@@ -7,4 +7,9 @@
 {% block content %}
 	<h1>Каталог</h1>
 	<a href="/">На главную</a>
+	<ul>
+		{% for product in category_products %}
+			<li><a href="{{ product.slug }}">{{ product.name }}</a></li>
+		{% endfor %}
+	</ul>
 {% endblock %}

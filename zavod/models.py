@@ -3,13 +3,16 @@ from django.utils import timezone
 
 
 class Article(models.Model):
-	slug = models.CharField(max_length = 100, default='')
-	title = models.CharField(max_length = 100)
+	name = models.CharField(max_length = 100)
+	slug = models.SlugField(max_length = 100, default='', unique=True)
 	preview_post = models.TextField(max_length = 200)
 	text = models.TextField()
 	date_created = models.DateTimeField(default=timezone.now)
+	seo_title = models.CharField(max_length = 100, default='')
+	seo_description = models.CharField(max_length = 100, default='')
+	seo_keywords = models.CharField(max_length = 100, default='')
 	def __str__(self):
-		return self.title
+		return self.name
 
 class ArticleImage(models.Model):
 	article = models.ForeignKey(Article)
@@ -17,17 +20,33 @@ class ArticleImage(models.Model):
 
 
 class CategoryProduct(models.Model):
-	slug = models.CharField(max_length = 100, default='')
-	category_name = models.CharField(max_length=50)
+	name = models.CharField(max_length=50)
+	slug = models.SlugField(max_length = 100, default='')
 	def __str__(self):
-		return self.category_name
+		return self.name
 
 class Product(models.Model):
+	name = models.CharField(max_length = 100, default='')
+	slug = models.SlugField(max_length = 100, default='')
 	product_category = models.ForeignKey(CategoryProduct)
-	product_title = models.CharField(max_length=50)
 	product_text = models.TextField()
+	seo_title = models.CharField(max_length = 100, default='')
+	seo_description = models.CharField(max_length = 100, default='')
+	seo_keywords = models.CharField(max_length = 100, default='')
 	def __str__(self):
-	    return self.product_title
+	    return self.name
+
+class SubProduct(models.Model):
+	name = models.CharField(max_length = 100, default='')
+	product = models.ForeignKey(Product)
+	slug = models.SlugField(max_length = 100, default='')
+	product_category = models.ForeignKey(CategoryProduct)
+	product_text = models.TextField()
+	seo_title = models.CharField(max_length = 100, default='')
+	seo_description = models.CharField(max_length = 100, default='')
+	seo_keywords = models.CharField(max_length = 100, default='')
+	def __str__(self):
+	    return self.name
 
 class ProductImage(models.Model):
 	article = models.ForeignKey(Product)

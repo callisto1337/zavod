@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		{% block title %}{% endblock %}
-	</title>
+	<title>{% block title %}{% endblock %}</title>
+	<meta name="description" content="{% block description %}{% endblock %}">
+	<meta name="keywords" content="{% block keywords %}{% endblock %}">
 </head>
 <body>
 	{% block content %}{% endblock %}
