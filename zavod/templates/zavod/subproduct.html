@@ -1,0 +1,11 @@
+{% extends 'zavod/base.html' %}
+
+{% block title %}{{ article.seo_title }}{% endblock %}
+{% block description %}{{ article.seo_description }}{% endblock %}
+{% block keywords %}{{ article.seo_keywords }}{% endblock %}
+
+{% block content %}
+	<h1>{{ subproduct.name }}</h1>
+	<a href="../">Назад</a>
+	
+{% endblock %}

@@ -5,6 +5,12 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Категории продуктов</h1>
-	<a href="/">На главную</a>
+	<h1>{{ products.name }}</h1>
+	<a href="../">Назад</a>
+	<ul>
+		{% for product in products %}
+			<li><a href="{{product.slug}}">{{ product.name }}</a></li>
+		{% endfor %}
+	</ul>
+	
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'zavod/base.html' %}
+
+{% block title %}{{ product.seo_title }}{% endblock %}
+{% block description %}{{ product.seo_description }}{% endblock %}
+{% block keywords %}{{ product.seo_keywords }}{% endblock %}
+
+{% block content %}
+	<h1>{{ product.name }}</h1>
+	<a href="../">Назад</a>
+	<ul>
+		{% for subproduct in subproducts %}
+			<li><a href="{{ subproduct.slug }}">{{ subproduct.name }}</a></li>	
+		{% endfor %}
+	</ul>
+	
+{% endblock %}
