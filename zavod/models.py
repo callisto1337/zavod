@@ -32,10 +32,24 @@ class CategoryProduct(models.Model):
 		verbose_name = 'Категория продуктов'
 		verbose_name_plural = 'Категории продуктов'
 
+class SubCategoryProduct(models.Model):
+	name = models.CharField(max_length = 100, default='')
+	category = models.ForeignKey(CategoryProduct)
+	slug = models.SlugField(max_length = 100, default='', unique=True)
+
+	def __str__(self):
+	    return self.name
+	class Meta:
+		verbose_name = 'Вложенная категория'
+		verbose_name_plural = 'Вложенные категории'
+
 class Product(models.Model):
+	list_display = ('name', 'slug')
+
 	name = models.CharField(max_length = 100, default='')
 	slug = models.SlugField(max_length = 100, default='', unique=True)
-	product_category = models.ForeignKey(CategoryProduct)
+	category = models.ForeignKey(CategoryProduct)
+	subcategory = models.ForeignKey(SubCategoryProduct, null=True)
 	product_text = models.TextField()
 	title = models.CharField(max_length = 100, default='')
 	seo_title = models.CharField(max_length = 100, default='')
@@ -46,22 +60,6 @@ class Product(models.Model):
 	class Meta:
 		verbose_name = 'Продукт'
 		verbose_name_plural = 'Продукты'
-
-class SubProduct(models.Model):
-	name = models.CharField(max_length = 100, default='')
-	product = models.ForeignKey(Product)
-	slug = models.SlugField(max_length = 100, default='', unique=True)
-	# product_category = models.ForeignKey(CategoryProduct)
-	product_text = models.TextField()
-	title = models.CharField(max_length = 100, default='')
-	seo_title = models.CharField(max_length = 100, default='')
-	seo_description = models.CharField(max_length = 100, default='')
-	seo_keywords = models.CharField(max_length = 100, default='')
-	def __str__(self):
-	    return self.name
-	class Meta:
-		verbose_name = 'Вложенный продукт'
-		verbose_name_plural = 'Вложенные продукты'
 
 class ProductImage(models.Model):
 	article = models.ForeignKey(Product)

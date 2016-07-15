@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Article, CategoryProduct, Product, SubProduct
+from .models import Article, CategoryProduct, Product, SubCategoryProduct
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 
 def main(request):
@@ -39,20 +39,23 @@ def catalog(request):
 
 def catalog_category(request):
 	path_catalog = request.path.replace('/', ' ').split()
-	parent_id = get_object_or_404(CategoryProduct, slug=path_catalog[1])
-	products = Product.objects.all().filter(product_category=parent_id)
-	return render(request, 'zavod/catalog_category.html', {'products': products})
+	category = get_object_or_404(CategoryProduct, slug=path_catalog[1])
+	subcategory = SubCategoryProduct(slug=path_catalog[1])
+
+
+	if SubCategoryProduct.objects.all().filter(category=category):
+		title = 'Вложенные категории'
+		subcategories = SubCategoryProduct.objects.all().filter(category=category)
+		return render(request, 'zavod/catalog_category.html', {'subcategories': subcategories, 'title': title})
+	# elif get_object_or_404(SubCategoryProduct, category=subcategory):
+	# 	return HttpResponse('')
+	else:
+		title = 'Список продуктов'
+		parent = get_object_or_404(CategoryProduct, slug=path_catalog[1])
+		products = Product.objects.all().filter(category=parent)
+		return render(request, 'zavod/catalog_category.html', {'products': products, 'parent': parent, 'title': title})
 
 def product(request):
 	path_product = request.path.replace('/', ' ').split()
-	parent_id = get_object_or_404(CategoryProduct, slug=path_product[1])
 	product = get_object_or_404(Product, slug=path_product[2])
-	subproducts = SubProduct.objects.all().filter(product=product)
-	return render(request, 'zavod/product.html', {'product': product, 'subproducts': subproducts})
-
-def subproduct(request):
-	path_subproduct = request.path.replace('/', ' ').split()
-	parent_id = get_object_or_404(CategoryProduct, slug=path_subproduct[1])
-	product = get_object_or_404(Product, slug=path_subproduct[2])
-	subproduct = get_object_or_404(SubProduct, slug=path_subproduct[3])
-	return render(request, 'zavod/subproduct.html', {'subproduct': subproduct})
+	return render(request, 'zavod/product.html', {'product': product})

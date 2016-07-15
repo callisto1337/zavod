@@ -5,13 +5,11 @@
 {% block keywords %}{{ product.seo_keywords }}{% endblock %}
 
 {% block content %}
-	<h1>{{ product.name }}</h1>
-	<h3>Описание</h3>
+	<h1>Список продуктов</h1>
 	<a href="../">Назад</a>
 	<ul>
-		{% for subproduct in subproducts %}
-			<li><a href="{{ subproduct.slug }}">{{ subproduct.name }}</a></li>	
+		{% for product in products %}
+			<li><a href="{{ product.slug }}">{{ product.name }}</a></li>
 		{% endfor %}
 	</ul>
-	
 {% endblock %}

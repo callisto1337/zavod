@@ -5,11 +5,14 @@
 {% endblock %}
 
 {% block content %}
-	<h1>{{ products.name }}</h1>
+	<h1>{{ title }}</h1>
 	<a href="../">Назад</a>
 	<ul>
 		{% for product in products %}
 			<li><a href="{{product.slug}}">{{ product.name }}</a></li>
+		{% endfor %}
+		{% for subcategory in subcategories %}
+			<li><a href="{{ subcategory.slug }}">{{ subcategory.name }}</a></li>
 		{% endfor %}
 	</ul>
 	
