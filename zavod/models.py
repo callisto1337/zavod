@@ -3,12 +3,13 @@ from django.utils import timezone
 
 
 class Article(models.Model):
+	published = models.BooleanField(default=True)
 	name = models.CharField(max_length = 100)
 	slug = models.SlugField(max_length = 100, default='', unique=True)
 	preview_post = models.TextField(max_length = 200)
 	text = models.TextField()
 	date_created = models.DateTimeField(default=timezone.now)
-	title = models.CharField(max_length = 100, default='')
+	title = models.CharField(max_length = 100)
 	seo_title = models.CharField(max_length = 100, default='')
 	seo_description = models.CharField(max_length = 100, default='')
 	seo_keywords = models.CharField(max_length = 100, default='')
@@ -24,6 +25,7 @@ class ArticleImage(models.Model):
 
 
 class CategoryProduct(models.Model):
+	published = models.BooleanField(default=True)
 	name = models.CharField(max_length=50, unique=True)
 	slug = models.SlugField(max_length = 100, default='', unique=True)
 	def __str__(self):
@@ -33,6 +35,7 @@ class CategoryProduct(models.Model):
 		verbose_name_plural = 'Категории продуктов'
 
 class SubCategoryProduct(models.Model):
+	published = models.BooleanField(default=True)
 	name = models.CharField(max_length = 100, default='')
 	category = models.ForeignKey(CategoryProduct)
 	slug = models.SlugField(max_length = 100, default='', unique=True)
@@ -44,12 +47,11 @@ class SubCategoryProduct(models.Model):
 		verbose_name_plural = 'Вложенные категории'
 
 class Product(models.Model):
-	list_display = ('name', 'slug')
-
+	published = models.BooleanField(default=True)
 	name = models.CharField(max_length = 100, default='')
 	slug = models.SlugField(max_length = 100, default='', unique=True)
 	category = models.ForeignKey(CategoryProduct)
-	subcategory = models.ForeignKey(SubCategoryProduct, null=True)
+	subcategory = models.ForeignKey(SubCategoryProduct, null=True, blank=True)
 	product_text = models.TextField()
 	title = models.CharField(max_length = 100, default='')
 	seo_title = models.CharField(max_length = 100, default='')

@@ -19,7 +19,7 @@ def dokumentatsija(request):
 
 
 def articles(request):
-	articles = Article.objects.all()[:5]
+	articles = Article.objects.all().filter(published=True)[:5]
 	return render(request, 'zavod/articles.html', {'articles': articles})
 
 def articles_detail(request):
@@ -34,7 +34,7 @@ def articles_detail(request):
 
 
 def catalog(request):
-	category_products = CategoryProduct.objects.all()[:5]
+	category_products = CategoryProduct.objects.all().filter(published=True)[:5]
 	return render(request, 'zavod/catalog.html', {'category_products': category_products})
 
 def catalog_category(request):
@@ -42,20 +42,30 @@ def catalog_category(request):
 	category = get_object_or_404(CategoryProduct, slug=path_catalog[1])
 	subcategory = SubCategoryProduct(slug=path_catalog[1])
 
-
 	if SubCategoryProduct.objects.all().filter(category=category):
 		title = 'Вложенные категории'
-		subcategories = SubCategoryProduct.objects.all().filter(category=category)
+		subcategories = SubCategoryProduct.objects.all().filter(category=category, published=True)
 		return render(request, 'zavod/catalog_category.html', {'subcategories': subcategories, 'title': title})
-	# elif get_object_or_404(SubCategoryProduct, category=subcategory):
-	# 	return HttpResponse('')
 	else:
 		title = 'Список продуктов'
 		parent = get_object_or_404(CategoryProduct, slug=path_catalog[1])
-		products = Product.objects.all().filter(category=parent)
+		products = Product.objects.all().filter(category=parent, published=True)
 		return render(request, 'zavod/catalog_category.html', {'products': products, 'parent': parent, 'title': title})
 
-def product(request):
+def product_or_products(request):
 	path_product = request.path.replace('/', ' ').split()
-	product = get_object_or_404(Product, slug=path_product[2])
-	return render(request, 'zavod/product.html', {'product': product})
+	category = get_object_or_404(CategoryProduct, slug=path_product[1])
+
+	if len(path_product) == 3:
+		if Product.objects.all().filter(slug=path_product[2]):
+			product = Product.objects.all().filter(slug=path_product[2], published=True)
+			return render(request, 'zavod/product.html', {'product': product})
+		else:
+			title = 'Список продуктов во вложенной категории'
+			subcategory_id = get_object_or_404(SubCategoryProduct, slug=path_product[2])
+			products = Product.objects.all().filter(subcategory=subcategory_id, published=True)
+			return render(request, 'zavod/catalog_category.html', {'products': products, 'title': title})
+	else:
+		subcategory = get_object_or_404(SubCategoryProduct, slug=path_product[2])
+		product = get_object_or_404(Product, slug=path_product[3])
+		return render(request, 'zavod/product.html', {'product': product})
