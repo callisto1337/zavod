@@ -20,8 +20,44 @@ def dostavka(request):
     return render(request, 'zavod/dostavka.html')
 
 
+def mezhdunarodnaja_dostavka(request):
+    return render(request, 'zavod/mezhdunarodnaja_dostavka.html')
+
+
+def geografija_prodazh(request):
+    return render(request, 'zavod/geografija_prodazh.html')
+
+
 def dokumentatsija(request):
     return render(request, 'zavod/dokumentatsija.html')
+
+
+def razreshenie_na_primenenie(request):
+    return render(request, 'zavod/razreshenie_na_primenenie.html')
+
+
+def sertifikaty(request):
+    return render(request, 'zavod/sertifikaty.html')
+
+
+def tovarnye_znaki(request):
+    return render(request, 'zavod/tovarnye_znaki.html')
+
+
+def mezhdunarodnye_tovarnye_znaki(request):
+    return render(request, 'zavod/mezhdunarodnye_tovarnye_znaki.html')
+
+
+def tovarnyjj_znak_zachem_on(request):
+    return render(request, 'zavod/tovarnyjj_znak_zachem_on.html')
+
+
+def tekhnicheskaja_dokumentatsija(request):
+    return render(request, 'zavod/tekhnicheskaja_dokumentatsija.html')
+
+
+def zachem_nuzhna_dokumentatsija(request):
+    return render(request, 'zavod/zachem_nuzhna_dokumentatsija.html')
 
 
 def articles(request):
