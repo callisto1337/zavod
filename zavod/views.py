@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponsePermanentRedirect
+
 from .models import Article, CategoryProduct, Product, SubCategoryProduct
-from django.http import HttpResponse, HttpResponsePermanentRedirect
 
 
 def main(request):

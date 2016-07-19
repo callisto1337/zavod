@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Article, ArticleImage, CategoryProduct, Product, SubCategoryProduct, CustomUser
+
+from .models import Article, CategoryProduct, Product, SubCategoryProduct, CustomUser
 
 
 class CategoryProductFields(admin.ModelAdmin):
