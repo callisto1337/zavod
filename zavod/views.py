@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponsePermanentRedirect
 
-from .models import Article, CategoryProduct, Product, SubCategoryProduct
+from .models import Article, CategoryProduct, Product
 
 
 def main(request):
@@ -85,11 +85,10 @@ def catalog(request):
 def catalog_category(request):
     path_catalog = request.path.replace('/', ' ').split()
     category = get_object_or_404(CategoryProduct, slug=path_catalog[1])
-    subcategory = SubCategoryProduct(slug=path_catalog[1])
 
-    if SubCategoryProduct.objects.all().filter(category=category):
+    if CategoryProduct.objects.filter(parent_id=category.id):
         title = 'Вложенные категории'
-        subcategories = SubCategoryProduct.objects.all().filter(category=category, published=True)
+        subcategories = CategoryProduct.objects.all().filter(parent_id=category.id, published=True)
         return render(request, 'zavod/catalog_category.html', {'subcategories': subcategories, 'title': title})
     else:
         title = 'Список продуктов'
@@ -108,10 +107,10 @@ def product_or_products(request):
             return render(request, 'zavod/product.html', {'product': product})
         else:
             title = 'Список продуктов во вложенной категории'
-            subcategory_id = get_object_or_404(SubCategoryProduct, slug=path_product[2])
-            products = Product.objects.all().filter(subcategory=subcategory_id, published=True)
+            subcategory_id = get_object_or_404(CategoryProduct, slug=path_product[2])
+            products = Product.objects.all().filter(category=subcategory_id, published=True)
             return render(request, 'zavod/catalog_category.html', {'products': products, 'title': title})
     else:
-        subcategory = get_object_or_404(SubCategoryProduct, slug=path_product[2])
+        subcategory = get_object_or_404(CategoryProduct, slug=path_product[2])
         product = get_object_or_404(Product, slug=path_product[3])
         return render(request, 'zavod/product.html', {'product': product})
