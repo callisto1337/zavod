@@ -1,2 +1,2 @@
 django-grappelli
-
+mongoengine==0.8.0

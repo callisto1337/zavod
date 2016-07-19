@@ -124,3 +124,5 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = '/home/mikhail/web4/zt/media'
 MEDIA_URL = '/media/'
+
+AUTH_USER_MODEL = 'zavod.CustomUser'
