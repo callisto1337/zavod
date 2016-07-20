@@ -27,4 +27,11 @@ urlpatterns = [
         name='mezhdunarodnye_tovarnye_znaki'),
     url(r'^dokumentatsija/tovarnye-znaki/tovarnyjj-znak-zachem-on/$', views.tovarnyjj_znak_zachem_on,
         name='tovarnyjj_znak_zachem_on'),
+    url(r'^photogallery/$', views.photogallery, name='photogallery'),
+    url(r'^news/$', views.news, name='news'),
+    url(r'^about/$', views.about, name='about'),
+    url(r'^about/otzyvy/$', views.otzyvy, name='otzyvy'),
+    url(r'^partnery/$', views.partnery, name='partnery'),
+    url(r'^proizvodstvo-zavoda-triumf/$', views.proizvodstvo_zavoda_triumf, name='proizvodstvo_zavoda_triumf'),
+    url(r'^prajjsy/gibkaja-sistema-skidok/$', views.gibkaja_sistema_skidok, name='gibkaja_sistema_skidok'),
 ]
