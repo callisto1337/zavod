@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User, UserManager, AbstractBaseUser
+from django.contrib.postgres.fields import JSONField
 
 
 class CustomUser(AbstractBaseUser):
@@ -59,6 +60,7 @@ class CategoryProduct(models.Model):
     published = models.BooleanField(default=True)
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=100, default='', unique=True)
+    parent_id = models.ForeignKey("CategoryProduct", default=0)
 
     def __str__(self):
         return self.name
@@ -68,31 +70,17 @@ class CategoryProduct(models.Model):
         verbose_name_plural = 'Категории продуктов'
 
 
-class SubCategoryProduct(models.Model):
-    published = models.BooleanField(default=True)
-    name = models.CharField(max_length=100, default='')
-    category = models.ForeignKey(CategoryProduct)
-    slug = models.SlugField(max_length=100, default='', unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Вложенная категория'
-        verbose_name_plural = 'Вложенные категории'
-
-
 class Product(models.Model):
     published = models.BooleanField(default=True)
     name = models.CharField(max_length=100, default='')
     slug = models.SlugField(max_length=100, default='', unique=True)
     category = models.ForeignKey(CategoryProduct)
-    subcategory = models.ForeignKey(SubCategoryProduct, null=True, blank=True)
     product_text = models.TextField()
     title = models.CharField(max_length=100, default='')
     seo_title = models.CharField(max_length=100, default='')
     seo_description = models.CharField(max_length=100, default='')
     seo_keywords = models.CharField(max_length=100, default='')
+    properties = JSONField(default='')
 
     def __str__(self):
         return self.name
@@ -103,5 +91,5 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    article = models.ForeignKey(Product)
+    product = models.ForeignKey(Product)
     product_image = models.FileField(upload_to='media/products/', blank=True, null=True)
