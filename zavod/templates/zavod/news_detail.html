@@ -1,0 +1,11 @@
+{% extends 'zavod/base.html' %}
+
+{% block title %}{{ news.seo_title }}{% endblock %}
+{% block description %}{{ news.seo_description }}{% endblock %}
+{% block keywords %}{{ news.seo_keywords }}{% endblock %}
+
+
+{% block content %}
+	<h1>{{ news.name }}</h1>
+	<a href="/news/">К списку новостей</a>
+{% endblock %}

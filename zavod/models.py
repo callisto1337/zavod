@@ -31,6 +31,10 @@ class CustomUser(AbstractBaseUser):
         return self.email
 
 
+class Tag(models.Model):
+    title = models.CharField(max_length=100)
+
+
 class Article(models.Model):
     published = models.BooleanField(default=True)
     name = models.CharField(max_length=100)
@@ -51,16 +55,53 @@ class Article(models.Model):
         verbose_name_plural = 'Статьи'
 
 
+class News(models.Model):
+    published = models.BooleanField(default=True)
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, default='', unique=True)
+    preview_post = models.TextField(max_length=200)
+    text = models.TextField()
+    date_created = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=100)
+    seo_title = models.CharField(max_length=100, default='')
+    seo_description = models.CharField(max_length=100, default='')
+    seo_keywords = models.CharField(max_length=100, default='')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
+
+
+class ArticleTag(models.Model):
+    article = models.ForeignKey(Article)
+    tag = models.ForeignKey(Tag)
+
+
+class NewsTag(models.Model):
+    news = models.ForeignKey(News)
+    tag = models.ForeignKey(Tag)
+
+
 class ArticleImage(models.Model):
     article = models.ForeignKey(Article)
     article_image = models.FileField(upload_to='media/articles/', blank=True, null=True)
+
+
+class NewsImage(models.Model):
+    news = models.ForeignKey(News)
+    news_image = models.FileField(upload_to='media/news/', blank=True, null=True)
 
 
 class CategoryProduct(models.Model):
     published = models.BooleanField(default=True)
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=100, default='', unique=True)
-    parent_id = models.ForeignKey("CategoryProduct", default=0)
+    parent_id = models.ForeignKey("CategoryProduct", default=None, null=True, blank=True)
+    title = models.CharField(max_length=100, default='')
+    text = models.TextField(default='')
 
     def __str__(self):
         return self.name
@@ -93,3 +134,22 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product)
     product_image = models.FileField(upload_to='media/products/', blank=True, null=True)
+
+
+class Gallery(models.Model):
+    published = models.BooleanField(default=True)
+    type = models.CharField(max_length=100, default='')
+    name = models.CharField(max_length=100, default='')
+    slug = models.SlugField(max_length=100, default='', unique=True)
+    text = models.TextField()
+    title = models.CharField(max_length=100, default='')
+    seo_title = models.CharField(max_length=100, default='')
+    seo_description = models.CharField(max_length=100, default='')
+    seo_keywords = models.CharField(max_length=100, default='')
+    date_created = models.DateTimeField(auto_now=True)
+    cover_image = models.ForeignKey('GalleryImage', default=None, blank=True, null=True, related_name='cover_image')
+
+
+class GalleryImage(models.Model):
+    gallery = models.ForeignKey(Gallery)
+    gallery_image = models.FileField(upload_to='media/gallery/', blank=True, null=True)

@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponsePermanentRedirect
 
-from .models import Article, CategoryProduct, Product
+from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage
 
 
 def main(request):
-    return render(request, 'zavod/main.html')
+    # return render(request, '/../../../zavod-static/src/templates/main.html')
+    return render(request, 'index.html')
+    # return render(request, 'zavod/main.html')
+
+
+def search(request):
+    return render(request, 'zavod/search.html')
 
 
 def contacts(request):
@@ -62,7 +68,24 @@ def zachem_nuzhna_dokumentatsija(request):
 
 
 def photogallery(request):
-    return render(request, 'zavod/photogallery.html')
+    out = {}
+    events = Gallery.objects.filter(type='event', published=True).order_by('date_created').all()
+    products = Gallery.objects.filter(type='product', published=True).order_by('date_created').all()
+    out.update({'events': events})
+    out.update({'products': products})
+    return render(request, 'zavod/photogallery.html', out)
+
+
+def photogallery_detail_page(request, page_number, photogallery_slug):
+    gallery = get_object_or_404(Gallery, slug=photogallery_slug)
+    start = (int(page_number) - 1) * 5 + 1
+    gallery.gallery_images = GalleryImage.objects.filter(gallery=gallery).all()[start:start+5]
+    return render(request, 'zavod/photogallery_detail.html', {'gallery': gallery})
+
+
+def photogallery_detail(request, photogallery_slug):
+    gallery = get_object_or_404(Gallery, slug=photogallery_slug)
+    return render(request, 'zavod/photogallery_detail.html', {'gallery': gallery})
 
 
 def news(request):
@@ -70,7 +93,7 @@ def news(request):
 
 
 def about(request):
-    return render(request, 'zavod/about.html')
+    return render(request, 'about.html')
 
 
 def otzyvy(request):
@@ -90,55 +113,86 @@ def gibkaja_sistema_skidok(request):
 
 
 def articles(request):
-    articles = Article.objects.all().filter(published=True)[:5]
+    articles = Article.objects.filter(published=True).order_by('date_created').all()[:5]
     return render(request, 'zavod/articles.html', {'articles': articles})
 
 
-def articles_detail(request):
-    path_article = str(request.path.replace('articles', '').replace('/', ''))
-    try:
-        int(path_article)
-        article = get_object_or_404(Article, pk=path_article)
-        return HttpResponsePermanentRedirect(article.slug)
-    except:
-        article = get_object_or_404(Article, slug=path_article)
-        return render(request, 'zavod/articles_detail.html', {'article': article})
+def articles_page(request, page_number):
+    start = (int(page_number) - 1) * 5 + 1
+    articles = Article.objects.filter(published=True).order_by('date_created').all()[start:start+5]
+    return render(request, 'zavod/articles.html', {'articles': articles})
+
+
+def articles_detail(request, article_slug):
+    article = get_object_or_404(Article, slug=article_slug)
+    return render(request, 'zavod/articles_detail.html', {'article': article})
+
+
+def articles_tag(request, tag):
+    articles = ArticleTag.objects.filter(tag__title=tag, article__published=True)\
+                   .order_by('article__date_created').values('article').all()[:5]
+    return render(request, 'zavod/articles.html', {'articles': articles})
+
+
+def articles_tag_page(request, page_number, tag):
+    start = (int(page_number) - 1) * 5 + 1
+    articles = ArticleTag.objects.filter(tag__title=tag, article__published=True)\
+                   .order_by('article__date_created').values('article').all()[start:start+5]
+    return render(request, 'zavod/articles.html', {'articles': articles})
+
+
+def news(request):
+    news = News.objects.filter(published=True).order_by('date_created').all()[:5]
+    return render(request, 'zavod/news.html', {'news': news})
+
+
+def news_page(request, page_number):
+    start = (int(page_number) - 1) * 5 + 1
+    news = News.objects.filter(published=True).order_by('date_created').all()[start:start+5]
+    return render(request, 'zavod/news.html', {'news': news})
+
+
+def news_detail(request, article_slug):
+    news = get_object_or_404(News, slug=article_slug)
+    return render(request, 'zavod/news_detail.html', {'news': news})
+
+
+def news_tag(request, tag):
+    news = NewsTag.objects.filter(tag__title=tag, news__published=True)\
+                   .order_by('news__date_created').values('news').all()[:5]
+    return render(request, 'zavod/news.html', {'news': news})
+
+
+def news_tag_page(request, page_number, tag):
+    start = (int(page_number) - 1) * 5 + 1
+    news = NewsTag.objects.filter(tag__title=tag, news__published=True)\
+                   .order_by('news__date_created').values('news').all()[start:start+5]
+    return render(request, 'zavod/news.html', {'news': news})
 
 
 def catalog(request):
-    category_products = CategoryProduct.objects.all().filter(published=True)[:5]
-    return render(request, 'zavod/catalog.html', {'category_products': category_products})
+    category_products = CategoryProduct.objects.filter(published=True).annotate(number=Count('product')).all()
+    return render(request, 'catalog.html', {'category_products': category_products})
 
 
-def catalog_category(request):
-    path_catalog = request.path.replace('/', ' ').split()
-    category = get_object_or_404(CategoryProduct, slug=path_catalog[1])
+def catalog_category(request, category_slug, parent_category_slug=None):
+    category = get_object_or_404(CategoryProduct, slug=category_slug)
 
     if CategoryProduct.objects.filter(parent_id=category.id):
         title = 'Вложенные категории'
-        subcategories = CategoryProduct.objects.all().filter(parent_id=category.id, published=True)
+        subcategories = CategoryProduct.objects.filter(parent_id=category.id, published=True).all()
         return render(request, 'zavod/catalog_category.html', {'subcategories': subcategories, 'title': title})
     else:
         title = 'Список продуктов'
-        parent = get_object_or_404(CategoryProduct, slug=path_catalog[1])
-        products = Product.objects.all().filter(category=parent, published=True)
-        return render(request, 'zavod/catalog_category.html', {'products': products, 'parent': parent, 'title': title})
+        products = Product.objects.all().filter(category=category, published=True)
+        return render(request, 'zavod/catalog_category.html', {'products': products, 'parent': category, 'title': title})
 
 
-def product_or_products(request):
-    path_product = request.path.replace('/', ' ').split()
-    category = get_object_or_404(CategoryProduct, slug=path_product[1])
-
-    if len(path_product) == 3:
-        if Product.objects.all().filter(slug=path_product[2]):
-            product = Product.objects.all().filter(slug=path_product[2], published=True)
-            return render(request, 'zavod/product.html', {'product': product})
-        else:
-            title = 'Список продуктов во вложенной категории'
-            subcategory_id = get_object_or_404(CategoryProduct, slug=path_product[2])
-            products = Product.objects.all().filter(category=subcategory_id, published=True)
-            return render(request, 'zavod/catalog_category.html', {'products': products, 'title': title})
-    else:
-        subcategory = get_object_or_404(CategoryProduct, slug=path_product[2])
-        product = get_object_or_404(Product, slug=path_product[3])
+def product_or_products(request, slug, parent_category_slug=None, category_slug=None):
+    product = Product.objects.filter(slug=slug).first()
+    if product:
         return render(request, 'zavod/product.html', {'product': product})
+    title = 'Список продуктов во вложенной категории'
+    category = get_object_or_404(CategoryProduct, slug=slug)
+    products = Product.objects.filter(category=category, published=True).all()
+    return render(request, 'zavod/catalog_category.html', {'products': products, 'title': title})
