@@ -131,9 +131,29 @@ class Product(models.Model):
         verbose_name_plural = 'Продукты'
 
 
+class Image(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.FileField(upload_to='media/images/', blank=True, null=True)
+
+
+class CategoryImage(models.Model):
+    category = models.ForeignKey(CategoryProduct)
+    category_image = models.ForeignKey(Image)
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product)
-    product_image = models.FileField(upload_to='media/products/', blank=True, null=True)
+    product_image = models.ForeignKey(Image)
+
+
+class File(models.Model):
+    title = models.CharField(max_length=100)
+    file_content = models.FileField(upload_to='media/files/', blank=True, null=True)
+
+
+class CategoryFile(models.Model):
+    category = models.ForeignKey(CategoryProduct)
+    category_file = models.ForeignKey(File)
 
 
 class Gallery(models.Model):
