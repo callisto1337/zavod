@@ -1,0 +1,388 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Главная страница</title>
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,500,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+	</head>
+	<body>
+		<header class="b-header js-header">
+			<div class="b-layout">
+				<div class="logo">
+					<img class="logo__image" src="{% static 'img/header/logo.png' %}" alt="Завод Триумф">
+					<p class="logo__text">
+						Ведущий завод теплообменного оборудования в РФ
+					</p>
+				</div>
+				<div class="b-header__actions clearfix">
+					<div class="check">
+						<a class="check__link" href="#">
+							<i class="fa fa-check" aria-hidden="true"></i>Проверить заказ
+						</a>
+					</div>
+					<div class="call">
+						<a class="call__link" href="#">
+							<i class="fa fa-phone" aria-hidden="true"></i>Перезвонить мне
+						</a>
+					</div>
+					<div class="email">
+						<a class="email__link" href="#">
+							<i class="fa fa-envelope" aria-hidden="true"></i>info@zavodtriumph.ru
+						</a>
+					</div>
+					<div class="skype">
+						<a class="skype__link" href="#">
+							<i class="fa fa-skype" aria-hidden="true"></i>zavodtriumph
+						</a>
+					</div>
+				</div>
+				<div class="contacts">
+					<div class="phone">
+						<p class="phone__status">Бесплатно по России</p>
+						<p class="phone__number"><i class="fa fa-phone" aria-hidden="true"></i> 8 (800) 555-92-20</p>
+					</div>
+					<div class="phone">
+						<p class="phone__status">Москва</p>
+						<p class="phone__number">8 (351) 729-99-47</p>
+					</div>
+					<div class="phone">
+						<p class="phone__status">Челябинск</p>
+						<p class="phone__number">8 (495) 545-36-90</p>
+					</div>
+				</div>
+				<div class="login">
+					<a class="b-btn">
+						<i class="fa fa-key ico" aria-hidden="true"></i>
+						<span class="b-btn__text">Войти</span>
+					</a>
+				</div>
+			</div>
+		</header>
+		<div class="b-menu" id="b-menu">
+			<div class="b-layout">
+				<table class="b-menu-table">
+					<tr>
+						<td class="b-menu__item">
+							<a href="{% url "about" %}" class="b-menu__item-link b-menu__item-link-active">О компании</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "news" %}" class="b-menu__item-link">Новости</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "catalog" %}" class="b-menu__item-link">Каталог</a>
+							<div class="b-menu__submenu">
+								<div class="submenu__content">
+									<div class="submenu__column">
+											<div class="submenu__group">
+												<h2 class="submenu__group-title">Кожухотрубные теплообменники</h2>
+												<ul class="submenu__group__list">
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category" category_slug='vodovodjanye-podogrevateli' %}" class="submenu__group__list__item-link">Водоводяные подогреватели</a>
+													</li>
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category_inside" parent_category_slug='vodovodjanye-podogrevateli' category_slug='kalachi' %}" class="submenu__group__list__item-link">Калачи для ВВП, переходы для ВВП</a>
+													</li>
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category" category_slug='parovodjanye-podogrevateli' %}" class="submenu__group__list__item-link">Подогреватели пароводяные</a>
+													</li>
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category_inside" parent_category_slug='emkostnoe-oborudovanie' category_slug='podogrevateli-parovye-emkostnye-tipa-vpe-std' %}" class="submenu__group__list__item-link">Подогреватели паровые емкостные (ВПЕ)</a>
+													</li>
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category" category_slug='konvektory-otoplenija' %}" class="submenu__group__list__item-link">Конвекторы отопления</a>
+													</li>
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category" category_slug='registry-otopitelnye' %}" class="submenu__group__list__item-link">Регистры отопительные</a>
+													</li>
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category" category_slug='pajanye-plastinchatye-teploobmenniki' %}" class="submenu__group__list__item-link">Паяные теплообменники</a>
+													</li>
+												</ul>
+											</div>
+											<div class="submenu__group">
+												<h2 class="submenu__group-title">Грязевики</h2>
+												<ul class="submenu__group__list">
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category_inside" parent_category_slug='grjazevik' category_slug='grjazeviki-gorizontalnye-gg-serija-ts-565-ts-566' %}" class="submenu__group__list__item-link">Горизонтальные: ТС-565, ТС-566</a>
+													</li>
+													<li class="submenu__group__list__item">
+                                                        <a href="{% url "catalog_category_inside" parent_category_slug='grjazevik' category_slug='grjazeviki-vertikalnye-gv-serija-ts-567-ts-568' %}" class="submenu__group__list__item-link">Вертикальные: ТС-567, ТС-568</a>
+													</li>
+													<li class="submenu__group__list__item">
+														<a href="#" class="submenu__group__list__item-link">Грезевики для тепловых пунктов (ГТП) ТС-569</a>
+													</li>
+												</ul>
+											</div>
+											<div class="submenu__group">
+												<h2 class="submenu__group-title">Воздухосборники А1И</h2>
+												<ul class="submenu__group__list">
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category_inside" parent_category_slug='vozdukhosborniki-a1i' category_slug='vertikalnye-vozdukhosborniki' %}" class="submenu__group__list__item-link">Вертикальные</a>
+													</li>
+													<li class="submenu__group__list__item">
+														<a href="{% url "catalog_category" category_slug='svarnye-teploobmenniki' %}" class="submenu__group__list__item-link">Горизонтальные</a>
+													</li>
+												</ul>
+											</div>
+									</div>
+									<div class="submenu__column submenu__column-offset">
+										<div class="submenu__group">
+											<h2 class="submenu__group-title">Пластинчатые теплообменники</h2>
+											<ul class="submenu__group__list">
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category_inside" parent_category_slug='plastinchatye-teploobmenniki' category_slug='ridan' %}" class="submenu__group__list__item-link">Теплообменники Ридан, Funke, Tranter</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category" category_slug='svarnye-teploobmenniki' %}" class="submenu__group__list__item-link">Сварные теплообменники</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category" category_slug='spiralnye-teploobmenniki' %}" class="submenu__group__list__item-link">Спиральные теплообменники</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category" category_slug='pogruzhnye-teploobmenniki' %}" class="submenu__group__list__item-link">Погружные теплообменники</a>
+												</li>
+											</ul>
+										</div>
+
+										<div class="submenu__group">
+											<h2 class="submenu__group-title">Другие категории</h2>
+											<ul class="submenu__group__list">
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category" category_slug='okhladiteli-vypara' %}" class="submenu__group__list__item-link">Охладители выпара</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category" category_slug='podogrevateli-mazuta' %}" class="submenu__group__list__item-link">Подогреватели мазута</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category" category_slug='dnishha-ellipticheskie' %}" class="submenu__group__list__item-link">Днища эллиптические</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="#" class="submenu__group__list__item-link">Элеваторы</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category" category_slug='truboprovodnaja-armatura' %}" class="submenu__group__list__item-link">Трубопроводная арматура</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="{% url "catalog_category" category_slug='kontejjnery-dlja-musora' %}" class="submenu__group__list__item-link">Контейнеры для мусора</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="#" class="submenu__group__list__item-link">Нестандартизированное оборудование</a>
+												</li>
+												<li class="submenu__group__list__item">
+													<a href="#" class="submenu__group__list__item-link">Монтаж оборудования</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "dostavka" %}" class="b-menu__item-link">Доставка</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "prajjsy" %}" class="b-menu__item-link">Прайс-листы</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "dokumentatsija" %}" class="b-menu__item-link">Документация</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "articles" %}" class="b-menu__item-link">Статьи</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "photogallery" %}" class="b-menu__item-link">Фотогалерия</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="" class="b-menu__item-link">Вопросы и ответы</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "contacts" %}" class="b-menu__item-link">Контакты</a>
+						</td>
+						<td class="b-menu__item">
+							<a href="{% url "search" %}" class="b-menu__item-link"><i class="fa fa-search" aria-hidden="true"></i></a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="b-section">
+			<div class="b-layout">
+				<div class="breadcrumbs">Главная / Каталог /</div>
+				<div class="grid__row">
+					<div class="grid__column-9">
+						<h3 class="b-section-title">{{ category.name }}</h3>
+					</div>
+					<div class="grid__column-4 grid__offset">
+						<ul class="view__option">
+							<li class="view__option__item">Расширено</li>
+							<li class="view__option__item view__option__item_active">Списком</li>
+						</ul>
+					</div>
+				</div>
+                <div class="grid__row">
+                    <h3 class="b-section-text-description"><a href="../"><-</a>Назад к каталогу</h3>
+				</div>
+				<div class="grid__row">
+					<div class="grid__column-12">
+						<div class="submenu__catalog">
+							<ul class="submenu__catalog__list">
+                                {% for product in products %}
+								<li class="submenu__catalog__list__item">
+									<a href="{% url "catalog_category" product.slug %}" class="submenu__catalog__list__item-link">{{ product.name }}</a>
+								</li>
+                                {% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+                <div class="grid__row">
+					<div class="grid__column-12">
+						<div class="submenu__catalog">
+							<ul class="submenu__catalog__list">
+                                {% for subcategory in subcategories %}
+								<li class="submenu__catalog__list__item">
+									<a href="{% url "catalog_category" subcategory.slug %}" class="submenu__catalog__list__item-link">{{ subcategory.name }}</a>
+								</li>
+                                {% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="grid__row">
+					<div class="grid__column-9">
+						<p class="b-section-text">
+                            {{ category.text }}
+                        </p>
+					</div>
+					<div class="grid__column-4 grid__offset grid__offset__catalog__news">
+						<h4 class="b-section-subtitle"></h4>
+						<ul class="b-section-list">
+                            {% for category_file in category.categoryfiles %}
+							<li class="b-section-list__item">{{ category_file.title }}</li>
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
+                <div class="grid__row">
+					<div class="grid__column-12">
+						<div class="submenu__catalog">
+							<ul class="submenu__catalog__list">
+                                {% for category_image in category.categoryimages %}
+								<li class="submenu__catalog__list__item">
+									{{ category_image.title }}
+								</li>
+                                <div class="b-box__image">
+                                    <img src="{% static category_image.url %}" alt="Пример Продукта">
+                                </div>
+                                {% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="b-section">
+			<div class="b-layout">
+				<div class="grid__row">
+					<div class="grid__column-4">
+						<h4 class="b-section-subtitle">Новинка производства</h4>
+						<div class="b-box__image-left">
+							<img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+						</div>
+						<span class="b-section-subtitle-subtitle">
+							ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
+						</span>
+						<span class="b-section-text">
+							Разборные пластинчатые<br>
+							теплообменник FUNKE
+						</span>
+					</div>
+					<div class="grid__column-4 grid__offset">
+						<h4 class="b-section-subtitle">Последняя новость</h4>
+						<span class="b-section-subtitle-subtitle">
+							ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
+						</span>
+						<span class="b-section-text">
+							Служба Яндекс.Рефераты предназнаена для
+							студентов и школьников, дизайнеров
+						</span>
+					</div>
+					<div class="grid__column-4 grid__offset">
+						<h4 class="b-section-subtitle">Видео как закалялась сталь</h4>
+						<div class="b-box__image-halfsize">
+							<img src="{% static 'img/life/banner_1.png' %}" alt="Пример Видео">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="b-section">
+			<div class="b-layout">
+				<div class="grid__row">
+					<div class="grid__column-4">
+						<h4 class="b-section-subtitle">Офис</h4>
+						<span class="b-section-text">
+							107014, г. Москва, ул. Стромынка, д. 13а
+							Телефон: +7 (495) 545-36-90
+						</span>
+					</div>
+					<div class="grid__column-4 grid__offset">
+						<h4 class="b-section-subtitle">Производство</h4>
+						<span class="b-section-text">
+							454008, г. Челябинск, ул. Автодорожная, д.3
+							Телефон: +7 (351) 729-99-47
+						</span>
+					</div>
+					<div class="grid__column-4 grid__offset">
+						<h4 class="b-section-subtitle">Мы на связи</h4>
+						<div class="b-section-social">
+							<ul class="b-section-social-list">
+								<li class="b-section-social-list__item">
+									<a href=""><i class="fa fa-skype" aria-hidden="true"></i></a>
+								</li>
+								<li class="b-section-social-list__item">
+									<a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+								</li>
+								<li class="b-section-social-list__item">
+									<a href=""><i class="fa fa-vk" aria-hidden="true"></i></a>
+								</li>
+								<li class="b-section-social-list__item">
+									<a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+								</li>
+								<li class="b-section-social-list__item">
+									<a href=""><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+								</li>
+								<li class="b-section-social-list__item">
+									<a href=""><i class="fa fa-youtube" aria-hidden="true"></i></a>
+								</li>
+								<li class="b-section-social-list__item">
+									<a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="b-footer">
+			<div class="b-layout">
+				<div class="grid__row">
+					<span class="b-footer-text pull-left">© 1995 — 2016 ООО «Завод Триумф»</span><span class="b-footer-text pull-right">Свидетельство и лицензии Завода</span>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="{% static 'js/stickymenu/StickyMenu.js' %}"></script>
+	</body>
+</html>
