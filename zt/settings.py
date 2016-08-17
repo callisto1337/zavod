@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'zt.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'zavod1',
+        'NAME': 'zavod',
         'USER': 'zavod_user',
         'PASSWORD': 'zavod',
         'HOST': 'localhost',
