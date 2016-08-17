@@ -36,7 +36,7 @@ def geografija_prodazh(request):
 
 
 def dokumentatsija(request):
-    return render(request, 'zavod/dokumentatsija.html')
+    return render(request, 'dokumentatsija.html')
 
 
 def razreshenie_na_primenenie(request):
@@ -93,7 +93,21 @@ def news(request):
 
 
 def about(request):
+    if 'awards' in request.GET:
+        return render(request, 'about_awards.html')
+    elif 'partners' in request.GET:
+        return render(request, 'about_partners.html')
+    elif 'employee' in request.GET:
+        return render(request, 'about_employee.html')
     return render(request, 'about.html')
+
+
+def nagrady(request):
+    return render(request, 'about_awards.html')
+
+
+def partnery(request):
+    return render(request, 'about_partners.html')
 
 
 def otzyvy(request):
