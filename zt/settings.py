@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'static', 'build'),
+            os.path.join(BASE_DIR, 'assets', 'static', 'build'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'zt.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'zavod',
+        'NAME': 'zavod1',
         'USER': 'zavod_user',
         'PASSWORD': 'zavod',
         'HOST': 'localhost',
@@ -125,8 +125,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static', 'build')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets', 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets', 'static', 'build')]
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
