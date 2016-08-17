@@ -92,3 +92,5 @@ ENV/
 .ropeproject
 
 *.*~
+
+assets/static/node_modules/
