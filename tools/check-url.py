@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 import requests
 
-root = ET.parse('/home/mikhail/web4/sitemap.xml').getroot()
+root = ET.parse('sitemap.xml').getroot()
 counter, successes, errors = 0, 0, 0
 urls = []
 
