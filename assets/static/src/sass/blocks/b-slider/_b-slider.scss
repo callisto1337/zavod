@@ -23,6 +23,7 @@
 		text-align: center;
 
 		&-title {
+			margin-top: 20px;
 			font-size: 16.2px;
 			font-weight: 700;
 			color: #292929;
@@ -33,5 +34,20 @@
 			font-weight: 300;
 			color: #868686;
 		}
+	}
+
+	#partners {
+		width: 1080px;
+		height: 95px;
+		overflow: hidden;
+		margin-left: 0;
+	}
+
+	#arrow-left:hover, #arrow-right:hover {
+		cursor: pointer;
+	}
+
+	#arrow-right {
+		float: right;
 	}
 }
