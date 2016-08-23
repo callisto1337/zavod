@@ -40,7 +40,7 @@ def dokumentatsija(request):
 
 
 def razreshenie_na_primenenie(request):
-    return render(request, 'zavod/razreshenie_na_primenenie.html')
+    return render(request, 'razreshenie_na_primenenie.html')
 
 
 def sertifikaty(request):
@@ -99,6 +99,8 @@ def about(request):
         return render(request, 'about_partners.html')
     elif 'employee' in request.GET:
         return render(request, 'about_employee.html')
+    elif 'review' in request.GET:
+        return render(request, 'about_review.html')
     return render(request, 'about.html')
 
 
@@ -111,11 +113,7 @@ def partnery(request):
 
 
 def otzyvy(request):
-    return render(request, 'zavod/otzyvy.html')
-
-
-def partnery(request):
-    return render(request, 'zavod/partnery.html')
+    return render(request, 'about_review.html')
 
 
 def proizvodstvo_zavoda_triumf(request):
