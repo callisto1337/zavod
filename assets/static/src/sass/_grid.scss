@@ -1,11 +1,11 @@
 @mixin column {
 	float:left;
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-	-moz-background-clip:padding-box !important;
-	-webkit-background-clip:padding-box !important;
-	background-clip:padding-box !important;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-background-clip: padding-box !important;
+	-webkit-background-clip: padding-box !important;
+	background-clip: padding-box !important;
 	position: relative;
 	min-height: 1px;
 }
@@ -18,7 +18,6 @@
 			display: table;
 			content: " ";
 		}
-
 	}
 
 	&__column {
