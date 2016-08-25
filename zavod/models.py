@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User, UserManager, AbstractBaseUser
 from django.contrib.postgres.fields import JSONField
 
@@ -47,8 +48,11 @@ class Article(models.Model):
     seo_description = models.CharField(max_length=100, default='')
     seo_keywords = models.CharField(max_length=100, default='')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('articles_detail', args=[self.slug])
 
     class Meta:
         verbose_name = 'Статья'
@@ -69,6 +73,9 @@ class News(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('news_detail', args=[self.slug])
 
     class Meta:
         verbose_name = 'Новость'
@@ -103,8 +110,11 @@ class CategoryProduct(models.Model):
     title = models.CharField(max_length=100, default='')
     text = models.TextField(default='')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('catalog_category', args=[self.slug])
 
     class Meta:
         verbose_name = 'Категория продуктов'
@@ -123,8 +133,11 @@ class Product(models.Model):
     seo_keywords = models.CharField(max_length=100, default='')
     properties = JSONField(default='')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('get_product', args=[self.slug])
 
     class Meta:
         verbose_name = 'Продукт'
@@ -168,6 +181,12 @@ class Gallery(models.Model):
     seo_keywords = models.CharField(max_length=100, default='')
     date_created = models.DateTimeField(auto_now=True)
     cover_image = models.ForeignKey('GalleryImage', default=None, blank=True, null=True, related_name='cover_image')
+
+    def __unicode__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return "/people/%i/" % self.id
 
 
 class GalleryImage(models.Model):

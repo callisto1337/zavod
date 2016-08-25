@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from watson import search as watson
+
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
@@ -12,7 +14,11 @@ def main(request):
 
 
 def search(request):
-    return render(request, 'zavod/search.html')
+    search_text = request.GET.get('text', '')
+    search_results = watson.search(search_text)
+    for result in search_results:
+        print result.title, result.url
+    return render(request, 'zavod/search.html', {'search_results': search_results})
 
 
 def contacts(request):
@@ -182,6 +188,11 @@ def news_tag_page(request, page_number, tag):
     return render(request, 'zavod/news.html', {'news': news})
 
 
+def get_product(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    return render(request, 'product.html', {'product': product})
+
+
 def catalog(request):
     category_products = CategoryProduct.objects.filter(published=True).annotate(number=Count('product')).all()
     return render(request, 'catalog.html', {'category_products': category_products})
@@ -201,14 +212,13 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             return render(request, 'catalog_category.html', {'products': products, 'parent': category, 'title': title,
                                                              'category': category})
     else:
-        product = get_object_or_404(Product, slug=category_slug)
-        return render(request, 'product.html', {'product': product})
+        get_product(request, category_slug)
 
 
 def product_or_products(request, slug, parent_category_slug=None, category_slug=None):
     product = Product.objects.filter(slug=slug).first()
     if product:
-        return render(request, 'product.html', {'product': product})
+        get_product(request, category_slug)
     title = 'Список продуктов во вложенной категории'
     category = get_object_or_404(CategoryProduct, slug=slug)
     products = Product.objects.filter(category=category, published=True).all()
