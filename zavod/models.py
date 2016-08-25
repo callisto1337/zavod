@@ -156,7 +156,7 @@ class CategoryImage(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product)
-    product_image = models.ForeignKey(Image)
+    product_image = models.ForeignKey(Image, blank=True, null=True)
 
 
 class File(models.Model):
