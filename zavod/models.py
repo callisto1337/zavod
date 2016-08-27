@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+from django.core.mail import send_mail
 from django.db import models
+from django.db.models.signals import post_save
 from django.urls import reverse
 from django.contrib.auth.models import User, UserManager, AbstractBaseUser
 from django.contrib.postgres.fields import JSONField
+
+from zt.settings import EMAILS_FOR_FAQ
 
 
 class CustomUser(AbstractBaseUser):
@@ -47,6 +51,8 @@ class Article(models.Model):
     seo_title = models.CharField(max_length=100, default='')
     seo_description = models.CharField(max_length=100, default='')
     seo_keywords = models.CharField(max_length=100, default='')
+    author = models.TextField(max_length=200, default='')
+    views = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name
@@ -192,3 +198,24 @@ class Gallery(models.Model):
 class GalleryImage(models.Model):
     gallery = models.ForeignKey(Gallery)
     gallery_image = models.FileField(upload_to='media/gallery/', blank=True, null=True)
+
+
+class Question(models.Model):
+    published = models.BooleanField(default=False)
+    text = models.TextField()
+    answer = models.TextField()
+
+
+def email_question(sender, instance, created, **kwargs):
+    if created:
+        send_mail(
+            u'Новый вопрос на сайте zavod',
+            u'Поступил новый вопрос. ' \
+            u'Вы можете зайти в раздел администрирования и ответить на него. ' \
+            u'Текст вопроса:\n\n{}'.format(instance.text),
+            'from@example.com',
+            EMAILS_FOR_FAQ,
+            fail_silently=True,
+        )
+
+post_save.connect(email_question, sender=Question, dispatch_uid="email_question")

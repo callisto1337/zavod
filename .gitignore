@@ -94,3 +94,4 @@ ENV/
 *.*~
 
 assets/static/node_modules/
+zt/local_settings.py
