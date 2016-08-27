@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from django.http import HttpResponse
 
 urlpatterns = [
     url(r'^$', views.main, name='main'),
@@ -45,7 +46,10 @@ urlpatterns = [
     url(r'^news/$', views.news, name='news'),
     url(r'^about/$', views.about, name='about'),
     url(r'^about/otzyvy/$', views.otzyvy, name='otzyvy'),
+    url(r'^about/chasto-zadavaemye-voprosy-faq/$', views.faq, name='faq'),
     url(r'^partnery/$', views.partnery, name='partnery'),
     url(r'^proizvodstvo-zavoda-triumf/$', views.proizvodstvo_zavoda_triumf, name='proizvodstvo_zavoda_triumf'),
     url(r'^prajjsy/gibkaja-sistema-skidok/$', views.gibkaja_sistema_skidok, name='gibkaja_sistema_skidok'),
+    url(r'^robots.txt$',
+        lambda r: HttpResponse("User-agent: *\nDisallow: /", content_type="text/plain")),
 ]

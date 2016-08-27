@@ -4,7 +4,8 @@ from watson import search as watson
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
-from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage
+from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage, Question
+from zavod.forms import QuestionForm
 
 
 def main(request):
@@ -122,6 +123,20 @@ def otzyvy(request):
     return render(request, 'about_review.html')
 
 
+def faq(request):
+    out = {}
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            new_question = form.save()
+            out.update({'question_asked': True})
+        else:
+            out.update({'error': 'Что-то пошло не так!'})
+    question_form = QuestionForm()
+    out.update({'question_form': question_form})
+    return render(request, 'zavod/about_faq.html', out)
+
+
 def proizvodstvo_zavoda_triumf(request):
     return render(request, 'zavod/proizvodstvo_zavoda_triumf.html')
 
@@ -143,6 +158,8 @@ def articles_page(request, page_number):
 
 def articles_detail(request, article_slug):
     article = get_object_or_404(Article, slug=article_slug)
+    article.views += 1
+    article.save()
     return render(request, 'zavod/articles_detail.html', {'article': article})
 
 
