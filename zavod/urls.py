@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^catalog/(?P<parent_category_slug>[-\w]+)/(?P<category_slug>[-\w]+)/$', views.catalog_category, name='catalog_category_inside'),
     url(r'^catalog/(?P<parent_category_slug>[-\w]+)/(?P<category_slug>[-\w]+)/(?P<slug>[-\w]+)/$', views.product_or_products, name='product_or_products'),
     url(r'^product/(?P<slug>[-\w]+)/$', views.get_product, name='get_product'),
+    url(r'^products_search/$', views.products_search, name='products_search'),
     url(r'^prajjsy/$', views.prajjsy, name='prajjsy'),
     url(r'^articles/$', views.articles, name='articles'),
     url(r'^articles/(?P<article_slug>[-\w]+)/$', views.articles_detail, name='articles_detail'),

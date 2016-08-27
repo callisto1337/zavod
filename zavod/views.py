@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import re
 from watson import search as watson
 
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
 from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage
+from zavod.constants import SPECIAL_FILTER_PARAMS
 
 
 def main(request):
@@ -16,8 +18,6 @@ def main(request):
 def search(request):
     search_text = request.GET.get('text', '')
     search_results = watson.search(search_text)
-    for result in search_results:
-        print result.title, result.url
     return render(request, 'zavod/search.html', {'search_results': search_results})
 
 
@@ -224,3 +224,24 @@ def product_or_products(request, slug, parent_category_slug=None, category_slug=
     products = Product.objects.filter(category=category, published=True).all()
     return render(request, 'catalog_category.html', {'products': products, 'title': title,
                                                      'category': category})
+
+
+def products_search(request):
+    search_param = {}
+    result = Product.objects
+    for param in request.GET:
+        if param in SPECIAL_FILTER_PARAMS:
+            result = result.filter(properties__has_key=unicode(param[:-4]))
+            for product in result:
+                param_value_str = (product.properties.get(unicode(param[:-4]), None))
+                param_value = float(re.findall(SPECIAL_FILTER_PARAMS.get(param), param_value_str)[0])
+                if param[-3:] == 'max' and param_value > float(request.GET.get(param, None)):
+                    result = result.exclude(pk=product.pk)
+                elif param[-3:] == 'min' and param_value < float(request.GET.get(param, None)):
+                    result = result.exclude(pk=product.pk)
+        else:
+            search_param.update({
+                u'properties__{}'.format(param): request.GET.get(param, None),
+            })
+            result = result.filter(**search_param)
+    return render(request, 'zavod/search.html', {'search_results': result})
