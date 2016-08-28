@@ -1,4 +1,5 @@
 Django==1.10
 psycopg2==2.6.2
-django-watson=1.2.3
+django-watson==1.2.3
+django-threadedcomments==1.0.1
 Pillow==2.6.1

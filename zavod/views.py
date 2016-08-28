@@ -187,8 +187,8 @@ def news_page(request, page_number):
     return render(request, 'zavod/news.html', {'news': news})
 
 
-def news_detail(request, article_slug):
-    news = get_object_or_404(News, slug=article_slug)
+def news_detail(request, news_slug):
+    news = get_object_or_404(News, slug=news_slug)
     return render(request, 'zavod/news_detail.html', {'news': news})
 
 

@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'watson',
+    'threadedcomments',
+    'django_comments',
+    'django.contrib.sites',
     'zavod',
 ]
 
@@ -135,6 +138,9 @@ MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'zavod.CustomUser'
 
+COMMENTS_APP = 'threadedcomments'
+
+SITE_ID = 1
 # Email
 
 EMAIL_USE_TLS = True
