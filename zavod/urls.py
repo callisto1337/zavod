@@ -1,6 +1,8 @@
 from django.conf.urls import url
-from . import views
+from django.conf.urls.static import static
 from django.http import HttpResponse
+from . import views
+from zt import settings
 
 urlpatterns = [
     url(r'^$', views.main, name='main'),
@@ -53,4 +55,4 @@ urlpatterns = [
     url(r'^prajjsy/gibkaja-sistema-skidok/$', views.gibkaja_sistema_skidok, name='gibkaja_sistema_skidok'),
     url(r'^robots.txt$',
         lambda r: HttpResponse("User-agent: *\nDisallow: /", content_type="text/plain")),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

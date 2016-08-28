@@ -39,6 +39,25 @@ class CustomUser(AbstractBaseUser):
 class Tag(models.Model):
     title = models.CharField(max_length=100)
 
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
+
+
+class Image(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
+
 
 class Article(models.Model):
     published = models.BooleanField(default=True)
@@ -53,6 +72,8 @@ class Article(models.Model):
     seo_keywords = models.CharField(max_length=100, default='')
     author = models.TextField(max_length=200, default='')
     views = models.IntegerField(default=0)
+    tags = models.ManyToManyField(Tag, related_name='articles', default=None, null=True, blank=True)
+    images = models.ManyToManyField(Image, related_name='articles', default=None, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -76,6 +97,8 @@ class News(models.Model):
     seo_title = models.CharField(max_length=100, default='')
     seo_description = models.CharField(max_length=100, default='')
     seo_keywords = models.CharField(max_length=100, default='')
+    tags = models.ManyToManyField(Tag, related_name='news', default=None, null=True, blank=True)
+    images = models.ManyToManyField(Image, related_name='news', default=None, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -88,24 +111,16 @@ class News(models.Model):
         verbose_name_plural = 'Новости'
 
 
-class ArticleTag(models.Model):
-    article = models.ForeignKey(Article)
-    tag = models.ForeignKey(Tag)
+class File(models.Model):
+    title = models.CharField(max_length=100)
+    file_content = models.FileField(upload_to='media/files/', blank=True, null=True)
 
+    def __unicode__(self):
+        return self.title
 
-class NewsTag(models.Model):
-    news = models.ForeignKey(News)
-    tag = models.ForeignKey(Tag)
-
-
-class ArticleImage(models.Model):
-    article = models.ForeignKey(Article)
-    article_image = models.FileField(upload_to='media/articles/', blank=True, null=True)
-
-
-class NewsImage(models.Model):
-    news = models.ForeignKey(News)
-    news_image = models.FileField(upload_to='media/news/', blank=True, null=True)
+    class Meta:
+        verbose_name = 'Документ'
+        verbose_name_plural = 'Документы'
 
 
 class CategoryProduct(models.Model):
@@ -115,6 +130,8 @@ class CategoryProduct(models.Model):
     parent_id = models.ForeignKey("CategoryProduct", default=None, null=True, blank=True)
     title = models.CharField(max_length=100, default='')
     text = models.TextField(default='')
+    images = models.ManyToManyField(Image, related_name='categories', default=None, null=True, blank=True)
+    files = models.ManyToManyField(File, related_name='categories', default=None, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -138,6 +155,7 @@ class Product(models.Model):
     seo_description = models.CharField(max_length=100, default='')
     seo_keywords = models.CharField(max_length=100, default='')
     properties = JSONField(default='')
+    images = models.ManyToManyField(Image, related_name='products', default=None, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -148,31 +166,6 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
-
-
-class Image(models.Model):
-    title = models.CharField(max_length=100)
-    image = models.FileField(upload_to='media/images/', blank=True, null=True)
-
-
-class CategoryImage(models.Model):
-    category = models.ForeignKey(CategoryProduct)
-    category_image = models.ForeignKey(Image)
-
-
-class ProductImage(models.Model):
-    product = models.ForeignKey(Product)
-    product_image = models.ForeignKey(Image, blank=True, null=True)
-
-
-class File(models.Model):
-    title = models.CharField(max_length=100)
-    file_content = models.FileField(upload_to='media/files/', blank=True, null=True)
-
-
-class CategoryFile(models.Model):
-    category = models.ForeignKey(CategoryProduct)
-    category_file = models.ForeignKey(File)
 
 
 class Gallery(models.Model):
@@ -194,16 +187,31 @@ class Gallery(models.Model):
     def get_absolute_url(self):
         return "/people/%i/" % self.id
 
+    class Meta:
+        verbose_name = 'Галерея'
+        verbose_name_plural = 'Галереи'
+
 
 class GalleryImage(models.Model):
     gallery = models.ForeignKey(Gallery)
-    gallery_image = models.FileField(upload_to='media/gallery/', blank=True, null=True)
+    gallery_image = models.ImageField(upload_to='media/gallery/', blank=True, null=True)
+
+    def __unicode__(self):
+        return self.gallery_image.name
+
+    class Meta:
+        verbose_name = 'Изображение в галерее'
+        verbose_name_plural = 'Изображения в галерее'
 
 
 class Question(models.Model):
     published = models.BooleanField(default=False)
     text = models.TextField()
     answer = models.TextField()
+
+    class Meta:
+        verbose_name = 'Вопрос'
+        verbose_name_plural = 'Вопросы'
 
 
 def email_question(sender, instance, created, **kwargs):

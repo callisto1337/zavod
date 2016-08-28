@@ -5,7 +5,7 @@ from watson import search as watson
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
-from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage
+from .models import Article, CategoryProduct, Product, News, Gallery, GalleryImage
 from zavod.forms import QuestionForm
 from zavod.constants import SPECIAL_FILTER_PARAMS
 
@@ -164,15 +164,15 @@ def articles_detail(request, article_slug):
 
 
 def articles_tag(request, tag):
-    articles = ArticleTag.objects.filter(tag__title=tag, article__published=True)\
-                   .order_by('article__date_created').values('article').all()[:5]
+    articles = Article.objects.filter(tags__title=tag, published=True)\
+                      .order_by('date_created').all()[:5]
     return render(request, 'zavod/articles.html', {'articles': articles})
 
 
 def articles_tag_page(request, page_number, tag):
     start = (int(page_number) - 1) * 5 + 1
-    articles = ArticleTag.objects.filter(tag__title=tag, article__published=True)\
-                   .order_by('article__date_created').values('article').all()[start:start+5]
+    articles = Article.objects.filter(tags__title=tag, published=True)\
+                      .order_by('date_created').all()[start:start+5]
     return render(request, 'zavod/articles.html', {'articles': articles})
 
 
@@ -193,15 +193,15 @@ def news_detail(request, article_slug):
 
 
 def news_tag(request, tag):
-    news = NewsTag.objects.filter(tag__title=tag, news__published=True)\
-                   .order_by('news__date_created').values('news').all()[:5]
+    news = News.objects.filter(tags__title=tag, published=True)\
+                   .order_by('date_created').all()[:5]
     return render(request, 'zavod/news.html', {'news': news})
 
 
 def news_tag_page(request, page_number, tag):
     start = (int(page_number) - 1) * 5 + 1
-    news = NewsTag.objects.filter(tag__title=tag, news__published=True)\
-                   .order_by('news__date_created').values('news').all()[start:start+5]
+    news = News.objects.filter(tags__title=tag, published=True)\
+                       .order_by('date_created').all()[start:start+5]
     return render(request, 'zavod/news.html', {'news': news})
 
 
