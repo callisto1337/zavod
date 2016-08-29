@@ -16,13 +16,21 @@
 		width: 180px;
 
 		&-fullsize {
-			// width: 612px;
 			margin: 0 auto 8px auto;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
 		}
 
-		img {
-			width: 100%;
-			height: auto;
+		&-halfsize {
+			margin: 0;
+
+			img {
+				width: 360px;
+				height: 108px;
+			}
 		}
 	}
 
@@ -45,7 +53,7 @@
 	&__author {
 		font-size: 9px;
 		text-transform: uppercase;
-		margin-bottom: 16px;
+		margin-bottom: 12px;
 		font-weight: 300;
 	}
 
@@ -134,9 +142,12 @@
 		}
 	}
 
+	// TODO Надо менять тень при наведении
 	&:hover {
-		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-			0 3px 1px -2px rgba(0, 0, 0, 0.2),
-			0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	}
+
+	// Без тени
+	&_noshadow {
+		box-shadow: none;
 	}
 }

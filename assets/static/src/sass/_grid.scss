@@ -34,18 +34,44 @@
 			@include column;
 			width: 360px;
 		}
-		/* Я люблю дизайнера*/
+		&-5 {
+			@include column;
+			width: 450px;
+		}
+		&-6 {
+			@include column;
+			width: 540px;
+		}
 		&-7 {
 			@include column;
-			width: 612px;
+			width: 630px;
+		}
+		&-8 {
+			@include column;
+			width: 720px;
 		}
 		&-9 {
 			@include column;
 			width: 810px;
 		}
+		&-10 {
+			@include column;
+			width: 900px;
+		}
+		&-11 {
+			@include column;
+			width: 990px;
+		}
 		&-12 {
 			@include column;
 			width: 1080px;
+		}
+		/*
+		* Крутые дизайнеры
+		*/
+		&-custom-612 {
+			@include column;
+			width: 612px;
 		}
 
 	}

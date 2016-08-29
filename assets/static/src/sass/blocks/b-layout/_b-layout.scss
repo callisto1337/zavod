@@ -11,13 +11,7 @@
 		content: " ";
 	}
 
-	.breadcrumbs {
-		font-size: 12px;
-		color: #868686;
-	}
-
 	.submenu__catalog {
-
 
 		.submenu__catalog__list {
 			margin: 25px 0 50px 0;
@@ -48,16 +42,6 @@
 	}
 
 	.view__option {
-		float: right;
-		list-style-type: none;
-		margin: 0 auto;
-
-		.view__option__item {
-			display: inline;
-			margin: 0 5px;
-			color: #00955f;
-			cursor: pointer;
-		}
 
 		.view__option__item_active {
 			margin: 0 5px;
@@ -73,13 +57,6 @@
 		font-size: 18px;
 	}
 
-	.b-box__image-halfsize {
-		img {
-			width: 360px;
-			height: 80px;
-		}
-	}
-
 	.b-box__image-left {
 		float: left;
 
@@ -92,10 +69,5 @@
 		img {
 			margin-top: 23px;
 		}
-	}
-
-	.b-section-subtitle-subtitle {
-		font-size: 14px;
-		display: block;
 	}
 }
