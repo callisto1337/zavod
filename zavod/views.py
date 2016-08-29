@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
+import re
+from watson import search as watson
+
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
-from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage
+from .models import Article, CategoryProduct, Product, News, Gallery, GalleryImage
+from zavod.forms import QuestionForm
+from zavod.constants import SPECIAL_FILTER_PARAMS
 
 
 def main(request):
@@ -12,7 +17,9 @@ def main(request):
 
 
 def search(request):
-    return render(request, 'zavod/search.html')
+    search_text = request.GET.get('text', '')
+    search_results = watson.search(search_text)
+    return render(request, 'zavod/search.html', {'search_results': search_results})
 
 
 def contacts(request):
@@ -116,6 +123,20 @@ def otzyvy(request):
     return render(request, 'about_review.html')
 
 
+def faq(request):
+    out = {}
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            new_question = form.save()
+            out.update({'question_asked': True})
+        else:
+            out.update({'error': 'Что-то пошло не так!'})
+    question_form = QuestionForm()
+    out.update({'question_form': question_form})
+    return render(request, 'zavod/about_faq.html', out)
+
+
 def proizvodstvo_zavoda_triumf(request):
     return render(request, 'zavod/proizvodstvo_zavoda_triumf.html')
 
@@ -137,19 +158,21 @@ def articles_page(request, page_number):
 
 def articles_detail(request, article_slug):
     article = get_object_or_404(Article, slug=article_slug)
+    article.views += 1
+    article.save()
     return render(request, 'zavod/articles_detail.html', {'article': article})
 
 
 def articles_tag(request, tag):
-    articles = ArticleTag.objects.filter(tag__title=tag, article__published=True)\
-                   .order_by('article__date_created').values('article').all()[:5]
+    articles = Article.objects.filter(tags__title=tag, published=True)\
+                      .order_by('date_created').all()[:5]
     return render(request, 'zavod/articles.html', {'articles': articles})
 
 
 def articles_tag_page(request, page_number, tag):
     start = (int(page_number) - 1) * 5 + 1
-    articles = ArticleTag.objects.filter(tag__title=tag, article__published=True)\
-                   .order_by('article__date_created').values('article').all()[start:start+5]
+    articles = Article.objects.filter(tags__title=tag, published=True)\
+                      .order_by('date_created').all()[start:start+5]
     return render(request, 'zavod/articles.html', {'articles': articles})
 
 
@@ -164,22 +187,27 @@ def news_page(request, page_number):
     return render(request, 'zavod/news.html', {'news': news})
 
 
-def news_detail(request, article_slug):
-    news = get_object_or_404(News, slug=article_slug)
+def news_detail(request, news_slug):
+    news = get_object_or_404(News, slug=news_slug)
     return render(request, 'zavod/news_detail.html', {'news': news})
 
 
 def news_tag(request, tag):
-    news = NewsTag.objects.filter(tag__title=tag, news__published=True)\
-                   .order_by('news__date_created').values('news').all()[:5]
+    news = News.objects.filter(tags__title=tag, published=True)\
+                   .order_by('date_created').all()[:5]
     return render(request, 'zavod/news.html', {'news': news})
 
 
 def news_tag_page(request, page_number, tag):
     start = (int(page_number) - 1) * 5 + 1
-    news = NewsTag.objects.filter(tag__title=tag, news__published=True)\
-                   .order_by('news__date_created').values('news').all()[start:start+5]
+    news = News.objects.filter(tags__title=tag, published=True)\
+                       .order_by('date_created').all()[start:start+5]
     return render(request, 'zavod/news.html', {'news': news})
+
+
+def get_product(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    return render(request, 'product.html', {'product': product})
 
 
 def catalog(request):
@@ -201,16 +229,36 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             return render(request, 'catalog_category.html', {'products': products, 'parent': category, 'title': title,
                                                              'category': category})
     else:
-        product = get_object_or_404(Product, slug=category_slug)
-        return render(request, 'product.html', {'product': product})
+        get_product(request, category_slug)
 
 
 def product_or_products(request, slug, parent_category_slug=None, category_slug=None):
     product = Product.objects.filter(slug=slug).first()
     if product:
-        return render(request, 'product.html', {'product': product})
+        get_product(request, category_slug)
     title = 'Список продуктов во вложенной категории'
     category = get_object_or_404(CategoryProduct, slug=slug)
     products = Product.objects.filter(category=category, published=True).all()
     return render(request, 'catalog_category.html', {'products': products, 'title': title,
                                                      'category': category})
+
+
+def products_search(request):
+    search_param = {}
+    result = Product.objects
+    for param in request.GET:
+        if param in SPECIAL_FILTER_PARAMS:
+            result = result.filter(properties__has_key=unicode(param[:-4]))
+            for product in result:
+                param_value_str = (product.properties.get(unicode(param[:-4]), None))
+                param_value = float(re.findall(SPECIAL_FILTER_PARAMS.get(param), param_value_str)[0])
+                if param[-3:] == 'max' and param_value > float(request.GET.get(param, None)):
+                    result = result.exclude(pk=product.pk)
+                elif param[-3:] == 'min' and param_value < float(request.GET.get(param, None)):
+                    result = result.exclude(pk=product.pk)
+        else:
+            search_param.update({
+                u'properties__{}'.format(param): request.GET.get(param, None),
+            })
+            result = result.filter(**search_param)
+    return render(request, 'zavod/search.html', {'search_results': result})

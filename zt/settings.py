@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'watson',
+    'threadedcomments',
+    'django_comments',
+    'django.contrib.sites',
     'zavod',
 ]
 
@@ -133,3 +137,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
 MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'zavod.CustomUser'
+
+COMMENTS_APP = 'threadedcomments'
+
+SITE_ID = 1
+# Email
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+
+EMAILS_FOR_FAQ = ['']
+
+try:
+    from zt.local_settings import *
+except ImportError:
+    pass
