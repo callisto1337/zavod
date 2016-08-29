@@ -13,7 +13,6 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 	</head>
 	<body>
 		<header class="b-header js-header">
@@ -215,21 +214,35 @@
 				</table>
 			</div>
 		</div>
-		<div class="b-section">
+		<div class="b-section b-section_short">
 			<div class="b-layout">
-                <div class="breadcrumbs">Главная /</div>
+                <div class="b-breadcrumbs">
+                    <a class="b-breadcrumbs__link" href="#">Главная</a> /
+                </div>
 				<div class="grid__row">
 					<div class="grid__column-7">
 						<h3 class="b-section-title">О компании</h3>
 					</div>
-					<div class="grid__column-6 grid__offset">
-						<ul class="view__option">
-							<li class="view__option__item view__option__item_active">Триумф</li>
-							<li class="view__option__item">Награды</li>
-							<li class="view__option__item">Партнеры</li>
-							<li class="view__option__item">Отзывы</li>
-							<li class="view__option__item">Сотрудники</li>
-							<li class="view__option__item">Вакансии</li>
+					<div class="grid__column-7">
+						<ul class="b-tab">
+							<li class="b-tab__item b-tab__item_active">
+                                <a class="b-tab__item__link" href="#">Триумф</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="#">Награды</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="#">Партнеры</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="#">Отзывы</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="#">Сотрудники</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="#">Вакансии</a>
+                            </li>
 						</ul>
 					</div>
 				</div>
@@ -241,6 +254,7 @@
                 <div class="b-player">
                     <img src="{% static 'img/player.png' %}" alt="Картинка">
                 </div>
+
 				<div class="grid__row">
 					<div class="grid__column-9">
 						<p class="b-section-text">Сегодня «Завод Триумф» это крупное предприятие, располагающее высокоэффективными производственными мощностями, это динамично развивающаяся компания, которая стремится расширить ассортимент продукции и тщательно следит за качеством оказываемых услуг, имея многолетний опыт работы на отечественном рынке.</p>
@@ -251,6 +265,7 @@
 						<p class="b-section-text">Качество продукции отслеживается на всех этапах производства, с момента получения заготовки до момента отгрузки готового оборудования. В работе отдела продаж предусмотрена обратная связь с потребителями для выявления их пожеланий, замечаний, предложений. Мы открыты ко всему новому.</p>
 						<p class="b-section-subtitle">Девиз нашего завода: Качество, которому можно доверять!</p>
 					</div>
+
 					<div class="grid__column-4 grid__offset">
 						<img class="b-section-logotype" src="{% static 'img/logotype_square.png' %}" alt="Логотип_маленький" />
 						<h4 class="b-section-subtitle">Обращаясь к нам Вам гарантированы:</h4>
@@ -270,32 +285,42 @@
 			<div class="b-layout">
 				<div class="grid__row">
 					<div class="grid__column-4">
-						<h4 class="b-section-subtitle">Новинка производства</h4>
-						<div class="b-box__image-left">
-							<img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-						</div>
-						<span class="b-section-subtitle-subtitle">
-							ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
-						</span>
-						<span class="b-section-text">
-							Разборные пластинчатые<br>
-							теплообменник FUNKE
-						</span>
+						<h3 class="subheading">Новинка производства</h3>
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                </div>
+                                <p class="b-box__author">
+                                    ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
+                                </p>
+                                <p class="b-box__text">
+                                    Разборные пластинчатые теплообменник FUNKE
+                                </p>
+                                <div class="b-box__sale">Хит</div>
+                            </div>
+                        </div>
 					</div>
 					<div class="grid__column-4 grid__offset">
-						<h4 class="b-section-subtitle">Последняя новость</h4>
-						<span class="b-section-subtitle-subtitle">
-							СЕГОДНЯ 10:45
-						</span>
-						<span class="b-section-text">
-							Служба Яндекс.Рефераты предназнаена для
-							студентов и школьников, дизайнеров
-						</span>
+						<h3 class="subheading">Последняя новость</h3>
+
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <p class="b-box__author">
+                                    СЕГОДНЯ 10:45
+                                </p>
+                                <p class="b-box__text">
+                                    Служба Яндекс.Рефераты предназнаена для студентов и школьников, дизайнеров
+                                </p>
+                            </div>
+                        </div>
 					</div>
 					<div class="grid__column-4 grid__offset">
-						<h4 class="b-section-subtitle">Видео как закалялась сталь</h4>
-						<div class="b-box__image-halfsize">
-							<img src="{% static 'img/life/banner_1.png' %}" alt="Пример Видео">
+						<h3 class="subheading">Видео как закалялась сталь</h3>
+                        <div class="b-box b-box_noshadow">
+							<div class="b-box__image-halfsize">
+								<img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+							</div>
 						</div>
 					</div>
 				</div>

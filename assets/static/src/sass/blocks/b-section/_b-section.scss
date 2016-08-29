@@ -1,6 +1,6 @@
 .b-section {
 	border-top: 1px solid #e5e5e5;
-	padding: 58px 0;
+	padding: 36px 0;
 
 	&-title {
 		font-size: 27px;
@@ -16,6 +16,16 @@
 		color: #292929;
 		margin: 0 0 20px 0;
 		padding: 0;
+
+		// ПодЗаголовок фирменного цвета
+		&_colorful {
+			color: #00955f;
+		}
+
+		// Инлайн вставка (без отступа снизу)
+		&_inline {
+			margin: 0;
+		}
 	}
 
 	&-text {
@@ -79,4 +89,18 @@
 		}
 	}
 
+	// Маленькие отступы
+	&_short {
+		padding-top: 20px;
+	}
+
+	// Большие отступы
+	&_large {
+		padding: 60px 0;
+	}
+
+	// Без границ
+	&_borderless {
+		border: none;
+	}
 }
