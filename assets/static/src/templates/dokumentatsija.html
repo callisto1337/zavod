@@ -13,7 +13,6 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 	</head>
 	<body>
 		<header class="b-header js-header">
@@ -215,19 +214,30 @@
 				</table>
 			</div>
 		</div>
-		<div class="b-section">
+		<div class="b-section b-section_short">
 			<div class="b-layout">
-                <div class="breadcrumbs">Главная / Документы </div>
+                <div class="b-breadcrumbs">
+                    <a class="b-breadcrumbs__link" href="#">Главная</a> /
+                    <a class="b-breadcrumbs__link" href="#">Документы</a>
+                </div>
 				<div class="grid__row">
 					<div class="grid__column-7">
 						<h3 class="b-section-title">Разрешение на применение</h3>
 					</div>
 					<div class="grid__column-6 grid__offset">
-						<ul class="view__option">
-							<li class="view__option__item view__option__item_active">Разрешение на применение</li>
-							<li class="view__option__item">Сертификаты</li>
-							<li class="view__option__item">Товарные знаки</li>
-							<li class="view__option__item">Техническая документация</li>
+						<ul class="b-tab">
+							<li class="b-tab__item b-tab__item_active">
+                                <a class="b-tab__item__link" href="#">Разрешение на применение</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="#">Сертификаты</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="#">Товарные знаки</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="#">Техническая документация</a>
+                            </li>
 						</ul>
 					</div>
 				</div>
@@ -245,32 +255,42 @@
 			<div class="b-layout">
 				<div class="grid__row">
 					<div class="grid__column-4">
-						<h4 class="b-section-subtitle">Новинка производства</h4>
-						<div class="b-box__image-left">
-							<img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-						</div>
-						<span class="b-section-subtitle-subtitle">
-							ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
-						</span>
-						<span class="b-section-text">
-							Разборные пластинчатые<br>
-							теплообменник FUNKE
-						</span>
+						<h3 class="subheading">Новинка производства</h3>
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                </div>
+                                <p class="b-box__author">
+                                    ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
+                                </p>
+                                <p class="b-box__text">
+                                    Разборные пластинчатые теплообменник FUNKE
+                                </p>
+                                <div class="b-box__sale">Хит</div>
+                            </div>
+                        </div>
 					</div>
 					<div class="grid__column-4 grid__offset">
-						<h4 class="b-section-subtitle">Последняя новость</h4>
-						<span class="b-section-subtitle-subtitle">
-							СЕГОДНЯ 10:45
-						</span>
-						<span class="b-section-text">
-							Служба Яндекс.Рефераты предназнаена для
-							студентов и школьников, дизайнеров
-						</span>
+						<h3 class="subheading">Последняя новость</h3>
+
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <p class="b-box__author">
+                                    СЕГОДНЯ 10:45
+                                </p>
+                                <p class="b-box__text">
+                                    Служба Яндекс.Рефераты предназнаена для студентов и школьников, дизайнеров
+                                </p>
+                            </div>
+                        </div>
 					</div>
 					<div class="grid__column-4 grid__offset">
-						<h4 class="b-section-subtitle">Видео как закалялась сталь</h4>
-						<div class="b-box__image-halfsize">
-							<img src="{% static 'img/life/banner_1.png' %}" alt="Пример Видео">
+						<h3 class="subheading">Видео как закалялась сталь</h3>
+                        <div class="b-box b-box_noshadow">
+							<div class="b-box__image-halfsize">
+								<img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+							</div>
 						</div>
 					</div>
 				</div>
