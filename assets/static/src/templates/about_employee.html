@@ -222,14 +222,26 @@
 					<div class="grid__column-7">
 						<h3 class="b-section-title">Сотрудники компании</h3>
 					</div>
-					<div class="grid__column-6 grid__offset">
-						<ul class="view__option">
-							<li class="view__option__item">Триумф</li>
-							<li class="view__option__item">Награды</li>
-							<li class="view__option__item">Партнеры</li>
-							<li class="view__option__item">Отзывы</li>
-							<li class="view__option__item view__option__item_active">Сотрудники</li>
-							<li class="view__option__item">Вакансии</li>
+					<div class="grid__column-7">
+						<ul class="b-tab">
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="{% url "about" %}">Триумф</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="{% url "nagrady" %}">Награды</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="{% url "partnery" %}">Партнеры</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="{% url "otzyvy" %}">Отзывы</a>
+                            </li>
+							<li class="b-tab__item b-tab__item_active">
+                                <a class="b-tab__item__link" href="#">Сотрудники</a>
+                            </li>
+							<li class="b-tab__item">
+                                <a class="b-tab__item__link" href="{% url "vacancy" %}">Вакансии</a>
+                            </li>
 						</ul>
 					</div>
 				</div>
