@@ -123,6 +123,14 @@ def otzyvy(request):
     return render(request, 'about_review.html')
 
 
+def employee(request):
+    return render(request, 'about_employee.html')
+
+
+def vacancy(request):
+    return render(request, 'about_vacancy.html')
+
+
 def faq(request):
     out = {}
     if request.method == 'POST':
@@ -212,6 +220,8 @@ def get_product(request, slug):
 
 def catalog(request):
     category_products = CategoryProduct.objects.filter(published=True).annotate(number=Count('product')).all()
+    if 'expand' in request.GET:
+        return render(request, 'catalog_expand.html', {'category_products': category_products})
     return render(request, 'catalog.html', {'category_products': category_products})
 
 
@@ -221,15 +231,22 @@ def catalog_category(request, category_slug, parent_category_slug=None):
         if CategoryProduct.objects.filter(parent_id=category.id):
             title = 'Вложенные категории'
             subcategories = CategoryProduct.objects.filter(parent_id=category.id, published=True).all()
-            return render(request, 'catalog_category.html', {'subcategories': subcategories, 'title': title,
-                                                             'category': category})
+            template_name = 'catalog_category.html'
+            if 'expand' in request.GET:
+                template_name = 'catalog_category_expand.html'
+            return render(request, template_name, {'subcategories': subcategories, 'title': title,
+                                                   'category': category, 'request': request})
         else:
             title = 'Список продуктов'
             products = Product.objects.all().filter(category=category, published=True)
-            return render(request, 'catalog_category.html', {'products': products, 'parent': category, 'title': title,
-                                                             'category': category})
+            template_name = 'catalog_category.html'
+            if 'expand' in request.GET:
+                template_name = 'catalog_category_expand.html'
+            return render(request, template_name, {'products': products, 'parent': category, 'title': title,
+                                                   'category': category, 'request': request})
     else:
-        get_product(request, category_slug)
+        product = get_object_or_404(Product, slug=category_slug)
+        return render(request, 'product.html', {'product': product})
 
 
 def product_or_products(request, slug, parent_category_slug=None, category_slug=None):
