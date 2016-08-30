@@ -1,8 +1,10 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
 
 urlpatterns = [
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^$', views.main, name='main'),
+    url(r'^logout/$', views.logout, name='logout'),
     url(r'^search/$', views.search, name='search'),
     url(r'^catalog/$', views.catalog, name='catalog'),
     url(r'^catalog/(?P<category_slug>[-\w]+)/$', views.catalog_category, name='catalog_category'),

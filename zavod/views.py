@@ -2,9 +2,16 @@
 from watson import search as watson
 
 from django.db.models import Count
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import logout as auth_logout
+from .forms import UserCreateForm
 
-from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage
+from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage, CustomUser
+
+
+def logout(request):
+    auth_logout(request)
+    return redirect('/')
 
 
 def main(request):

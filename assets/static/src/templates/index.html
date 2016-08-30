@@ -60,10 +60,17 @@
 					</div>
 				</div>
 				<div class="login">
-					<a class="b-btn">
-						<i class="fa fa-key ico" aria-hidden="true"></i>
-						<span class="b-btn__text">Войти</span>
-					</a>
+					{% if user and not user.is_anonymous %}
+						<a class="b-btn" href="logout/">
+							<i class="fa fa-key ico" aria-hidden="true"></i>
+							<span class="b-btn__text">Выйти</span>
+						</a>
+					{% else %}
+						<a class="b-btn">
+							<i class="fa fa-key ico" aria-hidden="true"></i>
+							<span class="b-btn__text">Войти</span>
+						</a>
+					{% endif %}
 				</div>
 			</div>
 		</header>

@@ -8,6 +8,8 @@ from django.contrib.postgres.fields import JSONField
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(max_length=50, unique=True)
     username = models.CharField(max_length=50, unique=True)
+    first_name = models.CharField(max_length=50, default='')
+    last_name = models.CharField(max_length=50, default='')
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
@@ -156,7 +158,7 @@ class CategoryImage(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product)
-    product_image = models.ForeignKey(Image)
+    product_image = models.ForeignKey(Image, blank=True, null=True)
 
 
 class File(models.Model):
