@@ -4,7 +4,9 @@ from watson import search as watson
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.forms import UserCreationForm
 from .forms import UserCreateForm
+from django.http import HttpResponse
 
 from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage, CustomUser
 
@@ -29,7 +31,14 @@ def search(request):
 
 
 def contacts(request):
-    return render(request, 'zavod/contacts.html')
+    if request.method == 'POST':
+        form_reg = UserCreationForm(request.POST)
+        if form_reg.is_valid():
+            form_reg.save()
+            return redirect('/')
+    else:
+        form_reg = UserCreateForm()
+    return render(request, 'zavod/contacts.html', {'form_reg': form_reg})
 
 
 def prajjsy(request):
