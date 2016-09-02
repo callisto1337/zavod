@@ -11,6 +11,17 @@ from django.http import HttpResponse
 from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage, CustomUser
 
 
+def login(request):
+    if request.method == 'POST':
+        form_reg = UserCreationForm(request.POST)
+        if form_reg.is_valid():
+            form_reg.save()
+            return redirect('/')
+    else:
+        form_reg = UserCreateForm()
+    return render(request, 'zavod/login.html', {'form_reg': form_reg})
+
+
 def logout(request):
     auth_logout(request)
     return redirect('/')
@@ -31,14 +42,7 @@ def search(request):
 
 
 def contacts(request):
-    if request.method == 'POST':
-        form_reg = UserCreationForm(request.POST)
-        if form_reg.is_valid():
-            form_reg.save()
-            return redirect('/')
-    else:
-        form_reg = UserCreateForm()
-    return render(request, 'zavod/contacts.html', {'form_reg': form_reg})
+    return render(request, 'zavod/contacts.html')
 
 
 def prajjsy(request):

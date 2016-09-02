@@ -7,9 +7,5 @@
 {% block content %}
 	<h1>Контакты</h1>
 	<a href="/">На главную</a><br>
-	<form action="/contacts/" method="post">
-			{% csrf_token %}
-			{{ form_reg }}
-			<button type="submit" name="button">123</button>
-	</form>
+
 {% endblock %}
