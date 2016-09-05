@@ -1,0 +1,30 @@
+{% extends 'zavod/base.html' %}
+
+{% block title %}
+	Контакты завода Триумф
+{% endblock %}
+
+{% block content %}
+	<h1>Регистрация</h1>
+	<a href="/">На главную</a><br>
+  <hr>
+  <form action="/registration/" method="post">
+      {% csrf_token %}
+      <h3>Регистрация</h3>
+      {{ form_reg }}
+      <button type="submit" name="button">Submit</button>
+  </form><br>
+  {% if user.is_authenticated %}
+    Логин: {{ user.username }}<br>
+    email: {{ user.email }}<br>
+    Имя: {{ user.first_name }}<br>
+    Фамилия: {{ user.last_name }}<br><br>
+
+    <a href="/logout/">Exit</a>
+  {% else %}
+    <a href="{% url 'social:begin' "vk-oauth2" %}">VK</a><br>
+    <a href="{% url 'social:begin' "facebook" %}">Facebook</a><br>
+    <a href="{% url 'social:begin' "twitter" %}">Twitter</a><br>
+  {% endif %}
+
+{% endblock %}
