@@ -1,5 +1,7 @@
 {% extends 'zavod/base.html' %}
 
+{% load threadedcomments_tags %}
+
 {% block title %}{{ article.seo_title }}{% endblock %}
 {% block description %}{{ article.seo_description }}{% endblock %}
 {% block keywords %}{{ article.seo_keywords }}{% endblock %}
@@ -7,5 +9,25 @@
 
 {% block content %}
 	<h1>{{ article.name }}</h1>
+
+    <h2>Comments for {{ article.name }}:</h2>
+
+    {% get_comment_count for article as count%}
+
+    <h3>Comments on This article ({{ count }}):</h3>
+    {% get_comment_list for article as tree %}
+    {% for comment in tree %}
+    <div style="margin-left: {{ comment.depth }}em;" class="comment">
+        <div style="margin-left:{{comment.depth}}em;">
+            {{ comment }}
+            Reply to this comment
+            {% render_comment_form for article with comment.id %}
+        </div>
+    </div>
+    {% endfor %}
+    <p>Reply to Original:</p>
+    {% render_comment_form for article %}
+
 	<a href="/articles/">К списку статей</a>
 {% endblock %}
+

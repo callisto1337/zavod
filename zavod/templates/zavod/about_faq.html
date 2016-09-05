@@ -1,0 +1,14 @@
+{% extends 'zavod/base.html' %}
+
+{% block title %}
+	О компании Завод Триумф
+{% endblock %}
+
+{% block content %}
+	<h1>FAQ</h1>
+    <form action="/about/chasto-zadavaemye-voprosy-faq/" method="post">{% csrf_token %}
+    {{ question_form }}
+    <input type="submit" value="Submit" />
+</form>
+	<a href="/">На главную</a><br>
+{% endblock %}

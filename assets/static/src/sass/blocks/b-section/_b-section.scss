@@ -1,7 +1,9 @@
 .b-section {
 	border-top: 1px solid #e5e5e5;
-	padding: 58px 0;
+	padding: 36px 0;
+	min-width: 1260px;
 
+	// Заголовок
 	&-title {
 		font-size: 27px;
 		font-weight: 700;
@@ -10,14 +12,26 @@
 		padding: 0;
 	}
 
+	// Под заголовок
 	&-subtitle {
 		font-size: 16.2px;
 		font-weight: 700;
 		color: #292929;
 		margin: 0 0 20px 0;
 		padding: 0;
+
+		// ПодЗаголовок фирменного цвета
+		&_colorful {
+			color: #00955f;
+		}
+
+		// Инлайн вставка (без отступа снизу)
+		&_inline {
+			margin: 0;
+		}
 	}
 
+	// Обычный текст
 	&-text {
 		font-size: 16.2px;
 		color: #292929;
@@ -25,6 +39,18 @@
 		margin-bottom: 32px;
 		font-weight: 300;
 		margin-top: 0;
+	}
+
+	// Картинка-хайлайт
+	&__image {
+		width: 100%;
+		min-width: 1260px;
+
+		// Сама картинка
+		& img {
+			width: 100%;
+			height: auto;
+		}
 	}
 
 	&-logotype {
@@ -79,4 +105,18 @@
 		}
 	}
 
+	// Маленькие отступы
+	&_short {
+		padding-top: 20px;
+	}
+
+	// Большие отступы
+	&_large {
+		padding: 60px 0;
+	}
+
+	// Без границ
+	&_borderless {
+		border: none;
+	}
 }

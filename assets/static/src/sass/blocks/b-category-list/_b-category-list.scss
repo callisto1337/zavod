@@ -36,7 +36,39 @@
 					text-decoration: none;
 					line-height: 18px;
 				}
+
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+
+				// Доп. инфо, например, количество позиций
+				&-info {
+					font-size: 12.6px;
+					line-height: 12.6px;
+					color: #777777;
+					font-weight: 300;
+				}
 			}
+
+			// Для страницы каталога нужен жирный
+			&_bold {
+
+				// Элемент списка
+				.b-category-list-group__list__item {
+
+					// Ссылка списка
+					&-link {
+						font-size: 16.2px;
+						line-height: 18px;
+						font-weight: 700;
+					}
+				}
+			}
+		}
+
+		// Инлайн вставка (без отступа снизу)
+		&_inline {
+			margin-bottom: 0;
 		}
 	}
 }

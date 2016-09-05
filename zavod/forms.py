@@ -1,10 +1,13 @@
-from django import forms
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from django.forms import ModelForm, TextInput, EmailField
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser
+from zavod.models import Question
+from zavod.models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = EmailField(required=True)
 
     class Meta:
         model = CustomUser
@@ -22,3 +25,14 @@ class LoginForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ("email", "password")
+
+
+class QuestionForm(ModelForm):
+    class Meta:
+        model = Question
+        fields = ['text']
+        widgets = {
+            'text': TextInput(attrs={'id': 'inputText',
+                                     'placeholder': 'Текст вопроса',
+                                     'required': 1}),
+        }

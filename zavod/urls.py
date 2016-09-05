@@ -1,5 +1,8 @@
 from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.http import HttpResponse
 from . import views
+from zt import settings
 
 urlpatterns = [
     url('', include('social.apps.django_app.urls', namespace='social')),
@@ -12,14 +15,18 @@ urlpatterns = [
     url(r'^catalog/(?P<category_slug>[-\w]+)/$', views.catalog_category, name='catalog_category'),
     url(r'^catalog/(?P<parent_category_slug>[-\w]+)/(?P<category_slug>[-\w]+)/$', views.catalog_category, name='catalog_category_inside'),
     url(r'^catalog/(?P<parent_category_slug>[-\w]+)/(?P<category_slug>[-\w]+)/(?P<slug>[-\w]+)/$', views.product_or_products, name='product_or_products'),
+    url(r'^product/comments/', include('django_comments.urls')),
     url(r'^product/(?P<slug>[-\w]+)/$', views.get_product, name='get_product'),
+    url(r'^products_search/$', views.products_search, name='products_search'),
     url(r'^prajjsy/$', views.prajjsy, name='prajjsy'),
+    url(r'^articles/comments/', include('django_comments.urls')),
     url(r'^articles/$', views.articles, name='articles'),
     url(r'^articles/(?P<article_slug>[-\w]+)/$', views.articles_detail, name='articles_detail'),
     url(r'^articles/page-(?P<page_number>[0-9]+)/$', views.articles_page, name='articles_page'),
     url(r'^articles/tag/(?P<tag>[-\w]+)/$', views.articles_tag, name='articles_tag'),
     url(r'^articles/tag/(?P<tag>[-\w]+)/page-(?P<page_number>[0-9]+)/$', views.articles_tag_page,
         name='articles_tag_page'),
+    url(r'^news/comments/', include('django_comments.urls')),
     url(r'^news/$', views.news, name='news'),
     url(r'^news/(?P<news_slug>[-\w]+)/$', views.news_detail, name='news_detail'),
     url(r'^news/page-(?P<page_number>[0-9]+)/$', views.news_page, name='news_page'),
@@ -46,10 +53,15 @@ urlpatterns = [
     url(r'^photogallery/$', views.photogallery, name='photogallery'),
     url(r'^photogallery/(?P<photogallery_slug>[-\w]+)/$', views.photogallery_detail, name='photogallery_detail'),
     url(r'^photogallery/(?P<photogallery_slug>[-\w]+)/page-(?P<page_number>[0-9]+)/$', views.photogallery_detail_page, name='photogallery_detail_page'),
-    url(r'^news/$', views.news, name='news'),
     url(r'^about/$', views.about, name='about'),
     url(r'^about/otzyvy/$', views.otzyvy, name='otzyvy'),
+    url(r'^about/employee/$', views.employee, name='employee'),
+    url(r'^about/chasto-zadavaemye-voprosy-faq/$', views.faq, name='faq'),
     url(r'^partnery/$', views.partnery, name='partnery'),
+    url(r'^vacancy/$', views.vacancy, name='vacancy'),
+    url(r'^nagrady/$', views.nagrady, name='nagrady'),
     url(r'^proizvodstvo-zavoda-triumf/$', views.proizvodstvo_zavoda_triumf, name='proizvodstvo_zavoda_triumf'),
     url(r'^prajjsy/gibkaja-sistema-skidok/$', views.gibkaja_sistema_skidok, name='gibkaja_sistema_skidok'),
-]
+    url(r'^robots.txt$',
+        lambda r: HttpResponse("User-agent: *\nDisallow: /", content_type="text/plain")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

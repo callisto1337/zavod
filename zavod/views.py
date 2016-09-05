@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+import re
 from django.contrib.auth.forms import AuthenticationForm
 from watson import search as watson
 
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout as auth_logout, authenticate, login
-from .forms import CustomUserCreationForm
-
-from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage, CustomUser
+from zavod.forms import QuestionForm, CustomUserCreationForm
+from zavod.constants import SPECIAL_FILTER_PARAMS
+from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage
 
 
 def registration(request):
@@ -50,16 +51,12 @@ def logout(request):
 
 
 def main(request):
-    # return render(request, '/../../../zavod-static/src/templates/main.html')
     return render(request, 'index.html')
-    # return render(request, 'zavod/main.html')
 
 
 def search(request):
     search_text = request.GET.get('text', '')
     search_results = watson.search(search_text)
-    for result in search_results:
-        print result.title, result.url
     return render(request, 'zavod/search.html', {'search_results': search_results})
 
 
@@ -164,6 +161,28 @@ def otzyvy(request):
     return render(request, 'about_review.html')
 
 
+def employee(request):
+    return render(request, 'about_employee.html')
+
+
+def vacancy(request):
+    return render(request, 'about_vacancy.html')
+
+
+def faq(request):
+    out = {}
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            new_question = form.save()
+            out.update({'question_asked': True})
+        else:
+            out.update({'error': 'Что-то пошло не так!'})
+    question_form = QuestionForm()
+    out.update({'question_form': question_form})
+    return render(request, 'zavod/about_faq.html', out)
+
+
 def proizvodstvo_zavoda_triumf(request):
     return render(request, 'zavod/proizvodstvo_zavoda_triumf.html')
 
@@ -185,19 +204,21 @@ def articles_page(request, page_number):
 
 def articles_detail(request, article_slug):
     article = get_object_or_404(Article, slug=article_slug)
+    article.views += 1
+    article.save()
     return render(request, 'zavod/articles_detail.html', {'article': article})
 
 
 def articles_tag(request, tag):
-    articles = ArticleTag.objects.filter(tag__title=tag, article__published=True)\
-                   .order_by('article__date_created').values('article').all()[:5]
+    articles = Article.objects.filter(tags__title=tag, published=True)\
+                      .order_by('date_created').all()[:5]
     return render(request, 'zavod/articles.html', {'articles': articles})
 
 
 def articles_tag_page(request, page_number, tag):
     start = (int(page_number) - 1) * 5 + 1
-    articles = ArticleTag.objects.filter(tag__title=tag, article__published=True)\
-                   .order_by('article__date_created').values('article').all()[start:start+5]
+    articles = Article.objects.filter(tags__title=tag, published=True)\
+                      .order_by('date_created').all()[start:start+5]
     return render(request, 'zavod/articles.html', {'articles': articles})
 
 
@@ -212,21 +233,21 @@ def news_page(request, page_number):
     return render(request, 'zavod/news.html', {'news': news})
 
 
-def news_detail(request, article_slug):
-    news = get_object_or_404(News, slug=article_slug)
+def news_detail(request, news_slug):
+    news = get_object_or_404(News, slug=news_slug)
     return render(request, 'zavod/news_detail.html', {'news': news})
 
 
 def news_tag(request, tag):
-    news = NewsTag.objects.filter(tag__title=tag, news__published=True)\
-                   .order_by('news__date_created').values('news').all()[:5]
+    news = News.objects.filter(tags__title=tag, published=True)\
+                   .order_by('date_created').all()[:5]
     return render(request, 'zavod/news.html', {'news': news})
 
 
 def news_tag_page(request, page_number, tag):
     start = (int(page_number) - 1) * 5 + 1
-    news = NewsTag.objects.filter(tag__title=tag, news__published=True)\
-                   .order_by('news__date_created').values('news').all()[start:start+5]
+    news = News.objects.filter(tags__title=tag, published=True)\
+                       .order_by('date_created').all()[start:start+5]
     return render(request, 'zavod/news.html', {'news': news})
 
 
@@ -237,6 +258,8 @@ def get_product(request, slug):
 
 def catalog(request):
     category_products = CategoryProduct.objects.filter(published=True).annotate(number=Count('product')).all()
+    if 'expand' in request.GET:
+        return render(request, 'catalog_expand.html', {'category_products': category_products})
     return render(request, 'catalog.html', {'category_products': category_products})
 
 
@@ -246,15 +269,22 @@ def catalog_category(request, category_slug, parent_category_slug=None):
         if CategoryProduct.objects.filter(parent_id=category.id):
             title = 'Вложенные категории'
             subcategories = CategoryProduct.objects.filter(parent_id=category.id, published=True).all()
-            return render(request, 'catalog_category.html', {'subcategories': subcategories, 'title': title,
-                                                             'category': category})
+            template_name = 'catalog_category.html'
+            if 'expand' in request.GET:
+                template_name = 'catalog_category_expand.html'
+            return render(request, template_name, {'subcategories': subcategories, 'title': title,
+                                                   'category': category, 'request': request})
         else:
             title = 'Список продуктов'
             products = Product.objects.all().filter(category=category, published=True)
-            return render(request, 'catalog_category.html', {'products': products, 'parent': category, 'title': title,
-                                                             'category': category})
+            template_name = 'catalog_category.html'
+            if 'expand' in request.GET:
+                template_name = 'catalog_category_expand.html'
+            return render(request, template_name, {'products': products, 'parent': category, 'title': title,
+                                                   'category': category, 'request': request})
     else:
-        get_product(request, category_slug)
+        product = get_object_or_404(Product, slug=category_slug)
+        return render(request, 'product.html', {'product': product})
 
 
 def product_or_products(request, slug, parent_category_slug=None, category_slug=None):
@@ -266,3 +296,24 @@ def product_or_products(request, slug, parent_category_slug=None, category_slug=
     products = Product.objects.filter(category=category, published=True).all()
     return render(request, 'catalog_category.html', {'products': products, 'title': title,
                                                      'category': category})
+
+
+def products_search(request):
+    search_param = {}
+    result = Product.objects
+    for param in request.GET:
+        if param in SPECIAL_FILTER_PARAMS:
+            result = result.filter(properties__has_key=unicode(param[:-4]))
+            for product in result:
+                param_value_str = (product.properties.get(unicode(param[:-4]), None))
+                param_value = float(re.findall(SPECIAL_FILTER_PARAMS.get(param), param_value_str)[0])
+                if param[-3:] == 'max' and param_value > float(request.GET.get(param, None)):
+                    result = result.exclude(pk=product.pk)
+                elif param[-3:] == 'min' and param_value < float(request.GET.get(param, None)):
+                    result = result.exclude(pk=product.pk)
+        else:
+            search_param.update({
+                u'properties__{}'.format(param): request.GET.get(param, None),
+            })
+            result = result.filter(**search_param)
+    return render(request, 'zavod/search.html', {'search_results': result})

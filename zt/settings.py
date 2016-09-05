@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'watson',
-    'zavod',
+    'threadedcomments',
+    'django_comments',
+    'django.contrib.sites',
     'social.apps.django_app.default',
+    'zavod',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -136,6 +139,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
 MEDIA_URL = '/media/'
 
+# Auth settings
+
 AUTH_USER_MODEL = 'zavod.CustomUser'
 
 SOCIAL_AUTH_USER_MODEL = 'zavod.CustomUser'
@@ -147,14 +152,14 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
 )
 
-SOCIAL_AUTH_VK_OAUTH2_KEY = '5617940'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'qBU9sjCXLjaOikzmsDYs'
+SOCIAL_AUTH_VK_OAUTH2_KEY = ''
+SOCIAL_AUTH_VK_OAUTH2_SECRET = ''
 
-SOCIAL_AUTH_FACEBOOK_KEY = '920189241442699'
-SOCIAL_AUTH_FACEBOOK_SECRET = '5bbe0790fdc569cbb8f81ee51116e82c'
+SOCIAL_AUTH_FACEBOOK_KEY = ''
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
 
-SOCIAL_AUTH_TWITTER_KEY = '62VEZJXsizBzviROtplTiwABm'
-SOCIAL_AUTH_TWITTER_SECRET = 'jGiXRTbTjZHtdT48MUd4XSpmDSRpXta9YGLzfp5BwPv2z7q08t'
+SOCIAL_AUTH_TWITTER_KEY = ''
+SOCIAL_AUTH_TWITTER_SECRET = ''
 
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = [
   'notify',
@@ -183,3 +188,26 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
 )
+
+# Comments
+
+COMMENTS_APP = 'threadedcomments'
+
+SITE_ID = 1
+
+# Email
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+
+EMAILS_FOR_FAQ = ['']
+
+# Local settings
+
+try:
+    from zt.local_settings import *
+except ImportError:
+    pass

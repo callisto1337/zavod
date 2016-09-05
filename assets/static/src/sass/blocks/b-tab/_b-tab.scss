@@ -1,0 +1,49 @@
+// табы, используются для переключения видов
+.b-tab {
+    float: right;
+    list-style-type: none;
+    margin: 0 auto;
+    white-space: nowrap;
+
+    // Элемент таба
+    &__item {
+        padding: 4px 8px;
+        margin-left: 24px;
+        display: inline-block;
+        border-radius: 2px;
+
+        // При наведении
+        &:hover {
+            background-color: #007a4e;
+
+            .b-tab__item__link {
+                color: #ffffff;
+            }
+        }
+
+        // у первого не нужно оступа
+        &:first-of-type {
+            margin-left: 0;
+        }
+
+        // ссылка в табе
+        &__link {
+            font-size: 16.2px;
+            line-height: 18px;
+            color: #00955f;
+            text-decoration: none;
+            display: block;
+        }
+
+        // активный элемент
+        &_active {
+            background-color: #007a4e;
+
+            .b-tab__item__link {
+                color: #ffffff;
+                cursor: default;
+            }
+
+        }
+    }
+}
