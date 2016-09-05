@@ -1,0 +1,149 @@
+{% block menu %}
+    <div class="b-menu" id="b-menu">
+        <div class="b-layout">
+            <table class="b-menu-table">
+                <tr>
+                    <td class="b-menu__item">
+                        <a href="{% url "about" %}" class="b-menu__item-link b-menu__item-link-active">О компании</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "news" %}" class="b-menu__item-link">Новости</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "catalog" %}" class="b-menu__item-link">Каталог</a>
+                        <div class="b-menu__submenu">
+                            <div class="submenu__content">
+                                <div class="submenu__column">
+                                        <div class="submenu__group">
+                                            <h2 class="submenu__group-title">Кожухотрубные теплообменники</h2>
+                                            <ul class="submenu__group__list">
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category" category_slug='vodovodjanye-podogrevateli' %}" class="submenu__group__list__item-link">Водоводяные подогреватели</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category_inside" parent_category_slug='vodovodjanye-podogrevateli' category_slug='kalachi' %}" class="submenu__group__list__item-link">Калачи для ВВП, переходы для ВВП</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category" category_slug='parovodjanye-podogrevateli' %}" class="submenu__group__list__item-link">Подогреватели пароводяные</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category_inside" parent_category_slug='emkostnoe-oborudovanie' category_slug='podogrevateli-parovye-emkostnye-tipa-vpe-std' %}" class="submenu__group__list__item-link">Подогреватели паровые емкостные (ВПЕ)</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category" category_slug='konvektory-otoplenija' %}" class="submenu__group__list__item-link">Конвекторы отопления</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category" category_slug='registry-otopitelnye' %}" class="submenu__group__list__item-link">Регистры отопительные</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category" category_slug='pajanye-plastinchatye-teploobmenniki' %}" class="submenu__group__list__item-link">Паяные теплообменники</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="submenu__group">
+                                            <h2 class="submenu__group-title">Грязевики</h2>
+                                            <ul class="submenu__group__list">
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category_inside" parent_category_slug='grjazevik' category_slug='grjazeviki-gorizontalnye-gg-serija-ts-565-ts-566' %}" class="submenu__group__list__item-link">Горизонтальные: ТС-565, ТС-566</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category_inside" parent_category_slug='grjazevik' category_slug='grjazeviki-vertikalnye-gv-serija-ts-567-ts-568' %}" class="submenu__group__list__item-link">Вертикальные: ТС-567, ТС-568</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="#" class="submenu__group__list__item-link">Грезевики для тепловых пунктов (ГТП) ТС-569</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="submenu__group">
+                                            <h2 class="submenu__group-title">Воздухосборники А1И</h2>
+                                            <ul class="submenu__group__list">
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category_inside" parent_category_slug='vozdukhosborniki-a1i' category_slug='vertikalnye-vozdukhosborniki' %}" class="submenu__group__list__item-link">Вертикальные</a>
+                                                </li>
+                                                <li class="submenu__group__list__item">
+                                                    <a href="{% url "catalog_category" category_slug='svarnye-teploobmenniki' %}" class="submenu__group__list__item-link">Горизонтальные</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                </div>
+                                <div class="submenu__column submenu__column-offset">
+                                    <div class="submenu__group">
+                                        <h2 class="submenu__group-title">Пластинчатые теплообменники</h2>
+                                        <ul class="submenu__group__list">
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category_inside" parent_category_slug='plastinchatye-teploobmenniki' category_slug='ridan' %}" class="submenu__group__list__item-link">Теплообменники Ридан, Funke, Tranter</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category" category_slug='svarnye-teploobmenniki' %}" class="submenu__group__list__item-link">Сварные теплообменники</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category" category_slug='spiralnye-teploobmenniki' %}" class="submenu__group__list__item-link">Спиральные теплообменники</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category" category_slug='pogruzhnye-teploobmenniki' %}" class="submenu__group__list__item-link">Погружные теплообменники</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="submenu__group">
+                                        <h2 class="submenu__group-title">Другие категории</h2>
+                                        <ul class="submenu__group__list">
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category" category_slug='okhladiteli-vypara' %}" class="submenu__group__list__item-link">Охладители выпара</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category" category_slug='podogrevateli-mazuta' %}" class="submenu__group__list__item-link">Подогреватели мазута</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category" category_slug='dnishha-ellipticheskie' %}" class="submenu__group__list__item-link">Днища эллиптические</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="#" class="submenu__group__list__item-link">Элеваторы</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category" category_slug='truboprovodnaja-armatura' %}" class="submenu__group__list__item-link">Трубопроводная арматура</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="{% url "catalog_category" category_slug='kontejjnery-dlja-musora' %}" class="submenu__group__list__item-link">Контейнеры для мусора</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="#" class="submenu__group__list__item-link">Нестандартизированное оборудование</a>
+                                            </li>
+                                            <li class="submenu__group__list__item">
+                                                <a href="#" class="submenu__group__list__item-link">Монтаж оборудования</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "dostavka" %}" class="b-menu__item-link">Доставка</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "prajjsy" %}" class="b-menu__item-link">Прайс-листы</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "dokumentatsija" %}" class="b-menu__item-link">Документация</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "articles" %}" class="b-menu__item-link">Статьи</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "photogallery" %}" class="b-menu__item-link">Фотогалерия</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="" class="b-menu__item-link">Вопросы и ответы</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "contacts" %}" class="b-menu__item-link">Контакты</a>
+                    </td>
+                    <td class="b-menu__item">
+                        <a href="{% url "search" %}" class="b-menu__item-link"><i class="fa fa-search" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
