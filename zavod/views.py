@@ -1,25 +1,47 @@
 # -*- coding: utf-8 -*-
+from django.contrib.auth.forms import AuthenticationForm
 from watson import search as watson
 
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth import logout as auth_logout
-from django.contrib.auth.forms import UserCreationForm
-from .forms import UserCreateForm
-from django.http import HttpResponse
+from django.contrib.auth import logout as auth_logout, authenticate, login
+from .forms import CustomUserCreationForm
 
 from .models import Article, CategoryProduct, Product, ArticleTag, News, NewsTag, Gallery, GalleryImage, CustomUser
 
 
-def login(request):
+def registration(request):
+    out = {}
     if request.method == 'POST':
-        form_reg = UserCreationForm(request.POST)
+        form_reg = CustomUserCreationForm(request.POST)
         if form_reg.is_valid():
             form_reg.save()
             return redirect('/')
     else:
-        form_reg = UserCreateForm()
-    return render(request, 'zavod/login.html', {'form_reg': form_reg})
+        form_reg = CustomUserCreationForm()
+    out.update({'form_reg': form_reg})
+    return render(request, 'zavod/login.html', out)
+
+
+def log_in(request):
+    if not request.user.is_authenticated:
+        out = {}
+        if request.method == 'POST':
+            form = AuthenticationForm(request.POST)
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+            else:
+                out.update({"error": 1})
+        else:
+            form = AuthenticationForm()
+        out.update({'form_auth': form})
+        return render(request, 'zavod/login.html', out)
+    else:
+        return redirect('/')
 
 
 def logout(request):

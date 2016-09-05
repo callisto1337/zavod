@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'zt.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'zavod',
+        'NAME': 'zavod1',
         'USER': 'zavod_user',
         'PASSWORD': 'zavod',
         'HOST': 'localhost',
@@ -138,18 +138,23 @@ MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'zavod.CustomUser'
 
+SOCIAL_AUTH_USER_MODEL = 'zavod.CustomUser'
+
 AUTHENTICATION_BACKENDS = (
     'social.backends.vk.VKOAuth2',
     'social.backends.facebook.FacebookOAuth2',
+    'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend'
 )
 
-SOCIAL_AUTH_VK_OAUTH2_KEY = '5604977'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'ZD8Gj29CQTKZXuKafoAq'
+SOCIAL_AUTH_VK_OAUTH2_KEY = '5617940'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'qBU9sjCXLjaOikzmsDYs'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '1079416965427085'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'f68c22ea1cb271d42e07be15f821d46b'
+SOCIAL_AUTH_FACEBOOK_KEY = '920189241442699'
+SOCIAL_AUTH_FACEBOOK_SECRET = '5bbe0790fdc569cbb8f81ee51116e82c'
 
+SOCIAL_AUTH_TWITTER_KEY = '62VEZJXsizBzviROtplTiwABm'
+SOCIAL_AUTH_TWITTER_SECRET = 'jGiXRTbTjZHtdT48MUd4XSpmDSRpXta9YGLzfp5BwPv2z7q08t'
 
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = [
   'notify',
