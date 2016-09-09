@@ -115,10 +115,11 @@
 		padding: 60px 0;
 	}
 
-	// Без отступов
-	&_colorfull {
+	// Цветной фон без отступов
+	&_colorful {
 		padding: 0;
 		min-width: 1290px;
+		background-color: #00955f;
 	}
 
 	// Без границ
@@ -127,13 +128,16 @@
 	}
 
 	.error-404 {
-		background-color: #00955f;		
 		height: 522px;
 
-		.wrapper {
-			width: 735px;
-			margin: 0 auto;
-			padding-top: 130px;
+		&__link {
+			color: white;
+			text-decoration: none;
+			line-height: 1px;
+		}
+
+		&__link:hover {
+			border-bottom: 2px solid #fff;
 		}
 
 		&__text {
@@ -141,21 +145,16 @@
 			color: #a3ceba;
 			padding: 96px 0 0 295px;
 			background: url(../img/404.png) no-repeat;
-			
+			width: 750px;
 			height: 270px;
 			letter-spacing: 0.7px;
 
-			a {
-				color: white;
-				text-decoration: none;
-				line-height: 1px;
-			}
-
-			a:hover {
-				border-bottom: 2px solid #fff;
-				
+			&_centered {
+				position: relative;
+			  top: 50%;
+			  left: 50%;
+			  transform: translate(-50%, -50%);
 			}
 		}
-
 	}
 }
