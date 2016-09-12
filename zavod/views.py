@@ -252,8 +252,23 @@ def news_tag_page(request, page_number, tag):
 
 
 def get_product(request, slug):
+    out = {}
     product = get_object_or_404(Product, slug=slug)
-    return render(request, 'product.html', {'product': product})
+    tab = request.GET.get('tab', 'description')
+    template_name = 'product.html'
+    print tab
+    if tab == 'description':
+        template_name = 'product.html'
+    elif tab == 'docs':
+        template_name = 'product_docs.html'
+    elif tab == 'photo':
+        template_name = 'product_photo.html'
+    elif tab == 'articles':
+        template_name = 'product_articles.html'
+    elif tab == 'review':
+        template_name = 'product_review.html'
+    out.update({'product': product})
+    return render(request, template_name, {'product': product})
 
 
 def catalog(request):
@@ -283,19 +298,37 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             return render(request, template_name, {'products': products, 'parent': category, 'title': title,
                                                    'category': category, 'request': request})
     else:
+        out = {}
         product = get_object_or_404(Product, slug=category_slug)
-        return render(request, 'product.html', {'product': product})
+        tab = request.GET.get('tab', 'description')
+        template_name = 'product.html'
+        if tab == 'description':
+            template_name = 'product.html'
+        elif tab == 'docs':
+            template_name = 'product_docs.html'
+            product.documents = product.category.files.all()
+        elif tab == 'photo':
+            template_name = 'product_photo.html'
+            product.photos = product.images.all()
+        elif tab == 'articles':
+            template_name = 'product_articles.html'
+            product.articles = Article.objects.all()
+        elif tab == 'review':
+            template_name = 'product_review.html'
+        out.update({'product': product})
+        return render(request, template_name, {'product': product})
 
 
 def product_or_products(request, slug, parent_category_slug=None, category_slug=None):
+    out = {}
     product = Product.objects.filter(slug=slug).first()
     if product:
         get_product(request, category_slug)
     title = 'Список продуктов во вложенной категории'
     category = get_object_or_404(CategoryProduct, slug=slug)
     products = Product.objects.filter(category=category, published=True).all()
-    return render(request, 'catalog_category.html', {'products': products, 'title': title,
-                                                     'category': category})
+    out.update({'products': products, 'title': title, 'category': category})
+    return render(request, 'catalog_category.html', out)
 
 
 def products_search(request):

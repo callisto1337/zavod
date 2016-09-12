@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load threadedcomments_tags %}
 
 {% block content %}
     <div class="b-section b-section_short">
@@ -18,7 +19,7 @@
             <div class="grid__row">
                 <div class="grid__column-7">
                     <ul class="b-tab">
-                        <li class="b-tab__item b-tab__item_active">
+                        <li class="b-tab__item">
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=description">Описание</a>
                         </li>
                         <li class="b-tab__item">
@@ -30,23 +31,24 @@
                         <li class="b-tab__item">
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=articles">Статьи</a>
                         </li>
-                        <li class="b-tab__item">
+                        <li class="b-tab__item b-tab__item_active">
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы</a>
                         </li>
                     </ul>
                 </div>
                 <div class="grid__column-9">
-                    <p class="b-section-text">
-                        {{ product.product_text }}
-                    </p>
+                {% get_comment_list for product as tree %}
+                {% for comment in tree %}
+                <div style="margin-left: {{ comment.depth }}em;" class="comment">
+                    <div style="margin-left:{{comment.depth}}em;">
+                        {{ comment }}
+                        Reply to this comment
+                        {% render_comment_form for product with comment.id %}
+                    </div>
                 </div>
-                <div class="grid__column-4 grid__offset grid__offset__catalog__news">
-                    <h4 class="b-section-subtitle"></h4>
-                    <ul class="b-section-list">
-                        {% for key in product.properties %}
-                            <li class="b-section-list__item">{{ key }} - {{ product.properties.key }}</li>
-                        {% endfor %}
-                    </ul>
+                {% endfor %}
+                <p>Reply to Original:</p>
+                {% render_comment_form for product %}
                 </div>
             </div>
             <div class="grid__row">
