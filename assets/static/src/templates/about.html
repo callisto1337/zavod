@@ -1,389 +1,122 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Главная страница</title>
-		<link rel="stylesheet" href="{% static 'css/main.css' %}">
-		<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,500,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<header class="b-header js-header">
-			<div class="b-layout">
-				<div class="logo">
-					<img class="logo__image" src="{% static 'img/header/logo.png' %}" alt="Завод Триумф">
-					<p class="logo__text">
-						Ведущий завод теплообменного оборудования в РФ
-					</p>
-				</div>
-				<div class="b-header__actions clearfix">
-					<div class="check">
-						<a class="check__link" href="#">
-							<i class="fa fa-check" aria-hidden="true"></i>Проверить заказ
-						</a>
-					</div>
-					<div class="call">
-						<a class="call__link" href="#">
-							<i class="fa fa-phone" aria-hidden="true"></i>Перезвонить мне
-						</a>
-					</div>
-					<div class="email">
-						<a class="email__link" href="#">
-							<i class="fa fa-envelope" aria-hidden="true"></i>info@zavodtriumph.ru
-						</a>
-					</div>
-					<div class="skype">
-						<a class="skype__link" href="#">
-							<i class="fa fa-skype" aria-hidden="true"></i>zavodtriumph
-						</a>
-					</div>
-				</div>
-				<div class="contacts">
-					<div class="phone">
-						<p class="phone__status">Бесплатно по России</p>
-						<p class="phone__number"><i class="fa fa-phone" aria-hidden="true"></i> 8 (800) 555-92-20</p>
-					</div>
-					<div class="phone">
-						<p class="phone__status">Москва</p>
-						<p class="phone__number">8 (351) 729-99-47</p>
-					</div>
-					<div class="phone">
-						<p class="phone__status">Челябинск</p>
-						<p class="phone__number">8 (495) 545-36-90</p>
-					</div>
-				</div>
-				<div class="login">
-					<a class="b-btn">
-						<i class="fa fa-key ico" aria-hidden="true"></i>
-						<span class="b-btn__text">Войти</span>
-					</a>
-				</div>
-			</div>
-		</header>
-		<div class="b-menu" id="b-menu">
-			<div class="b-layout">
-				<table class="b-menu-table">
-					<tr>
-						<td class="b-menu__item">
-							<a href="{% url "about" %}" class="b-menu__item-link b-menu__item-link-active">О компании</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "news" %}" class="b-menu__item-link">Новости</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "catalog" %}" class="b-menu__item-link">Каталог</a>
-							<div class="b-menu__submenu">
-								<div class="submenu__content">
-									<div class="submenu__column">
-											<div class="submenu__group">
-												<h2 class="submenu__group-title">Кожухотрубные теплообменники</h2>
-												<ul class="submenu__group__list">
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category" category_slug='vodovodjanye-podogrevateli' %}" class="submenu__group__list__item-link">Водоводяные подогреватели</a>
-													</li>
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category_inside" parent_category_slug='vodovodjanye-podogrevateli' category_slug='kalachi' %}" class="submenu__group__list__item-link">Калачи для ВВП, переходы для ВВП</a>
-													</li>
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category" category_slug='parovodjanye-podogrevateli' %}" class="submenu__group__list__item-link">Подогреватели пароводяные</a>
-													</li>
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category_inside" parent_category_slug='emkostnoe-oborudovanie' category_slug='podogrevateli-parovye-emkostnye-tipa-vpe-std' %}" class="submenu__group__list__item-link">Подогреватели паровые емкостные (ВПЕ)</a>
-													</li>
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category" category_slug='konvektory-otoplenija' %}" class="submenu__group__list__item-link">Конвекторы отопления</a>
-													</li>
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category" category_slug='registry-otopitelnye' %}" class="submenu__group__list__item-link">Регистры отопительные</a>
-													</li>
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category" category_slug='pajanye-plastinchatye-teploobmenniki' %}" class="submenu__group__list__item-link">Паяные теплообменники</a>
-													</li>
-												</ul>
-											</div>
-											<div class="submenu__group">
-												<h2 class="submenu__group-title">Грязевики</h2>
-												<ul class="submenu__group__list">
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category_inside" parent_category_slug='grjazevik' category_slug='grjazeviki-gorizontalnye-gg-serija-ts-565-ts-566' %}" class="submenu__group__list__item-link">Горизонтальные: ТС-565, ТС-566</a>
-													</li>
-													<li class="submenu__group__list__item">
-                                                        <a href="{% url "catalog_category_inside" parent_category_slug='grjazevik' category_slug='grjazeviki-vertikalnye-gv-serija-ts-567-ts-568' %}" class="submenu__group__list__item-link">Вертикальные: ТС-567, ТС-568</a>
-													</li>
-													<li class="submenu__group__list__item">
-														<a href="#" class="submenu__group__list__item-link">Грезевики для тепловых пунктов (ГТП) ТС-569</a>
-													</li>
-												</ul>
-											</div>
-											<div class="submenu__group">
-												<h2 class="submenu__group-title">Воздухосборники А1И</h2>
-												<ul class="submenu__group__list">
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category_inside" parent_category_slug='vozdukhosborniki-a1i' category_slug='vertikalnye-vozdukhosborniki' %}" class="submenu__group__list__item-link">Вертикальные</a>
-													</li>
-													<li class="submenu__group__list__item">
-														<a href="{% url "catalog_category" category_slug='svarnye-teploobmenniki' %}" class="submenu__group__list__item-link">Горизонтальные</a>
-													</li>
-												</ul>
-											</div>
-									</div>
-									<div class="submenu__column submenu__column-offset">
-										<div class="submenu__group">
-											<h2 class="submenu__group-title">Пластинчатые теплообменники</h2>
-											<ul class="submenu__group__list">
-												<li class="submenu__group__list__item">
-													<a href="{% url "catalog_category_inside" parent_category_slug='plastinchatye-teploobmenniki' category_slug='ridan' %}" class="submenu__group__list__item-link">Теплообменники Ридан, Funke, Tranter</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="{% url "catalog_category" category_slug='svarnye-teploobmenniki' %}" class="submenu__group__list__item-link">Сварные теплообменники</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="{% url "catalog_category" category_slug='spiralnye-teploobmenniki' %}" class="submenu__group__list__item-link">Спиральные теплообменники</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="{% url "catalog_category" category_slug='pogruzhnye-teploobmenniki' %}" class="submenu__group__list__item-link">Погружные теплообменники</a>
-												</li>
-											</ul>
-										</div>
+{% extends "blocks/base.html" %}
 
-										<div class="submenu__group">
-											<h2 class="submenu__group-title">Другие категории</h2>
-											<ul class="submenu__group__list">
-												<li class="submenu__group__list__item">
-													<a href="{% url "catalog_category" category_slug='okhladiteli-vypara' %}" class="submenu__group__list__item-link">Охладители выпара</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="{% url "catalog_category" category_slug='podogrevateli-mazuta' %}" class="submenu__group__list__item-link">Подогреватели мазута</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="" class="submenu__group__list__item-link">Днища эллиптические</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="#" class="submenu__group__list__item-link">Элеваторы</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="{% url "catalog_category" category_slug='truboprovodnaja-armatura' %}" class="submenu__group__list__item-link">Трубопроводная арматура</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="{% url "catalog_category" category_slug='kontejjnery-dlja-musora' %}" class="submenu__group__list__item-link">Контейнеры для мусора</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="#" class="submenu__group__list__item-link">Нестандартизированное оборудование</a>
-												</li>
-												<li class="submenu__group__list__item">
-													<a href="#" class="submenu__group__list__item-link">Монтаж оборудования</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "dostavka" %}" class="b-menu__item-link">Доставка</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "prajjsy" %}" class="b-menu__item-link">Прайс-листы</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "dokumentatsija" %}" class="b-menu__item-link">Документация</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "articles" %}" class="b-menu__item-link">Статьи</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "photogallery" %}" class="b-menu__item-link">Фотогалерия</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="" class="b-menu__item-link">Вопросы и ответы</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "contacts" %}" class="b-menu__item-link">Контакты</a>
-						</td>
-						<td class="b-menu__item">
-							<a href="{% url "search" %}" class="b-menu__item-link"><i class="fa fa-search" aria-hidden="true"></i></a>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div class="b-section b-section_short">
-			<div class="b-layout">
-                <div class="b-breadcrumbs">
-                    <a class="b-breadcrumbs__link" href="#">Главная</a> /
+{# TODO: remove that loading #}
+{% load static from staticfiles %}
+
+{% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-7">
+                    <h3 class="b-section-title">О компании</h3>
                 </div>
-				<div class="grid__row">
-					<div class="grid__column-7">
-						<h3 class="b-section-title">О компании</h3>
-					</div>
-					<div class="grid__column-7">
-						<ul class="b-tab">
-							<li class="b-tab__item b-tab__item_active">
-                                <a class="b-tab__item__link" href="#">Триумф</a>
-                            </li>
-							<li class="b-tab__item">
-                                <a class="b-tab__item__link" href="#">Награды</a>
-                            </li>
-							<li class="b-tab__item">
-                                <a class="b-tab__item__link" href="#">Партнеры</a>
-                            </li>
-							<li class="b-tab__item">
-                                <a class="b-tab__item__link" href="#">Отзывы</a>
-                            </li>
-							<li class="b-tab__item">
-                                <a class="b-tab__item__link" href="#">Сотрудники</a>
-                            </li>
-							<li class="b-tab__item">
-                                <a class="b-tab__item__link" href="#">Вакансии</a>
-                            </li>
-						</ul>
-					</div>
-				</div>
-                <div class="grid__row">
-                    <div class="grid__column-12">
-                        <p class="b-section-subtitle b-section-subtitle_inline">«Завод Триумф» был основан в 1995 году и является одним из основных поставщиков теплообменного, котельного и вспомогательного оборудования для различных областей промышленности и главным образом для коммунального хозяйства.</p>
+                <div class="grid__column-7">
+                    <ul class="b-tab">
+                        <li class="b-tab__item b-tab__item_active">
+                            <a class="b-tab__item__link" href="#">Триумф</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "nagrady" %}">Награды</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "partnery" %}">Партнеры</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "otzyvy" %}">Отзывы</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "employee" %}">Сотрудники</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "vacancy" %}">Вакансии</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-12">
+                    <p class="b-section-subtitle b-section-subtitle_inline">«Завод Триумф» был основан в 1995 году и является одним из основных поставщиков теплообменного, котельного и вспомогательного оборудования для различных областей промышленности и главным образом для коммунального хозяйства.</p>
+                </div>
+            </div>
+
+            <div class="b-section b-section_borderless">
+                <div class="b-section__image">
+                    <img src="{% static 'img/player.png' %}" alt="Картинка">
+                </div>
+            </div>
+
+            <div class="grid__row">
+                <div class="grid__column-9">
+                    <p class="b-section-text">Сегодня «Завод Триумф» это крупное предприятие, располагающее высокоэффективными производственными мощностями, это динамично развивающаяся компания, которая стремится расширить ассортимент продукции и тщательно следит за качеством оказываемых услуг, имея многолетний опыт работы на отечественном рынке.</p>
+                    <p class="b-section-text">К основным видам продукции относятся кожухотрубные пароводяные и водоводяные подогреватели систем теплоснабжения, которые нашли широкое применение на различных промышленных объектах РФ и СНГ. Взаимовыгодное партнерство и долговременное сотрудничество с крупными предприятиями России, дает нам возможность являться поставщиками оборудования для нефтегазового и химического комплекса</p>
+                    <p class="b-section-text">Наряду с этим, предприятие осуществляет поставку различных элементов трубопровода: отводы крутоизогнутые, фланцы стальные плоские приварные, переходы стальные концентрические, трубопроводную арматуру, пластинчатые теплообменники, подогреватели мазута, грязевики абонентские, элеваторы, отопительное оборудование, радиаторы, конвекторы, полотенцесушители оцинкованные и др. Коллектив завода — это сплоченный коллектив опытных работников, которые делают свою работу на совесть и дорожат репутацией компании.</p>
+                    <p class="b-section-text">В нашем трудовом коллективе трудятся ответственные, энергичные, высококвалифицированных специалисты, способные решать любые поставленные перед ними задачи. Это позволяет нам выполнить любой заказ и удовлетворить любую потребность заказчика.</p>
+                    <p class="b-section-text">Мы сами производим продукцию, что позволяет нам сохранять приемлемые цены на рынке теплообменного оборудования и обеспечивает здоровую конкуренцию. На заводе в настоящий момент внедрена и успешно зарекомендовала себя система качества, которая предусматривает сквозной контроль всего производственного процесса.</p>
+                    <p class="b-section-text">Качество продукции отслеживается на всех этапах производства, с момента получения заготовки до момента отгрузки готового оборудования. В работе отдела продаж предусмотрена обратная связь с потребителями для выявления их пожеланий, замечаний, предложений. Мы открыты ко всему новому.</p>
+                    <p class="b-section-subtitle">Девиз нашего завода: Качество, которому можно доверять!</p>
+                </div>
+
+                <div class="grid__column-4 grid__offset">
+                    <img class="b-section-logotype" src="{% static 'img/logotype_square.png' %}" alt="Логотип_маленький" />
+                    <h4 class="b-section-subtitle">Обращаясь к нам Вам гарантированы:</h4>
+                    <ul class="b-section-list">
+                        <li class="b-section-list__item">Продукция по привлекательной цене;</li>
+                        <li class="b-section-list__item">Гарантия качества;</li>
+                        <li class="b-section-list__item">Надежный партнер в  нашем лице;</li>
+                        <li class="b-section-list__item">Профессиональные консультации опытных специалистов;</li>
+                        <li class="b-section-list__item">Индивидуальный подход к каждому заказчику;</li>
+                        <li class="b-section-list__item">Доставка заказа в любые регионы России удобным для Вас способом.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="b-section">
+        <div class="b-layout">
+            <div class="grid__row">
+                <div class="grid__column-4">
+                    <h3 class="subheading">Новинка производства</h3>
+                    <div class="b-box">
+                        <div class="b-box__wrapper">
+                            <div class="b-box__image-left">
+                                <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                            </div>
+                            <p class="b-box__author">
+                                ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
+                            </p>
+                            <p class="b-box__text">
+                                Разборные пластинчатые теплообменник FUNKE
+                            </p>
+                            <div class="b-box__sale">Хит</div>
+                        </div>
                     </div>
                 </div>
+                <div class="grid__column-4 grid__offset">
+                    <h3 class="subheading">Последняя новость</h3>
 
-                <div class="b-section b-section_borderless">
-                    <div class="b-section__image">
-                        <img src="{% static 'img/player.png' %}" alt="Картинка">
+                    <div class="b-box">
+                        <div class="b-box__wrapper">
+                            <p class="b-box__author">
+                                СЕГОДНЯ 10:45
+                            </p>
+                            <p class="b-box__text">
+                                Служба Яндекс.Рефераты предназнаена для студентов и школьников, дизайнеров
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-				<div class="grid__row">
-					<div class="grid__column-9">
-						<p class="b-section-text">Сегодня «Завод Триумф» это крупное предприятие, располагающее высокоэффективными производственными мощностями, это динамично развивающаяся компания, которая стремится расширить ассортимент продукции и тщательно следит за качеством оказываемых услуг, имея многолетний опыт работы на отечественном рынке.</p>
-						<p class="b-section-text">К основным видам продукции относятся кожухотрубные пароводяные и водоводяные подогреватели систем теплоснабжения, которые нашли широкое применение на различных промышленных объектах РФ и СНГ. Взаимовыгодное партнерство и долговременное сотрудничество с крупными предприятиями России, дает нам возможность являться поставщиками оборудования для нефтегазового и химического комплекса</p>
-						<p class="b-section-text">Наряду с этим, предприятие осуществляет поставку различных элементов трубопровода: отводы крутоизогнутые, фланцы стальные плоские приварные, переходы стальные концентрические, трубопроводную арматуру, пластинчатые теплообменники, подогреватели мазута, грязевики абонентские, элеваторы, отопительное оборудование, радиаторы, конвекторы, полотенцесушители оцинкованные и др. Коллектив завода — это сплоченный коллектив опытных работников, которые делают свою работу на совесть и дорожат репутацией компании.</p>
-						<p class="b-section-text">В нашем трудовом коллективе трудятся ответственные, энергичные, высококвалифицированных специалисты, способные решать любые поставленные перед ними задачи. Это позволяет нам выполнить любой заказ и удовлетворить любую потребность заказчика.</p>
-						<p class="b-section-text">Мы сами производим продукцию, что позволяет нам сохранять приемлемые цены на рынке теплообменного оборудования и обеспечивает здоровую конкуренцию. На заводе в настоящий момент внедрена и успешно зарекомендовала себя система качества, которая предусматривает сквозной контроль всего производственного процесса.</p>
-						<p class="b-section-text">Качество продукции отслеживается на всех этапах производства, с момента получения заготовки до момента отгрузки готового оборудования. В работе отдела продаж предусмотрена обратная связь с потребителями для выявления их пожеланий, замечаний, предложений. Мы открыты ко всему новому.</p>
-						<p class="b-section-subtitle">Девиз нашего завода: Качество, которому можно доверять!</p>
-					</div>
-
-					<div class="grid__column-4 grid__offset">
-						<img class="b-section-logotype" src="{% static 'img/logotype_square.png' %}" alt="Логотип_маленький" />
-						<h4 class="b-section-subtitle">Обращаясь к нам Вам гарантированы:</h4>
-						<ul class="b-section-list">
-							<li class="b-section-list__item">Продукция по привлекательной цене;</li>
-							<li class="b-section-list__item">Гарантия качества;</li>
-							<li class="b-section-list__item">Надежный партнер в  нашем лице;</li>
-							<li class="b-section-list__item">Профессиональные консультации опытных специалистов;</li>
-							<li class="b-section-list__item">Индивидуальный подход к каждому заказчику;</li>
-							<li class="b-section-list__item">Доставка заказа в любые регионы России удобным для Вас способом.</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-        <div class="b-section">
-			<div class="b-layout">
-				<div class="grid__row">
-					<div class="grid__column-4">
-						<h3 class="subheading">Новинка производства</h3>
-                        <div class="b-box">
-                            <div class="b-box__wrapper">
-                                <div class="b-box__image-left">
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                </div>
-                                <p class="b-box__author">
-                                    ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
-                                </p>
-                                <p class="b-box__text">
-                                    Разборные пластинчатые теплообменник FUNKE
-                                </p>
-                                <div class="b-box__sale">Хит</div>
-                            </div>
+                <div class="grid__column-4 grid__offset">
+                    <h3 class="subheading">Видео как закалялась сталь</h3>
+                    <div class="b-box b-box_noshadow">
+                        <div class="b-box__image-halfsize">
+                            <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
                         </div>
-					</div>
-					<div class="grid__column-4 grid__offset">
-						<h3 class="subheading">Последняя новость</h3>
-
-                        <div class="b-box">
-                            <div class="b-box__wrapper">
-                                <p class="b-box__author">
-                                    СЕГОДНЯ 10:45
-                                </p>
-                                <p class="b-box__text">
-                                    Служба Яндекс.Рефераты предназнаена для студентов и школьников, дизайнеров
-                                </p>
-                            </div>
-                        </div>
-					</div>
-					<div class="grid__column-4 grid__offset">
-						<h3 class="subheading">Видео как закалялась сталь</h3>
-                        <div class="b-box b-box_noshadow">
-							<div class="b-box__image-halfsize">
-								<img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="b-section">
-			<div class="b-layout">
-				<div class="grid__row">
-					<div class="grid__column-4">
-						<h4 class="b-section-subtitle">Офис</h4>
-						<span class="b-section-text">
-							107014, г. Москва, ул. Стромынка, д. 13а
-							Телефон: +7 (495) 545-36-90
-						</span>
-					</div>
-					<div class="grid__column-4 grid__offset">
-						<h4 class="b-section-subtitle">Производство</h4>
-						<span class="b-section-text">
-							454008, г. Челябинск, ул. Автодорожная, д.3
-							Телефон: +7 (351) 729-99-47
-						</span>
-					</div>
-					<div class="grid__column-4 grid__offset">
-						<h4 class="b-section-subtitle">Мы на связи</h4>
-						<div class="b-section-social">
-							<ul class="b-section-social-list">
-								<li class="b-section-social-list__item">
-									<a href=""><i class="fa fa-skype" aria-hidden="true"></i></a>
-								</li>
-								<li class="b-section-social-list__item">
-									<a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-								</li>
-								<li class="b-section-social-list__item">
-									<a href=""><i class="fa fa-vk" aria-hidden="true"></i></a>
-								</li>
-								<li class="b-section-social-list__item">
-									<a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-								</li>
-								<li class="b-section-social-list__item">
-									<a href=""><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-								</li>
-								<li class="b-section-social-list__item">
-									<a href=""><i class="fa fa-youtube" aria-hidden="true"></i></a>
-								</li>
-								<li class="b-section-social-list__item">
-									<a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="b-footer">
-			<div class="b-layout">
-				<div class="grid__row">
-					<span class="b-footer-text pull-left">© 1995 — 2016 ООО «Завод Триумф»</span><span class="b-footer-text pull-right">Свидетельство и лицензии Завода</span>
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript" src="{% static 'js/stickymenu/StickyMenu.js' %}"></script>
-	</body>
-</html>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

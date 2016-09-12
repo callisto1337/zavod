@@ -4,20 +4,23 @@
 {% load static from staticfiles %}
 
 {% block content %}
-
     <div class="b-section">
         <div class="b-layout">
-            <div class="breadcrumbs">Главная / Каталог /</div>
+
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+            </div>
+
             <div class="grid__row">
                 <div class="grid__column-9">
                     <h3 class="b-section-title">{{ category.name }}</h3>
                 </div>
                 <div class="grid__column-7">
                     <ul class="b-tab">
-                        <li class="b-tab__item">
+                        <li class="b-tab__item b-tab__item_active">
                             <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
                         </li>
-                        <li class="b-tab__item b-tab__item_active">
+                        <li class="b-tab__item">
                             <a class="b-tab__item__link" href="{{ request.path }}">Списком</a>
                         </li>
                     </ul>

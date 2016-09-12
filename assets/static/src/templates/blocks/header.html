@@ -1,0 +1,58 @@
+{% load static from staticfiles %}
+
+{% block header %}
+    <header class="b-header js-header">
+        <div class="b-layout">
+            <div class="logo">
+                <a href="/" class="logo__link">
+                    <img class="logo__image" src="{% static 'img/header/logo.png' %}" alt="Завод Триумф">
+                </a>
+                <p class="logo__text">
+                    Ведущий завод теплообменного оборудования в РФ
+                </p>
+            </div>
+            <div class="b-header__actions clearfix">
+                <div class="check">
+                    <a class="check__link" href="#">
+                        <i class="fa fa-check" aria-hidden="true"></i>Проверить заказ
+                    </a>
+                </div>
+                <div class="call">
+                    <a class="call__link" href="#">
+                        <i class="fa fa-phone" aria-hidden="true"></i>Перезвонить мне
+                    </a>
+                </div>
+                <div class="email">
+                    <a class="email__link" href="#">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>info@zavodtriumph.ru
+                    </a>
+                </div>
+                <div class="skype">
+                    <a class="skype__link" href="#">
+                        <i class="fa fa-skype" aria-hidden="true"></i>zavodtriumph
+                    </a>
+                </div>
+            </div>
+            <div class="contacts">
+                <div class="phone">
+                    <p class="phone__status">Бесплатно по России</p>
+                    <p class="phone__number"><i class="fa fa-phone" aria-hidden="true"></i> 8 (800) 555-92-20</p>
+                </div>
+                <div class="phone">
+                    <p class="phone__status">Москва</p>
+                    <p class="phone__number">8 (351) 729-99-47</p>
+                </div>
+                <div class="phone">
+                    <p class="phone__status">Челябинск</p>
+                    <p class="phone__number">8 (495) 545-36-90</p>
+                </div>
+            </div>
+            <div class="login">
+                <a class="b-btn">
+                    <i class="fa fa-key ico" aria-hidden="true"></i>
+                    <span class="b-btn__text">Войти</span>
+                </a>
+            </div>
+        </div>
+    </header>
+{% endblock %}

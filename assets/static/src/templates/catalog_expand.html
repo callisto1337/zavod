@@ -7,7 +7,7 @@
     <div class="b-section b-section_short">
         <div class="b-layout">
             <div class="b-breadcrumbs">
-                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+                <a class="b-breadcrumbs__link" href="#">Главная</a> /
             </div>
 
             <div class="grid__row">
@@ -16,10 +16,10 @@
                 </div>
                 <div class="grid__column-7">
                     <ul class="b-tab">
-                        <li class="b-tab__item">
+                        <li class="b-tab__item b-tab__item_active">
                             <a class="b-tab__item__link" href="{% url "catalog" %}?expand=true">Расширено</a>
                         </li>
-                        <li class="b-tab__item b-tab__item_active">
+                        <li class="b-tab__item">
                             <a class="b-tab__item__link" href="{% url "catalog" %}">Списком</a>
                         </li>
                     </ul>
@@ -37,10 +37,10 @@
                         <div class="b-category-list-group b-category-list-group_inline">
                             <ul class="b-category-list-group__list b-category-list-group__list_bold">
                                 {% for category_product in category_products %}
-                                    <li class="b-category-list-group__list__item">
-                                        <a href="{% url "catalog_category" category_product.slug %}" class="b-category-list-group__list__item-link">{{ category_product.name }}</a>
-                                        <span class="b-category-list-group__list__item-info">{{ category_product.number }} позиции</span>
-                                    </li>
+                                <li class="b-category-list-group__list__item">
+                                    <a href="{% url "catalog_category" category_product.slug %}" class="b-category-list-group__list__item-link">{{ category_product.name }}</a>
+                                    <span class="b-category-list-group__list__item-info">{{ category_product.number }} позиции</span>
+                                </li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -121,3 +121,4 @@
         </div>
     </div>
 {% endblock %}
+

@@ -8,7 +8,7 @@ var reload = browserSync.reload;
  * Подготовка HTML-файлов к продакшену
  */
 gulp.task('build-html', function () {
-	return gulp.src('src/templates/*.html')
+	return gulp.src('src/templates/**/*.html')
 		.pipe(gulp.dest('build'))
 		.pipe(reload({ stream:true }));
 });
@@ -42,13 +42,8 @@ gulp.task('build-js', function () {
 });
 
 gulp.task('default', ['build-html', 'build-css', 'build-img', 'build-js'], function () {
-	browserSync({
-		server: {
-			baseDir: 'build'
-		}
-	});
 
-	gulp.watch(['src/templates/*.html'], ['build-html']);
+	gulp.watch(['src/templates/**/*.html'], ['build-html']);
 	gulp.watch(['src/sass/**/*.scss'], ['build-css']);
 	gulp.watch(['src/img/**/*.+(jpg|png|gif)'], ['build-img']);
 	gulp.watch(['src/js/**/*.js'], ['build-js']);

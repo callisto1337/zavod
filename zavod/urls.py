@@ -5,7 +5,11 @@ from . import views
 from zt import settings
 
 urlpatterns = [
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^$', views.main, name='main'),
+    url(r'^login/$', views.log_in, name='login'),
+    url(r'^registration/$', views.registration, name='registration'),
+    url(r'^logout/$', views.logout, name='logout'),
     url(r'^search/$', views.search, name='search'),
     url(r'^catalog/$', views.catalog, name='catalog'),
     url(r'^catalog/(?P<category_slug>[-\w]+)/$', views.catalog_category, name='catalog_category'),
@@ -51,8 +55,11 @@ urlpatterns = [
     url(r'^photogallery/(?P<photogallery_slug>[-\w]+)/page-(?P<page_number>[0-9]+)/$', views.photogallery_detail_page, name='photogallery_detail_page'),
     url(r'^about/$', views.about, name='about'),
     url(r'^about/otzyvy/$', views.otzyvy, name='otzyvy'),
+    url(r'^about/employee/$', views.employee, name='employee'),
     url(r'^about/chasto-zadavaemye-voprosy-faq/$', views.faq, name='faq'),
     url(r'^partnery/$', views.partnery, name='partnery'),
+    url(r'^vacancy/$', views.vacancy, name='vacancy'),
+    url(r'^nagrady/$', views.nagrady, name='nagrady'),
     url(r'^proizvodstvo-zavoda-triumf/$', views.proizvodstvo_zavoda_triumf, name='proizvodstvo_zavoda_triumf'),
     url(r'^prajjsy/gibkaja-sistema-skidok/$', views.gibkaja_sistema_skidok, name='gibkaja_sistema_skidok'),
     url(r'^robots.txt$',
