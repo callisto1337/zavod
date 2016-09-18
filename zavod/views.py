@@ -199,62 +199,67 @@ def gibkaja_sistema_skidok(request):
 
 def articles(request):
     articles = Article.objects.filter(published=True).order_by('date_created').all()[:5]
-    return render(request, 'zavod/articles.html', {'articles': articles})
+    return render(request, 'articles.html', {'articles': articles})
 
 
 def articles_page(request, page_number):
     start = (int(page_number) - 1) * 5 + 1
     articles = Article.objects.filter(published=True).order_by('date_created').all()[start:start+5]
-    return render(request, 'zavod/articles.html', {'articles': articles})
+    return render(request, 'articles.html', {'articles': articles})
 
 
 def articles_detail(request, article_slug):
     article = get_object_or_404(Article, slug=article_slug)
     article.views += 1
     article.save()
-    return render(request, 'zavod/articles_detail.html', {'article': article})
+    return render(request, 'articles_detail.html', {'article': article})
 
 
 def articles_tag(request, tag):
     articles = Article.objects.filter(tags__title=tag, published=True)\
                       .order_by('date_created').all()[:5]
-    return render(request, 'zavod/articles.html', {'articles': articles})
+    return render(request, 'articles.html', {'articles': articles})
 
 
 def articles_tag_page(request, page_number, tag):
     start = (int(page_number) - 1) * 5 + 1
     articles = Article.objects.filter(tags__title=tag, published=True)\
                       .order_by('date_created').all()[start:start+5]
-    return render(request, 'zavod/articles.html', {'articles': articles})
+    return render(request, 'articles.html', {'articles': articles})
+
+
+def news_archive(request):
+    news = News.objects.filter(published=True).order_by('date_created').all()[:5]
+    return render(request, 'news_archive.html', {'news': news})
 
 
 def news(request):
     news = News.objects.filter(published=True).order_by('date_created').all()[:5]
-    return render(request, 'zavod/news.html', {'news': news})
+    return render(request, 'news.html', {'news': news})
 
 
 def news_page(request, page_number):
     start = (int(page_number) - 1) * 5 + 1
     news = News.objects.filter(published=True).order_by('date_created').all()[start:start+5]
-    return render(request, 'zavod/news.html', {'news': news})
+    return render(request, 'news.html', {'news': news})
 
 
 def news_detail(request, news_slug):
     news = get_object_or_404(News, slug=news_slug)
-    return render(request, 'zavod/news_detail.html', {'news': news})
+    return render(request, 'news_detail.html', {'news': news})
 
 
 def news_tag(request, tag):
     news = News.objects.filter(tags__title=tag, published=True)\
                    .order_by('date_created').all()[:5]
-    return render(request, 'zavod/news.html', {'news': news})
+    return render(request, 'news.html', {'news': news})
 
 
 def news_tag_page(request, page_number, tag):
     start = (int(page_number) - 1) * 5 + 1
     news = News.objects.filter(tags__title=tag, published=True)\
                        .order_by('date_created').all()[start:start+5]
-    return render(request, 'zavod/news.html', {'news': news})
+    return render(request, 'news.html', {'news': news})
 
 
 def get_product(request, slug):
