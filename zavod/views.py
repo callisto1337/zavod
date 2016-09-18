@@ -326,6 +326,9 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             product.articles = Article.objects.all()
         elif tab == 'review':
             template_name = 'product_review.html'
+        product.string_properties = []
+        for key, value in product.properties.items():
+            product.string_properties.append(u'{}: {}'.format(key, value))
         out.update({'product': product})
         return render(request, template_name, {'product': product})
 
