@@ -39,13 +39,56 @@
                 </div>
             </div>
             <div class="grid__row">
-                <div class="grid__column-9">
-                    <p class="b-section-subtitle">«Завод Триумф» был основан в 1995 году и является одним из основных поставщиков теплообменного, котельного и вспомогательного оборудования для различных областей промышленности и главным образом для коммунального хозяйства.</p>
+                <div class="grid__column-12">
+                    <p class="b-section-text">«Завод Триумф» – предприятие, производящее оборудование для предприятий различной сферы деятельности, а также жилищно-коммунального хозяйства. На Заводе Триумф трудятся одаренные и талантливые люди. </p>
                 </div>
             </div>
-            <div class="grid__row">
-                <div class="grid__column-9">
-                    <a href="{% url "employee_info" 'luda' %}" class="b-category-list-group__list__item-link">Сотрудник 1</a>
+
+            <div class="grid__row grid__row-btm">
+                <div class="grid__column-2">
+                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
+                        <div class="b-image__container">
+                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                        </div>
+                        <div class="b-image__title">Алена Мартынова</div>
+                        <div class="b-image__caption">Менеджер отдела продаж</div>
+                    </a>
+                </div>
+                <div class="grid__column-2 grid__offset">
+                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
+                        <div class="b-image__container">
+                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                        </div>
+                        <div class="b-image__title">Алена Мартынова</div>
+                        <div class="b-image__caption">Менеджер отдела продаж</div>
+                    </a>
+                </div>
+                <div class="grid__column-2 grid__offset">
+                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
+                        <div class="b-image__container">
+                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                        </div>
+                        <div class="b-image__title">Алена Мартынова</div>
+                        <div class="b-image__caption">Менеджер отдела продаж</div>
+                    </a>
+                </div>
+                <div class="grid__column-2 grid__offset">
+                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
+                        <div class="b-image__container">
+                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                        </div>
+                        <div class="b-image__title">Алена Мартынова</div>
+                        <div class="b-image__caption">Менеджер отдела продаж</div>
+                    </a>
+                </div>
+                <div class="grid__column-2 grid__offset">
+                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
+                        <div class="b-image__container">
+                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                        </div>
+                        <div class="b-image__title">Алена Мартынова</div>
+                        <div class="b-image__caption">Менеджер отдела продаж</div>
+                    </a>
                 </div>
             </div>
             <div class="grid__row">
@@ -55,7 +98,8 @@
                     <p class="b-section-text">Завод гордится своими трудовыми ресурсами, которые обеспечивают устойчивость компании для сохранения своих позиций на рынке теплообменного оборудования, тем самым, приводя к развитию экономики страны в целом.</p>
                 </div>
                 <div class="grid__column-4 grid__offset">
-                    <h4 class="b-section-subtitle">Благодаря нашей дружной, сплоченной, единой команде, Завод смог выйти на рынок не только России, но и стран Содружества.</h4>
+{# @TODO fix this inline styles #}
+                    <h4 class="b-section-subtitle" style="margin-top: 230px;">Благодаря нашей дружной, сплоченной, единой команде, Завод смог выйти на рынок не только России, но и стран Содружества.</h4>
                 </div>
             </div>
         </div>

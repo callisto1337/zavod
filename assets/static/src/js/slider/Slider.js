@@ -43,6 +43,10 @@
             this.el = elID || '';
             this.$el = document.getElementById(this.el) || '';
 
+            if (!this.el || !this.$el) {
+                return;
+            }
+
             this.count = this.$el.children.length || 0;
 
             this.sliderWidth = this.$el.clientWidth;
