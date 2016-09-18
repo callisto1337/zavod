@@ -1,4 +1,14 @@
 {% block menu %}
+    <div class="b-menu b-menu_search" id="form-search">
+        <div class="b-layout">
+            <button id="form__button-cancel" class="form__button form__button_cancel" type="submit"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <form class="form">
+                <input class="form__input" type="text" placeholder="Что хотите найти?">
+                <button class="form__button form__button_search" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+        </div>
+    </div>
+
     <div class="b-menu" id="b-menu">
         <div class="b-layout">
             <table class="b-menu-table">
@@ -140,7 +150,7 @@
                         <a href="{% url "contacts" %}" class="b-menu__item-link">Контакты</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "search" %}" class="b-menu__item-link"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <a id="btn-search" class="b-menu__item-link b-menu__item-link_search"><i class="fa fa-search" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             </table>
