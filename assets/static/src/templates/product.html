@@ -6,7 +6,10 @@
 {% block content %}
     <div class="b-section b-section_short">
         <div class="b-layout">
-            <div class="breadcrumbs">Главная / Каталог /</div>
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+                <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
+            </div>
             <div class="grid__row">
                 <div class="grid__column-9">
                     <h3 class="b-section-title">{{ product.name }}</h3>
@@ -43,8 +46,8 @@
                 <div class="grid__column-4 grid__offset grid__offset__catalog__news">
                     <h4 class="b-section-subtitle"></h4>
                     <ul class="b-section-list">
-                        {% for key in product.properties %}
-                            <li class="b-section-list__item">{{ key }} - {{ product.properties.key }}</li>
+                        {% for property in product.string_properties %}
+                            <li class="b-section-list__item">{{ property }}</li>
                         {% endfor %}
                     </ul>
                 </div>

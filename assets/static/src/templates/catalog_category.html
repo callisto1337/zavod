@@ -7,7 +7,10 @@
 
     <div class="b-section">
         <div class="b-layout">
-            <div class="breadcrumbs">Главная / Каталог /</div>
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+                <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
+            </div>
             <div class="grid__row">
                 <div class="grid__column-9">
                     <h3 class="b-section-title">{{ category.name }}</h3>
