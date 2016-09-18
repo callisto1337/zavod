@@ -89,11 +89,11 @@ def razreshenie_na_primenenie(request):
 
 
 def sertifikaty(request):
-    return render(request, 'zavod/sertifikaty.html')
+    return render(request, 'sertifikaty.html')
 
 
 def tovarnye_znaki(request):
-    return render(request, 'zavod/tovarnye_znaki.html')
+    return render(request, 'tovarnye_znaki.html')
 
 
 def mezhdunarodnye_tovarnye_znaki(request):
@@ -105,7 +105,7 @@ def tovarnyjj_znak_zachem_on(request):
 
 
 def tekhnicheskaja_dokumentatsija(request):
-    return render(request, 'zavod/tekhnicheskaja_dokumentatsija.html')
+    return render(request, 'tekhnicheskaja_dokumentatsija.html')
 
 
 def zachem_nuzhna_dokumentatsija(request):
@@ -163,6 +163,12 @@ def otzyvy(request):
 
 def employee(request):
     return render(request, 'about_employee.html')
+
+
+def employee_info(request, employee_name):
+    if employee_name:
+        return render(request, 'about_employee_info.html')
+    return render(request, 'about_employee_info.html')
 
 
 def vacancy(request):

@@ -6,17 +6,28 @@
 {% block content %}
     <div class="b-section">
         <div class="b-layout">
-            <div class="breadcrumbs">Главная / Документы /</div>
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="#">Главная</a> /
+                <a class="b-breadcrumbs__link" href="#">Документы</a>
+            </div>
             <div class="grid__row">
                 <div class="grid__column-7">
                     <h3 class="b-section-title">Разрешение на применение</h3>
                 </div>
                 <div class="grid__column-6 grid__offset">
-                    <ul class="view__option">
-                        <li class="view__option__item view__option__item_active">Разрешение на применение</li>
-                        <li class="view__option__item">Сертификаты</li>
-                        <li class="view__option__item">Товарные знаки</li>
-                        <li class="view__option__item">Техническая документация</li>
+                    <ul class="b-tab">
+                        <li class="b-tab__item b-tab__item_active">
+                            <a class="b-tab__item__link" href="#">Разрешение на применение</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "sertifikaty" %}">Сертификаты</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "tovarnye_znaki" %}">Товарные знаки</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "tekhnicheskaja_dokumentatsija" %}">Техническая документация</a>
+                        </li>
                     </ul>
                 </div>
             </div>

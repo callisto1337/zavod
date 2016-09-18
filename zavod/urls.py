@@ -56,6 +56,7 @@ urlpatterns = [
     url(r'^about/$', views.about, name='about'),
     url(r'^about/otzyvy/$', views.otzyvy, name='otzyvy'),
     url(r'^about/employee/$', views.employee, name='employee'),
+    url(r'^about/employee/info/(?P<employee_name>[-\w]+)$', views.employee_info, name='employee_info'),
     url(r'^about/chasto-zadavaemye-voprosy-faq/$', views.faq, name='faq'),
     url(r'^partnery/$', views.partnery, name='partnery'),
     url(r'^vacancy/$', views.vacancy, name='vacancy'),
