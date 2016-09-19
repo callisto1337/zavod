@@ -31,6 +31,29 @@
 		}
 	}
 
+	// Кнопка "вернутся на предыдущую страницу
+	&-back {
+		font-size: 16.2px;
+		font-weight: 700;
+		position: relative;
+		margin-bottom: 20px;
+		text-decoration: none;
+		display: block;
+		color: #000000;
+
+		&::before {
+			content: "←";
+			position: absolute;
+			left: -20px;
+			color: inherit;
+			font-size:
+		}
+
+		&:hover {
+			color: #00955F;
+		}
+	}
+
 	// Обычный текст
 	&-text {
 		font-size: 16.2px;
