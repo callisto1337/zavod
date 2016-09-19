@@ -1,0 +1,30 @@
+{% extends "blocks/base.html" %}
+
+{# TODO: remove that loading #}
+{% load static from staticfiles %}
+
+{% block content %}
+    <div class="b-section">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-7">
+                    <h3 class="b-section-title">Вопросы про бойлеры</h3>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-3">
+                    {% for question in questions %}
+                        <li>{{ question.text }}</li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="/about/chasto-zadavaemye-voprosy-faq/" method="post">{% csrf_token %}
+    {{ question_form }}
+    <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

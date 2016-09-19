@@ -8,7 +8,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout as auth_logout, authenticate, login
 from zavod.forms import QuestionForm, CustomUserCreationForm
 from zavod.constants import SPECIAL_FILTER_PARAMS
-from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage
+from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage, Question, Employee
 
 
 def registration(request):
@@ -61,7 +61,7 @@ def search(request):
 
 
 def contacts(request):
-    return render(request, 'zavod/contacts.html')
+    return render(request, 'contacts.html')
 
 
 def prajjsy(request):
@@ -116,25 +116,23 @@ def photogallery(request):
     out = {}
     events = Gallery.objects.filter(type='event', published=True).order_by('date_created').all()
     products = Gallery.objects.filter(type='product', published=True).order_by('date_created').all()
+    gallery = Gallery.objects.filter(published=True).order_by('date_created').all()
     out.update({'events': events})
     out.update({'products': products})
-    return render(request, 'zavod/photogallery.html', out)
+    out.update({'gallery': gallery})
+    return render(request, 'photogallery.html', out)
 
 
 def photogallery_detail_page(request, page_number, photogallery_slug):
     gallery = get_object_or_404(Gallery, slug=photogallery_slug)
     start = (int(page_number) - 1) * 5 + 1
     gallery.gallery_images = GalleryImage.objects.filter(gallery=gallery).all()[start:start+5]
-    return render(request, 'zavod/photogallery_detail.html', {'gallery': gallery})
+    return render(request, 'photogallery_detail.html', {'gallery': gallery})
 
 
 def photogallery_detail(request, photogallery_slug):
     gallery = get_object_or_404(Gallery, slug=photogallery_slug)
-    return render(request, 'zavod/photogallery_detail.html', {'gallery': gallery})
-
-
-def news(request):
-    return render(request, 'zavod/news.html')
+    return render(request, 'photogallery_detail.html', {'gallery': gallery})
 
 
 def about(request):
@@ -162,13 +160,31 @@ def otzyvy(request):
 
 
 def employee(request):
-    return render(request, 'about_employee.html')
+    out = {}
+    employees = Employee.objects.filter(published=True).all()
+    i = 0
+    all_employees = []
+    set_by_five_employees = []
+    for employee in employees:
+        employee.is_first = False
+        if i % 5 == 0:
+            employee.is_first = True
+        set_by_five_employees.append(employee)
+        if len(set_by_five_employees) == 5:
+            all_employees.append(set_by_five_employees)
+            set_by_five_employees = []
+        i += 1
+    if set_by_five_employees:
+        all_employees.append(set_by_five_employees)
+    out.update({'employees': all_employees})
+    return render(request, 'about_employee.html', out)
 
 
 def employee_info(request, employee_name):
-    if employee_name:
-        return render(request, 'about_employee_info.html')
-    return render(request, 'about_employee_info.html')
+    out = {}
+    employee = Employee.objects.filter(published=True, name=employee_name).first()
+    out.update({'employee': employee})
+    return render(request, 'about_employee_info.html', out)
 
 
 def vacancy(request):
@@ -186,7 +202,9 @@ def faq(request):
             out.update({'error': 'Что-то пошло не так!'})
     question_form = QuestionForm()
     out.update({'question_form': question_form})
-    return render(request, 'zavod/about_faq.html', out)
+    questions = Question.objects.filter(published=True).all()
+    out.update({'questions': questions})
+    return render(request, 'about_faq.html', out)
 
 
 def proizvodstvo_zavoda_triumf(request):

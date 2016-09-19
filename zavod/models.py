@@ -216,6 +216,20 @@ class Question(models.Model):
         verbose_name_plural = 'Вопросы'
 
 
+class Employee(models.Model):
+    name = models.CharField(max_length=50, null=False)
+    first_name = models.CharField(max_length=50, default='')
+    last_name = models.CharField(max_length=50, default='')
+    published = models.BooleanField(default=True)
+    position = models.TextField()
+    text = models.TextField()
+    image = models.ForeignKey(Image, related_name='employees', default=None, null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
+
+
 def email_question(sender, instance, created, **kwargs):
     if created:
         send_mail(

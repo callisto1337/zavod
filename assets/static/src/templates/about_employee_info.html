@@ -13,7 +13,7 @@
 
             <div class="grid__row">
                 <div class="grid__column-7">
-                    <h3 class="b-section-title">Сотрудники компании</h3>
+                    <h3 class="b-section-title">{{ employee.first_name }} {{ employee.last_name }}</h3>
                     <a href="../" class="b-section-back">Назад к списку сотрудников</a>
                 </div>
                 <div class="grid__column-7">
@@ -40,15 +40,22 @@
                 </div>
             </div>
             <div class="grid__row">
-                <div class="grid__column-9">
-                    <p class="b-section-subtitle">начальник отдела продаж</p>
+                <div class="b-image__container">
+                    {% if employee.image %}
+                        <img src="{{ employee.image.image.url }}" alt="Пример награды">
+                    {% else %}
+                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                    {% endif %}
                 </div>
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">
-                    <p class="b-section-text">За плечами трудности, которые сплотили и воспитали команду профессионалов, которым не страшны никакие не выполнимые задачи.</p>
-                    <p class="b-section-text">Мы горды тем, что именно у нас работают все те люди, которые нзывают себя коллективом Завода Триумф. И руководство предприятия прилагает все усилия для того, чтобы каждый сотрудник раскрыл свои возможности, самореализовался и самое главное получал удовольствие от того дела, которыс он занимается на предприятии. Компания привлекает для производства своей продукции только лучших специалистов, уделяет значительное внимание для их развития, их мотивации, предоставляет реализовать возможность карьерного роста, а так же и самореализации.</p>
-                    <p class="b-section-text">Завод гордится своими трудовыми ресурсами, которые обеспечивают устойчивость компании для сохранения своих позиций на рынке теплообменного оборудования, тем самым, приводя к развитию экономики страны в целом.</p>
+                    <p class="b-section-subtitle">{{ employee.position }}</p>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-9">
+                    <p class="b-section-text">{{ employee.text }}</p>
                 </div>
             </div>
         </div>

@@ -1,0 +1,22 @@
+{% extends "blocks/base.html" %}
+
+{# TODO: remove that loading #}
+{% load static from staticfiles %}
+
+{% block content %}
+    <div class="b-section">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
+                <a class="b-breadcrumbs__link" href="{% url "photogallery" %}>">Фотогалерея</a>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-3">
+                    {% for item in gallery %}
+                        <li>{{ item.title }}</li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

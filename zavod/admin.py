@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Article, CategoryProduct, Product, CustomUser, Tag, Question, News, Image, Gallery, GalleryImage, \
-    File
+    File, Employee
 
 
 class CategoryProductFields(admin.ModelAdmin):
@@ -22,6 +22,11 @@ admin.site.register(Product, ProductFields)
 class CustomUserFields(admin.ModelAdmin):
     list_display = ('email', 'is_superuser')
 admin.site.register(CustomUser, CustomUserFields)
+
+
+class EmployeeFields(admin.ModelAdmin):
+    list_display = ('name', 'first_name', 'last_name', 'position', 'published')
+admin.site.register(Employee, EmployeeFields)
 
 
 class TagFields(admin.ModelAdmin):

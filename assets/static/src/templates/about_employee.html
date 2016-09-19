@@ -44,53 +44,29 @@
                 </div>
             </div>
 
-            <div class="grid__row grid__row-btm">
-                <div class="grid__column-2">
-                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
-                        <div class="b-image__container">
-                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                        </div>
-                        <div class="b-image__title">Алена Мартынова</div>
-                        <div class="b-image__caption">Менеджер отдела продаж</div>
-                    </a>
+            {% for set_by_five_employees in employees %}
+                <div class="grid__row grid__row-btm">
+                    {% for employee in set_by_five_employees %}
+                        {% if employee.is_first %}
+                            <div class="grid__column-2 ">
+                        {% else %}
+                            <div class="grid__column-2 grid__offset">
+                        {% endif %}
+                        <a class="b-image b-image-round" href="{% url "employee_info" employee.name %}">
+                            <div class="b-image__container">
+                                {% if employee.image %}
+                                    <img src="{{ employee.image.image.url }}" alt="Пример награды">
+                                {% else %}
+                                    <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                {% endif %}
+                            </div>
+                            <div class="b-image__title">{{ employee.first_name }} {{ employee.last_name }}</div>
+                            <div class="b-image__caption">{{ employee.position }}</div>
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
-                <div class="grid__column-2 grid__offset">
-                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
-                        <div class="b-image__container">
-                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                        </div>
-                        <div class="b-image__title">Алена Мартынова</div>
-                        <div class="b-image__caption">Менеджер отдела продаж</div>
-                    </a>
-                </div>
-                <div class="grid__column-2 grid__offset">
-                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
-                        <div class="b-image__container">
-                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                        </div>
-                        <div class="b-image__title">Алена Мартынова</div>
-                        <div class="b-image__caption">Менеджер отдела продаж</div>
-                    </a>
-                </div>
-                <div class="grid__column-2 grid__offset">
-                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
-                        <div class="b-image__container">
-                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                        </div>
-                        <div class="b-image__title">Алена Мартынова</div>
-                        <div class="b-image__caption">Менеджер отдела продаж</div>
-                    </a>
-                </div>
-                <div class="grid__column-2 grid__offset">
-                    <a class="b-image b-image-round" href="{% url "employee_info" 'luda' %}">
-                        <div class="b-image__container">
-                            <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                        </div>
-                        <div class="b-image__title">Алена Мартынова</div>
-                        <div class="b-image__caption">Менеджер отдела продаж</div>
-                    </a>
-                </div>
-            </div>
+            {% endfor %}
             <div class="grid__row">
                 <div class="grid__column-9">
                     <p class="b-section-text">За плечами трудности, которые сплотили и воспитали команду профессионалов, которым не страшны никакие не выполнимые задачи.</p>
