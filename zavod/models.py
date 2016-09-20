@@ -61,33 +61,6 @@ class Image(models.Model):
         verbose_name_plural = 'Изображения'
 
 
-class Article(models.Model):
-    published = models.BooleanField(default=True)
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, default='', unique=True)
-    preview_post = models.TextField(max_length=200)
-    text = models.TextField()
-    date_created = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=100)
-    seo_title = models.CharField(max_length=100, default='')
-    seo_description = models.CharField(max_length=100, default='')
-    seo_keywords = models.CharField(max_length=100, default='')
-    author = models.TextField(max_length=200, default='')
-    views = models.IntegerField(default=0)
-    tags = models.ManyToManyField(Tag, related_name='articles', default=None, null=True, blank=True)
-    images = models.ManyToManyField(Image, related_name='articles', default=None, null=True, blank=True)
-
-    def __unicode__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('articles_detail', args=[self.slug])
-
-    class Meta:
-        verbose_name = 'Статья'
-        verbose_name_plural = 'Статьи'
-
-
 class News(models.Model):
     published = models.BooleanField(default=True)
     name = models.CharField(max_length=100)
@@ -168,6 +141,34 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+
+
+class Article(models.Model):
+    published = models.BooleanField(default=True)
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, default='', unique=True)
+    preview_post = models.TextField(max_length=200)
+    text = models.TextField()
+    date_created = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=100)
+    seo_title = models.CharField(max_length=100, default='')
+    seo_description = models.CharField(max_length=100, default='')
+    seo_keywords = models.CharField(max_length=100, default='')
+    author = models.TextField(max_length=200, default='')
+    views = models.IntegerField(default=0)
+    tags = models.ManyToManyField(Tag, related_name='articles', default=None, null=True, blank=True)
+    images = models.ManyToManyField(Image, related_name='articles', default=None, null=True, blank=True)
+    products = models.ManyToManyField(Product, related_name='articles', default=None, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('articles_detail', args=[self.slug])
+
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
 
 
 class Gallery(models.Model):

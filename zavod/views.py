@@ -51,7 +51,10 @@ def logout(request):
 
 
 def main(request):
-    return render(request, 'index.html')
+    out = {}
+    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[0:3])
+    out.update({'ind_articles': ind_articles})
+    return render(request, 'index.html', out)
 
 
 def search(request):
@@ -216,21 +219,28 @@ def gibkaja_sistema_skidok(request):
 
 
 def articles(request):
-    articles = Article.objects.filter(published=True).order_by('date_created').all()[:5]
-    return render(request, 'articles.html', {'articles': articles})
+    out = {}
+    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[0:7])
+    out.update({'ind_articles': ind_articles})
+    # print(Article.objects.filter(published=True).order_by('date_created').all()[0:7])
+    return render(request, 'articles.html', out)
 
 
 def articles_page(request, page_number):
+    out = {}
     start = (int(page_number) - 1) * 5 + 1
-    articles = Article.objects.filter(published=True).order_by('date_created').all()[start:start+5]
-    return render(request, 'articles.html', {'articles': articles})
+    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[start:start+7])
+    out.update({'ind_articles': ind_articles})
+    return render(request, 'articles.html', out)
 
 
 def articles_detail(request, article_slug):
+    out = {}
     article = get_object_or_404(Article, slug=article_slug)
     article.views += 1
     article.save()
-    return render(request, 'articles_detail.html', {'article': article})
+    out.update({'article': article})
+    return render(request, 'articles_detail.html', out)
 
 
 def articles_tag(request, tag):
@@ -285,7 +295,6 @@ def get_product(request, slug):
     product = get_object_or_404(Product, slug=slug)
     tab = request.GET.get('tab', 'description')
     template_name = 'product.html'
-    print tab
     if tab == 'description':
         template_name = 'product.html'
     elif tab == 'docs':
@@ -294,10 +303,14 @@ def get_product(request, slug):
         template_name = 'product_photo.html'
     elif tab == 'articles':
         template_name = 'product_articles.html'
+        product.ind_articles = enumerate(product.articles.all())
     elif tab == 'review':
         template_name = 'product_review.html'
+    product.string_properties = []
+    for key, value in product.properties.items():
+        product.string_properties.append(u'{}: {}'.format(key, value))
     out.update({'product': product})
-    return render(request, template_name, {'product': product})
+    return render(request, template_name, out)
 
 
 def catalog(request):
@@ -327,35 +340,14 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             return render(request, template_name, {'products': products, 'parent': category, 'title': title,
                                                    'category': category, 'request': request})
     else:
-        out = {}
-        product = get_object_or_404(Product, slug=category_slug)
-        tab = request.GET.get('tab', 'description')
-        template_name = 'product.html'
-        if tab == 'description':
-            template_name = 'product.html'
-        elif tab == 'docs':
-            template_name = 'product_docs.html'
-            product.documents = product.category.files.all()
-        elif tab == 'photo':
-            template_name = 'product_photo.html'
-            product.photos = product.images.all()
-        elif tab == 'articles':
-            template_name = 'product_articles.html'
-            product.articles = Article.objects.all()
-        elif tab == 'review':
-            template_name = 'product_review.html'
-        product.string_properties = []
-        for key, value in product.properties.items():
-            product.string_properties.append(u'{}: {}'.format(key, value))
-        out.update({'product': product})
-        return render(request, template_name, {'product': product})
+        return get_product(request, category_slug)
 
 
 def product_or_products(request, slug, parent_category_slug=None, category_slug=None):
     out = {}
     product = Product.objects.filter(slug=slug).first()
     if product:
-        get_product(request, category_slug)
+        return get_product(request, category_slug)
     title = 'Список продуктов во вложенной категории'
     category = get_object_or_404(CategoryProduct, slug=slug)
     products = Product.objects.filter(category=category, published=True).all()

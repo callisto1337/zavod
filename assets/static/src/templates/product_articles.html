@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load extras %}
 
 {% block content %}
     <div class="b-section b-section_short">
@@ -13,7 +14,7 @@
                 </div>
             </div>
             <div class="grid__row">
-                <h3 class="b-section-text-description"><a href="../"><-</a>Назад к каталогу</h3>
+                <a href="../" class="b-section-back">Назад к каталогу</a>
             </div>
             <div class="grid__row">
                 <div class="grid__column-7">
@@ -35,30 +36,37 @@
                         </li>
                     </ul>
                 </div>
-                <div class="grid__column-9">
-                    {% for article in product.articles %}
-                    <li class="submenu__catalog__list__item">
-                        <a href="{{ article.slug }}">{{ articles.title }}</a>
-                    </li>
-                    {% endfor %}
-                </div>
             </div>
-            <div class="grid__row">
-                <div class="grid__column-12">
-                    <div class="submenu__catalog">
-                        <ul class="submenu__catalog__list">
-                            {% for product_image in product.productimages %}
-                            <li class="submenu__catalog__list__item">
-                                {{ product_image.title }}
-                            </li>
-                            <div class="b-box__image">
-                                <img src="{% static product_image.url %}" alt="Пример Продукта">
+                {% for ind, article in product.ind_articles %}
+                    {% if ind|divisibleby:2 %}
+                        <div class="grid__row">
+                        <div class="grid__column-4">
+                    {% else %}
+                        <div class="grid__column-4 grid__offset">
+                    {% endif %}
+                        <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
+                            <div class="b-box {% if ind|mod:3 == 0 %} b-box-red {% endif %} {% if ind|mod:3 == 1 %} b-box-green {% endif %} {% if ind|mod:3 == 2 %} b-box-black {% endif %}">
+                                <div class="b-box__image-fullsize">
+                                    {% if article.images.first %}
+                                        <img src="{{ article.images.first.image.url }}" alt="Пример награды">
+                                    {% else %}
+                                        <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
+                                    {% endif %}
+                                </div>
+                                <div class="b-box__wrapper">
+                                    <div class="b-box__author">{{ article.author }}</div>
+                                    <h4 class="b-box__header">{{ article.title }}</h4>
+                                    <p class="b-box__text">
+                                        {{ article.text }}
+                                    </p>
+                                </div>
                             </div>
-                            {% endfor %}
-                        </ul>
+                        </a>
                     </div>
-                </div>
-            </div>
+                    {% if not ind|divisibleby:2 %}
+                    </div>
+                    {% endif %}
+                {% endfor %}
         </div>
     </div>
 
