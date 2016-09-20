@@ -124,7 +124,7 @@
 		}
 	}
 
-	&_search {
+	&__search {
 		transform: translateY(-100%);
 		opacity: 0;
 		transition: 0.3s;
@@ -136,7 +136,7 @@
 			opacity: 1;
 		}
 
-		.form {
+		.form-search {
 			width: 100%;
 			height: 64px;
 
