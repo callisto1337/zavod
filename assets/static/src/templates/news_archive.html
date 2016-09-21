@@ -2,6 +2,8 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load extras %}
+{% load threadedcomments_tags %}
 
 {% block content %}
     <div class="b-section">
@@ -18,13 +20,40 @@
             <div class="grid__row">
                 <a href="../" class="b-section-back">Назад к панораме новостей</a>
             </div>
-            <div class="grid__row">
-                <div class="grid__column-3">
-                    {% for one_news in news %}
-                        <li>{{ one_news.title }}</li>
-                    {% endfor %}
+            {% for ind, one_news in ind_news %}
+                {% if ind|mod:2 == 0 %}
+                    <div class="grid__row">
+                    <div class="grid__column-custom-612">
+                {% else %}
+                    <div class="grid__column-custom-612 grid__offset-small">
+                {% endif %}
+                    <div class="b-box">
+                        <div class="b-box__image-fullsize">
+                            {% if one_news.images.first %}
+                                <img src="{{ one_news.images.first.image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
+                            {% endif %}
+                        </div>
+                        <div class="b-box__wrapper">
+                            <h4 class="b-box__header b-box__header-big">{{ one_news.title }}</h4>
+                            <p class="b-box__text">
+                                 {{ one_news.popularity }}
+                            </p>
+                        </div>
+                        <div class="b-box__footer">
+                            <div class="b-box__wrapper">
+                                <span class="b-box__footer-left">{{ one_news.date_created|date:"d F Y"|lower }} г.</span>
+                                {% get_comment_count for one_news as comment_count %}
+                                <span class="b-box__footer-right"><i class="fa fa-comments" aria-hidden="true"></i> {{ comment_count }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                {% if ind|mod:2 == 1 %}
+                </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
     <div class="b-section">

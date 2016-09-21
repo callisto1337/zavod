@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load threadedcomments_tags %}
 
 {% block content %}
     <div class="b-section">
@@ -19,6 +20,18 @@
                 <a href="../" class="b-section-back">Назад к новостям</a>
             </div>
         </div>
+        {% get_comment_list for news as tree %}
+        {% for comment in tree %}
+        <div style="margin-left: {{ comment.depth }}em;" class="comment">
+            <div style="margin-left:{{comment.depth}}em;">
+                {{ comment }}
+                Reply to this comment
+                {% render_comment_form for news with comment.id %}
+            </div>
+        </div>
+        {% endfor %}
+        <p>Reply to Original:</p>
+        {% render_comment_form for news %}
     </div>
     <div class="b-section">
         <div class="b-layout">
