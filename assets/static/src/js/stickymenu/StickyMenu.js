@@ -21,6 +21,8 @@
 		 */
 		init: function () {
 			this.sticky = document.getElementById('b-menu');
+			this.search = document.getElementsByClassName('b-menu__search')[0];
+			this.clone_search = document.getElementsByClassName('b-menu__search')[1];
 			this.clone = this.sticky.cloneNode(true);
 			this.clone.classList.add('clone');
 
@@ -50,9 +52,16 @@
 				this.clone.classList.add('sticky-visible');
 				this.active = true;
 
+				if(this.search.classList.contains('b-menu__search_toggled')) {
+					this.clone_search.classList.add('sticky-visible');
+				}
 			} else {
 				this.clone.classList.remove('sticky-visible');
 				this.active = false;
+
+				if(this.search.classList.contains('b-menu__search_toggled')) {
+					this.clone_search.classList.remove('sticky-visible');
+				}
 			}
 
 			this._handleSubmenu();

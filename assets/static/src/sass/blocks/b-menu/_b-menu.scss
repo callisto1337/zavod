@@ -127,7 +127,7 @@
 	&__search {
 		transform: translateY(-100%);
 		opacity: 0;
-		transition: 0.3s;
+		transition: 0.2s;
 		position: absolute;
 		z-index: 3;
 
@@ -189,7 +189,13 @@
 		box-shadow: none;
 
 		&.sticky-visible {
+			opacity: 1;
 			transform: translateY(0);
+		}
+
+		&.b-menu__search {
+			z-index: 3;
+            transition: 0.2s;
 		}
 	}
 }
