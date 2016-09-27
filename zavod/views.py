@@ -221,7 +221,34 @@ def gibkaja_sistema_skidok(request):
 
 def articles(request):
     out = {}
-    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[0:8])
+    article_objects = Article.objects.filter(published=True)
+    tag = request.GET.get('tag', None)
+    sort_type = request.GET.get('sort_type', 'date_created')
+    ctype = ContentType.objects.get_for_model(Article.objects.model)
+    if tag:
+        article_objects = article_objects.filter(tags=Tag.objects.filter(title=tag).first())
+    if sort_type == 'date_created':
+        article_objects = article_objects.order_by('date_created')
+    elif sort_type == 'popular':
+        article_objects = article_objects.order_by('-views')
+    elif sort_type == 'comment':
+        article_objects = article_objects.extra(select={
+            'comment_count' : """
+                SELECT COUNT(*)
+                FROM django_comments
+                WHERE
+                    django_comments.content_type_id={} AND
+                    django_comments.object_pk=CAST({}.{} as CHAR)
+            """.format ( ctype.pk,
+                    article_objects.model._meta.db_table,
+                    article_objects.model._meta.pk.name
+                         ),
+            },
+            order_by=('-comment_count',)
+        )
+    elif sort_type == 'view':
+        article_objects = article_objects.order_by('-views')
+    ind_articles = enumerate(article_objects.all()[0:6])
     out.update({'ind_articles': ind_articles})
     return render(request, 'articles.html', out)
 

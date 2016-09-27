@@ -36,20 +36,24 @@
                         </li>
                     </ul>
                 </div>
-                <div class="grid__column-9">
-                {% get_comment_list for product as tree %}
-                {% for comment in tree %}
-                <div style="margin-left: {{ comment.depth }}em;" class="comment">
-                    <div style="margin-left:{{comment.depth}}em;">
-                        {{ comment }}
-                        Reply to this comment
-                        {% render_comment_form for product with comment.id %}
+                {% if user.is_authenticated %}
+                    <div class="grid__column-9">
+                    {% get_comment_list for product as tree %}
+                    {% for comment in tree %}
+                    <div style="margin-left: {{ comment.depth }}em;" class="comment">
+                        <div style="margin-left:{{comment.depth}}em;">
+                            {{ comment }}
+                            {% if user.is_staff %}
+                                Reply to this comment
+                                {% render_comment_form for product with comment.id %}
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-                {% endfor %}
-                <p>Reply to Original:</p>
-                {% render_comment_form for product %}
-                </div>
+                    {% endfor %}
+                    <p>Reply to Original:</p>
+                    {% render_comment_form for product %}
+                    </div>
+                {% endif %}
             </div>
             <div class="grid__row">
                 <div class="grid__column-12">

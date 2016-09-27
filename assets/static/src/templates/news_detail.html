@@ -20,18 +20,28 @@
                 <a href="../" class="b-section-back">Назад к новостям</a>
             </div>
         </div>
-        {% get_comment_list for news as tree %}
-        {% for comment in tree %}
-        <div style="margin-left: {{ comment.depth }}em;" class="comment">
-            <div style="margin-left:{{comment.depth}}em;">
-                {{ comment }}
-                Reply to this comment
-                {% render_comment_form for news with comment.id %}
+    </div>
+    <div class="b-section">
+        <div class="b-layout">
+        {% if user.is_authenticated %}
+            <div class="grid__column-9">
+            {% get_comment_list for news as tree %}
+            {% for comment in tree %}
+            <div style="margin-left: {{ comment.depth }}em;" class="comment">
+                <div style="margin-left:{{comment.depth}}em;">
+                    {{ comment }}
+                    {% if user.is_staff %}
+                        Reply to this comment
+                        {% render_comment_form for news with comment.id %}
+                    {% endif %}
+                </div>
             </div>
+            {% endfor %}
+            <p>Reply to Original:</p>
+            {% render_comment_form for news %}
+            </div>
+        {% endif %}
         </div>
-        {% endfor %}
-        <p>Reply to Original:</p>
-        {% render_comment_form for news %}
     </div>
     <div class="b-section">
         <div class="b-layout">
