@@ -5,6 +5,9 @@
 {% load threadedcomments_tags %}
 
 {% block content %}
+    {#  get all comments count  #}
+    {% get_comment_count for product as comments_count %}
+
     <div class="b-section b-section_short">
         <div class="b-layout">
             <div class="breadcrumbs">Главная / Каталог /</div>
@@ -16,9 +19,9 @@
             <div class="grid__row">
                 <a href="../" class="b-section-back">Назад к каталогу</a>
             </div>
-            <div class="grid__row">
-                <div class="grid__column-7">
-                    <ul class="b-tab">
+            <div class="grid__row grid__row-btm">
+                <div class="grid__column-9">
+                    <ul class="b-tab b-tab-left">
                         <li class="b-tab__item">
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=description">Описание</a>
                         </li>
@@ -32,10 +35,17 @@
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=articles">Статьи</a>
                         </li>
                         <li class="b-tab__item b-tab__item_active">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы</a>
+                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы <span class="b-tab__item__link__counter">{{ comments_count }}</span></a>
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-9">
+                    <a class="b-section-subtitle b-section-subtitle_colorful" href="#">Оставить свой отзыв</a>
+                    {% render_comment_form for product %}
+                </div>
+            </div>
                 <div class="grid__column-9">
                 {% get_comment_list for product as tree %}
                 {% for comment in tree %}
@@ -47,9 +57,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                <p>Reply to Original:</p>
-                {% render_comment_form for product %}
-                </div>
+
             </div>
             <div class="grid__row">
                 <div class="grid__column-12">
