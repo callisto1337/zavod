@@ -54,7 +54,9 @@ def logout(request):
 def main(request):
     out = {}
     ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[0:3])
+    ind_news = enumerate(News.objects.filter(published=True).order_by('date_created').all()[0:2])
     out.update({'ind_articles': ind_articles})
+    out.update({'ind_news': ind_news})
     return render(request, 'index.html', out)
 
 

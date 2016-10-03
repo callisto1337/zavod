@@ -79,42 +79,59 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                    <a class="b-image" href="{% url 'get_product' product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
+                                    {%  else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.title }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.title }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
-                            </p>
-                            <p class="b-box__text">
-                                Разборные пластинчатые теплообменник FUNKE
-                            </p>
-                            <div class="b-box__sale">Хит</div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-
                     <div class="b-box">
-                        <div class="b-box__wrapper">
-                            <p class="b-box__author">
-                                СЕГОДНЯ 10:45
-                            </p>
-                            <p class="b-box__text">
-                                Служба Яндекс.Рефераты предназнаена для студентов и школьников, дизайнеров
-                            </p>
-                        </div>
+                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                            <div class="b-box__wrapper">
+                                <p class="b-box__author">
+                                    {{ news_for_bottom.date_created }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ news_for_bottom.title }}
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>
+                    {% if media_for_bottom %}
+                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                    {% endif %}
                     <div class="b-box b-box_noshadow">
                         <div class="b-box__image-halfsize">
-                            <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% if media_for_bottom %}
+                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% endif %}
                         </div>
                     </div>
+                    {% if media_for_bottom %}
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

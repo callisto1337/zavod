@@ -3,6 +3,7 @@
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
 {% load extras %}
+{% load threadedcomments_tags %}
 
 {% block content %}
     <div class="b-player">
@@ -223,44 +224,34 @@
         <div class="b-layout">
             <h3 class="b-section-title">Жизнь завода</h3>
             <div class="grid__row">
-                <div class="grid__column-custom-612">
-                    <div class="b-box">
-                        <div class="b-box__image-fullsize">
-                            <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
-                        </div>
-                        <div class="b-box__wrapper">
-                            <h4 class="b-box__header b-box__header-big">Качественный бойлер за копейки теперь в продаже в Москве</h4>
-                            <p class="b-box__text">
-                                Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и журналистов, создателей научных заявок и отчетов — для всех.
-                            </p>
-                        </div>
-                        <div class="b-box__footer">
-                            <div class="b-box__wrapper">
-                                <span class="b-box__footer-left">12 января 2015 г.</span>
-                                <span class="b-box__footer-right"><i class="fa fa-comments" aria-hidden="true"></i> 78</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid__column-custom-612 grid__offset-small">
-                    <div class="b-box">
-                        <div class="b-box__image-fullsize">
-                            <img src="{% static 'img/life/banner_2.png' %}" alt="Пример баннера">
-                        </div>
-                        <div class="b-box__wrapper">
-                            <h4 class="b-box__header b-box__header-big">Качественный бойлер за копейки теперь в продаже в Москве</h4>
-                            <p class="b-box__text">
-                                Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и журналистов, создателей научных заявок и отчетов — для всех.
-                            </p>
-                        </div>
-                        <div class="b-box__footer">
-                            <div class="b-box__wrapper">
-                                <span class="b-box__footer-left">24 января 2015 г.</span>
-                                <span class="b-box__footer-right"><i class="fa fa-comments" aria-hidden="true"></i> 78</span>
-                            </div>
+                {% for ind, news in ind_news %}
+                    {% if ind == 0 %}
+                        <div class="grid__column-custom-612">
+                    {% else %}
+                        <div class="grid__column-custom-612 grid__offset-small">
+                    {% endif %}
+                        <div class="b-box">
+                            <a class="b-image b-image-round" href="{% url "news_detail" news.slug %}">
+                                <div class="b-box__image-fullsize">
+                                    <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
+                                </div>
+                                <div class="b-box__wrapper">
+                                    <h4 class="b-box__header b-box__header-big">{{ news.title }}</h4>
+                                    <p class="b-box__text">
+                                        {{ news.text }}
+                                    </p>
+                                </div>
+                                <div class="b-box__footer">
+                                    <div class="b-box__wrapper">
+                                        <span class="b-box__footer-left">{{ news.date_created|date:"d F Y"|lower }} г.</span>
+                                        {% get_comment_count for news as comment_count %}
+                                        <span class="b-box__footer-right"><i class="fa fa-comments" aria-hidden="true"></i> {{ comment_count }}</span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -293,48 +284,6 @@
                         </a>
                     </div>
                 {% endfor %}
-{#                <div class="grid__column-4">#}
-{#                    <div class="b-box b-box-red">#}
-{#                        <div class="b-box__image-fullsize">#}
-{#                            <img src="{% static 'img/news/news1.png' %}" alt="Пример баннера">#}
-{#                        </div>#}
-{#                        <div class="b-box__wrapper">#}
-{#                            <div class="b-box__author">Денис Такойто</div>#}
-{#                            <h4 class="b-box__header">Качественный бойлер за копейки теперь в продаже в Москве</h4>#}
-{#                            <p class="b-box__text">#}
-{#                                Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и журналистов, создателей научных заявок и отчетов — для всех.#}
-{#                            </p>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="grid__column-4 grid__offset">#}
-{#                    <div class="b-box b-box-green">#}
-{#                        <div class="b-box__image-fullsize">#}
-{#                            <img src="{% static 'img/news/news1.png' %}" alt="Пример баннера">#}
-{#                        </div>#}
-{#                        <div class="b-box__wrapper">#}
-{#                            <div class="b-box__author">Денис Такойто</div>#}
-{#                            <h4 class="b-box__header">Качественный бойлер за копейки теперь в продаже в Москве</h4>#}
-{#                            <p class="b-box__text">#}
-{#                                Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и журналистов, создателей научных заявок и отчетов — для всех.#}
-{#                            </p>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="grid__column-4 grid__offset">#}
-{#                    <div class="b-box b-box-black">#}
-{#                        <div class="b-box__image-fullsize">#}
-{#                            <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">#}
-{#                        </div>#}
-{#                        <div class="b-box__wrapper">#}
-{#                            <div class="b-box__author">Денис Такойто</div>#}
-{#                            <h4 class="b-box__header">Качественный бойлер за копейки теперь в продаже в Москве</h4>#}
-{#                            <p class="b-box__text">#}
-{#                                Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и журналистов, создателей научных заявок и отчетов — для всех.#}
-{#                            </p>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
             </div>
         </div>
     </div>
