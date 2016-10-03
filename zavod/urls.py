@@ -28,7 +28,7 @@ urlpatterns = [
         name='articles_tag_page'),
     url(r'^news/comments/', include('django_comments.urls')),
     url(r'^news/$', views.news, name='news'),
-    url(r'^news_archive/$', views.news_archive, name='news_archive'),
+    url(r'^news/archive/$', views.news_archive, name='news_archive'),
     url(r'^news/(?P<news_slug>[-\w]+)/$', views.news_detail, name='news_detail'),
     url(r'^news/page-(?P<page_number>[0-9]+)/$', views.news_page, name='news_page'),
     url(r'^news/tag/(?P<tag>[-\w]+)/$', views.news_tag, name='news_tag'),

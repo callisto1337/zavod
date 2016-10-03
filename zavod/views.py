@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.contenttypes.models import ContentType
 from watson import search as watson
 
 from django.db.models import Count
@@ -8,7 +9,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout as auth_logout, authenticate, login
 from zavod.forms import QuestionForm, CustomUserCreationForm
 from zavod.constants import SPECIAL_FILTER_PARAMS
-from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage, Question, Employee
+from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage, Question, Employee, Tag
 
 
 def registration(request):
@@ -53,7 +54,9 @@ def logout(request):
 def main(request):
     out = {}
     ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[0:3])
+    ind_news = enumerate(News.objects.filter(published=True).order_by('date_created').all()[0:2])
     out.update({'ind_articles': ind_articles})
+    out.update({'ind_news': ind_news})
     return render(request, 'index.html', out)
 
 
@@ -220,16 +223,42 @@ def gibkaja_sistema_skidok(request):
 
 def articles(request):
     out = {}
-    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[0:7])
+    article_objects = Article.objects.filter(published=True)
+    tag = request.GET.get('tag', None)
+    sort_type = request.GET.get('sort_type', 'date_created')
+    ctype = ContentType.objects.get_for_model(Article.objects.model)
+    if tag:
+        article_objects = article_objects.filter(tags=Tag.objects.filter(title=tag).first())
+    if sort_type == 'date_created':
+        article_objects = article_objects.order_by('date_created')
+    elif sort_type == 'popular':
+        article_objects = article_objects.order_by('-views')
+    elif sort_type == 'comment':
+        article_objects = article_objects.extra(select={
+            'comment_count' : """
+                SELECT COUNT(*)
+                FROM django_comments
+                WHERE
+                    django_comments.content_type_id={} AND
+                    django_comments.object_pk=CAST({}.{} as CHAR)
+            """.format ( ctype.pk,
+                    article_objects.model._meta.db_table,
+                    article_objects.model._meta.pk.name
+                         ),
+            },
+            order_by=('-comment_count',)
+        )
+    elif sort_type == 'view':
+        article_objects = article_objects.order_by('-views')
+    ind_articles = enumerate(article_objects.all()[0:6])
     out.update({'ind_articles': ind_articles})
-    # print(Article.objects.filter(published=True).order_by('date_created').all()[0:7])
     return render(request, 'articles.html', out)
 
 
 def articles_page(request, page_number):
     out = {}
     start = (int(page_number) - 1) * 5 + 1
-    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[start:start+7])
+    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[start:start+8])
     out.update({'ind_articles': ind_articles})
     return render(request, 'articles.html', out)
 
@@ -257,8 +286,37 @@ def articles_tag_page(request, page_number, tag):
 
 
 def news_archive(request):
-    news = News.objects.filter(published=True).order_by('date_created').all()[:5]
-    return render(request, 'news_archive.html', {'news': news})
+    out = {}
+    news_objects = News.objects.filter(published=True)
+    tag = request.GET.get('tag', None)
+    sort_type = request.GET.get('sort_type', 'date_created')
+    ctype = ContentType.objects.get_for_model(News.objects.model)
+    if tag:
+        news_objects = news_objects.filter(tags=Tag.objects.filter(title=tag).first())
+    if sort_type == 'date_created':
+        news_objects = news_objects.order_by('date_created')
+    elif sort_type == 'popular':
+        news_objects = news_objects.order_by('-views')
+    elif sort_type == 'comment':
+        news_objects = news_objects.extra(select={
+            'comment_count' : """
+                SELECT COUNT(*)
+                FROM django_comments
+                WHERE
+                    django_comments.content_type_id={} AND
+                    django_comments.object_pk=CAST({}.{} as CHAR)
+            """.format ( ctype.pk,
+                    news_objects.model._meta.db_table,
+                    news_objects.model._meta.pk.name
+                         ),
+            },
+            order_by=('-comment_count',)
+        )
+    elif sort_type == 'view':
+        news_objects = news_objects.order_by('-views')
+    ind_news = enumerate(news_objects.all()[0:6])
+    out.update({'ind_news': ind_news})
+    return render(request, 'news_archive.html', out)
 
 
 def news(request):
@@ -274,6 +332,8 @@ def news_page(request, page_number):
 
 def news_detail(request, news_slug):
     news = get_object_or_404(News, slug=news_slug)
+    news.views += 1
+    news.save()
     return render(request, 'news_detail.html', {'news': news})
 
 

@@ -37,6 +37,9 @@ class CustomUser(AbstractBaseUser):
     def get_short_name(self):
         return self.email
 
+    def get_full_name(self):
+        return u'{} {}'.format(self.first_name, self.last_name)
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=100)
@@ -72,6 +75,7 @@ class News(models.Model):
     seo_title = models.CharField(max_length=100, default='')
     seo_description = models.CharField(max_length=100, default='')
     seo_keywords = models.CharField(max_length=100, default='')
+    views = models.IntegerField(default=0)
     tags = models.ManyToManyField(Tag, related_name='news', default=None, null=True, blank=True)
     images = models.ManyToManyField(Image, related_name='news', default=None, null=True, blank=True)
 

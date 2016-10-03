@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load threadedcomments_tags %}
 
 {% block content %}
     <div class="b-section">
@@ -22,23 +23,49 @@
     </div>
     <div class="b-section">
         <div class="b-layout">
+        {% if user.is_authenticated %}
+            <div class="grid__column-9">
+            {% get_comment_list for news as tree %}
+            {% for comment in tree %}
+            <div style="margin-left: {{ comment.depth }}em;" class="comment">
+                <div style="margin-left:{{comment.depth}}em;">
+                    {{ comment }}
+                    {% if user.is_staff %}
+                        Reply to this comment
+                        {% render_comment_form for news with comment.id %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <p>Reply to Original:</p>
+            {% render_comment_form for news %}
+            </div>
+        {% endif %}
+        </div>
+    </div>
+    <div class="b-section">
+        <div class="b-layout">
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <div class="b-box">
+                    <a class="b-image" href="{% url 'get_product' product_for_bottom.slug %}"><div class="b-box">
                         <div class="b-box__wrapper">
                             <div class="b-box__image-left">
-                                <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                {% if product_for_bottom.images.first %}
+                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
+                                {%  else %}
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                {% endif %}
                             </div>
                             <p class="b-box__author">
-                                ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
+                                {{ product_for_bottom.category.title }}
                             </p>
                             <p class="b-box__text">
-                                Разборные пластинчатые теплообменник FUNKE
+                                {{ product_for_bottom.title }}
                             </p>
-                            <div class="b-box__sale">Хит</div>
+                            <div class="b-box__sale">Хит</div></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
@@ -46,21 +73,31 @@
                     <div class="b-box">
                         <div class="b-box__wrapper">
                             <p class="b-box__author">
-                                СЕГОДНЯ 10:45
+                                {{ news_for_bottom.date_created }}
                             </p>
                             <p class="b-box__text">
-                                Служба Яндекс.Рефераты предназнаена для студентов и школьников, дизайнеров
+                                {{ news_for_bottom.title }}
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>
+                    {% if media_for_bottom %}
+                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                    {% endif %}
                     <div class="b-box b-box_noshadow">
                         <div class="b-box__image-halfsize">
-                            <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% if media_for_bottom %}
+                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% endif %}
                         </div>
                     </div>
+                    {% if media_for_bottom %}
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
