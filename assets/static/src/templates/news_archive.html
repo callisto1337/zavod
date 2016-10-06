@@ -61,7 +61,7 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'get_product' product_for_bottom.slug %}"><div class="b-box">
+                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
                         <div class="b-box__wrapper">
                             <div class="b-box__image-left">
                                 {% if product_for_bottom.images.first %}
@@ -71,10 +71,10 @@
                                 {% endif %}
                             </div>
                             <p class="b-box__author">
-                                {{ product_for_bottom.category.title }}
+                                {{ product_for_bottom.category.name }}
                             </p>
                             <p class="b-box__text">
-                                {{ product_for_bottom.title }}
+                                {{ product_for_bottom.name }}
                             </p>
                             <div class="b-box__sale">Хит</div></div>
                         </div>

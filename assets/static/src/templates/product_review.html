@@ -10,7 +10,10 @@
 
     <div class="b-section b-section_short">
         <div class="b-layout">
-            <div class="breadcrumbs">Главная / Каталог /</div>
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+                <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
+            </div>
             <div class="grid__row">
                 <div class="grid__column-9">
                     <h3 class="b-section-title">{{ product.name }}</h3>
@@ -83,20 +86,24 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <div class="b-box">
+                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
                         <div class="b-box__wrapper">
                             <div class="b-box__image-left">
-                                <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                {% if product_for_bottom.images.first %}
+                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
+                                {%  else %}
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                {% endif %}
                             </div>
                             <p class="b-box__author">
-                                ПЛАСТИНЧАТЫЕ ТЕПЛООБМЕННИКИ
+                                {{ product_for_bottom.category.name }}
                             </p>
                             <p class="b-box__text">
-                                Разборные пластинчатые теплообменник FUNKE
+                                {{ product_for_bottom.name }}
                             </p>
-                            <div class="b-box__sale">Хит</div>
+                            <div class="b-box__sale">Хит</div></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
