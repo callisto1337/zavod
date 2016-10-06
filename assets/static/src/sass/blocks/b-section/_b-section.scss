@@ -138,8 +138,46 @@
 		padding: 60px 0;
 	}
 
+	// Цветной фон без отступов
+	&_colorful {
+		padding: 0;
+		min-width: 1290px;
+		background-color: #00955f;
+	}
+
 	// Без границ
 	&_borderless {
 		border: none;
+	}
+
+	.error-404 {
+		height: 522px;
+
+		&__link {
+			color: white;
+			text-decoration: none;
+			line-height: 1px;
+		}
+
+		&__link:hover {
+			border-bottom: 2px solid #fff;
+		}
+
+		&__text {
+			font-size: 26.5px;
+			color: #a3ceba;
+			padding: 96px 0 0 295px;
+			background: url(../img/404.png) no-repeat;
+			width: 750px;
+			height: 270px;
+			letter-spacing: 0.7px;
+
+			&_centered {
+				position: relative;
+			  top: 50%;
+			  left: 50%;
+			  transform: translate(-50%, -50%);
+			}
+		}
 	}
 }
