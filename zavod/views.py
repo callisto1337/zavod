@@ -350,9 +350,9 @@ def news_tag_page(request, page_number, tag):
     return render(request, 'news.html', {'news': news})
 
 
-def get_product(request, slug):
+def get_product(request, slug, parent_category_slug=None):
     out = {}
-    product = get_object_or_404(Product, slug=slug)
+    product = get_object_or_404(Product, slug=slug, category__slug=parent_category_slug)
     tab = request.GET.get('tab', 'description')
     template_name = 'product.html'
     if tab == 'description':
@@ -400,7 +400,7 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             return render(request, template_name, {'products': products, 'parent': category, 'title': title,
                                                    'category': category, 'request': request})
     else:
-        return get_product(request, category_slug)
+        return get_product(request, category_slug, parent_category_slug)
 
 
 def product_or_products(request, slug, parent_category_slug=None, category_slug=None):

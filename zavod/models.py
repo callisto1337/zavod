@@ -104,7 +104,7 @@ class File(models.Model):
 
 class CategoryProduct(models.Model):
     published = models.BooleanField(default=True)
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, default='', unique=True)
     parent_id = models.ForeignKey("CategoryProduct", default=None, null=True, blank=True)
     title = models.CharField(max_length=100, default='')
@@ -126,13 +126,13 @@ class CategoryProduct(models.Model):
 class Product(models.Model):
     published = models.BooleanField(default=True)
     name = models.CharField(max_length=100, default='')
-    slug = models.SlugField(max_length=100, default='', unique=True)
+    slug = models.SlugField(max_length=100, default='')
     category = models.ForeignKey(CategoryProduct)
     product_text = models.TextField()
-    title = models.CharField(max_length=100, default='')
-    seo_title = models.CharField(max_length=100, default='')
-    seo_description = models.CharField(max_length=100, default='')
-    seo_keywords = models.CharField(max_length=100, default='')
+    title = models.CharField(max_length=200, default='')
+    seo_title = models.CharField(max_length=300, default='')
+    seo_description = models.CharField(max_length=300, default='')
+    seo_keywords = models.CharField(max_length=300, default='')
     properties = JSONField(default='')
     images = models.ManyToManyField(Image, related_name='products', default=None, null=True, blank=True)
 

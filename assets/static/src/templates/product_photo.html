@@ -35,25 +35,15 @@
                         </li>
                     </ul>
                 </div>
-                <div class="grid__column-9">
-                    {% for photo in product.photos %}
-                    <li class="submenu__catalog__list__item">
-                        <a href="{{ photo.image.url }}">{{ photo.title }}</a>
-                    </li>
-                    {% endfor %}
-                </div>
             </div>
             <div class="grid__row">
                 <div class="grid__column-12">
                     <div class="submenu__catalog">
                         <ul class="submenu__catalog__list">
-                            {% for product_image in product.productimages.all %}
-                            <li class="submenu__catalog__list__item">
-                                {{ product_image.title }}
-                            </li>
-                            <div class="b-box__image">
-                                <img src="{% static product_image.url %}" alt="Пример Продукта">
-                            </div>
+                            {% for product_image in product.images.all %}
+                                <div class="b-box__image">
+                                    <img src="{{ product_image.image.url }}" alt="Пример Продукта">
+                                </div>
                             {% endfor %}
                         </ul>
                     </div>
