@@ -112,14 +112,16 @@
                     <h3 class="subheading">Последняя новость</h3>
 
                     <div class="b-box">
-                        <div class="b-box__wrapper">
-                            <p class="b-box__author">
-                                {{ news_for_bottom.date_created }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ news_for_bottom.title }}
-                            </p>
-                        </div>
+                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                            <div class="b-box__wrapper">
+                                <p class="b-box__author">
+                                    {{ news_for_bottom.date_created }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ news_for_bottom.title }}
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="grid__column-4 grid__offset">
