@@ -4,13 +4,13 @@
             <table class="b-menu-table">
                 <tr>
                     <td class="b-menu__item">
-                        <a href="{% url "about" %}" class="b-menu__item-link b-menu__item-link-active">О компании</a>
+                        <a href="{% url "about" %}" class="b-menu__item-link {% if not menu_active_item or menu_active_item == 'about' %}b-menu__item-link-active {% endif %}">О компании</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "news" %}" class="b-menu__item-link">Новости</a>
+                        <a href="{% url "news" %}" class="b-menu__item-link {% if menu_active_item == 'news' %}b-menu__item-link-active {% endif %}">Новости</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "catalog" %}" class="b-menu__item-link">Каталог</a>
+                        <a href="{% url "catalog" %}" class="b-menu__item-link {% if menu_active_item == 'catalog' %}b-menu__item-link-active {% endif %}">Каталог</a>
                         <div class="b-menu__submenu">
                             <div class="submenu__content">
                                 <div class="submenu__column">
@@ -119,28 +119,28 @@
                         </div>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "dostavka" %}" class="b-menu__item-link">Доставка</a>
+                        <a href="{% url "dostavka" %}" class="b-menu__item-link {% if menu_active_item == 'dostavka' %}b-menu__item-link-active {% endif %}">Доставка</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "prajjsy" %}" class="b-menu__item-link">Прайс-листы</a>
+                        <a href="{% url "prajjsy" %}" class="b-menu__item-link {% if menu_active_item == 'prajjsy' %}b-menu__item-link-active {% endif %}">Прайс-листы</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "dokumentatsija" %}" class="b-menu__item-link">Документация</a>
+                        <a href="{% url "dokumentatsija" %}" class="b-menu__item-link {% if menu_active_item == 'dokumentatsija' %}b-menu__item-link-active {% endif %}">Документация</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "articles" %}" class="b-menu__item-link">Статьи</a>
+                        <a href="{% url "articles" %}" class="b-menu__item-link {% if menu_active_item == 'articles' %}b-menu__item-link-active {% endif %}">Статьи</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "photogallery" %}" class="b-menu__item-link">Фотогалерия</a>
+                        <a href="{% url "photogallery" %}" class="b-menu__item-link {% if menu_active_item == 'photogallery' %}b-menu__item-link-active {% endif %}">Фотогалерия</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "faq" %}" class="b-menu__item-link">Вопросы и ответы</a>
+                        <a href="{% url "faq" %}" class="b-menu__item-link {% if menu_active_item == 'faq' %}b-menu__item-link-active {% endif %}">Вопросы и ответы</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "contacts" %}" class="b-menu__item-link">Контакты</a>
+                        <a href="{% url "contacts" %}" class="b-menu__item-link {% if menu_active_item == 'contacts' %}b-menu__item-link-active {% endif %}">Контакты</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "search" %}" class="b-menu__item-link"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <a href="{% url "search" %}" class="b-menu__item-link {% if menu_active_item == 'search' %}b-menu__item-link-active {% endif %}"><i class="fa fa-search" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             </table>
