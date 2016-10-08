@@ -22,34 +22,36 @@
             </div>
             {% for ind, one_news in ind_news %}
                 {% if ind|mod:2 == 0 %}
-                    <div class="grid__row">
+                    <div class="grid__row grid__row-btm">
                     <div class="grid__column-custom-612">
                 {% else %}
                     <div class="grid__column-custom-612 grid__offset-small">
                 {% endif %}
-            <div class="b-box">
-                <div class="b-box__image-fullsize">
-                    {% if one_news.images.first %}
-                        <img src="{{ one_news.images.first.image.url }}" alt="Пример баннера">
-                    {% else %}
-                        <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
-                    {% endif %}
-                </div>
-                <div class="b-box__wrapper">
-                    <h4 class="b-box__header b-box__header-big">{{ one_news.title }}</h4>
-                    <p class="b-box__text">
-                        {{ one_news.popularity }}
-                    </p>
-                </div>
-                <div class="b-box__footer">
-                    <div class="b-box__wrapper">
-                        <span class="b-box__footer-left">{{ one_news.date_created|date:"d F Y"|lower }} г.</span>
-                        {% get_comment_count for one_news as comment_count %}
-                        <span class="b-box__footer-right"><i class="fa fa-comments"
-                                                             aria-hidden="true"></i> {{ comment_count }}</span>
+                <a class="b-image b-image-round" href="{% url "news_detail" one_news.slug %}">
+                    <div class="b-box">
+                        <div class="b-box__image-fullsize">
+                            {% if one_news.images.first %}
+                                <img src="{{ one_news.images.first.image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
+                            {% endif %}
+                        </div>
+                        <div class="b-box__wrapper">
+                            <h4 class="b-box__header b-box__header-big">{{ one_news.title }}</h4>
+                            <p class="b-box__text">
+                                {{ one_news.popularity }}
+                            </p>
+                        </div>
+                        <div class="b-box__footer">
+                            <div class="b-box__wrapper">
+                                <span class="b-box__footer-left">{{ one_news.date_created|date:"d F Y"|lower }} г.</span>
+                                {% get_comment_count for one_news as comment_count %}
+                                <span class="b-box__footer-right"><i class="fa fa-comments"
+                                                                     aria-hidden="true"></i> {{ comment_count }}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </a>
             </div>
             {% if ind|mod:2 == 1 %}
                 </div>
@@ -60,22 +62,23 @@
     </div>
     <div class="b-layout">
         <div class="b-paginator">
+        {% if all_page_number|length <= 6 %}
+            {% for page_number in all_page_number %}
             <div class="b-paginator__item">
-                <a class="b-paginator__item__link b-paginator__item__link_current" href="">1</a>
+                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'news_archive_page' page_number %}">{{ page_number }}</a>
             </div>
+            {% endfor %}
+        {% else %}
+            {% for page_number in all_page_number|slice:":6" %}
             <div class="b-paginator__item">
-                <a class="b-paginator__item__link" href="">2</a>
+                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'news_archive_page' page_number %}">{{ page_number }}</a>
             </div>
-            <div class="b-paginator__item">
-                <a class="b-paginator__item__link" href="">3</a>
-            </div>
-            <div class="b-paginator__item">
-                <a class="b-paginator__item__link" href="">4</a>
-            </div>
+            {% endfor %}
             <div class="b-paginator__item">...</div>
             <div class="b-paginator__item">
-                <a class="b-paginator__item__link" href="">86</a>
+                <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'news_archive_page' all_page_number|length %}">{{ all_page_number|length }}</a>
             </div>
+        {% endif %}
         </div>
     </div>
     <div class="b-section">

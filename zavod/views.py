@@ -274,7 +274,7 @@ def gibkaja_sistema_skidok(request):
     return render(request, 'zavod/gibkaja_sistema_skidok.html', out)
 
 
-def articles(request):
+def articles(request, page_number=1):
     out = {}
     article_objects = Article.objects.filter(published=True)
     tag = request.GET.get('tag', None)
@@ -303,18 +303,15 @@ def articles(request):
         )
     elif sort_type == 'view':
         article_objects = article_objects.order_by('-views')
-    ind_articles = enumerate(article_objects.all()[0:6])
+    start = (int(page_number) - 1) * 8
+    ind_articles = enumerate(article_objects.all()[start:start+8])
     out.update({'ind_articles': ind_articles})
     out.update({'menu_active_item': 'articles'})
-    return render(request, 'articles.html', out)
-
-
-def articles_page(request, page_number):
-    out = {}
-    start = (int(page_number) - 1) * 5 + 1
-    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[start:start+8])
-    out.update({'ind_articles': ind_articles})
-    out.update({'menu_active_item': 'articles'})
+    out.update({'current_page_number': int(page_number)})
+    all_page_count = article_objects.count() / 8 + 1
+    if article_objects.count() % 8:
+        all_page_count += 1
+    out.update({'all_page_number': range(1, all_page_count)})
     return render(request, 'articles.html', out)
 
 
@@ -347,7 +344,7 @@ def articles_tag_page(request, page_number, tag):
     return render(request, 'articles.html', out)
 
 
-def news_archive(request):
+def news_archive(request, page_number=1):
     out = {}
     news_objects = News.objects.filter(published=True)
     tag = request.GET.get('tag', None)
@@ -376,9 +373,15 @@ def news_archive(request):
         )
     elif sort_type == 'view':
         news_objects = news_objects.order_by('-views')
-    ind_news = enumerate(news_objects.all()[0:6])
+    start = (int(page_number) - 1) * 6
+    ind_news = enumerate(news_objects.all()[start:start+6])
     out.update({'ind_news': ind_news})
     out.update({'menu_active_item': 'news'})
+    out.update({'current_page_number': int(page_number)})
+    all_page_count = news_objects.count() / 6 + 1
+    if news_objects.count() % 6:
+        all_page_count += 1
+    out.update({'all_page_number': range(1, all_page_count)})
     return render(request, 'news_archive.html', out)
 
 
