@@ -102,7 +102,7 @@
 	}
 
 	/* animation */
-	&:hover {
+	&:hover:not(&_nohover) {
 		box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.14),
 					0 4px 2px 0px rgba(0, 0, 0, 0.2),
 					0 2px 6px 0 rgba(0, 0, 0, 0.12);
@@ -144,10 +144,6 @@
 		.b-box__text, .b-box__header {
 			color: #ffffff;
 		}
-	}
-
-	// TODO Надо менять тень при наведении
-	&:hover {
 	}
 
 	// Без тени

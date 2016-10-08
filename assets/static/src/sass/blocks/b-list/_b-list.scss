@@ -1,0 +1,45 @@
+// список
+.b-list {
+
+	// Элемент списка
+	&__item {
+		padding: 28px;
+		border-bottom: 1px solid #e8e8e8;
+
+		&:last-of-type {
+			border: none;
+		}
+
+		// Первый (главный) элемент списка
+		&_head {
+			font-size: 16.2px;
+			font-weight: 700;
+			color: #00955F;
+		}
+
+		// Доп инфа, например, дата
+		&__extra {
+			color: #777777;
+			font-size: 9px;
+			font-weight: 300;
+			text-transform: uppercase;
+			margin-bottom: 16px;
+		}
+
+		// ссылка
+		&__link {
+			color: #292929;
+			font-size: 14.4px;
+			text-decoration: none;
+
+			&:hover {
+				color: #00955F;
+			}
+		}
+
+		// для доп инфы
+		&_footer {
+
+		}
+	}
+}

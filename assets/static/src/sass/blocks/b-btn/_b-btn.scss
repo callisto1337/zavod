@@ -23,6 +23,7 @@
 	-ms-user-select: none;
 	user-select: none;
 	outline: none;
+	text-decoration: none;
 
 	text-shadow: none;
 	border-color: #2d9d79;
@@ -33,6 +34,7 @@
 
 
 	&__text {
+		font-weight: 500;
 		color: #ffffff;
 	}
 
@@ -45,6 +47,21 @@
 		background-image: linear-gradient(180deg, transparent, transparent), none;
 	}
 
+	&__fullwidth {
+		display: block;
+		width: 100%;
+		margin: 0;
+		text-align: center;
+		white-space: nowrap;
+		vertical-align: middle;
+		padding: 12px 0;
+
+		.b-btn__text {
+			font-weight: 500;
+			font-size: 14.4px;
+			line-height: 1;
+		}
+	}
 }
 
 .ico + .b-btn__text {
