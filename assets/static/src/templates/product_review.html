@@ -54,7 +54,7 @@
                 {% for comment in tree %}
                 <div style="margin-left: {{ comment.depth }}em;" class="comment">
                     <div style="margin-left:{{comment.depth}}em;">
-                        {{ comment }}
+                        {{ comment.comment }}
                         Reply to this comment
                         {% render_comment_form for product with comment.id %}
                     </div>

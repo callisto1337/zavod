@@ -13,7 +13,7 @@
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">
-                    <h3 class="b-section-title">{{ news.name }}</h3>
+                    <h3 class="b-section-title">{{ news.title }}</h3>
                 </div>
             </div>
             <div class="grid__row">
@@ -76,7 +76,7 @@
                         <div class="b-comment {% if comment.depth > 1 %} b-comment-offset {% endif %}">
                             <div class="b-comment__content">
                                 <div class="b-comment__content__text">
-                                    {{ comment }}
+                                    {{ comment.comment }}
                                 </div>
                                 {% if user.is_staff %}
                                     {#                                        {% render_comment_form for news with comment.id %}#}
