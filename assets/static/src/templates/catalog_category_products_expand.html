@@ -2,86 +2,79 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
-{% load threadedcomments_tags %}
 
 {% block content %}
-    {#  get all comments count  #}
-    {% get_comment_count for product as comments_count %}
-
     <div class="b-section b-section_short">
         <div class="b-layout">
+
             <div class="b-breadcrumbs">
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
-                {% if product.category.parent_id %}
-                    /<a class="b-breadcrumbs__link" href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
-                {% endif %}
-                {% if product.category %}
-                    /<a class="b-breadcrumbs__link" href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
+                {% if category.parent_id %}
+                    /<a class="b-breadcrumbs__link" href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
                 {% endif %}
             </div>
+
             <div class="grid__row">
-                <div class="grid__column-9">
-                    <h3 class="b-section-title">{{ product.name }}</h3>
+                <div class="grid__column-7">
+                    <h3 class="b-section-title">{{ category.name }}</h3>
                 </div>
-            </div>
-            <div class="grid__row">
-                {% if product.category %}
-                    <a href="{% url "catalog_category" product.category.slug %}" class="b-section-back">Назад к каталогу</a>
-                {% else %}
-                    <a href="../" class="b-section-back">Назад к каталогу</a>
-                {% endif %}
-            </div>
-            <div class="grid__row grid__row-btm">
-                <div class="grid__column-9">
-                    <ul class="b-tab b-tab-left">
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=description">Описание</a>
-                        </li>
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=docs">Документация</a>
-                        </li>
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=photo">Фото/Видео</a>
-                        </li>
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=articles">Статьи</a>
-                        </li>
+                <div class="grid__column-7">
+                    <ul class="b-tab">
                         <li class="b-tab__item b-tab__item_active">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы <span class="b-tab__item__link__counter">{{ comments_count }}</span></a>
+                            <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{{ request.path }}">Списком</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="grid__row">
-                <div class="grid__column-9">
-                    <a class="b-section-subtitle b-section-subtitle_colorful" href="#">Оставить свой отзыв</a>
-                    {% render_comment_form for product %}
-                </div>
-            </div>
-                <div class="grid__column-9">
-                {% get_comment_list for product as tree %}
-                {% for comment in tree %}
-                <div style="margin-left: {{ comment.depth }}em;" class="comment">
-                    <div style="margin-left:{{comment.depth}}em;">
-                        {{ comment.comment }}
-                        Reply to this comment
-                        {% render_comment_form for product with comment.id %}
-                    </div>
-                </div>
-                {% endfor %}
-
+                {% if category.parent_id %}
+                    <a href="{% url "catalog_category" category.parent_id.slug %}" class="b-section-back">Назад к каталогу</a>
+                {% else %}
+                    <a href="../" class="b-section-back">Назад к каталогу</a>
+                {% endif %}
             </div>
             <div class="grid__row">
                 <div class="grid__column-12">
                     <div class="submenu__catalog">
                         <ul class="submenu__catalog__list">
-                            {% for product_image in product.productimages %}
+                            {% for product in products %}
                             <li class="submenu__catalog__list__item">
-                                {{ product_image.title }}
+                                <a href="{% url "catalog_category" product.slug %}" class="submenu__catalog__list__item-link">{{ product.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-9">
+                    <p class="b-section-text">
+                        {{ category.text }}
+                    </p>
+                </div>
+                <div class="grid__column-4 grid__offset grid__offset__catalog__news">
+                    <h4 class="b-section-subtitle"></h4>
+                    <ul class="b-section-list">
+                        {% for category_file in category.categoryfiles %}
+                        <li class="b-section-list__item">{{ category_file.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-12">
+                    <div class="submenu__catalog">
+                        <ul class="submenu__catalog__list">
+                            {% for category_image in category.categoryimages %}
+                            <li class="submenu__catalog__list__item">
+                                {{ category_image.title }}
                             </li>
                             <div class="b-box__image">
-                                <img src="{% static product_image.url %}" alt="Пример Продукта">
+                                <img src="{% static category_image.url %}" alt="Пример Продукта">
                             </div>
                             {% endfor %}
                         </ul>
@@ -133,11 +126,21 @@
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>
+                    {% if media_for_bottom %}
+                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                    {% endif %}
                     <div class="b-box b-box_noshadow">
                         <div class="b-box__image-halfsize">
-                            <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% if media_for_bottom %}
+                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% endif %}
                         </div>
                     </div>
+                    {% if media_for_bottom %}
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

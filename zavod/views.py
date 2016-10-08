@@ -483,9 +483,9 @@ def catalog_category(request, category_slug, parent_category_slug=None):
         else:
             title = 'Список продуктов'
             products = Product.objects.all().filter(category=category, published=True)
-            template_name = 'catalog_category.html'
+            template_name = 'catalog_category_products.html'
             if 'expand' in request.GET:
-                template_name = 'catalog_category_expand.html'
+                template_name = 'catalog_category_products_expand.html'
             out.update({'products': products, 'parent': category, 'title': title, 'category': category,
                         'request': request})
             return render(request, template_name, out)

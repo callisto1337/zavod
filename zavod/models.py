@@ -72,22 +72,21 @@ class Image(models.Model):
 
 class News(models.Model):
     published = models.BooleanField(default=True)
-    name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, default='', unique=True)
     preview_post = models.TextField(max_length=200)
     text = models.TextField()
     date_created = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=100)
     seo_title = models.CharField(max_length=100, default='')
-    seo_description = models.CharField(max_length=100, default='')
+    seo_description = models.CharField(max_length=300, default='')
     seo_keywords = models.CharField(max_length=100, default='')
     views = models.IntegerField(default=0)
     tags = models.ManyToManyField(Tag, related_name='news', default=None, null=True, blank=True)
     images = models.ManyToManyField(Image, related_name='news', default=None, null=True, blank=True)
     author = models.TextField(max_length=200, default='')
 
-    def __str__(self):
-        return self.name
+    def __unicode__(self):
+        return self.title
 
     def get_absolute_url(self):
         return reverse('news_detail', args=[self.slug])
@@ -156,7 +155,6 @@ class Product(models.Model):
 
 class Article(models.Model):
     published = models.BooleanField(default=True)
-    name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, default='', unique=True)
     preview_post = models.TextField(max_length=200)
     text = models.TextField()
@@ -172,7 +170,7 @@ class Article(models.Model):
     products = models.ManyToManyField(Product, related_name='articles', default=None, null=True, blank=True)
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
     def get_absolute_url(self):
         return reverse('articles_detail', args=[self.slug])
