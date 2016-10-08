@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from django.core.mail import send_mail
 from django.db import models
 from django.db.models.signals import post_save
@@ -7,6 +8,11 @@ from django.contrib.auth.models import User, UserManager, AbstractBaseUser
 from django.contrib.postgres.fields import JSONField
 
 from zt.settings import EMAILS_FOR_FAQ
+
+
+class JSONFieldCustom(JSONField):
+    def value_from_object(self, obj):
+        return json.dumps(super(JSONFieldCustom, self).value_from_object(obj))
 
 
 class CustomUser(AbstractBaseUser):
@@ -78,6 +84,7 @@ class News(models.Model):
     views = models.IntegerField(default=0)
     tags = models.ManyToManyField(Tag, related_name='news', default=None, null=True, blank=True)
     images = models.ManyToManyField(Image, related_name='news', default=None, null=True, blank=True)
+    author = models.TextField(max_length=200, default='')
 
     def __str__(self):
         return self.name
@@ -133,9 +140,8 @@ class Product(models.Model):
     seo_title = models.CharField(max_length=300, default='')
     seo_description = models.CharField(max_length=300, default='')
     seo_keywords = models.CharField(max_length=300, default='')
-    properties = JSONField(default='')
+    properties = JSONFieldCustom(default='')
     images = models.ManyToManyField(Image, related_name='products', default=None, null=True, blank=True)
-    author = models.TextField(max_length=200, default='')
 
     def __unicode__(self):
         return self.name
