@@ -60,24 +60,26 @@
                         {{ product.product_text | safe }}
                     </div>
                     {# нужна картинка, которую можно выбирать в адмике #}
+                    {% if product.images.first %}
                     <div class="b-section-subtitle">
-                        ALT/TITLE картинки
+                        {{ product.images.first.image.title }}
                     </div>
                     <div class="b-section__image">
-                        <img src="{% static 'img/player.png' %}" alt="Картинка">
+                        <img src="{{ product.images.first.image.url }}" alt="Картинка">
                     </div>
+                    {% endif %}
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <ul class="b-property">
                         <li class="b-property__item">
-                            <span class="b-property__key">Цена с НДС, нержав.</span>
-                            <span class="b-property__value b-property__value_extra">5700 руб.</span>
+                            {% for key, value in product.properties.items %}
+                                {% if key == "Цена с НДС, руб." %}
+                                    <span class="b-property__key">Цена с НДС, нержав.</span>
+                                    <span class="b-property__value b-property__value_extra">{{ value }}</span>
+                                {% endif %}
+                            {% endfor %}
                         </li>
 
-                        <li class="b-property__item">
-                            <span class="b-property__key">Цена с НДС, нержав.</span>
-                            <span class="b-property__value b-property__value_extra">5700 руб.</span>
-                        </li>
                         {#                        {% for property in product.string_properties %}#}
                         {#                            <li class="b-property__item">{{ property }}</li>#}
                         {#                        {% endfor %}#}
@@ -93,29 +95,24 @@
                     <div class="b-inner b-inner_simple">
                         <div class="b-slider js-slider">
                             <ul class="b-slider">
-                                <li class="b-slider__item">
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                </li>
-                                <li class="b-slider__item">
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                </li>
-                                <li class="b-slider__item">
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                </li>
+                                {% for image in product.images.all%}
+                                    <li class="b-slider__item">
+                                        <img src="{{ image.image.url }}" alt="{{ image.image.title }}">
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
 
                     <ul class="b-property">
-                        <li class="b-property__item">
-                            <span class="b-property__key">Число трубок, Ду 16, шт.</span>
-                            <span class="b-property__value">4</span>
-                        </li>
-
-                        <li class="b-property__item">
-                            <span class="b-property__key">Поверхность нагрева, м2</span>
-                            <span class="b-property__value">0,37</span>
-                        </li>
+                        {% for key, value in product.properties.items %}
+                            {% if key != "Цена с НДС, руб." %}
+                                <li class="b-property__item">
+                                    <span class="b-property__key">{{ key }}</span>
+                                    <span class="b-property__value">{{ value }}</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
