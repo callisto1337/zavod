@@ -1,14 +1,15 @@
 .b-slider {
-	&__wrapper {
-		position: relative;
-	}
 
 	&__arrow-left, &__arrow-right {
 		position: absolute;
-		display: block;
-		top: 15px;
+		top: 50%;
 		width: 18px;
 		height: 32px;
+		z-index: 100;
+		
+		&:hover {
+			cursor: pointer;
+		}
 	}
 	&__arrow-left {
 		background: url('../img/slider/arrow-left.png') center center no-repeat;
@@ -20,34 +21,9 @@
 	}
 
 	&__item {
-		text-align: center;
-
-		&-title {
-			margin-top: 20px;
-			font-size: 16.2px;
-			font-weight: 700;
-			color: #292929;
+		// В случае одной картинки в центре
+		img {
+			margin: 0 auto;
 		}
-
-		&-desc {
-			font-size: 12.6px;
-			font-weight: 300;
-			color: #868686;
-		}
-	}
-
-	#partners {
-		width: 1080px;
-		height: 95px;
-		overflow: hidden;
-		margin-left: 0;
-	}
-
-	#arrow-left:hover, #arrow-right:hover {
-		cursor: pointer;
-	}
-
-	#arrow-right {
-		float: right;
 	}
 }

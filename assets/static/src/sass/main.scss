@@ -1,5 +1,6 @@
 // Vendor
 @import "vendor/normalize";
+@import "vendor/slider";
 
 // Global
 @import "global";
@@ -32,3 +33,5 @@
 @import "blocks/b-faq/b-faq";
 @import "blocks/b-link/b-link";
 @import "blocks/b-paginator/b-paginator";
+@import "blocks/b-property/b-property";
+@import "blocks/b-inner/b-inner";

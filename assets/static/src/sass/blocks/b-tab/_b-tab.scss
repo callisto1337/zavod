@@ -19,6 +19,10 @@
 
             .b-tab__item__link {
                 color: #ffffff;
+
+                &__counter {
+                    color: #ffffff;
+                }
             }
         }
 
@@ -37,9 +41,11 @@
             display: block;
             padding: 4px 8px;
 
+            // счетчик в табе
             &__counter {
                 font-size: 12.6px;
                 font-weight: 300;
+                color: #777777;
             }
         }
 
@@ -50,6 +56,10 @@
             .b-tab__item__link {
                 color: #ffffff;
                 cursor: default;
+
+                &__counter {
+                    color: #ffffff;
+                }
             }
 
         }
@@ -58,5 +68,7 @@
     // выравниваниеп по левому краю
     &-left {
         float: left;
+        margin-bottom: 44px;
+        margin-left: 0;
     }
 }
