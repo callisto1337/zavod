@@ -15,16 +15,47 @@
                 </div>
             </div>
             <div class="grid__row">
-                <div class="grid__column-3">
+                <div class="grid__column-14">
                     {% for question in questions %}
-                        <li>{{ question.text }}</li>
+                        <div class="b-box b-box_faq js-faq">
+                            <div class="b-faq">
+                                <div class="grid__row">
+                                    <div class="grid__column-1">
+                                        <div class="b-faq__label">
+                                            Вопрос
+                                        </div>
+                                    </div>
+                                    <div class="grid__column-10">
+                                        <div class="b-faq__question">
+                                            {{ question.text }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="b-faq__delimiter">
+                                    <div class="grid__row">
+                                        <div class="grid__column-1">
+                                            <div class="b-faq__label">
+                                                Ответ
+                                            </div>
+                                        </div>
+                                        <div class="grid__column-10">
+                                            <div class="b-faq__answer">
+                                                {{ question.answer }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     {% endfor %}
                 </div>
             </div>
+            <script type="text/javascript" src="{% static 'js/faq/faq.js' %}"></script>
         </div>
+
     </div>
-    <form action="/about/chasto-zadavaemye-voprosy-faq/" method="post">{% csrf_token %}
-    {{ question_form }}
-    <input type="submit" value="Submit" />
-    </form>
+    {#    <form action="/about/chasto-zadavaemye-voprosy-faq/" method="post">{% csrf_token %}#}
+    {#    {{ question_form }}#}
+    {#    <input type="submit" value="Submit" />#}
+    {#    </form>#}
 {% endblock %}

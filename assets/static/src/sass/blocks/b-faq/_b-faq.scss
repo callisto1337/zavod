@@ -1,0 +1,61 @@
+// блок вопросы-ответы
+.b-faq {
+	padding: 28px 0;
+
+	// Заголовок: вопрос или ответ
+	&__label {
+		font-size: 9px;
+		text-transform: uppercase;
+		color: #777;
+		display: inline-block;
+		width: 100%;
+		text-align: center;
+	}
+
+	// Вопрос
+	&__question, &__answer {
+		font-size: 16.2px;
+		font-weight: 500;
+		color: #292929;
+		text-decoration: none;
+	}
+
+	// Ответ
+	&__answer {
+		font-weight: 300;
+	}
+
+	// При наведении
+	&:hover {
+		.b-faq__question {
+			color: #00955F;
+		}
+	}
+
+	// Разделитель секции ответов
+	&__delimiter {
+		display: none;
+		margin-top: 24px;
+		opacity: 0;
+	}
+
+	&_expanded {
+		.b-faq__delimiter {
+			display: block;
+			opacity: 1;
+			-webkit-animation: display-none-transition 1s both;
+			animation: display-none-transition 1s both;
+		}
+	}
+
+	@-webkit-keyframes display-none-transition {
+		0% {
+			opacity: 0;
+		}
+	}
+	@keyframes display-none-transition {
+		0% {
+			opacity: 0;
+		}
+	}
+}
