@@ -20,27 +20,125 @@
                 <a href="../" class="b-section-back">Назад к новостям</a>
             </div>
         </div>
-    </div>
-    <div class="b-section">
         <div class="b-layout">
-        {% if user.is_authenticated %}
-            <div class="grid__column-9">
-            {% get_comment_list for news as tree %}
-            {% for comment in tree %}
-            <div style="margin-left: {{ comment.depth }}em;" class="comment">
-                <div style="margin-left:{{comment.depth}}em;">
-                    {{ comment }}
-                    {% if user.is_staff %}
-                        Reply to this comment
-                        {% render_comment_form for news with comment.id %}
-                    {% endif %}
+            <div class="grid__row">
+                <div class="grid__column-9">
+
+                    <hr class="delimiter"/>
+                    {# news #}
+                    <div class="b-info">
+                        <div class="b-info__item b-info_left b-info__date">
+                            Сегодня 24 января 2016 г.
+                        </div>
+                        <div class="b-info__item b-info_left">
+                            <i class="fa fa-user" aria-hidden="true"></i> Денис Такой-то
+                        </div>
+
+                        <div class="b-info__item b-info_right">
+                            <i class="fa fa-comments" aria-hidden="true"></i> 12
+                        </div>
+                        <div class="b-info__item b-info_right">
+                            <i class="fa fa-eye" aria-hidden="true"></i> 2342
+                        </div>
+                    </div>
+                    <div class="b-section__image">
+                        <img src="{% static 'img/player.png' %}" alt="Картинка">
+                    </div>
+                    <div class="b-section__space"></div>
+                    {# Содержимое статьи #}
+                    <div class="b-content">
+                        <p>Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и журналистов,
+                            создателей научных заявок и отчетов — для всех, кто относится к тексту, как к количеству
+                            знаков.</p>
+
+                        <p>Нажав на кнопку «Написать реферат», вы лично создаете уникальный текст, причем именно от
+                            вашего нажатия на кнопку зависит, какой именно текст получится — таким образом, авторские
+                            права на реферат принадлежат только вам.</p>
+
+                        <p>Теперь никто не сможет обвинить вас в плагиате, ибо каждый текст Яндекс.Рефератов
+                            неповторим.</p>
+
+                        <p>Текстами рефератов можно пользоваться совершенно бесплатно, однако при транслировании и
+                            предоставлении текстов в массовое пользование ссылка на Яндекс.Рефераты обязательна.</p>
+                    </div>
+                    <div class="b-info">
+                        <div class="b-info__item b-info_left b-info_colorful b-info_italic b-info_small">
+                            <i class="fa fa-tag" aria-hidden="true"></i> Котельные
+                        </div>
+                        <div class="b-info__item b-info_left b-info_colorful b-info_italic b-info_small">
+                            <i class="fa fa-tag" aria-hidden="true"></i> Бойлер
+                        </div>
+                    </div>
+                    {# end news #}
+                    <hr class="delimiter"/>
+
+                    <div class="b-comment">
+                        {% if user.is_authenticated %}
+                            <a href="#" class="b-comment-comment">
+                                Оставить свой комментарий
+                            </a>
+                        {% endif %}
+                    </div>
+                    {% get_comment_list for news as tree %}
+                    {% for comment in tree %}
+
+                        <div class="b-comment {% if comment.depth > 1 %} b-comment-offset {% endif %}">
+                            <div class="b-comment__content">
+                                <div class="b-comment__content__text">
+                                    {{ comment }}
+                                </div>
+                                {% if user.is_staff %}
+                                    {#                                        {% render_comment_form for news with comment.id %}#}
+                                {% endif %}
+                            </div>
+                            <div class="b-comment__info">
+                                <div class="b-comment__avatar">
+                                    <img src="{% static 'img/avatars/noavatar.png' %}" alt="">
+                                </div>
+                                <div class="b-comment__extra">
+                                    <div class="b-comment__extra-author">
+                                        Денис такой-то
+                                    </div>
+                                    <div class="b-comment__extra-date">
+                                        24 января 2016 г.
+                                        <a href="#" class="b-comment-send">ответить</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                    {#                            {% render_comment_form for news %}#}
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <div class="b-box b-box_nohover">
+                        <div class="b-list">
+                            <div class="b-list__item b-list__item_head">Новости по данной теме</div>
+                            <div class="b-list__item">
+                                <div class="b-list__item__extra">
+                                    Сегодня  10:55
+                                </div>
+                                <a href="#" class="b-list__item__link">
+                                    Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров.
+                                </a>
+                            </div>
+                            <div class="b-list__item">
+                                <div class="b-list__item__extra">
+                                    Сегодня  10:55
+                                </div>
+                                <a href="#" class="b-list__item__link">
+                                    Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров.
+                                </a>
+                            </div>
+                            <div class="b-list__item b-list__item_footer">
+                                <a class="b-btn b-btn__fullwidth" href="#">
+                                    <span class="b-btn__text">Еще новости</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            {% endfor %}
-            <p>Reply to Original:</p>
-            {% render_comment_form for news %}
-            </div>
-        {% endif %}
         </div>
     </div>
     <div class="b-section">
@@ -48,22 +146,26 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                    <a class="b-image"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
                     </a>
                 </div>

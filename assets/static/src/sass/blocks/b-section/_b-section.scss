@@ -1,3 +1,4 @@
+// Абстрактный блок
 .b-section {
 	border-top: 1px solid #e5e5e5;
 	padding: 36px 0;
@@ -67,13 +68,18 @@
 	// Картинка-хайлайт
 	&__image {
 		width: 100%;
-		min-width: 1260px;
 
 		// Сама картинка
 		& img {
 			width: 100%;
 			height: auto;
 		}
+	}
+
+	//  искусственный отступ
+	&__space {
+		height: 0;
+		margin-bottom: 28px;
 	}
 
 	&-logotype {
@@ -167,16 +173,16 @@
 			font-size: 26.5px;
 			color: #a3ceba;
 			padding: 96px 0 0 295px;
-			background: url(../img/404.png) no-repeat;
+			background: url('../img/404.png') no-repeat;
 			width: 750px;
 			height: 270px;
 			letter-spacing: 0.7px;
 
 			&_centered {
 				position: relative;
-			  top: 50%;
-			  left: 50%;
-			  transform: translate(-50%, -50%);
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
 			}
 		}
 	}

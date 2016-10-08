@@ -1,0 +1,114 @@
+// Блок комментариев
+.b-comment {
+	margin-bottom: 16px;
+
+	// Содержимое комментария
+	&__content {
+
+		display: block;
+		padding: 28px;
+		box-shadow: 0 0 4px rgba(0,0,0,.12),
+					1px 2px 4px rgba(0,0,0,.08);
+		position: relative;
+		border: 1px solid #dbdbdb;
+
+		// Нижний треугольник
+		// только такой грязный хак
+		//http://jsfiddle.net/BKtnn/1/
+		&::after, &::before {
+			content: ' ';
+		    display: block;
+		    position: absolute;
+		    bottom: -8px;
+		    background: #ffffff;
+		    box-shadow: 0 0 4px rgba(0,0,0,.12),
+					1px 2px 4px rgba(0,0,0,.08);
+	        width: 16px;
+			height: 16px;
+		}
+
+		&::before {
+			transform: rotate(45deg);
+			left: 14px;
+		}
+
+		&::after {
+			box-shadow: none;
+		    border: none;
+		    bottom: 0;
+		    left: 0;
+		    width: 50px;
+		    height: 24px;
+		}
+
+		&__text {
+			font-size: 12.6px;
+			font-weight: 300;
+		}
+	}
+
+	// Блок с дополнительной информацией
+	&__info {
+	}
+
+	// Аватарка
+	&__avatar {
+		border-radius: 50%;
+		width: 45px;
+		height: 45px;
+		margin-left: 22px;
+		margin-top: 12px;
+		display: inline-block;
+
+		img {
+			width: 45px;
+			height: 45px;
+		}
+	}
+
+	// Дополнительная информация о комментаторе
+	&__extra {
+		display: inline-block;
+		font-size: 12.6px;
+		font-weight: 300;
+		height: 45px;
+		vertical-align: top;
+		margin-top: 12px;
+		margin-left: 10px;
+
+		// автор комментария
+		&-author {
+			margin-top: 10px;
+		}
+
+		// дата комментария
+		&-date {
+			color: #868686;
+		}
+	}
+
+	// кнопочка ответить
+	&-send {
+		color: #00955F;
+		font-size: 10.6px;
+		margin-left: 5px;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: 500;
+	}
+
+	// отступ по уровню
+	&-offset {
+		margin-left: 62px;
+	}
+
+	// Ссылка оставить комментарий
+	&-comment {
+		font-size: 16.2px;
+		font-weight: 700;
+		color: #00955f;
+		margin: 0 0 20px 0;
+		padding: 0;
+		text-decoration: none;
+	}
+}
