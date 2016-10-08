@@ -404,8 +404,10 @@ def news_detail(request, news_slug):
     news = get_object_or_404(News, slug=news_slug)
     news.views += 1
     news.save()
+    related_news = News.objects.filter(tags__in=news.tags.all()).exclude(pk=news.pk).all()
     out.update({'menu_active_item': 'news'})
     out.update({'news': news})
+    out.update({'related_news': related_news})
     return render(request, 'news_detail.html', out)
 
 
