@@ -14,10 +14,12 @@
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if product.category.parent_id %}
-                    /<a class="b-breadcrumbs__link" href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
+                    /<a class="b-breadcrumbs__link"
+                        href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
                 {% endif %}
                 {% if product.category %}
-                    /<a class="b-breadcrumbs__link" href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
+                    /<a class="b-breadcrumbs__link"
+                        href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
                 {% endif %}
             </div>
             <div class="grid__row">
@@ -27,7 +29,8 @@
             </div>
             <div class="grid__row">
                 {% if product.category %}
-                    <a href="{% url "catalog_category" product.category.slug %}" class="b-section-back">Назад к каталогу</a>
+                    <a href="{% url "catalog_category" product.category.slug %}" class="b-section-back">Назад к
+                        каталогу</a>
                 {% else %}
                     <a href="../" class="b-section-back">Назад к каталогу</a>
                 {% endif %}
@@ -48,22 +51,69 @@
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=articles">Статьи</a>
                         </li>
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы <span class="b-tab__item__link__counter">{{ comments_count }}</span></a>
+                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы <span
+                                    class="b-tab__item__link__counter">{{ comments_count }}</span></a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="grid__row">
-                <div class="grid__column-12">
-                    <div class="submenu__catalog">
-                        <ul class="submenu__catalog__list">
-                            {% for product_image in product.images.all %}
-                                <div class="b-box__image">
-                                    <img src="{{ product_image.image.url }}" alt="Пример Продукта">
-                                </div>
-                            {% endfor %}
-                        </ul>
+                <div class="grid__column-9">
+                    {% for product_image in product.images.all %}
+                        <div class="grid__row grid__row-btm">
+                            <div class="b-section__image">
+                                <img src="{{ product_image.image.url }}" alt="{# @TODO реальный заголовок #}">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <ul class="b-property">
+                        <li class="b-property__item">
+                            <span class="b-property__key">Цена с НДС, нержав.</span>
+                            <span class="b-property__value b-property__value_extra">5700 руб.</span>
+                        </li>
+
+                        <li class="b-property__item">
+                            <span class="b-property__key">Цена с НДС, нержав.</span>
+                            <span class="b-property__value b-property__value_extra">5700 руб.</span>
+                        </li>
+                    </ul>
+
+                    <div class="b-box b-box-grey b-box_nohover">
+                        <div class="b-box__wrapper">
+                            <a class="b-btn b-btn__fullwidth" href="#">
+                                <span class="b-btn__text">Заказать</span>
+                            </a>
+                        </div>
                     </div>
+                    <div class="b-inner b-inner_simple">
+                        <div class="b-slider js-slider">
+                            <ul class="b-slider">
+                                <li class="b-slider__item">
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                </li>
+                                <li class="b-slider__item">
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                </li>
+                                <li class="b-slider__item">
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <ul class="b-property">
+                        <li class="b-property__item">
+                            <span class="b-property__key">Число трубок, Ду 16, шт.</span>
+                            <span class="b-property__value">4</span>
+                        </li>
+
+                        <li class="b-property__item">
+                            <span class="b-property__key">Поверхность нагрева, м2</span>
+                            <span class="b-property__value">0,37</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -74,22 +124,26 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                    <a class="b-image"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
                     </a>
                 </div>
