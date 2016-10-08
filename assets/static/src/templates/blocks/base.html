@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Главная страница</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,500,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,500,700&subset=latin,cyrillic-ext'
+          rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -25,9 +26,24 @@
 
 {% include "blocks/footer.html" %}
 
+<script type="text/javascript" src="{% static 'js/vendor/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/forms/Forms.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/stickymenu/StickyMenu.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/slider/Slider.js' %}"></script>
+{# TODO создать главный файл инициализации #}
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('.js-slider').unslider({
+{#            autoplay: true,#}
+            infinite: true,
+            nav: false,
+            arrows: {
+                prev: '<a class="b-slider__arrow-left"></a>',
+                next: '<a class="b-slider__arrow-right"></a>'
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

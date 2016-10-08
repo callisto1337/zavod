@@ -2,8 +2,12 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load threadedcomments_tags %}
 
 {% block content %}
+    {#  get all comments count  #}
+    {% get_comment_count for product as comments_count %}
+
     <div class="b-section b-section_short">
         <div class="b-layout">
             <div class="b-breadcrumbs">
@@ -30,7 +34,7 @@
             </div>
             <div class="grid__row">
                 <div class="grid__column-7">
-                    <ul class="b-tab">
+                    <ul class="b-tab b-tab-left">
                         <li class="b-tab__item">
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=description">Описание</a>
                         </li>
@@ -44,7 +48,7 @@
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=articles">Статьи</a>
                         </li>
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы</a>
+                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы <span class="b-tab__item__link__counter">{{ comments_count }}</span></a>
                         </li>
                     </ul>
                 </div>

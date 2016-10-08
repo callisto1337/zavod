@@ -2,8 +2,12 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load threadedcomments_tags %}
 
 {% block content %}
+    {#  get all comments count  #}
+    {% get_comment_count for product as comments_count %}
+
     <div class="b-section b-section_short">
         <div class="b-layout">
             <div class="b-breadcrumbs">
@@ -30,7 +34,7 @@
             </div>
             <div class="grid__row">
                 <div class="grid__column-7">
-                    <ul class="b-tab">
+                    <ul class="b-tab b-tab-left">
                         <li class="b-tab__item b-tab__item_active">
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=description">Описание</a>
                         </li>
@@ -44,21 +48,74 @@
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=articles">Статьи</a>
                         </li>
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы</a>
+                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы <span
+                                    class="b-tab__item__link__counter">{{ comments_count }}</span></a>
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="grid__row">
                 <div class="grid__column-9">
-                    <p class="b-section-text">
-                        {{ product.product_text }}
-                    </p>
+                    <div class="b-content">
+                        {{ product.product_text | safe }}
+                    </div>
+                    {# нужна картинка, которую можно выбирать в адмике #}
+                    <div class="b-section-subtitle">
+                        ALT/TITLE картинки
+                    </div>
+                    <div class="b-section__image">
+                        <img src="{% static 'img/player.png' %}" alt="Картинка">
+                    </div>
                 </div>
-                <div class="grid__column-4 grid__offset grid__offset__catalog__news">
-                    <h4 class="b-section-subtitle"></h4>
-                    <ul class="b-section-list">
-                        {% for property in product.string_properties %}
-                            <li class="b-section-list__item">{{ property }}</li>
-                        {% endfor %}
+                <div class="grid__column-4 grid__offset">
+                    <ul class="b-property">
+                        <li class="b-property__item">
+                            <span class="b-property__key">Цена с НДС, нержав.</span>
+                            <span class="b-property__value b-property__value_extra">5700 руб.</span>
+                        </li>
+
+                        <li class="b-property__item">
+                            <span class="b-property__key">Цена с НДС, нержав.</span>
+                            <span class="b-property__value b-property__value_extra">5700 руб.</span>
+                        </li>
+                        {#                        {% for property in product.string_properties %}#}
+                        {#                            <li class="b-property__item">{{ property }}</li>#}
+                        {#                        {% endfor %}#}
+                    </ul>
+
+                    <div class="b-box b-box-grey b-box_nohover">
+                        <div class="b-box__wrapper">
+                            <a class="b-btn b-btn__fullwidth" href="#">
+                                <span class="b-btn__text">Заказать</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="b-inner b-inner_simple">
+                        <div class="b-slider js-slider">
+                            <ul class="b-slider">
+                                <li class="b-slider__item">
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                </li>
+                                <li class="b-slider__item">
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                </li>
+                                <li class="b-slider__item">
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <ul class="b-property">
+                        <li class="b-property__item">
+                            <span class="b-property__key">Число трубок, Ду 16, шт.</span>
+                            <span class="b-property__value">4</span>
+                        </li>
+
+                        <li class="b-property__item">
+                            <span class="b-property__key">Поверхность нагрева, м2</span>
+                            <span class="b-property__value">0,37</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -67,12 +124,12 @@
                     <div class="submenu__catalog">
                         <ul class="submenu__catalog__list">
                             {% for product_image in product.productimages %}
-                            <li class="submenu__catalog__list__item">
-                                {{ product_image.title }}
-                            </li>
-                            <div class="b-box__image">
-                                <img src="{% static product_image.url %}" alt="Пример Продукта">
-                            </div>
+                                <li class="submenu__catalog__list__item">
+                                    {{ product_image.title }}
+                                </li>
+                                <div class="b-box__image">
+                                    <img src="{% static product_image.url %}" alt="Пример Продукта">
+                                </div>
                             {% endfor %}
                         </ul>
                     </div>
@@ -86,22 +143,26 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                    <a class="b-image"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
                     </a>
                 </div>

@@ -4,4 +4,164 @@
 {% load static from staticfiles %}
 
 {% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-7">
+                    <h3 class="b-section-title">О компании</h3>
+                </div>
+                <div class="grid__column-7">
+                    <ul class="b-tab">
+                        <li class="b-tab__item b-tab__item_active">
+                            <a class="b-tab__item__link" href="#">Триумф</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "nagrady" %}">Награды</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "partnery" %}">Партнеры</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "otzyvy" %}">Отзывы</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "employee" %}">Сотрудники</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "vacancy" %}">Вакансии</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-12">
+                    <p class="b-section-subtitle b-section-subtitle_inline">«Завод Триумф» был основан в 1995 году и
+                        является одним из основных поставщиков теплообменного, котельного и вспомогательного
+                        оборудования для различных областей промышленности и главным образом для коммунального
+                        хозяйства.</p>
+                </div>
+            </div>
+
+            <div class="b-section b-section_borderless">
+                <div class="b-section__image">
+                    <img src="{% static 'img/player.png' %}" alt="Картинка">
+                </div>
+            </div>
+
+            <div class="grid__row">
+                <div class="grid__column-9">
+                    <p class="b-section-text">Сегодня «Завод Триумф» это крупное предприятие, располагающее
+                        высокоэффективными производственными мощностями, это динамично развивающаяся компания, которая
+                        стремится расширить ассортимент продукции и тщательно следит за качеством оказываемых услуг,
+                        имея многолетний опыт работы на отечественном рынке.</p>
+                    <p class="b-section-text">К основным видам продукции относятся кожухотрубные пароводяные и
+                        водоводяные подогреватели систем теплоснабжения, которые нашли широкое применение на различных
+                        промышленных объектах РФ и СНГ. Взаимовыгодное партнерство и долговременное сотрудничество с
+                        крупными предприятиями России, дает нам возможность являться поставщиками оборудования для
+                        нефтегазового и химического комплекса</p>
+                    <p class="b-section-text">Наряду с этим, предприятие осуществляет поставку различных элементов
+                        трубопровода: отводы крутоизогнутые, фланцы стальные плоские приварные, переходы стальные
+                        концентрические, трубопроводную арматуру, пластинчатые теплообменники, подогреватели мазута,
+                        грязевики абонентские, элеваторы, отопительное оборудование, радиаторы, конвекторы,
+                        полотенцесушители оцинкованные и др. Коллектив завода — это сплоченный коллектив опытных
+                        работников, которые делают свою работу на совесть и дорожат репутацией компании.</p>
+                    <p class="b-section-text">В нашем трудовом коллективе трудятся ответственные, энергичные,
+                        высококвалифицированных специалисты, способные решать любые поставленные перед ними задачи. Это
+                        позволяет нам выполнить любой заказ и удовлетворить любую потребность заказчика.</p>
+                    <p class="b-section-text">Мы сами производим продукцию, что позволяет нам сохранять приемлемые цены
+                        на рынке теплообменного оборудования и обеспечивает здоровую конкуренцию. На заводе в настоящий
+                        момент внедрена и успешно зарекомендовала себя система качества, которая предусматривает
+                        сквозной контроль всего производственного процесса.</p>
+                    <p class="b-section-text">Качество продукции отслеживается на всех этапах производства, с момента
+                        получения заготовки до момента отгрузки готового оборудования. В работе отдела продаж
+                        предусмотрена обратная связь с потребителями для выявления их пожеланий, замечаний, предложений.
+                        Мы открыты ко всему новому.</p>
+                    <p class="b-section-subtitle">Девиз нашего завода: Качество, которому можно доверять!</p>
+                </div>
+
+                <div class="grid__column-4 grid__offset">
+                    <img class="b-section-logotype" src="{% static 'img/logotype_square.png' %}"
+                         alt="Логотип_маленький"/>
+                    <h4 class="b-section-subtitle">Обращаясь к нам Вам гарантированы:</h4>
+                    <ul class="b-section-list">
+                        <li class="b-section-list__item">Продукция по привлекательной цене;</li>
+                        <li class="b-section-list__item">Гарантия качества;</li>
+                        <li class="b-section-list__item">Надежный партнер в нашем лице;</li>
+                        <li class="b-section-list__item">Профессиональные консультации опытных специалистов;</li>
+                        <li class="b-section-list__item">Индивидуальный подход к каждому заказчику;</li>
+                        <li class="b-section-list__item">Доставка заказа в любые регионы России удобным для Вас
+                            способом.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="b-section">
+        <div class="b-layout">
+            <div class="grid__row">
+                <div class="grid__column-4">
+                    <h3 class="subheading">Новинка производства</h3>
+                    <a class="b-image"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <h3 class="subheading">Последняя новость</h3>
+                    <div class="b-box">
+                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                            <div class="b-box__wrapper">
+                                <p class="b-box__author">
+                                    {{ news_for_bottom.date_created }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ news_for_bottom.title }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <h3 class="subheading">Видео как закалялась сталь</h3>
+                    {% if media_for_bottom %}
+                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                    {% endif %}
+                    <div class="b-box b-box_noshadow">
+                        <div class="b-box__image-halfsize">
+                            {% if media_for_bottom %}
+                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if media_for_bottom %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

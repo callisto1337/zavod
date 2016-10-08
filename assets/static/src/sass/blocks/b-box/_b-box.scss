@@ -6,7 +6,7 @@
 	height: 100%;
 
 	&__wrapper {
-		padding: 18px 27px 27px 27px;
+		padding: 28px;
 	}
 
 	&__image {
@@ -52,7 +52,7 @@
 	&__author {
 		font-size: 9px;
 		text-transform: uppercase;
-		margin-bottom: 12px;
+		margin: 0 0 12px 0;
 		font-weight: 300;
 	}
 
@@ -100,6 +100,9 @@
 		}
 	}
 
+	// без наведения
+	&_nohover {}
+
 	/* animation */
 	&:hover:not(&_nohover) {
 		box-shadow: 0 0 32px rgba(0,0,0,.01),
@@ -143,6 +146,10 @@
 		.b-box__text, .b-box__header {
 			color: #ffffff;
 		}
+	}
+
+	&-grey {
+		background: #f4f4f4;
 	}
 
 	// Без тени
