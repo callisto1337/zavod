@@ -1,0 +1,29 @@
+// пагинатор
+.b-paginator {
+	margin: 0 auto;
+	text-align: center;
+	padding-bottom: 70px;
+
+	// Одна страница
+	&__item {
+		margin-left: 12px;
+		display: inline-block;
+
+		// ссылка
+		&__link {
+			display: block;
+			padding: 16px;
+			font-size: 16.2px;
+			font-weight: 500;
+			color: #232323;
+			text-decoration: none;
+
+			// Текущая активная страница
+			&:hover, &_current {
+				color: #ffffff;
+				background-color: #00955F;
+			}
+		}
+	}
+
+}
