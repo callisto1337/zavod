@@ -33,9 +33,9 @@
                 <div class="grid__column-12">
                     <div class="submenu__catalog">
                         <ul class="submenu__catalog__list">
-                            {% for subcategory in subcategories %}
+                            {% for product in products %}
                             <li class="submenu__catalog__list__item">
-                                <a href="{% url "catalog_category" subcategory.slug %}" class="submenu__catalog__list__item-link">{{ subcategory.name }}</a>
+                                <a href="{% url "catalog_category_inside" product.category.slug product.slug %}" class="submenu__catalog__list__item-link">{{ product.name }}</a>
                             </li>
                             {% endfor %}
                         </ul>

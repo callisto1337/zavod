@@ -4,23 +4,23 @@
 {% load static from staticfiles %}
 
 {% block content %}
-
     <div class="b-section b-section_short">
         <div class="b-layout">
+
             <div class="b-breadcrumbs">
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
-                <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
             </div>
+
             <div class="grid__row">
-                <div class="grid__column-9">
+                <div class="grid__column-7">
                     <h3 class="b-section-title">{{ category.name }}</h3>
                 </div>
-                <div class="grid__column-5">
+                <div class="grid__column-7">
                     <ul class="b-tab">
-                        <li class="b-tab__item">
+                        <li class="b-tab__item b-tab__item_active">
                             <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
                         </li>
-                        <li class="b-tab__item b-tab__item_active">
+                        <li class="b-tab__item">
                             <a class="b-tab__item__link" href="{{ request.path }}">Списком</a>
                         </li>
                     </ul>
@@ -33,9 +33,9 @@
                 <div class="grid__column-12">
                     <div class="submenu__catalog">
                         <ul class="submenu__catalog__list">
-                            {% for subcategory in subcategories %}
+                            {% for product in products %}
                             <li class="submenu__catalog__list__item">
-                                <a href="{% url "catalog_category" subcategory.slug %}" class="submenu__catalog__list__item-link">{{ subcategory.name }}</a>
+                                <a href="{% url "catalog_category" product.slug %}" class="submenu__catalog__list__item-link">{{ product.name }}</a>
                             </li>
                             {% endfor %}
                         </ul>
