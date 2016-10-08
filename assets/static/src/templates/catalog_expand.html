@@ -33,17 +33,68 @@
 
             <div class="b-section b-section_large b-section_borderless">
                 <div class="grid__row">
-                    <div class="grid__column-12">
-                        <div class="b-category-list-group b-category-list-group_inline">
-                            <ul class="b-category-list-group__list b-category-list-group__list_bold">
-                                {% for category_product in category_products %}
-                                <li class="b-category-list-group__list__item">
-                                    <a href="{% url "catalog_category" category_product.slug %}" class="b-category-list-group__list__item-link">{{ category_product.name }}</a>
-                                    <span class="b-category-list-group__list__item-info">{{ category_product.number }} позиции</span>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                    <div class="grid__column-4">
+                        <a class="b-link b-link_pseudo" href="#">
+                            <div class="b-box">
+                                <div class="b-box__wrapper">
+                                    <div class="b-box__image">
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    </div>
+                                    <h4 class="b-box__header">Водоводяные подогреватели</h4>
+                                    <p class="b-box__text">
+                                        Водоводяной подогреватель используется в системах горячего водоснабжения и отопительных системах общественных, коммунально-бытовых...
+                                    </p>
+                                </div>
+                                <div class="b-box__footer">
+                                    <div class="b-box__wrapper">
+                                        <span class="b-box__footer-left">44 позиции</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <a class="b-link b-link_pseudo" href="#">
+                            <div class="b-box">
+                                <div class="b-box__wrapper">
+                                    <div class="b-box__image">
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    </div>
+                                    <h4 class="b-box__header">Водоводяные подогреватели</h4>
+                                    <p class="b-box__text">
+                                        Водоводяной подогреватель используется в системах горячего водоснабжения и отопительных системах общественных, коммунально-бытовых...
+                                    </p>
+                                </div>
+                                <div class="b-box__footer">
+                                    <div class="b-box__wrapper">
+                                        <span class="b-box__footer-left">44 позиции</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <a class="b-link b-link_pseudo" href="#">
+                            <div class="b-box">
+                                <div class="b-box__wrapper">
+                                    <div class="b-box__image">
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    </div>
+                                    <h4 class="b-box__header">Водоводяные подогреватели</h4>
+                                    <p class="b-box__text">
+                                        Водоводяной подогреватель используется в системах горячего водоснабжения и отопительных системах общественных, коммунально-бытовых...
+                                    </p>
+                                </div>
+                                <div class="b-box__footer">
+                                    <div class="b-box__wrapper">
+                                        <span class="b-box__footer-left">44 позиции</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

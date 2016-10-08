@@ -1,6 +1,11 @@
 // Блок для вывода HTML, чтобы поддерживались все теги
 .b-content {
-	// параграфы
+	font-size: 16.2px;
+	color: #292929;
+	line-height: 21.6px;
+	font-weight: 300;
+	margin-bottom: 32px;
+
 	p {
 		font-size: 16.2px;
 		color: #292929;
@@ -8,5 +13,9 @@
 		margin-bottom: 32px;
 		font-weight: 300;
 		margin-top: 0;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
 	}
 }

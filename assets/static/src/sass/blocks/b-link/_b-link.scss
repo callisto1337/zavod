@@ -1,0 +1,10 @@
+.b-link {
+	text-decoration: underline;
+	color: #00955F;
+
+	// Псевдо ссылка
+	&_pseudo {
+		color: inherit;
+		text-decoration: none;
+	}
+}
