@@ -9,6 +9,12 @@
             <div class="b-breadcrumbs">
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
+                {% if product.category.parent_id %}
+                    /<a class="b-breadcrumbs__link" href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
+                {% endif %}
+                {% if product.category %}
+                    /<a class="b-breadcrumbs__link" href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
+                {% endif %}
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">
@@ -16,7 +22,11 @@
                 </div>
             </div>
             <div class="grid__row">
-                <a href="../" class="b-section-back">Назад к каталогу</a>
+                {% if product.category %}
+                    <a href="{% url "catalog_category" product.category.slug %}" class="b-section-back">Назад к каталогу</a>
+                {% else %}
+                    <a href="../" class="b-section-back">Назад к каталогу</a>
+                {% endif %}
             </div>
             <div class="grid__row">
                 <div class="grid__column-7">
