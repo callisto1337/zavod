@@ -13,7 +13,7 @@
             </div>
             {% for ind, article in ind_articles %}
                 {% if ind == 0 or ind == 2 or ind|add:1|mod:3 == 0 %}
-                    <div class="grid__row">
+                    <div class="grid__row grid__row-btm">
                     <div class="grid__column-4">
                 {% else %}
                     <div class="grid__column-4 grid__offset">
@@ -41,6 +41,27 @@
                 </div>
                 {% endif %}
             {% endfor %}
+        </div>
+    </div>
+    <div class="b-layout">
+        <div class="b-paginator">
+        {% if all_page_number|length <= 8 %}
+            {% for page_number in all_page_number %}
+            <div class="b-paginator__item">
+                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'articles_page' page_number %}">{{ page_number }}</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            {% for page_number in all_page_number|slice:":6" %}
+            <div class="b-paginator__item">
+                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'articles_page' page_number %}">{{ page_number }}</a>
+            </div>
+            {% endfor %}
+            <div class="b-paginator__item">...</div>
+            <div class="b-paginator__item">
+                <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'articles_page' all_page_number|length %}">{{ all_page_number|length }}</a>
+            </div>
+        {% endif %}
         </div>
     </div>
     <div class="b-section">
