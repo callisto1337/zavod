@@ -4,46 +4,51 @@
 {% load static from staticfiles %}
 
 {% block content %}
-
     <div class="b-section b-section_short">
         <div class="b-layout">
             <div class="b-breadcrumbs">
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if category.parent_id %}
-                    /<a class="b-breadcrumbs__link" href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
+                    /<a class="b-breadcrumbs__link"
+                        href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
                 {% endif %}
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">
                     <h3 class="b-section-title">{{ category.name }}</h3>
                 </div>
-                <div class="grid__column-5">
-                    <ul class="b-tab">
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
-                        </li>
-                        <li class="b-tab__item b-tab__item_active">
-                            <a class="b-tab__item__link" href="{{ request.path }}">Списком</a>
-                        </li>
-                    </ul>
-                </div>
+                {% if subcategories %}
+                    <div class="grid__column-5">
+                        <ul class="b-tab">
+                            <li class="b-tab__item">
+                                <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
+                            </li>
+                            <li class="b-tab__item b-tab__item_active">
+                                <a class="b-tab__item__link" href="{{ request.path }}">Списком</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
             <div class="grid__row">
                 {% if category.parent_id %}
-                    <a href="{% url "catalog_category" category.parent_id.slug %}" class="b-section-back">Назад к каталогу</a>
+                    <a href="{% url "catalog_category" category.parent_id.slug %}" class="b-section-back">Назад к
+                        каталогу</a>
                 {% else %}
                     <a href="../" class="b-section-back">Назад к каталогу</a>
                 {% endif %}
             </div>
-            <div class="grid__row">
-                <div class="grid__column-12">
-                    <div class="submenu__catalog">
-                        <ul class="submenu__catalog__list">
+            <div class="grid__row grid__row-btm">
+                <div class="grid__column-10">
+                    <div class="b-category-list-group b-category-list-group_inline">
+                        <ul class="b-category-list-group__list b-category-list-group__list_bold">
                             {% for subcategory in subcategories %}
-                            <li class="submenu__catalog__list__item">
-                                <a href="{% url "catalog_category" subcategory.slug %}" class="submenu__catalog__list__item-link">{{ subcategory.name }}</a>
-                            </li>
+                                <li class="b-category-list-group__list__item">
+                                    <a href="{% url "catalog_category" subcategory.slug %}"
+                                       class="b-category-list-group__list__item-link">{{ subcategory.name }}</a>
+                                    <span class="b-category-list-group__list__item-info">{{ subcategory.number }} позиции</span>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -51,15 +56,14 @@
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">
-                    <p class="b-section-text">
-                        {{ category.text }}
-                    </p>
+                    <div class="b-content">
+                        {{ category.text | safe }}
+                    </div>
                 </div>
-                <div class="grid__column-4 grid__offset grid__offset__catalog__news">
-                    <h4 class="b-section-subtitle"></h4>
+                <div class="grid__column-4 grid__offset ">
                     <ul class="b-section-list">
                         {% for category_file in category.categoryfiles %}
-                        <li class="b-section-list__item">{{ category_file.title }}</li>
+                            <li class="b-section-list__item">{{ category_file.title }}</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -69,12 +73,12 @@
                     <div class="submenu__catalog">
                         <ul class="submenu__catalog__list">
                             {% for category_image in category.categoryimages %}
-                            <li class="submenu__catalog__list__item">
-                                {{ category_image.title }}
-                            </li>
-                            <div class="b-box__image">
-                                <img src="{% static category_image.url %}" alt="Пример Продукта">
-                            </div>
+                                <li class="submenu__catalog__list__item">
+                                    {{ category_image.title }}
+                                </li>
+                                <div class="b-box__image">
+                                    <img src="{% static category_image.url %}" alt="Пример Продукта">
+                                </div>
                             {% endfor %}
                         </ul>
                     </div>
@@ -88,22 +92,26 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                    <a class="b-image"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
                     </a>
                 </div>
