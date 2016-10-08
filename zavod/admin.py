@@ -10,7 +10,7 @@ admin.site.register(CategoryProduct, CategoryProductFields)
 
 
 class ArticleFields(admin.ModelAdmin):
-    list_display = ('name', 'date_created', 'published')
+    list_display = ('title', 'date_created', 'published')
 admin.site.register(Article, ArticleFields)
 
 
@@ -40,7 +40,7 @@ admin.site.register(Question, QuestionFields)
 
 
 class NewsFields(admin.ModelAdmin):
-    list_display = ('name', 'date_created', 'published')
+    list_display = ('title', 'date_created', 'published')
 admin.site.register(News, NewsFields)
 
 
