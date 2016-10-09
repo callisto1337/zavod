@@ -38,14 +38,14 @@
                     <a href="../" class="b-section-back">Назад к каталогу</a>
                 {% endif %}
             </div>
-            <div class="grid__row">
-                <div class="grid__column-12">
-                    <div class="submenu__catalog">
-                        <ul class="submenu__catalog__list">
+            <div class="grid__row grid__row-btm">
+                <div class="grid__column-10">
+                    <div class="b-category-list-group b-category-list-group_inline">
+                        <ul class="b-category-list-group__list b-category-list-group__list_bold">
                             {% for product in products %}
-                                <li class="submenu__catalog__list__item">
+                                <li class="b-category-list-group__list__item">
                                     <a href="{% url "catalog_category_inside" product.category.slug product.slug %}"
-                                       class="submenu__catalog__list__item-link">{{ product.name }}</a>
+                                       class="b-category-list-group__list__item-link">{{ product.name }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
