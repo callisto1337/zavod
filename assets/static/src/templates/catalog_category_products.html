@@ -47,9 +47,7 @@
                             <tr>
                                 <th>Позиция</th>
                                 {% for key, value in products.first.properties.items %}
-                                    {% if key != "Цена с НДС, руб." %}
-                                        <th>{{ key }}</th>
-                                    {% endif %}
+                                    <th>{{ key }}</th>
                                 {% endfor %}
                                 <th></th>
                             </tr>
@@ -63,12 +61,9 @@
                                 </a>
                                  </td>
                                 {% for key, value in product.properties.items %}
-                                    {% if key != "Цена с НДС, руб." %}
+                                    {% if "Цена" not in key %}
                                         <td>{{ value }}</td>
-                                    {% endif %}
-                                {% endfor %}
-                                {% for key, value in product.properties.items %}
-                                    {% if key == "Цена с НДС, руб." %}
+                                    {% else %}
                                         <td class="bold">{{ value }}</td>
                                     {% endif %}
                                 {% endfor %}

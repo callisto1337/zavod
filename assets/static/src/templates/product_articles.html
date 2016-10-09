@@ -89,14 +89,14 @@
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <ul class="b-property">
-                        <li class="b-property__item">
-                            {% for key, value in product.properties.items %}
-                                {% if key == "Цена с НДС, руб." %}
-                                    <span class="b-property__key">Цена с НДС, нержав.</span>
+                        {% for key, value in product.properties.items %}
+                            {% if "Цена" in key %}
+                                <li class="b-property__item">
+                                    <span class="b-property__key">{{ key }}</span>
                                     <span class="b-property__value b-property__value_extra">{{ value }}</span>
-                                {% endif %}
-                            {% endfor %}
-                        </li>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
 
                         {#                        {% for property in product.string_properties %}#}
                         {#                            <li class="b-property__item">{{ property }}</li>#}
@@ -124,7 +124,7 @@
 
                     <ul class="b-property">
                         {% for key, value in product.properties.items %}
-                            {% if key != "Цена с НДС, руб." %}
+                            {% if "Цена" not in key %}
                                 <li class="b-property__item">
                                     <span class="b-property__key">{{ key }}</span>
                                     <span class="b-property__value">{{ value }}</span>
