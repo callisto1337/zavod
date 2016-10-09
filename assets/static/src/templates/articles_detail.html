@@ -20,27 +20,88 @@
                 <a href="../" class="b-section-back">Назад к статьям</a>
             </div>
         </div>
-    </div>
-    <div class="b-section">
         <div class="b-layout">
-        {% if user.is_authenticated %}
-            <div class="grid__column-9">
-            {% get_comment_list for article as tree %}
-            {% for comment in tree %}
-            <div style="margin-left: {{ comment.depth }}em;" class="comment">
-                <div style="margin-left:{{comment.depth}}em;">
-                    {{ comment.comment }}
-                    {% if user.is_staff %}
-                        Reply to this comment
-                        {% render_comment_form for article with comment.id %}
-                    {% endif %}
+            <div class="grid__row">
+                <div class="grid__column-9">
+
+                    <hr class="delimiter"/>
+                    {# article #}
+                    <div class="b-info">
+                        <div class="b-info__item b-info_left b-info__date">
+                            {{ article.date_created|date:"d F Y"|lower }}
+                        </div>
+                        <div class="b-info__item b-info_left">
+                            <i class="fa fa-user" aria-hidden="true"></i> {{ article.author }}
+                        </div>
+                        {% get_comment_count for article as comment_count %}
+                        <div class="b-info__item b-info_right">
+                            <i class="fa fa-comments" aria-hidden="true"></i> {{ comment_count }}
+                        </div>
+                        <div class="b-info__item b-info_right">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ article.views }}
+                        </div>
+                    </div>
+                    <div class="b-section__image">
+                        {% if article.images.first %}
+                            <img src="{{ article.images.first.image.url }}" alt="Картинка">
+                        {% else %}
+                            <img src="{% static 'img/player.png' %}" alt="Картинка">
+                        {% endif %}
+                    </div>
+                    <div class="b-section__space"></div>
+                    {# Содержимое статьи #}
+                    <div class="b-content">
+                        {{ article.text | safe }}
+                    </div>
+                    <div class="b-info">
+                        {% for tag in article.tags.all %}
+                        <div class="b-info__item b-info_left b-info_colorful b-info_italic b-info_small">
+                            <i class="fa fa-tag" aria-hidden="true"></i> {{ tag.title }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {# end article #}
+                    <hr class="delimiter"/>
+
+                    <div class="b-comment">
+                        {% if user.is_authenticated %}
+                            <a href="#" class="b-comment-comment">
+                                Оставить свой комментарий
+                            </a>
+                        {% endif %}
+                    </div>
+                    {% get_comment_list for article as tree %}
+                    {% for comment in tree %}
+
+                        <div class="b-comment {% if comment.depth > 1 %} b-comment-offset {% endif %}">
+                            <div class="b-comment__content">
+                                <div class="b-comment__content__text">
+                                    {{ comment.comment }}
+                                </div>
+                                {% if user.is_staff %}
+                                    {#                                        {% render_comment_form for news with comment.id %}#}
+                                {% endif %}
+                            </div>
+                            <div class="b-comment__info">
+                                <div class="b-comment__avatar">
+                                    <img src="{% static 'img/avatars/noavatar.png' %}" alt="">
+                                </div>
+                                <div class="b-comment__extra">
+                                    <div class="b-comment__extra-author">
+                                        Денис такой-то
+                                    </div>
+                                    <div class="b-comment__extra-date">
+                                        24 января 2016 г.
+                                        <a href="#" class="b-comment-send">ответить</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                    {#                            {% render_comment_form for news %}#}
                 </div>
             </div>
-            {% endfor %}
-            <p>Reply to Original:</p>
-            {% render_comment_form for article %}
-            </div>
-        {% endif %}
         </div>
     </div>
     <div class="b-section">
