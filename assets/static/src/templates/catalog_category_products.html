@@ -46,70 +46,40 @@
                             <thead>
                             <tr>
                                 <th>Позиция</th>
-                                <th>Число трубок, Ду 16, шт.</th>
-                                <th>Поверхность нагрева, м2</th>
-                                <th>Тепловой поток, кВт</th>
-                                <th>Т. производ. Гкал/час</th>
-                                <th>Расход нагрев. воды, т/час</th>
-                                <th>Масса, кг</th>
-                                <th>Расход нагрев. воды, т/час</th>
-                                <th>Масса, кг</th>
+                                {% for key, value in products.first.properties.items %}
+                                    {% if key != "Цена с НДС, руб." %}
+                                        <th>{{ key }}</th>
+                                    {% endif %}
+                                {% endfor %}
                                 <th>Цена с НДС, руб., нержав.</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
+                            {% for product in products %}
                             <tr>
-                                <td>Подогреватель кожухотрубный ВВП22-­‐530-­‐4000</td>
-                                <td>4</td>
-                                <td>0,37</td>
-                                <td>7,9</td>
-                                <td>0,007</td>
-                                <td>4,4</td>
-                                <td>23,5</td>
-                                <td>4,4</td>
-                                <td>23,5</td>
-                                <td class="bold">57008988</td>
+                                <td>
+                                    <a href="{% url "catalog_category_inside" product.category.slug product.slug %}">
+                                    {{ product.name }}
+                                </a>
+                                 </td>
+                                {% for key, value in product.properties.items %}
+                                    {% if key != "Цена с НДС, руб." %}
+                                        <td>{{ value }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for key, value in product.properties.items %}
+                                    {% if key == "Цена с НДС, руб." %}
+                                        <td class="bold">{{ value }}</td>
+                                    {% endif %}
+                                {% endfor %}
                                 <td>
                                     <a class="b-btn" href="#">
                                         <span class="b-btn__text">Заказать</span>
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Подогреватель кожухотрубный ВВП22-­‐530-­‐4000</td>
-                                <td>4</td>
-                                <td>0,37</td>
-                                <td>7,9</td>
-                                <td>0,007</td>
-                                <td>4,4</td>
-                                <td>23,5</td>
-                                <td>4,4</td>
-                                <td>23,5</td>
-                                <td class="bold">57008988</td>
-                                <td>
-                                    <a class="b-btn" href="#">
-                                        <span class="b-btn__text">Заказать</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Подогреватель кожухотрубный ВВП22-­‐530-­‐4000</td>
-                                <td>4</td>
-                                <td>0,37</td>
-                                <td>7,9</td>
-                                <td>0,007</td>
-                                <td>4,4</td>
-                                <td>23,5</td>
-                                <td>4,4</td>
-                                <td>23,5</td>
-                                <td class="bold">57008988</td>
-                                <td>
-                                    <a class="b-btn" href="#">
-                                        <span class="b-btn__text">Заказать</span>
-                                    </a>
-                                </td>
-                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
