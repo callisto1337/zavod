@@ -220,6 +220,7 @@ class Question(models.Model):
     published = models.BooleanField(default=False)
     text = models.TextField()
     answer = models.TextField()
+    type = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = 'Вопрос'
