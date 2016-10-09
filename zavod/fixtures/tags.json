@@ -1,0 +1,79 @@
+[
+  {
+    "model": "zavod.tag",
+    "pk": 1,
+    "fields": {
+      "title": "о продукции"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 2,
+    "fields": {
+      "title": "документация"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 3,
+    "fields": {
+      "title": "наше оборудование"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 4,
+    "fields": {
+      "title": "пластинчатый теплообменник"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 5,
+    "fields": {
+      "title": "кожухотрубный теплообменник"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 6,
+    "fields": {
+      "title": "полезно знать"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 7,
+    "fields": {
+      "title": "тепло в доме"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 8,
+    "fields": {
+      "title": "обслуживание"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 9,
+    "fields": {
+      "title": "теория тепла"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 10,
+    "fields": {
+      "title": "тепловой пункт"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 11,
+    "fields": {
+      "title": "новости жкх"
+    }
+  }
+]

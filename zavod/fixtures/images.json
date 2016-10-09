@@ -2,867 +2,1452 @@
   {
     "model": "zavod.image",
     "pk": 1,
-    "fields":
-      {
-        "title": "shop_group_image594",
-        "image": "images/shop_group_image594.jpg"
-      }
+    "fields": {
+      "title": "shop_group_image594",
+      "image": "images/shop_group_image594.jpg"
+    }
   },
-     {
+  {
     "model": "zavod.image",
     "pk": 2,
-    "fields":
-      {
-        "title": "Система подогревателя водоводяного — ВВП",
-    "image": "images/Система подогревателя водоводяного — ВВП.jpg"
-  }},
-     {
+    "fields": {
+      "title": "Система подогревателя водоводяного — ВВП",
+      "image": "images/Система подогревателя водоводяного — ВВП.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 3,
-    "fields":
-      {
-        "title": "shop_group_image599",
-    "image": "images/shop_group_image599.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image599",
+      "image": "images/shop_group_image599.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 4,
-    "fields":
-      {
-        "title": "shop_group_image602",
-    "image": "images/shop_group_image602.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image602",
+      "image": "images/shop_group_image602.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 5,
-    "fields":
-      {
-        "title": "shop_group_image601",
-    "image": "images/shop_group_image601.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image601",
+      "image": "images/shop_group_image601.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 6,
-    "fields":
-      {
-        "title": "dniha1",
-    "image": "images/dniha1.png"
-  }},
-     {
+    "fields": {
+      "title": "dniha1",
+      "image": "images/dniha1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 7,
-    "fields":
-      {
-        "title": "dnishab",
-    "image": "images/dnishab.png"
-  }},
-     {
+    "fields": {
+      "title": "dnishab",
+      "image": "images/dnishab.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 8,
-    "fields":
-      {
-        "title": "shop_group_image597",
-    "image": "images/shop_group_image597.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image597",
+      "image": "images/shop_group_image597.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 9,
-    "fields":
-      {
-        "title": "shop_group_image669",
-    "image": "images/shop_group_image669.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image669",
+      "image": "images/shop_group_image669.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 10,
-    "fields":
-      {
-        "title": "shop_group_image653",
-    "image": "images/shop_group_image653.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image653",
+      "image": "images/shop_group_image653.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 11,
-    "fields":
-      {
-        "title": "shop_group_image676",
-    "image": "images/shop_group_image676.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image676",
+      "image": "images/shop_group_image676.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 12,
-    "fields":
-      {
-        "title": "shop_group_image595",
-    "image": "images/shop_group_image595.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image595",
+      "image": "images/shop_group_image595.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 13,
-    "fields":
-      {
-        "title": "shop_group_image631",
-    "image": "images/shop_group_image631.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image631",
+      "image": "images/shop_group_image631.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 14,
-    "fields":
-      {
-        "title": "shop_group_image677",
-    "image": "images/shop_group_image677.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image677",
+      "image": "images/shop_group_image677.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 15,
-    "fields":
-      {
-        "title": "shop_group_image634",
-    "image": "images/shop_group_image634.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image634",
+      "image": "images/shop_group_image634.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 16,
-    "fields":
-      {
-        "title": "shop_group_image675",
-    "image": "images/shop_group_image675.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image675",
+      "image": "images/shop_group_image675.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 17,
-    "fields":
-      {
-        "title": "shop_group_image600",
-    "image": "images/shop_group_image600.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image600",
+      "image": "images/shop_group_image600.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 18,
-    "fields":
-      {
-        "title": "Изготовление регистров отопления",
-    "image": "images/Изготовление регистров отопления.jpg"
-  }},
-     {
+    "fields": {
+      "title": "Изготовление регистров отопления",
+      "image": "images/Изготовление регистров отопления.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 19,
-    "fields":
-      {
-        "title": "shop_group_image632",
-    "image": "images/shop_group_image632.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image632",
+      "image": "images/shop_group_image632.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 20,
-    "fields":
-      {
-        "title": "shop_group_image633",
-    "image": "images/shop_group_image633.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image633",
+      "image": "images/shop_group_image633.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 21,
-    "fields":
-      {
-        "title": "Преимущества спиральных теплообменников",
-    "image": "images/Преимущества спиральных теплообменников.jpg"
-  }},
-     {
+    "fields": {
+      "title": "Преимущества спиральных теплообменников",
+      "image": "images/Преимущества спиральных теплообменников.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 22,
-    "fields":
-      {
-        "title": "shop_group_image603",
-    "image": "images/shop_group_image603.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image603",
+      "image": "images/shop_group_image603.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 23,
-    "fields":
-      {
-        "title": "shop_group_image609",
-    "image": "images/shop_group_image609.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image609",
+      "image": "images/shop_group_image609.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 24,
-    "fields":
-      {
-        "title": "shop_group_image670",
-    "image": "images/shop_group_image670.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image670",
+      "image": "images/shop_group_image670.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 25,
-    "fields":
-      {
-        "title": "shop_group_image674",
-    "image": "images/shop_group_image674.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image674",
+      "image": "images/shop_group_image674.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 26,
-    "fields":
-      {
-        "title": "shop_group_image679",
-    "image": "images/shop_group_image679.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image679",
+      "image": "images/shop_group_image679.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 27,
-    "fields":
-      {
-        "title": "shop_group_image622",
-    "image": "images/shop_group_image622.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image622",
+      "image": "images/shop_group_image622.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 28,
-    "fields":
-      {
-        "title": "shop_group_image623",
-    "image": "images/shop_group_image623.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image623",
+      "image": "images/shop_group_image623.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 29,
-    "fields":
-      {
-        "title": "shop_group_image646",
-    "image": "images/shop_group_image646.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image646",
+      "image": "images/shop_group_image646.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 30,
-    "fields":
-      {
-        "title": "shop_group_image615",
-    "image": "images/shop_group_image615.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image615",
+      "image": "images/shop_group_image615.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 31,
-    "fields":
-      {
-        "title": "shop_group_image612",
-    "image": "images/shop_group_image612.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image612",
+      "image": "images/shop_group_image612.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 32,
-    "fields":
-      {
-        "title": "shop_property_file_612_1",
-    "image": "images/shop_property_file_612_1.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_612_1",
+      "image": "images/shop_property_file_612_1.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 33,
-    "fields":
-      {
-        "title": "shop_property_file_612_2",
-    "image": "images/shop_property_file_612_2.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_612_2",
+      "image": "images/shop_property_file_612_2.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 34,
-    "fields":
-      {
-        "title": "shop_group_image613",
-    "image": "images/shop_group_image613.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image613",
+      "image": "images/shop_group_image613.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 35,
-    "fields":
-      {
-        "title": "shop_group_image625",
-    "image": "images/shop_group_image625.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image625",
+      "image": "images/shop_group_image625.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 36,
-    "fields":
-      {
-        "title": "shop_group_image647",
-    "image": "images/shop_group_image647.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image647",
+      "image": "images/shop_group_image647.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 37,
-    "fields":
-      {
-        "title": "shop_group_image657",
-    "image": "images/shop_group_image657.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image657",
+      "image": "images/shop_group_image657.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 38,
-    "fields":
-      {
-        "title": "shop_property_file_657_1",
-    "image": "images/shop_property_file_657_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_657_1",
+      "image": "images/shop_property_file_657_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 39,
-    "fields":
-      {
-        "title": "shop_property_file_656_1",
-    "image": "images/shop_property_file_656_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_656_1",
+      "image": "images/shop_property_file_656_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 40,
-    "fields":
-      {
-        "title": "shop_group_image658",
-    "image": "images/shop_group_image658.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image658",
+      "image": "images/shop_group_image658.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 41,
-    "fields":
-      {
-        "title": "shop_property_file_658_1",
-    "image": "images/shop_property_file_658_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_658_1",
+      "image": "images/shop_property_file_658_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 42,
-    "fields":
-      {
-        "title": "shop_group_image659",
-    "image": "images/shop_group_image659.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image659",
+      "image": "images/shop_group_image659.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 43,
-    "fields":
-      {
-        "title": "shop_property_file_659_1",
-    "image": "images/shop_property_file_659_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_659_1",
+      "image": "images/shop_property_file_659_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 44,
-    "fields":
-      {
-        "title": "shop_group_image660",
-    "image": "images/shop_group_image660.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image660",
+      "image": "images/shop_group_image660.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 45,
-    "fields":
-      {
-        "title": "shop_property_file_660_1",
-    "image": "images/shop_property_file_660_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_660_1",
+      "image": "images/shop_property_file_660_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 46,
-    "fields":
-      {
-        "title": "shop_group_image661",
-    "image": "images/shop_group_image661.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image661",
+      "image": "images/shop_group_image661.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 47,
-    "fields":
-      {
-        "title": "shop_property_file_661_1",
-    "image": "images/shop_property_file_661_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_661_1",
+      "image": "images/shop_property_file_661_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 48,
-    "fields":
-      {
-        "title": "shop_group_image662",
-    "image": "images/shop_group_image662.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image662",
+      "image": "images/shop_group_image662.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 49,
-    "fields":
-      {
-        "title": "shop_property_file_662_1",
-    "image": "images/shop_property_file_662_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_662_1",
+      "image": "images/shop_property_file_662_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 50,
-    "fields":
-      {
-        "title": "shop_group_image663",
-    "image": "images/shop_group_image663.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image663",
+      "image": "images/shop_group_image663.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 51,
-    "fields":
-      {
-        "title": "shop_property_file_663_1",
-    "image": "images/shop_property_file_663_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_663_1",
+      "image": "images/shop_property_file_663_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 52,
-    "fields":
-      {
-        "title": "shop_group_image664",
-    "image": "images/shop_group_image664.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image664",
+      "image": "images/shop_group_image664.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 53,
-    "fields":
-      {
-        "title": "shop_property_file_664_1",
-    "image": "images/shop_property_file_664_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_664_1",
+      "image": "images/shop_property_file_664_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 54,
-    "fields":
-      {
-        "title": "shop_group_image665",
-    "image": "images/shop_group_image665.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image665",
+      "image": "images/shop_group_image665.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 55,
-    "fields":
-      {
-        "title": "shop_property_file_665_1",
-    "image": "images/shop_property_file_665_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_665_1",
+      "image": "images/shop_property_file_665_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 56,
-    "fields":
-      {
-        "title": "shop_group_image666",
-    "image": "images/shop_group_image666.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image666",
+      "image": "images/shop_group_image666.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 57,
-    "fields":
-      {
-        "title": "shop_property_file_666_1",
-    "image": "images/shop_property_file_666_1.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_666_1",
+      "image": "images/shop_property_file_666_1.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 58,
-    "fields":
-      {
-        "title": "shop_group_image667",
-    "image": "images/shop_group_image667.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image667",
+      "image": "images/shop_group_image667.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 59,
-    "fields":
-      {
-        "title": "shop_group_image668",
-    "image": "images/shop_group_image668.png"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image668",
+      "image": "images/shop_group_image668.png"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 60,
-    "fields":
-      {
-        "title": "shop_group_image624",
-    "image": "images/shop_group_image624.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image624",
+      "image": "images/shop_group_image624.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 61,
-    "fields":
-      {
-        "title": "shop_group_image652",
-    "image": "images/shop_group_image652.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image652",
+      "image": "images/shop_group_image652.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 62,
-    "fields":
-      {
-        "title": "shop_group_image678",
-    "image": "images/shop_group_image678.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image678",
+      "image": "images/shop_group_image678.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 63,
-    "fields":
-      {
-        "title": "shop_group_image630",
-    "image": "images/shop_group_image630.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_group_image630",
+      "image": "images/shop_group_image630.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 64,
-    "fields":
-      {
-        "title": "shop_items_catalog_image285",
-    "image": "images/shop_items_catalog_image285.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image285",
+      "image": "images/shop_items_catalog_image285.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 65,
-    "fields":
-      {
-        "title": "shop_property_file_285_169",
-    "image": "images/shop_property_file_285_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_285_169",
+      "image": "images/shop_property_file_285_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 66,
-    "fields":
-      {
-        "title": "shop_items_catalog_image286",
-    "image": "images/shop_items_catalog_image286.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image286",
+      "image": "images/shop_items_catalog_image286.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 67,
-    "fields":
-      {
-        "title": "shop_property_file_286_169",
-    "image": "images/shop_property_file_286_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_286_169",
+      "image": "images/shop_property_file_286_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 68,
-    "fields":
-      {
-        "title": "shop_items_catalog_image287",
-    "image": "images/shop_items_catalog_image287.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image287",
+      "image": "images/shop_items_catalog_image287.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 69,
-    "fields":
-      {
-        "title": "shop_property_file_287_169",
-    "image": "images/shop_property_file_287_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_287_169",
+      "image": "images/shop_property_file_287_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 70,
-    "fields":
-      {
-        "title": "shop_items_catalog_image281",
-    "image": "images/shop_items_catalog_image281.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image281",
+      "image": "images/shop_items_catalog_image281.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 71,
-    "fields":
-      {
-        "title": "shop_property_file_281_169",
-    "image": "images/shop_property_file_281_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_281_169",
+      "image": "images/shop_property_file_281_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 72,
-    "fields":
-      {
-        "title": "shop_items_catalog_image272",
-    "image": "images/shop_items_catalog_image272.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image272",
+      "image": "images/shop_items_catalog_image272.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 73,
-    "fields":
-      {
-        "title": "shop_property_file_272_169",
-    "image": "images/shop_property_file_272_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_272_169",
+      "image": "images/shop_property_file_272_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 74,
-    "fields":
-      {
-        "title": "shop_items_catalog_image282",
-    "image": "images/shop_items_catalog_image282.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image282",
+      "image": "images/shop_items_catalog_image282.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 75,
-    "fields":
-      {
-        "title": "shop_property_file_282_169",
-    "image": "images/shop_property_file_282_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_282_169",
+      "image": "images/shop_property_file_282_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 76,
-    "fields":
-      {
-        "title": "shop_items_catalog_image273",
-    "image": "images/shop_items_catalog_image273.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image273",
+      "image": "images/shop_items_catalog_image273.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 77,
-    "fields":
-      {
-        "title": "shop_property_file_273_169",
-    "image": "images/shop_property_file_273_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_273_169",
+      "image": "images/shop_property_file_273_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 78,
-    "fields":
-      {
-        "title": "shop_items_catalog_image283",
-    "image": "images/shop_items_catalog_image283.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image283",
+      "image": "images/shop_items_catalog_image283.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 79,
-    "fields":
-      {
-        "title": "shop_property_file_283_169",
-    "image": "images/shop_property_file_283_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_283_169",
+      "image": "images/shop_property_file_283_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 80,
-    "fields":
-      {
-        "title": "shop_items_catalog_image270",
-    "image": "images/shop_items_catalog_image270.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image270",
+      "image": "images/shop_items_catalog_image270.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 81,
-    "fields":
-      {
-        "title": "shop_property_file_270_169",
-    "image": "images/shop_property_file_270_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_270_169",
+      "image": "images/shop_property_file_270_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 82,
-    "fields":
-      {
-        "title": "shop_items_catalog_image284",
-    "image": "images/shop_items_catalog_image284.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image284",
+      "image": "images/shop_items_catalog_image284.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 83,
-    "fields":
-      {
-        "title": "shop_property_file_284_169",
-    "image": "images/shop_property_file_284_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_284_169",
+      "image": "images/shop_property_file_284_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 84,
-    "fields":
-      {
-        "title": "shop_items_catalog_image271",
-    "image": "images/shop_items_catalog_image271.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image271",
+      "image": "images/shop_items_catalog_image271.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 85,
-    "fields":
-      {
-        "title": "shop_property_file_271_169",
-    "image": "images/shop_property_file_271_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_271_169",
+      "image": "images/shop_property_file_271_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 86,
-    "fields":
-      {
-        "title": "shop_items_catalog_image488",
-    "image": "images/shop_items_catalog_image488.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image488",
+      "image": "images/shop_items_catalog_image488.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 87,
-    "fields":
-      {
-        "title": "shop_property_file_488_169",
-    "image": "images/shop_property_file_488_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_488_169",
+      "image": "images/shop_property_file_488_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 88,
-    "fields":
-      {
-        "title": "shop_items_catalog_image278",
-    "image": "images/shop_items_catalog_image278.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image278",
+      "image": "images/shop_items_catalog_image278.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 89,
-    "fields":
-      {
-        "title": "shop_property_file_278_169",
-    "image": "images/shop_property_file_278_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_278_169",
+      "image": "images/shop_property_file_278_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 90,
-    "fields":
-      {
-        "title": "shop_items_catalog_image269",
-    "image": "images/shop_items_catalog_image269.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image269",
+      "image": "images/shop_items_catalog_image269.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 91,
-    "fields":
-      {
-        "title": "shop_property_file_269_169",
-    "image": "images/shop_property_file_269_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_269_169",
+      "image": "images/shop_property_file_269_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 92,
-    "fields":
-      {
-        "title": "shop_items_catalog_image279",
-    "image": "images/shop_items_catalog_image279.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image279",
+      "image": "images/shop_items_catalog_image279.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 93,
-    "fields":
-      {
-        "title": "shop_property_file_279_169",
-    "image": "images/shop_property_file_279_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_279_169",
+      "image": "images/shop_property_file_279_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 94,
-    "fields":
-      {
-        "title": "shop_items_catalog_image280",
-    "image": "images/shop_items_catalog_image280.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image280",
+      "image": "images/shop_items_catalog_image280.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 95,
-    "fields":
-      {
-        "title": "shop_property_file_280_169",
-    "image": "images/shop_property_file_280_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_280_169",
+      "image": "images/shop_property_file_280_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 96,
-    "fields":
-      {
-        "title": "shop_items_catalog_image487",
-    "image": "images/shop_items_catalog_image487.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image487",
+      "image": "images/shop_items_catalog_image487.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 97,
-    "fields":
-      {
-        "title": "shop_property_file_487_169",
-    "image": "images/shop_property_file_487_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_487_169",
+      "image": "images/shop_property_file_487_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 98,
-    "fields":
-      {
-        "title": "shop_items_catalog_image288",
-    "image": "images/shop_items_catalog_image288.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image288",
+      "image": "images/shop_items_catalog_image288.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 99,
-    "fields":
-      {
-        "title": "shop_property_file_288_169",
-    "image": "images/shop_property_file_288_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_288_169",
+      "image": "images/shop_property_file_288_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 100,
-    "fields":
-      {
-        "title": "shop_items_catalog_image276",
-    "image": "images/shop_items_catalog_image276.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image276",
+      "image": "images/shop_items_catalog_image276.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 101,
-    "fields":
-      {
-        "title": "shop_property_file_276_169",
-    "image": "images/shop_property_file_276_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_276_169",
+      "image": "images/shop_property_file_276_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 102,
-    "fields":
-      {
-        "title": "shop_items_catalog_image277",
-    "image": "images/shop_items_catalog_image277.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image277",
+      "image": "images/shop_items_catalog_image277.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 103,
-    "fields":
-      {
-        "title": "shop_property_file_277_169",
-    "image": "images/shop_property_file_277_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_277_169",
+      "image": "images/shop_property_file_277_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 104,
-    "fields":
-      {
-        "title": "shop_items_catalog_image274",
-    "image": "images/shop_items_catalog_image274.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image274",
+      "image": "images/shop_items_catalog_image274.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 105,
-    "fields":
-      {
-        "title": "shop_property_file_274_169",
-    "image": "images/shop_property_file_274_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_274_169",
+      "image": "images/shop_property_file_274_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 106,
-    "fields":
-      {
-        "title": "shop_items_catalog_image275",
-    "image": "images/shop_items_catalog_image275.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_items_catalog_image275",
+      "image": "images/shop_items_catalog_image275.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 107,
-    "fields":
-      {
-        "title": "shop_property_file_275_169",
-    "image": "images/shop_property_file_275_169.jpg"
-  }},
-     {
+    "fields": {
+      "title": "shop_property_file_275_169",
+      "image": "images/shop_property_file_275_169.jpg"
+    }
+  },
+  {
     "model": "zavod.image",
     "pk": 108,
-    "fields":
-      {
-        "title": "",
-    "image": "images/"
+    "fields": {
+      "title": "39873-2836981",
+      "image": "images/39873-2836981.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 109,
+    "fields": {
+      "title": "153_o",
+      "image": "images/153_o.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 110,
+    "fields": {
+      "title": "IMG_0370",
+      "image": "images/IMG_0370.JPG"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 111,
+    "fields": {
+      "title": "6908",
+      "image": "images/6908.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 112,
+    "fields": {
+      "title": "464",
+      "image": "images/464.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 113,
+    "fields": {
+      "title": "gfn",
+      "image": "images/gfn.png"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 114,
+    "fields": {
+      "title": "him",
+      "image": "images/him.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 115,
+    "fields": {
+      "title": "stroi",
+      "image": "images/stroi.jpeg"
+    }
+  }  ,
+  {
+    "model": "zavod.image",
+    "pk": 116,
+    "fields": {
+      "title": "1",
+      "image": "images/1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 117,
+    "fields": {
+      "title": "2",
+      "image": "images/2.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 118,
+    "fields": {
+      "title": "2_1",
+      "image": "images/2_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 119,
+    "fields": {
+      "title": "3_1",
+      "image": "images/3_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 120,
+    "fields": {
+      "title": "3",
+      "image": "images/3.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 121,
+    "fields": {
+      "title": "4",
+      "image": "images/4.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 122,
+    "fields": {
+      "title": "4",
+      "image": "images/4.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 122,
+    "fields": {
+      "title": "5",
+      "image": "images/5.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 123,
+    "fields": {
+      "title": "6",
+      "image": "images/6.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 124,
+    "fields": {
+      "title": "7",
+      "image": "images/7.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 125,
+    "fields": {
+      "title": "8",
+      "image": "images/8.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 126,
+    "fields": {
+      "title": "8_1",
+      "image": "images/8_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 127,
+    "fields": {
+      "title": "9",
+      "image": "images/9.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 128,
+    "fields": {
+      "title": "10",
+      "image": "images/10.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 129,
+    "fields": {
+      "title": "10_1",
+      "image": "images/10_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 130,
+    "fields": {
+      "title": "11",
+      "image": "images/11.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 131,
+    "fields": {
+      "title": "12",
+      "image": "images/12.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 132,
+    "fields": {
+      "title": "12_2",
+      "image": "images/12_2.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 133,
+    "fields": {
+      "title": "13",
+      "image": "images/13.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 134,
+    "fields": {
+      "title": "14",
+      "image": "images/14.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 135,
+    "fields": {
+      "title": "15",
+      "image": "images/15.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 136,
+    "fields": {
+      "title": "16",
+      "image": "images/16.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 137,
+    "fields": {
+      "title": "17",
+      "image": "images/17.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 138,
+    "fields": {
+      "title": "18",
+      "image": "images/18.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 139,
+    "fields": {
+      "title": "18_1",
+      "image": "images/18_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 140,
+    "fields": {
+      "title": "19",
+      "image": "images/19.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 141,
+    "fields": {
+      "title": "19_1",
+      "image": "images/19_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 142,
+    "fields": {
+      "title": "20",
+      "image": "images/20.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 143,
+    "fields": {
+      "title": "20_1",
+      "image": "images/20_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 144,
+    "fields": {
+      "title": "20_2",
+      "image": "images/20_2.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 145,
+    "fields": {
+      "title": "21_1",
+      "image": "images/21_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 146,
+    "fields": {
+      "title": "21",
+      "image": "images/21.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 147,
+    "fields": {
+      "title": "a",
+      "image": "images/a.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 148,
+    "fields": {
+      "title": "b",
+      "image": "images/b.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 149,
+    "fields": {
+      "title": "c",
+      "image": "images/c.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 150,
+    "fields": {
+      "title": "d",
+      "image": "images/d.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 151,
+    "fields": {
+      "title": "e",
+      "image": "images/e.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 152,
+    "fields": {
+      "title": "f",
+      "image": "images/f.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 153,
+    "fields": {
+      "title": "g",
+      "image": "images/g.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 154,
+    "fields": {
+      "title": "k",
+      "image": "images/k.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 155,
+    "fields": {
+      "title": "l",
+      "image": "images/l.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 156,
+    "fields": {
+      "title": "m",
+      "image": "images/m.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 157,
+    "fields": {
+      "title": "saxp",
+      "image": "images/saxp.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 158,
+    "fields": {
+      "title": "Teplovoi_nasos2",
+      "image": "images/Teplovoi_nasos2.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 159,
+    "fields": {
+      "title": "winter",
+      "image": "images/winter.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 160,
+    "fields": {
+      "title": "105600316_4348076_31783w",
+      "image": "images/105600316_4348076_31783w.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 161,
+    "fields": {
+      "title": "heating",
+      "image": "images/heating.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 162,
+    "fields": {
+      "title": "01-170906",
+      "image": "images/01-170906.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 163,
+    "fields": {
+      "title": "110",
+      "image": "images/110.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 164,
+    "fields": {
+      "title": "1403342146_1",
+      "image": "images/1403342146_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 165,
+    "fields": {
+      "title": "strahovanie_1",
+      "image": "images/strahovanie_1.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 166,
+    "fields": {
+      "title": "tsg",
+      "image": "images/tsg.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 167,
+    "fields": {
+      "title": "734_image_big",
+      "image": "images/734_image_big.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 168,
+    "fields": {
+      "title": "01fa8446ca357d56f1a3be26b38377cc",
+      "image": "images/01fa8446ca357d56f1a3be26b38377cc.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 169,
+    "fields": {
+      "title": "areg",
+      "image": "images/areg.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 170,
+    "fields": {
+      "title": "DSC_0002.JPG",
+      "image": "images/DSC_0002.JPG"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 171,
+    "fields": {
+      "title": "3 (1)",
+      "image": "images/3 (1).jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 172,
+    "fields": {
+      "title": "erh1",
+      "image": "images/erh1.jpeg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 173,
+    "fields": {
+      "title": "tec-23",
+      "image": "images/tec-23.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 174,
+    "fields": {
+      "title": "12149228553_39b83249fd_k",
+      "image": "images/12149228553_39b83249fd_k.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 175,
+    "fields": {
+      "title": "ochistka",
+      "image": "images/ochistka.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 176,
+    "fields": {
+      "title": "renewable-energy-mit",
+      "image": "images/renewable-energy-mit.jpeg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 177,
+    "fields": {
+      "title": "ENERGY-SAVINGS-3",
+      "image": "images/ENERGY-SAVINGS-3.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 178,
+    "fields": {
+      "title": "dcfwvwbdju-Testo-2",
+      "image": "images/Edcfwvwbdju-Testo-2.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 179,
+    "fields": {
+      "title": "2123",
+      "image": "images/2123.jpg"
+    }
+  },
+  {
+    "model": "zavod.image",
+    "pk": 180,
+    "fields": {
+      "title": "6128370",
+      "image": "images/6128370.jpg"
+    }
   }
-}
+
+
+
 ]

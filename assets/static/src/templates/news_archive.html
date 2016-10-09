@@ -39,7 +39,7 @@
                         <div class="b-box__wrapper">
                             <h4 class="b-box__header b-box__header-big">{{ one_news.title }}</h4>
                             <p class="b-box__text">
-                                {{ one_news.popularity }}
+                                {{ one_news.text | truncatewords:20 | striptags }}
                             </p>
                         </div>
                         <div class="b-box__footer">
