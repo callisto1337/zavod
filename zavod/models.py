@@ -131,6 +131,8 @@ class CategoryProduct(models.Model):
 
 class Product(models.Model):
     published = models.BooleanField(default=True)
+    is_black_friday = models.BooleanField(default=False)
+    black_friday_discount = models.IntegerField(default=0)
     name = models.CharField(max_length=100, default='')
     slug = models.SlugField(max_length=100, default='')
     category = models.ForeignKey(CategoryProduct)

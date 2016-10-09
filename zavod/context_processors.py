@@ -9,10 +9,15 @@ def news_for_bottom(request):
 
 
 def product_for_bottom(request):
-    product_for_bottom = Product.objects.filter(published=True).first()
+    product_for_bottom = Product.objects.filter(published=True).order_by('?').first()
     return {'product_for_bottom': product_for_bottom}
 
 
 def media_for_bottom(request):
     media_for_bottom = Gallery.objects.filter(published=True).first()
     return {'media_for_bottom': media_for_bottom}
+
+
+def black_friday_product(request):
+    black_friday_product = Product.objects.filter(published=True, is_black_friday=True).order_by('?').first()
+    return {'black_friday_product': black_friday_product}
