@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load extras %}
 
 {% block content %}
     <div class="b-section b-section_short">
@@ -32,71 +33,39 @@
             </div>
 
             <div class="b-section b-section_large b-section_borderless">
-                <div class="grid__row">
+                {% for ind, category_product in ind_category_products %}
+                {% if ind|mod:3 == 0 %}
+                    <div class="grid__row grid__row-btm">
                     <div class="grid__column-4">
-                        <a class="b-link b-link_pseudo" href="#">
-                            <div class="b-box">
-                                <div class="b-box__wrapper">
-                                    <div class="b-box__image">
-                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                    </div>
-                                    <h4 class="b-box__header">Водоводяные подогреватели</h4>
-                                    <p class="b-box__text">
-                                        Водоводяной подогреватель используется в системах горячего водоснабжения и отопительных системах общественных, коммунально-бытовых...
-                                    </p>
-                                </div>
-                                <div class="b-box__footer">
-                                    <div class="b-box__wrapper">
-                                        <span class="b-box__footer-left">44 позиции</span>
-                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                {% else %}
                     <div class="grid__column-4 grid__offset">
-                        <a class="b-link b-link_pseudo" href="#">
-                            <div class="b-box">
-                                <div class="b-box__wrapper">
-                                    <div class="b-box__image">
-                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                    </div>
-                                    <h4 class="b-box__header">Водоводяные подогреватели</h4>
-                                    <p class="b-box__text">
-                                        Водоводяной подогреватель используется в системах горячего водоснабжения и отопительных системах общественных, коммунально-бытовых...
-                                    </p>
-                                </div>
-                                <div class="b-box__footer">
-                                    <div class="b-box__wrapper">
-                                        <span class="b-box__footer-left">44 позиции</span>
-                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
-                                    </div>
-                                </div>
+                {% endif %}
+                <a class="b-link b-link_pseudo" href="{% url "catalog_category" category_product.slug %}">
+                    <div class="b-box">
+                        <div class="b-box__wrapper">
+                            <div class="b-box__image">
+                                {% if category_product.images.first %}
+                                    <img src="{{ category_product.images.first.image.url }}" alt="Пример Продукта">
+                                {% else %}
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                {% endif %}
                             </div>
-                        </a>
-                    </div>
-                    <div class="grid__column-4 grid__offset">
-                        <a class="b-link b-link_pseudo" href="#">
-                            <div class="b-box">
-                                <div class="b-box__wrapper">
-                                    <div class="b-box__image">
-                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                    </div>
-                                    <h4 class="b-box__header">Водоводяные подогреватели</h4>
-                                    <p class="b-box__text">
-                                        Водоводяной подогреватель используется в системах горячего водоснабжения и отопительных системах общественных, коммунально-бытовых...
-                                    </p>
-                                </div>
-                                <div class="b-box__footer">
-                                    <div class="b-box__wrapper">
-                                        <span class="b-box__footer-left">44 позиции</span>
-                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
-                                    </div>
-                                </div>
+                            <h4 class="b-box__header">{{ category_product.name }}</h4>
+                            <p class="b-box__text">{{ category_product.text|truncatewords:20}}</p>
+                        </div>
+                        <div class="b-box__footer">
+                            <div class="b-box__wrapper">
+                                <span class="b-box__footer-left">{{ category_product.number }} позиции</span>
+                                <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
                             </div>
-                        </a>
+                        </div>
                     </div>
+                </a>
+            </div>
+            {% if ind|add:1|mod:3 == 0 %}
                 </div>
+            {% endif %}
+            {% endfor %}
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">

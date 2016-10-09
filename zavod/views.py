@@ -463,6 +463,8 @@ def catalog(request):
         category_product.number = Product.objects.filter(published=True, category=category_product).count()
         for child_category in CategoryProduct.objects.filter(published=True, parent_id=category_product.id).all():
             category_product.number += Product.objects.filter(published=True, category=child_category).count()
+    ind_category_products = enumerate(category_products)
+    out.update({'ind_category_products': ind_category_products})
     out.update({'menu_active_item': 'catalog'})
     out.update({'category_products': category_products})
     if 'expand' in request.GET:
@@ -479,18 +481,21 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             title = 'Вложенные категории'
             subcategories = CategoryProduct.objects.filter(parent_id=category.id, published=True).all()
             template_name = 'catalog_category.html'
+            ind_subcategory = enumerate(subcategories)
             if 'expand' in request.GET:
                 template_name = 'catalog_category_expand.html'
-            out.update({'subcategories': subcategories, 'title': title, 'category': category, 'request': request})
+            out.update({'subcategories': subcategories, 'title': title, 'category': category, 'request': request,
+                        'ind_subcategory': ind_subcategory})
             return render(request, template_name, out)
         else:
             title = 'Список продуктов'
             products = Product.objects.all().filter(category=category, published=True)
             template_name = 'catalog_category_products.html'
+            ind_products = enumerate(products)
             if 'expand' in request.GET:
                 template_name = 'catalog_category_products_expand.html'
             out.update({'products': products, 'parent': category, 'title': title, 'category': category,
-                        'request': request})
+                        'request': request, 'ind_products': ind_products})
             return render(request, template_name, out)
     else:
         return get_product(request, category_slug, parent_category_slug, out)

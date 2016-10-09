@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load extras %}
 
 {% block content %}
     <div class="b-section b-section_short">
@@ -39,19 +40,34 @@
                     <a href="../" class="b-section-back">Назад к каталогу</a>
                 {% endif %}
             </div>
-            <div class="grid__row">
-                <div class="grid__column-12">
-                    <div class="submenu__catalog">
-                        <ul class="submenu__catalog__list">
-                            {% for product in products %}
-                                <li class="submenu__catalog__list__item">
-                                    <a href="{% url "catalog_category" product.slug %}"
-                                       class="submenu__catalog__list__item-link">{{ product.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+            <div class="b-section b-section_large b-section_borderless">
+                {% for ind, product in ind_products %}
+                {% if ind|mod:3 == 0 %}
+                    <div class="grid__row grid__row-btm">
+                    <div class="grid__column-4">
+                {% else %}
+                    <div class="grid__column-4 grid__offset">
+                {% endif %}
+                <a class="b-link b-link_pseudo" href="{% url "catalog_category_inside" product.category.slug product.slug %}">
+                    <div class="b-box">
+                        <div class="b-box__wrapper">
+                            <div class="b-box__image">
+                                {% if product.images.first %}
+                                    <img src="{{ product.images.first.image.url }}" alt="Пример Продукта">
+                                {% else %}
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                {% endif %}
+                            </div>
+                            <h4 class="b-box__header">{{ product.name }}</h4>
+                            <p class="b-box__text">{{ product.text|truncatewords:20}}</p>
+                        </div>
                     </div>
+                </a>
+            </div>
+            {% if ind|add:1|mod:3 == 0 %}
                 </div>
+            {% endif %}
+            {% endfor %}
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">

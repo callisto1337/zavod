@@ -60,19 +60,51 @@
             <div class="grid__row">
                 <div class="grid__column-9">
                     <a class="b-section-subtitle b-section-subtitle_colorful" href="#">Оставить свой отзыв</a>
+                    {% get_comment_list for product as tree %}
+                    {% for comment in tree %}
+
+                        <div class="b-comment {% if comment.depth > 1 %} b-comment-offset {% endif %}">
+                            <div class="b-comment__content">
+                                <div class="b-comment__content__text">
+                                    {{ comment.comment }}
+                                </div>
+                                {% if user.is_staff %}
+                                    {#                                        {% render_comment_form for news with comment.id %}#}
+                                {% endif %}
+                            </div>
+                            <div class="b-comment__info">
+                                <div class="b-comment__avatar">
+                                    <img src="{% static 'img/avatars/noavatar.png' %}" alt="">
+                                </div>
+                                <div class="b-comment__extra">
+                                    <div class="b-comment__extra-author">
+                                        Денис такой-то
+                                    </div>
+                                    <div class="b-comment__extra-date">
+                                        24 января 2016 г.
+                                        <a href="#" class="b-comment-send">ответить</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
                     {% render_comment_form for product %}
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <ul class="b-property">
                         <li class="b-property__item">
-                            <span class="b-property__key">Цена с НДС, нержав.</span>
-                            <span class="b-property__value b-property__value_extra">5700 руб.</span>
+                            {% for key, value in product.properties.items %}
+                                {% if key == "Цена с НДС, руб." %}
+                                    <span class="b-property__key">Цена с НДС, нержав.</span>
+                                    <span class="b-property__value b-property__value_extra">{{ value }}</span>
+                                {% endif %}
+                            {% endfor %}
                         </li>
 
-                        <li class="b-property__item">
-                            <span class="b-property__key">Цена с НДС, нержав.</span>
-                            <span class="b-property__value b-property__value_extra">5700 руб.</span>
-                        </li>
+                        {#                        {% for property in product.string_properties %}#}
+                        {#                            <li class="b-property__item">{{ property }}</li>#}
+                        {#                        {% endfor %}#}
                     </ul>
 
                     <div class="b-box b-box-grey b-box_nohover">
@@ -85,44 +117,26 @@
                     <div class="b-inner b-inner_simple">
                         <div class="b-slider js-slider">
                             <ul class="b-slider">
-                                <li class="b-slider__item">
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                </li>
-                                <li class="b-slider__item">
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                </li>
-                                <li class="b-slider__item">
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                </li>
+                                {% for image in product.images.all%}
+                                    <li class="b-slider__item">
+                                        <img src="{{ image.image.url }}" alt="{{ image.image.title }}">
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
 
                     <ul class="b-property">
-                        <li class="b-property__item">
-                            <span class="b-property__key">Число трубок, Ду 16, шт.</span>
-                            <span class="b-property__value">4</span>
-                        </li>
-
-                        <li class="b-property__item">
-                            <span class="b-property__key">Поверхность нагрева, м2</span>
-                            <span class="b-property__value">0,37</span>
-                        </li>
+                        {% for key, value in product.properties.items %}
+                            {% if key != "Цена с НДС, руб." %}
+                                <li class="b-property__item">
+                                    <span class="b-property__key">{{ key }}</span>
+                                    <span class="b-property__value">{{ value }}</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                 </div>
-            </div>
-            <div class="grid__column-9">
-                {% get_comment_list for product as tree %}
-                {% for comment in tree %}
-                    <div style="margin-left: {{ comment.depth }}em;" class="comment">
-                        <div style="margin-left:{{ comment.depth }}em;">
-                            {{ comment.comment }}
-                            Reply to this comment
-                            {% render_comment_form for product with comment.id %}
-                        </div>
-                    </div>
-                {% endfor %}
-
             </div>
             <div class="grid__row">
                 <div class="grid__column-12">

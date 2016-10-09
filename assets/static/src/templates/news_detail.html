@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="b-section__image">
-                        {% if article.images.first %}
+                        {% if news.images.first %}
                             <img src="{{ news.images.first.image.url }}" alt="Картинка">
                         {% else %}
                             <img src="{% static 'img/player.png' %}" alt="Картинка">

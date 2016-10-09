@@ -146,7 +146,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('get_product', args=[self.slug])
+        return "{}?tab=review".format(reverse('catalog_category_inside', args=[self.category.slug, self.slug]))
 
     class Meta:
         verbose_name = 'Продукт'

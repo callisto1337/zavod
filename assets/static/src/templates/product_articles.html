@@ -54,36 +54,86 @@
                     </ul>
                 </div>
             </div>
-                {% for ind, article in product.ind_articles %}
-                    {% if ind|divisibleby:2 %}
-                        <div class="grid__row">
-                        <div class="grid__column-4">
-                    {% else %}
-                        <div class="grid__column-4 grid__offset">
-                    {% endif %}
-                        <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
-                            <div class="b-box {% if ind|mod:3 == 0 %} b-box-red {% endif %} {% if ind|mod:3 == 1 %} b-box-green {% endif %} {% if ind|mod:3 == 2 %} b-box-black {% endif %}">
-                                <div class="b-box__image-fullsize">
-                                    {% if article.images.first %}
-                                        <img src="{{ article.images.first.image.url }}" alt="Пример награды">
-                                    {% else %}
-                                        <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
-                                    {% endif %}
+            <div class="grid__row">
+                <div class="grid__column-9">
+                    {% for ind, article in product.ind_articles %}
+                        {% if ind|divisibleby:2 %}
+                            <div class="grid__row">
+                            <div class="grid__column-4">
+                        {% else %}
+                            <div class="grid__column-4 grid__offset">
+                        {% endif %}
+                            <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
+                                <div class="b-box {% if ind|mod:3 == 0 %} b-box-red {% endif %} {% if ind|mod:3 == 1 %} b-box-green {% endif %} {% if ind|mod:3 == 2 %} b-box-black {% endif %}">
+                                    <div class="b-box__image-fullsize">
+                                        {% if article.images.first %}
+                                            <img src="{{ article.images.first.image.url }}" alt="Пример награды">
+                                        {% else %}
+                                            <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
+                                        {% endif %}
+                                    </div>
+                                    <div class="b-box__wrapper">
+                                        <div class="b-box__author">{{ article.author }}</div>
+                                        <h4 class="b-box__header">{{ article.title }}</h4>
+                                        <p class="b-box__text">
+                                            {{ article.text }}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="b-box__wrapper">
-                                    <div class="b-box__author">{{ article.author }}</div>
-                                    <h4 class="b-box__header">{{ article.title }}</h4>
-                                    <p class="b-box__text">
-                                        {{ article.text }}
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+                        {% if not ind|divisibleby:2 %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <ul class="b-property">
+                        <li class="b-property__item">
+                            {% for key, value in product.properties.items %}
+                                {% if key == "Цена с НДС, руб." %}
+                                    <span class="b-property__key">Цена с НДС, нержав.</span>
+                                    <span class="b-property__value b-property__value_extra">{{ value }}</span>
+                                {% endif %}
+                            {% endfor %}
+                        </li>
+
+                        {#                        {% for property in product.string_properties %}#}
+                        {#                            <li class="b-property__item">{{ property }}</li>#}
+                        {#                        {% endfor %}#}
+                    </ul>
+
+                    <div class="b-box b-box-grey b-box_nohover">
+                        <div class="b-box__wrapper">
+                            <a class="b-btn b-btn__fullwidth" href="#">
+                                <span class="b-btn__text">Заказать</span>
+                            </a>
+                        </div>
                     </div>
-                    {% if not ind|divisibleby:2 %}
+                    <div class="b-inner b-inner_simple">
+                        <div class="b-slider js-slider">
+                            <ul class="b-slider">
+                                {% for image in product.images.all%}
+                                    <li class="b-slider__item">
+                                        <img src="{{ image.image.url }}" alt="{{ image.image.title }}">
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                    {% endif %}
-                {% endfor %}
+
+                    <ul class="b-property">
+                        {% for key, value in product.properties.items %}
+                            {% if key != "Цена с НДС, руб." %}
+                                <li class="b-property__item">
+                                    <span class="b-property__key">{{ key }}</span>
+                                    <span class="b-property__value">{{ value }}</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
