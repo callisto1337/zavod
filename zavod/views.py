@@ -467,7 +467,7 @@ def catalog(request):
     out.update({'ind_category_products': ind_category_products})
     out.update({'menu_active_item': 'catalog'})
     out.update({'category_products': category_products})
-    if 'expand' in request.GET:
+    if request.GET.get('expand', 'true') == 'true':
         return render(request, 'catalog_expand.html', out)
     return render(request, 'catalog.html', out)
 
@@ -475,14 +475,21 @@ def catalog(request):
 def catalog_category(request, category_slug, parent_category_slug=None):
     out = {}
     category = CategoryProduct.objects.filter(slug=category_slug).first()
+    category.number = Product.objects.filter(published=True, category=category).count()
+    for child_category in CategoryProduct.objects.filter(published=True, parent_id=category.id).all():
+        category.number += Product.objects.filter(published=True, category=child_category).count()
     out.update({'menu_active_item': 'catalog'})
     if category:
         if CategoryProduct.objects.filter(parent_id=category.id):
             title = 'Вложенные категории'
             subcategories = CategoryProduct.objects.filter(parent_id=category.id, published=True).all()
+            for subcategory in subcategories:
+                subcategory.number = Product.objects.filter(published=True, category=subcategory).count()
+                for child_category in CategoryProduct.objects.filter(published=True, parent_id=subcategory.id).all():
+                    subcategory.number += Product.objects.filter(published=True, category=child_category).count()
             template_name = 'catalog_category.html'
             ind_subcategory = enumerate(subcategories)
-            if 'expand' in request.GET:
+            if request.GET.get('expand', 'true') == 'true':
                 template_name = 'catalog_category_expand.html'
             out.update({'subcategories': subcategories, 'title': title, 'category': category, 'request': request,
                         'ind_subcategory': ind_subcategory})
@@ -492,7 +499,7 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             products = Product.objects.all().filter(category=category, published=True)
             template_name = 'catalog_category_products.html'
             ind_products = enumerate(products)
-            if 'expand' in request.GET:
+            if request.GET.get('expand', 'true') == 'true':
                 template_name = 'catalog_category_products_expand.html'
             out.update({'products': products, 'parent': category, 'title': title, 'category': category,
                         'request': request, 'ind_products': ind_products})

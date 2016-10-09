@@ -27,7 +27,7 @@
                             <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
                         </li>
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}">Списком</a>
+                            <a class="b-tab__item__link" href="{{ request.path }}?expand=false">Списком</a>
                         </li>
                     </ul>
                 </div>
@@ -60,6 +60,13 @@
                             </div>
                             <h4 class="b-box__header">{{ subcategory.name }}</h4>
                             <p class="b-box__text">{{ subcategory.text|truncatewords:20 | striptags }}</p>
+                        </div>
+                        <div class="b-box__footer">
+                            <div class="b-box__wrapper">
+                                <span class="b-box__footer-left">{{ subcategory.number }} позиции</span>
+                                <span class="b-box__footer-left">{{ category.number }}</span>
+                                <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                            </div>
                         </div>
                     </div>
                 </a>

@@ -25,7 +25,7 @@
                                 <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
                             </li>
                             <li class="b-tab__item b-tab__item_active">
-                                <a class="b-tab__item__link" href="{{ request.path }}">Списком</a>
+                                <a class="b-tab__item__link" href="{{ request.path }}?expand=false">Списком</a>
                             </li>
                         </ul>
                     </div>
@@ -46,7 +46,8 @@
                             {% for subcategory in subcategories %}
                                 <li class="b-category-list-group__list__item">
                                     <a href="{% url "catalog_category" subcategory.slug %}"
-                                       class="b-category-list-group__list__item-link">{{ subcategory.name }}</a>
+                                       class="b-category-list-group__list__item-link">{{ subcategory.name }}
+                                        <span class="b-category-list-group__list__item-info">{{ subcategory.number }} позиции</span>
                                 </li>
                             {% endfor %}
                         </ul>
