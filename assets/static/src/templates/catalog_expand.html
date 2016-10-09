@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="b-section b-section_large b-section_borderless">
+            <div class="b-section b-section_borderless">
                 {% for ind, category_product in ind_category_products %}
                 {% if ind|mod:3 == 0 %}
                     <div class="grid__row grid__row-btm">
@@ -51,7 +51,7 @@
                                 {% endif %}
                             </div>
                             <h4 class="b-box__header">{{ category_product.name }}</h4>
-                            <p class="b-box__text">{{ category_product.text|truncatewords:20}}</p>
+                            <p class="b-box__text">{{ category_product.text | truncatewords:20 | striptags }}</p>
                         </div>
                         <div class="b-box__footer">
                             <div class="b-box__wrapper">

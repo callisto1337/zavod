@@ -6,7 +6,7 @@
 		width: 18px;
 		height: 32px;
 		z-index: 100;
-		
+
 		&:hover {
 			cursor: pointer;
 		}
@@ -24,6 +24,7 @@
 		// В случае одной картинки в центре
 		img {
 			margin: 0 auto;
+			width: 100%;
 		}
 	}
 }

@@ -14,11 +14,16 @@
 		margin: 0 auto 26px auto;
 		width: 180px;
 
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+
 		&-fullsize {
 			margin: 0 auto 8px auto;
 
 			img {
-				width: 100%;
+				max-width: 100%;
 				height: auto;
 			}
 		}
