@@ -238,7 +238,7 @@
                                 <div class="b-box__wrapper">
                                     <h4 class="b-box__header b-box__header-big">{{ news.title }}</h4>
                                     <p class="b-box__text">
-                                        {{ news.text }}
+                                        {{ news.text | truncatewords:20 | safe }}
                                     </p>
                                 </div>
                                 <div class="b-box__footer">
