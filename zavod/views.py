@@ -58,8 +58,8 @@ def logout(request):
 
 def main(request):
     out = {}
-    ind_articles = enumerate(Article.objects.filter(published=True).order_by('date_created').all()[0:3])
-    ind_news = enumerate(News.objects.filter(published=True).order_by('date_created').all()[0:2])
+    ind_articles = enumerate(Article.objects.filter(published=True).order_by('-date_created').all()[0:3])
+    ind_news = enumerate(News.objects.filter(published=True).order_by('-date_created').all()[0:2])
     out.update({'ind_articles': ind_articles})
     out.update({'ind_news': ind_news})
     out.update({'menu_active_item': 'about'})
@@ -155,9 +155,9 @@ def zachem_nuzhna_dokumentatsija(request):
 
 def photogallery(request):
     out = {}
-    events = Gallery.objects.filter(type='event', published=True).order_by('date_created').all()
-    products = Gallery.objects.filter(type='product', published=True).order_by('date_created').all()
-    gallery = Gallery.objects.filter(published=True).order_by('date_created').all()
+    events = Gallery.objects.filter(type='event', published=True).order_by('-date_created').all()
+    products = Gallery.objects.filter(type='product', published=True).order_by('-date_created').all()
+    gallery = Gallery.objects.filter(published=True).order_by('-date_created').all()
     out.update({'events': events})
     out.update({'products': products})
     out.update({'gallery': gallery})
@@ -334,7 +334,7 @@ def articles_detail(request, article_slug):
 def articles_tag(request, tag):
     out = {}
     articles = Article.objects.filter(tags__title=tag, published=True)\
-                      .order_by('date_created').all()[:5]
+                      .order_by('-date_created').all()[:5]
     out.update({'menu_active_item': 'articles'})
     out.update({'articles': articles})
     return render(request, 'articles.html', out)
@@ -344,7 +344,7 @@ def articles_tag_page(request, page_number, tag):
     out = {}
     start = (int(page_number) - 1) * 5 + 1
     articles = Article.objects.filter(tags__title=tag, published=True)\
-                      .order_by('date_created').all()[start:start+5]
+                      .order_by('-date_created').all()[start:start+5]
     out.update({'menu_active_item': 'articles'})
     out.update({'articles': articles})
     return render(request, 'articles.html', out)
@@ -359,7 +359,7 @@ def news_archive(request, page_number=1):
     if tag:
         news_objects = news_objects.filter(tags=Tag.objects.filter(title=tag).first())
     if sort_type == 'date_created':
-        news_objects = news_objects.order_by('date_created')
+        news_objects = news_objects.order_by('-date_created')
     elif sort_type == 'popular':
         news_objects = news_objects.order_by('-views')
     elif sort_type == 'comment':
@@ -393,7 +393,7 @@ def news_archive(request, page_number=1):
 
 def news(request):
     out = {}
-    news = News.objects.filter(published=True).order_by('date_created').all()[:5]
+    news = News.objects.filter(published=True).order_by('-date_created').all()[:5]
     out.update({'menu_active_item': 'news'})
     out.update({'news': news})
     return render(request, 'news.html', out)
@@ -402,7 +402,7 @@ def news(request):
 def news_page(request, page_number):
     out = {}
     start = (int(page_number) - 1) * 5 + 1
-    news = News.objects.filter(published=True).order_by('date_created').all()[start:start+5]
+    news = News.objects.filter(published=True).order_by('-date_created').all()[start:start+5]
     out.update({'menu_active_item': 'news'})
     out.update({'news': news})
     return render(request, 'news.html', out)
@@ -413,7 +413,7 @@ def news_detail(request, news_slug):
     news = get_object_or_404(News, slug=news_slug)
     news.views += 1
     news.save()
-    related_news = News.objects.filter(tags__in=news.tags.all()).exclude(pk=news.pk).all()
+    related_news = News.objects.filter(tags__in=news.tags.all()).exclude(pk=news.pk).order_by('-date_created').all()[:7]
     out.update({'menu_active_item': 'news'})
     out.update({'news': news})
     out.update({'related_news': related_news})
@@ -423,7 +423,7 @@ def news_detail(request, news_slug):
 def news_tag(request, tag):
     out = {}
     news = News.objects.filter(tags__title=tag, published=True)\
-                   .order_by('date_created').all()[:5]
+                   .order_by('-date_created').all()[:5]
     out.update({'menu_active_item': 'news'})
     out.update({'news': news})
     return render(request, 'news.html', out)
@@ -433,7 +433,7 @@ def news_tag_page(request, page_number, tag):
     out = {}
     start = (int(page_number) - 1) * 5 + 1
     news = News.objects.filter(tags__title=tag, published=True)\
-                       .order_by('date_created').all()[start:start+5]
+                       .order_by('-date_created').all()[start:start+5]
     out.update({'menu_active_item': 'news'})
     out.update({'news': news})
     return render(request, 'news.html', out)

@@ -21,16 +21,18 @@
                 <div class="grid__column-7">
                     <h3 class="b-section-title">{{ category.name }}</h3>
                 </div>
-                <div class="grid__column-7">
-                    <ul class="b-tab">
-                        <li class="b-tab__item b-tab__item_active">
-                            <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
-                        </li>
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?expand=false">Списком</a>
-                        </li>
-                    </ul>
-                </div>
+                {% if category.number != 0 %}
+                    <div class="grid__column-7">
+                        <ul class="b-tab">
+                            <li class="b-tab__item b-tab__item_active">
+                                <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
+                            </li>
+                            <li class="b-tab__item">
+                                <a class="b-tab__item__link" href="{{ request.path }}?expand=false">Списком</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
             <div class="grid__row">
                 {% if category.parent_id %}

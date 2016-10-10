@@ -56,7 +56,9 @@
                         <div class="b-box__footer">
                             <div class="b-box__wrapper">
                                 <span class="b-box__footer-left">{{ category_product.number }} позиции</span>
-                                <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                                {% if category_product.number != 0 %}
+                                    <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
