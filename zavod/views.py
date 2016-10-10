@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 import re
+import logging
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.contenttypes.models import ContentType
+from django.core.mail import EmailMessage
 from watson import search as watson
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout as auth_logout, authenticate, login
-from zavod.forms import QuestionForm, CustomUserCreationForm
+from zavod.forms import QuestionForm, CustomUserCreationForm, CallbackForm
 from zavod.constants import SPECIAL_FILTER_PARAMS
 from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage, Question, Employee, Tag
+from zt.settings import EMAILS_FOR_CALLBACK
+
+
+logger = logging.getLogger(__name__)
 
 
 def registration(request):
@@ -453,6 +459,28 @@ def get_product(request, slug, parent_category_slug=None, out={}):
         product.string_properties.append(u'{}: {}'.format(key, value))
     out.update({'product': product})
     out.update({'menu_active_item': 'catalog'})
+    if request.method == 'POST':
+        callback_form = CallbackForm(request.POST, request.FILES)
+        if callback_form.is_valid():
+            kwargs = dict(
+                to=EMAILS_FOR_CALLBACK,
+                from_email='from@example.com',
+                subject=u'Заказ продукции',
+                body=u'Поступил запрос на заказ продукции {} от {} (телефон для связи - {}, email - {}) с комментарием:\n\n"{}"'.format(
+                    callback_form.cleaned_data['product'],
+                    callback_form.cleaned_data['name'],
+                    callback_form.cleaned_data['phone'],
+                    callback_form.cleaned_data['email'],
+                    callback_form.cleaned_data['comment'],
+                ),
+            )
+            message = EmailMessage(**kwargs)
+            for attachment in request.FILES.getlist('file_field'):
+                message.attach(attachment.name, attachment.read(), attachment.content_type)
+            message.send()
+            logger.info(u'Send callback with text: {}'.format(kwargs['body']))
+    callback_form = CallbackForm()
+    out.update({'callback_form': callback_form})
     return render(request, template_name, out)
 
 
@@ -475,11 +503,11 @@ def catalog(request):
 def catalog_category(request, category_slug, parent_category_slug=None):
     out = {}
     category = CategoryProduct.objects.filter(slug=category_slug).first()
-    category.number = Product.objects.filter(published=True, category=category).count()
-    for child_category in CategoryProduct.objects.filter(published=True, parent_id=category.id).all():
-        category.number += Product.objects.filter(published=True, category=child_category).count()
     out.update({'menu_active_item': 'catalog'})
     if category:
+        category.number = Product.objects.filter(published=True, category=category).count()
+        for child_category in CategoryProduct.objects.filter(published=True, parent_id=category.id).all():
+            category.number += Product.objects.filter(published=True, category=child_category).count()
         if CategoryProduct.objects.filter(parent_id=category.id):
             title = 'Вложенные категории'
             subcategories = CategoryProduct.objects.filter(parent_id=category.id, published=True).all()
@@ -543,3 +571,37 @@ def products_search(request):
             result = result.filter(**search_param)
     out.update({'search_results': result})
     return render(request, 'zavod/search.html', out)
+
+
+# def email_question(request):
+    # if request.method == 'POST':
+    #     form = CallbackForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         kwargs = dict(
+    #             to=EMAIL_FOR_CALLBACK,
+    #             from_email='from@example.com',
+    #             subject=u'Заказ продукции',
+    #             body=u'Поступил запрос на заказ продукции {} от {} (телефон для связи - {}, email - {}) с комментарием:\n\n"{}"'.format(
+    #                 form.cleaned_data['product'],
+    #                 form.cleaned_data['name'],
+    #                 form.cleaned_data['phone'],
+    #                 form.cleaned_data['email'],
+    #                 form.cleaned_data['comment'],
+    #             ),
+    #         )
+    #         message = EmailMessage(**kwargs)
+    #         for attachment in request.FILES:
+    #             message.attach(attachment.name, attachment.read(), attachment.content_type)
+    #             message.attach_file(attachment.path)
+    #         message.send()
+    #         logger.info(u'Send callback with text: {}'.format(
+    #             u'Поступил запрос на заказ продукции {} от {} (телефон для связи - {}, email - {}) с комментарием:\n\n"{}"'.format(
+    #                 form.cleaned_data['product'],
+    #                 form.cleaned_data['name'],
+    #                 form.cleaned_data['phone'],
+    #                 form.cleaned_data['email'],
+    #                 form.cleaned_data['comment'],
+    #             )
+    #         ))
+    # else:
+    #     form = CallbackForm()

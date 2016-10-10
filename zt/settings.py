@@ -207,6 +207,28 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 
 EMAILS_FOR_FAQ = ['']
+EMAILS_FOR_CALLBACK = ['']
+
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django_app.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # Local settings
 

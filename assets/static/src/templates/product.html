@@ -89,6 +89,13 @@
                             </a>
                         </div>
                     </div>
+                    <div class="b-box b-box-grey b-box_nohover">
+                        <form action="{{ request.path }}" method="post" enctype="multipart/form-data">{% csrf_token %}
+                        {{ callback_form }}
+                        <input type="submit" value="Submit" />
+                        </form>
+
+                    </div>
                     <div class="b-inner b-inner_simple">
                         <div class="b-slider js-slider">
                             <ul class="b-slider">
