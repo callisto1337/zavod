@@ -64,8 +64,10 @@
                         <div class="b-box__footer">
                             <div class="b-box__wrapper">
                                 <span class="b-box__footer-left">{{ subcategory.number }} позиции</span>
-                                {% if subcategory.number != 0 %}
-                                    <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                                {% if subcategory.number != 0 and subcategory.price_list %}
+                                    <a class="b-link b-link_pseudo" href="{{ subcategory.price_list.url }}">
+                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                                    </a>
                                 {% endif %}
                             </div>
                         </div>

@@ -326,7 +326,11 @@ def articles_detail(request, article_slug):
     article = get_object_or_404(Article, slug=article_slug)
     article.views += 1
     article.save()
+    related_article = Article.objects.filter(tags__in=article.tags.all()).exclude(pk=article.pk).order_by('-date_created').first()
     out.update({'article': article})
+    print(related_article)
+    print(article)
+    out.update({'related_article': related_article})
     out.update({'menu_active_item': 'articles'})
     return render(request, 'articles_detail.html', out)
 
@@ -451,7 +455,8 @@ def get_product(request, slug, parent_category_slug=None, out={}):
         template_name = 'product_photo.html'
     elif tab == 'articles':
         template_name = 'product_articles.html'
-        product.ind_articles = enumerate(product.articles.all())
+        articles = set(product.category.articles.all()) | set(product.articles.all())
+        product.ind_articles = enumerate(articles)
     elif tab == 'review':
         template_name = 'product_review.html'
     product.string_properties = []

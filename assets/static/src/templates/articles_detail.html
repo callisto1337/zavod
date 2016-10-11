@@ -101,6 +101,33 @@
                     {% endfor %}
                     {#                            {% render_comment_form for news %}#}
                 </div>
+                <div class="grid__column-4 grid__offset">
+                            <div class="b-list__item b-list__item_head">Также читайте</div>
+                            {% if related_article %}
+                                <div class="grid__row grid__row-btm">
+                                <div class="grid__column-4">
+                                <a class="b-image b-image-round" href="{% url "articles_detail" related_article.slug %}">
+                                    <div class="b-box b-box-green">
+                                        <div class="b-box__image-fullsize">
+                                            {% if related_article.images.first %}
+                                                <img src="{{ related_article.images.first.image.url }}" alt="Пример награды">
+                                            {% else %}
+                                                <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
+                                            {% endif %}
+                                        </div>
+                                        <div class="b-box__wrapper">
+                                            <div class="b-box__author">{{ related_article.author }}</div>
+                                            <h4 class="b-box__header">{{ related_article.title }}</h4>
+                                            <p class="b-box__text">
+                                                {{ related_article.text }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            </div>
+                            {% endif %}
+                </div>
             </div>
         </div>
     </div>

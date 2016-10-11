@@ -1,18 +1,11 @@
 # -*- coding: utf-8 -*-
-import json
 from django.core.mail import send_mail
 from django.db import models
 from django.db.models.signals import post_save
 from django.urls import reverse
 from django.contrib.auth.models import User, UserManager, AbstractBaseUser
 from django.contrib.postgres.fields import JSONField
-
 from zt.settings import EMAILS_FOR_FAQ
-
-
-class JSONFieldCustom(JSONField):
-    def value_from_object(self, obj):
-        return json.dumps(super(JSONFieldCustom, self).value_from_object(obj))
 
 
 class CustomUser(AbstractBaseUser):
@@ -117,6 +110,7 @@ class CategoryProduct(models.Model):
     text = models.TextField(default='')
     images = models.ManyToManyField(Image, related_name='categories', default=None, null=True, blank=True)
     files = models.ManyToManyField(File, related_name='categories', default=None, null=True, blank=True)
+    price_list = models.FileField(upload_to='media/price_lists/', blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -141,7 +135,7 @@ class Product(models.Model):
     seo_title = models.CharField(max_length=300, default='')
     seo_description = models.CharField(max_length=300, default='')
     seo_keywords = models.CharField(max_length=300, default='')
-    properties = JSONFieldCustom(default='')
+    properties = JSONField(null=True)
     images = models.ManyToManyField(Image, related_name='products', default=None, null=True, blank=True)
 
     def __unicode__(self):
@@ -170,6 +164,7 @@ class Article(models.Model):
     tags = models.ManyToManyField(Tag, related_name='articles', default=None, null=True, blank=True)
     images = models.ManyToManyField(Image, related_name='articles', default=None, null=True, blank=True)
     products = models.ManyToManyField(Product, related_name='articles', default=None, null=True, blank=True)
+    category = models.ManyToManyField(CategoryProduct, related_name='articles', default=None, null=True, blank=True)
 
     def __unicode__(self):
         return self.title
