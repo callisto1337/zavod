@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
@@ -20,6 +21,9 @@ gulp.task('build-css', function () {
 	return gulp.src('src/sass/main.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('build/css'))
+		.pipe(autoprefixer({
+			browsers: ['> 1%', 'IE 7']
+		}))
 		.pipe(reload({ stream:true }));
 });
 
@@ -27,7 +31,7 @@ gulp.task('build-css', function () {
  * Подготовка Картинок
  */
 gulp.task('build-img', function () {
-	return gulp.src('src/img/**/*.+(jpg|png|gif)')
+	return gulp.src('src/img/**/**/*.+(jpg|png|gif|ico)')
 		.pipe(gulp.dest('build/img'))
 		.pipe(reload({ stream:true }));
 });
@@ -41,7 +45,16 @@ gulp.task('build-js', function () {
 		.pipe(reload({ stream:true }));
 });
 
-gulp.task('default', ['build-html', 'build-css', 'build-img', 'build-js'], function () {
+/**
+ * Подготовка шрифтов
+ */
+gulp.task('build-font', function () {
+	return gulp.src('src/fonts/**/*')
+		.pipe(gulp.dest('build/fonts'))
+		.pipe(reload({ stream:true }));
+});
+
+gulp.task('default', ['build-html', 'build-css', 'build-font', 'build-img', 'build-js'], function () {
 
 	gulp.watch(['src/templates/**/*.html'], ['build-html']);
 	gulp.watch(['src/sass/**/*.scss'], ['build-css']);

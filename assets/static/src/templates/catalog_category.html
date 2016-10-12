@@ -10,7 +10,7 @@
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if category.parent_id %}
-                    /<a class="b-breadcrumbs__link"
+                    / <a class="b-breadcrumbs__link"
                         href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
                 {% endif %}
             </div>
