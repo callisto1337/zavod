@@ -1,12 +1,20 @@
 .b-box {
-	box-shadow: 0 0 4px rgba(0,0,0,.12),
-				1px 2px 4px rgba(0,0,0,.08);
+	box-shadow: 0 0 4px rgba(0, 0, 0, .12),
+	1px 2px 4px rgba(0, 0, 0, .08);
 	position: relative;
 	background-color: #ffffff;
 	height: 100%;
 
 	&__wrapper {
-		padding: 28px;
+		padding: 16px 32px;
+
+		&:after {
+			content: " ";
+			visibility: hidden;
+			display: block;
+			height: 0;
+			clear: both;
+		}
 	}
 
 	&__image {
@@ -106,13 +114,14 @@
 	}
 
 	// без наведения
-	&_nohover {}
+	&_nohover {
+	}
 
 	/* animation */
 	&:hover:not(&_nohover) {
-		box-shadow: 0 0 32px rgba(0,0,0,.01),
-					7px 11px 11px rgba(0,0,0,.17),
-					9px 16px 36px rgba(0,0,0,.3);
+		box-shadow: 0 0 32px rgba(0, 0, 0, .01),
+		7px 11px 11px rgba(0, 0, 0, .17),
+		9px 16px 36px rgba(0, 0, 0, .3);
 	}
 
 	/* Colorful */

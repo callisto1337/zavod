@@ -47,7 +47,7 @@
 		width: 100%;
 		z-index: -1;
 	}
-	.table > tbody> tr:hover {
+	.table > tbody > tr:hover {
 		background-color: #ffffff !important;
 	}
 	.table > caption + thead > tr:first-child > th,
@@ -106,5 +106,11 @@
 	.table-hover > tbody > tr:hover > .active,
 	.table-hover > tbody > tr.active:hover > th {
 		background-color: #e8e8e8;
+	}
+
+	// хак для ссылок в таблице
+	.table a {
+		color: #292929;
+		text-decoration: none;
 	}
 }

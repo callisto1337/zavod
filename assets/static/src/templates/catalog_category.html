@@ -47,7 +47,9 @@
                                 <li class="b-category-list-group__list__item">
                                     <a href="{% url "catalog_category" subcategory.slug %}"
                                        class="b-category-list-group__list__item-link">{{ subcategory.name }}
-                                        <span class="b-category-list-group__list__item-info">{{ subcategory.number }} позиции</span>
+                                        {% if subcategory.number > 0 %}
+                                            <span class="b-category-list-group__list__item-info">{{ subcategory.number }} позиции</span>
+                                        {% endif %}
                                 </li>
                             {% endfor %}
                         </ul>
