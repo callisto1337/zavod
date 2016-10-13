@@ -224,6 +224,14 @@ class Question(models.Model):
         verbose_name_plural = 'Вопросы'
 
 
+class Department(models.Model):
+    title = models.CharField(max_length=100, null=False)
+
+    class Meta:
+        verbose_name = 'Отдел'
+        verbose_name_plural = 'Отделы'
+
+
 class Employee(models.Model):
     name = models.CharField(max_length=50, null=False)
     first_name = models.CharField(max_length=50, default='')
@@ -232,6 +240,7 @@ class Employee(models.Model):
     position = models.TextField()
     text = models.TextField()
     image = models.ForeignKey(Image, related_name='employees', default=None, null=True, blank=True)
+    department = models.ForeignKey(Department, related_name='employees', default=None, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Сотрудник'
