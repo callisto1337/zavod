@@ -62,7 +62,6 @@ def main(request):
     ind_news = enumerate(News.objects.filter(published=True).order_by('-date_created').all()[0:2])
     out.update({'ind_articles': ind_articles})
     out.update({'ind_news': ind_news})
-    out.update({'menu_active_item': 'about'})
     return render(request, 'index.html', out)
 
 

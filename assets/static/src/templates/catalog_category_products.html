@@ -11,8 +11,8 @@
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if category.parent_id %}
-                    /<a class="b-breadcrumbs__link"
-                        href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
+                    / <a class="b-breadcrumbs__link"
+                         href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
                 {% endif %}
             </div>
             <div class="grid__row">
@@ -54,25 +54,25 @@
                             </thead>
                             <tbody>
                             {% for product in products %}
-                            <tr>
-                                <td>
-                                    <a href="{% url "catalog_category_inside" product.category.slug product.slug %}">
-                                    {{ product.name }}
-                                </a>
-                                 </td>
-                                {% for key, value in product.properties.items %}
-                                    {% if "Цена" not in key %}
-                                        <td>{{ value }}</td>
-                                    {% else %}
-                                        <td class="bold">{{ value }}</td>
-                                    {% endif %}
-                                {% endfor %}
-                                <td>
-                                    <a class="b-btn" href="#">
-                                        <span class="b-btn__text">Заказать</span>
-                                    </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <a href="{% url "catalog_category_inside" product.category.slug product.slug %}">
+                                            {{ product.name }}
+                                        </a>
+                                    </td>
+                                    {% for key, value in product.properties.items %}
+                                        {% if "Цена" not in key %}
+                                            <td>{{ value }}</td>
+                                        {% else %}
+                                            <td class="bold">{{ value }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <td>
+                                        <a class="b-btn" href="#">
+                                            <span class="b-btn__text">Заказать</span>
+                                        </a>
+                                    </td>
+                                </tr>
                             {% endfor %}
                             </tbody>
                         </table>

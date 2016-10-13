@@ -10,7 +10,7 @@
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if category.parent_id %}
-                    /<a class="b-breadcrumbs__link"
+                    / <a class="b-breadcrumbs__link"
                         href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
                 {% endif %}
             </div>
@@ -47,7 +47,9 @@
                                 <li class="b-category-list-group__list__item">
                                     <a href="{% url "catalog_category" subcategory.slug %}"
                                        class="b-category-list-group__list__item-link">{{ subcategory.name }}
-                                        <span class="b-category-list-group__list__item-info">{{ subcategory.number }} позиции</span>
+                                        {% if subcategory.number > 0 %}
+                                            <span class="b-category-list-group__list__item-info">{{ subcategory.number }} позиции</span>
+                                        {% endif %}
                                 </li>
                             {% endfor %}
                         </ul>

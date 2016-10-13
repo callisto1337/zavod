@@ -55,7 +55,9 @@
                         </div>
                         <div class="b-box__footer">
                             <div class="b-box__wrapper">
-                                <span class="b-box__footer-left">{{ category_product.number }} позиции</span>
+                                {% if category_product.number > 0 %}
+                                    <span class="b-box__footer-left">{{ category_product.number }} позиции</span>
+                                {% endif %}
                                 {% if category_product.number != 0 and category_product.price_list %}
                                     <a class="b-link b-link_pseudo" href="{{ category_product.price_list.url }}">
                                         <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
