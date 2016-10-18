@@ -119,7 +119,7 @@
                                             <div class="b-box__author">{{ related_article.author }}</div>
                                             <h4 class="b-box__header">{{ related_article.title }}</h4>
                                             <p class="b-box__text">
-                                                {{ related_article.text }}
+                                                {{ related_article.text | safe }}
                                             </p>
                                         </div>
                                     </div>

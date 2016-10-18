@@ -134,7 +134,7 @@ class Property(models.Model):
     units = models.CharField(max_length=200, default='')
 
     def __unicode__(self):
-        return '{}, {}'.format(self.title, self.units)
+        return u'{}, {}'.format(self.title, self.units)
 
     class Meta:
         verbose_name = 'Свойство'
@@ -172,7 +172,7 @@ class ProductProperty(models.Model):
     value = models.CharField(max_length=200, default='')
 
     def __unicode__(self):
-        return '{} - {}'.format(self.property.title, self.value)
+        return u'{} - {}'.format(self.property.title, self.value)
 
     class Meta:
         verbose_name = 'Свойство продукта'

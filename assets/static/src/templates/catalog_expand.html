@@ -51,7 +51,7 @@
                                 {% endif %}
                             </div>
                             <h4 class="b-box__header">{{ category_product.name }}</h4>
-                            <p class="b-box__text">{{ category_product.text | truncatewords:20 | striptags }}</p>
+                            <p class="b-box__text">{{ category_product.text | truncatewords:20 | striptags | safe }}</p>
                         </div>
                         <div class="b-box__footer">
                             <div class="b-box__wrapper">

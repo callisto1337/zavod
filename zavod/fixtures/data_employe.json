@@ -1,0 +1,80 @@
+[
+  {
+    "model": "zavod.employee",
+    "pk": 1,
+    "fields": {
+      "published": true,
+      "name": "irina1",
+      "first_name": "Ирина",
+      "last_name": "Иванчина",
+      "position": "Менеджер",
+      "text": "Чудесный работник",
+      "image": 2
+    }
+  },
+  {
+    "model": "zavod.employee",
+    "pk": 2,
+    "fields": {
+      "published": true,
+      "name": "irina2",
+      "first_name": "Ирина",
+      "last_name": "Иванчина",
+      "position": "Менеджер",
+      "text": "Чудесный работник",
+      "image": 2
+    }
+  },
+  {
+    "model": "zavod.employee",
+    "pk": 3,
+    "fields": {
+      "published": true,
+      "name": "irina3",
+      "first_name": "Ирина",
+      "last_name": "Иванчина",
+      "position": "Менеджер",
+      "text": "Чудесный работник",
+      "image": 2
+    }
+  },
+  {
+    "model": "zavod.employee",
+    "pk": 4,
+    "fields": {
+      "published": true,
+      "name": "irina4",
+      "first_name": "Ирина",
+      "last_name": "Иванчина",
+      "position": "Менеджер",
+      "text": "Чудесный работник",
+      "image": 2
+    }
+  },
+  {
+    "model": "zavod.employee",
+    "pk": 5,
+    "fields": {
+      "published": true,
+      "name": "irina5",
+      "first_name": "Ирина",
+      "last_name": "Иванчина",
+      "position": "Менеджер",
+      "text": "Чудесный работник",
+      "image": 2
+    }
+  },
+  {
+    "model": "zavod.employee",
+    "pk": 6,
+    "fields": {
+      "published": true,
+      "name": "irina6",
+      "first_name": "Ирина",
+      "last_name": "Иванчина",
+      "position": "Менеджер",
+      "text": "Чудесный работник",
+      "image": 2
+    }
+  }
+]
