@@ -68,11 +68,14 @@
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <ul class="b-property">
-                        {% for key, value in product.properties.items %}
-                            {% if "Цена" in key %}
+                        {% for property in product.properties.all %}
+                            {% if "Цена" in property.property.title %}
                                 <li class="b-property__item">
-                                    <span class="b-property__key">{{ key }}</span>
-                                    <span class="b-property__value b-property__value_extra">{{ value }}</span>
+                                    <span class="b-property__key">{{ property.property.title }}
+                                        {% if property.property.units %}
+                                            , {{ property.property.units }}
+                                        {% endif %}</span>
+                                    <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
                                 </li>
                             {% endif %}
                         {% endfor %}
@@ -109,11 +112,14 @@
                     </div>
 
                     <ul class="b-property">
-                        {% for key, value in product.properties.items %}
-                            {% if "Цена" not in key %}
+                        {% for property in product.properties.all %}
+                            {% if "Цена" not in property.property.title %}
                                 <li class="b-property__item">
-                                    <span class="b-property__key">{{ key }}</span>
-                                    <span class="b-property__value">{{ value }}</span>
+                                    <span class="b-property__key">{{ property.property.title }}
+                                        {% if property.property.units %}
+                                            , {{ property.property.units }}
+                                        {% endif %}</span>
+                                    <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
                                 </li>
                             {% endif %}
                         {% endfor %}

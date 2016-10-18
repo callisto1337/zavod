@@ -58,6 +58,12 @@ class Image(models.Model):
     def __unicode__(self):
         return self.title
 
+    def image_tag(self):
+        return u'<img src="{}" />'.format(self.image.url)
+
+    image_tag.short_description = 'Изображение'
+    image_tag.allow_tags = True
+
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
@@ -123,19 +129,30 @@ class CategoryProduct(models.Model):
         verbose_name_plural = 'Категории продуктов'
 
 
+class Property(models.Model):
+    title = models.CharField(max_length=200, default='')
+    units = models.CharField(max_length=200, default='')
+
+    def __unicode__(self):
+        return '{}, {}'.format(self.title, self.units)
+
+    class Meta:
+        verbose_name = 'Свойство'
+        verbose_name_plural = 'Свойства'
+
+
 class Product(models.Model):
     published = models.BooleanField(default=True)
     is_black_friday = models.BooleanField(default=False)
     black_friday_discount = models.IntegerField(default=0)
     name = models.CharField(max_length=100, default='')
     slug = models.SlugField(max_length=100, default='')
-    category = models.ForeignKey(CategoryProduct)
+    category = models.ForeignKey(CategoryProduct, null=True)
     product_text = models.TextField()
     title = models.CharField(max_length=200, default='')
     seo_title = models.CharField(max_length=300, default='')
     seo_description = models.CharField(max_length=300, default='')
     seo_keywords = models.CharField(max_length=300, default='')
-    properties = JSONField(null=True)
     images = models.ManyToManyField(Image, related_name='products', default=None, null=True, blank=True)
 
     def __unicode__(self):
@@ -149,15 +166,28 @@ class Product(models.Model):
         verbose_name_plural = 'Продукты'
 
 
+class ProductProperty(models.Model):
+    property = models.ForeignKey(Property, related_name='products')
+    product = models.ForeignKey(Product, related_name='properties')
+    value = models.CharField(max_length=200, default='')
+
+    def __unicode__(self):
+        return '{} - {}'.format(self.property.title, self.value)
+
+    class Meta:
+        verbose_name = 'Свойство продукта'
+        verbose_name_plural = 'Свойства продуктов'
+
+
 class Article(models.Model):
     published = models.BooleanField(default=True)
     slug = models.SlugField(max_length=100, default='', unique=True)
-    preview_post = models.TextField(max_length=200)
+    preview_post = models.TextField()
     text = models.TextField()
     date_created = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=100)
-    seo_title = models.CharField(max_length=100, default='')
-    seo_description = models.CharField(max_length=100, default='')
+    title = models.CharField(max_length=1000)
+    seo_title = models.CharField(max_length=200, default='')
+    seo_description = models.CharField(max_length=1000, default='')
     seo_keywords = models.CharField(max_length=100, default='')
     author = models.TextField(max_length=200, default='')
     views = models.IntegerField(default=0)

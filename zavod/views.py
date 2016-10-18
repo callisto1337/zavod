@@ -82,6 +82,8 @@ def contacts(request):
 
 def prajjsy(request):
     out = {}
+    price_lists = CategoryProduct.objects.filter(published=True).exclude(price_list='').values_list('price_list').distinct().all()
+    out.update({'price_lists': price_lists})
     out.update({'menu_active_item': 'prajjsy'})
     return render(request, 'prajjsy.html', out)
 
@@ -458,9 +460,6 @@ def get_product(request, slug, parent_category_slug=None, out={}):
         product.ind_articles = enumerate(articles)
     elif tab == 'review':
         template_name = 'product_review.html'
-    product.string_properties = []
-    for key, value in product.properties.items():
-        product.string_properties.append(u'{}: {}'.format(key, value))
     out.update({'product': product})
     out.update({'menu_active_item': 'catalog'})
     if request.method == 'POST':
@@ -545,7 +544,7 @@ def product_or_products(request, slug, parent_category_slug=None, category_slug=
     out.update({'menu_active_item': 'catalog'})
     product = Product.objects.filter(slug=slug).first()
     if product:
-        return get_product(request, category_slug, out)
+        return get_product(request, slug, category_slug, out)
     title = 'Список продуктов во вложенной категории'
     category = get_object_or_404(CategoryProduct, slug=slug)
     products = Product.objects.filter(category=category, published=True).all()

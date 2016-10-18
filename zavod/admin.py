@@ -1,21 +1,30 @@
 from django.contrib import admin
 
 from .models import Article, CategoryProduct, Product, CustomUser, Tag, Question, News, Image, Gallery, GalleryImage, \
-    File, Employee
+    File, Employee, Property, ProductProperty
+
+
+class ProductPropertyInline(admin.TabularInline):
+    model = ProductProperty
 
 
 class CategoryProductFields(admin.ModelAdmin):
+    change_form_template = 'zavod/admin/change_form.html'
     list_display = ('name', 'slug', 'published')
 admin.site.register(CategoryProduct, CategoryProductFields)
 
 
 class ArticleFields(admin.ModelAdmin):
+    change_form_template = 'zavod/admin/change_form.html'
     list_display = ('title', 'date_created', 'published')
 admin.site.register(Article, ArticleFields)
 
 
 class ProductFields(admin.ModelAdmin):
+    change_form_template = 'zavod/admin/change_form.html'
     list_display = ('name', 'category', 'published')
+    inlines = (ProductPropertyInline,)
+    filter_horizontal = ('images',)
 admin.site.register(Product, ProductFields)
 
 
@@ -41,11 +50,14 @@ admin.site.register(Question, QuestionFields)
 
 class NewsFields(admin.ModelAdmin):
     list_display = ('title', 'date_created', 'published')
+    change_form_template = 'zavod/admin/change_form.html'
 admin.site.register(News, NewsFields)
 
 
 class ImageFields(admin.ModelAdmin):
-    list_display = ('title', 'image')
+    list_display = ('title', 'image', 'image_tag')
+    fields = ('image_tag', 'title', 'image')
+    readonly_fields = ('image_tag',)
 admin.site.register(Image, ImageFields)
 
 
@@ -62,3 +74,9 @@ class GalleryFields(admin.ModelAdmin):
     list_display = ('name', 'slug', 'published')
     inlines = [GalleryImageInline]
 admin.site.register(Gallery, GalleryFields)
+
+
+class PropertyFields(admin.ModelAdmin):
+    list_display = ('title', 'units')
+    inlines = (ProductPropertyInline,)
+admin.site.register(Property, PropertyFields)

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django_comments',
     'django.contrib.sites',
     'social.apps.django_app.default',
+    # 'fluent_contents.plugins.text',
+    'django_wysiwyg',
     'zavod',
 ]
 

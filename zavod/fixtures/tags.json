@@ -75,5 +75,61 @@
     "fields": {
       "title": "новости жкх"
     }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 12,
+    "fields": {
+      "title": "тарифы жкх"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 13,
+    "fields": {
+      "title": "капремонт"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 14,
+    "fields": {
+      "title": "новости завода"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 15,
+    "fields": {
+      "title": "борьба с контрафактом"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 16,
+    "fields": {
+      "title": "продукция"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 17,
+    "fields": {
+      "title": "реформа жкх"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 18,
+    "fields": {
+      "title": "лицензирование"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 19,
+    "fields": {
+      "title": "рсо"
+    }
   }
 ]
