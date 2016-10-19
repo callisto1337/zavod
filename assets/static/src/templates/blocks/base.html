@@ -31,6 +31,7 @@
 {% include "blocks/footer.html" %}
 
 <script type="text/javascript" src="{% static 'js/vendor/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/vendor/modal.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/vendor/underscore.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/forms/Forms.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/stickymenu/StickyMenu.js' %}"></script>
@@ -52,6 +53,6 @@
     });
 </script>
 {% block extra-js %}{% endblock %}
-
+{% block extra-html %}{% endblock %}
 </body>
 </html>
