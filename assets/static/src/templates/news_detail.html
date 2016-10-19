@@ -88,10 +88,10 @@
                                 </div>
                                 <div class="b-comment__extra">
                                     <div class="b-comment__extra-author">
-                                        Денис такой-то
+                                        {{ comment.user_name }}
                                     </div>
                                     <div class="b-comment__extra-date">
-                                        24 января 2016 г.
+                                        {{ comment.submit_date | date }}
                                         <a href="#" class="b-comment-send">ответить</a>
                                     </div>
                                 </div>

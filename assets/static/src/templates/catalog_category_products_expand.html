@@ -98,22 +98,61 @@
             </div>
             <div class="grid__row">
                 <div class="grid__column-12">
-                    <div class="submenu__catalog">
-                        <ul class="submenu__catalog__list">
-                            {% for category_image in category.categoryimages %}
-                                <li class="submenu__catalog__list__item">
-                                    {{ category_image.title }}
-                                </li>
-                                <div class="b-box__image">
-                                    <img src="{% static category_image.url %}" alt="Пример Продукта">
-                                </div>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                    {% for category_image in category.images.all %}
+                        <div class="b-box__image-fullsize">
+                            <img src="{{ category_image.image.url }}" alt="Пример Продукта">
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
             </div>
         </div>
+
+        {% if category.popularproduct.all %}
+            <div class="b-section">
+                <div class="b-layout">
+                    <div class="grid__row">
+                        <h3 class="subheading">Популярные товары</h3>
+                        {% for popularproduct in category.popularproduct.all %}
+                            {% if forloop.counter > 1 %}
+                                <div class="grid__column-4 grid__offset">
+                            {% else %}
+                                <div class="grid__column-4">
+                            {% endif %}
+                                <a class="b-image"
+                                   href="{% url 'catalog_category_inside' popularproduct.product.category.slug popularproduct.product.slug %}">
+                                    <div class="b-box">
+                                        <div class="b-box__wrapper">
+                                            <div class="b-box__image-left">
+                                                {% if popularproduct.product.images.first %}
+                                                    <img src="{{ popularproduct.product.images.first.image.url }}"
+                                                         alt="Пример Продукта">
+                                                {% else %}
+                                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                                {% endif %}
+                                            </div>
+                                            <p class="b-box__author">
+                                                {{ popularproduct.product.category.name }}
+                                            </p>
+                                            <p class="b-box__text">
+                                                {{ popularproduct.product.name }}
+                                            </p>
+                                        {% if popularproduct.type == 0 %}
+                                            <div class="b-box__sale">Хит</div>
+                                        {% elif popularproduct.type == 1 %}
+                                            <div class="b-box__sale">Скидка!</div>
+                                        {% elif popularproduct.type == 2 %}
+                                            <div class="b-box__sale">Новинка</div>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
         <div class="b-section">
             <div class="b-layout">
