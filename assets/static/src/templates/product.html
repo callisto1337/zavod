@@ -60,10 +60,10 @@
                         {{ product.product_text | safe }}
                     </div>
                     {# нужна картинка, которую можно выбирать в адмике #}
-                    {% if product.images.first %}
-                    <div class="b-section-subtitle">
-                        {{ product.images.first.image.title }}
-                    </div>
+                    {% if product.image_in_description %}
+                        <div class="b-section-subtitle">
+                            <img src="{{ product.image_in_description.image.url }}" alt="{{ product.image_in_description.title }}">
+                        </div>
                     {% endif %}
                 </div>
                 <div class="grid__column-4 grid__offset">
@@ -143,6 +143,42 @@
                 </div>
             </div>
         </div>
+        {% if product.related_products.all %}
+            <div class="b-layout">
+                <div class="grid__row">
+                    <h3 class="subheading">С этим товаром также покупают</h3>
+                    {% for related_product in product.related_products.all %}
+                        {% if forloop.counter > 1 %}
+                            <div class="grid__column-4 grid__offset">
+                        {% else %}
+                            <div class="grid__column-4">
+                        {% endif %}
+                            <a class="b-image"
+                               href="{% url 'catalog_category_inside' related_product.category.slug related_product.slug %}">
+                                <div class="b-box">
+                                    <div class="b-box__wrapper">
+                                        <div class="b-box__image-left">
+                                            {% if related_product.images.first %}
+                                                <img src="{{ related_product.images.first.image.url }}"
+                                                     alt="Пример Продукта">
+                                            {% else %}
+                                                <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                            {% endif %}
+                                        </div>
+                                        <p class="b-box__author">
+                                            {{ related_product.category.name }}
+                                        </p>
+                                        <p class="b-box__text">
+                                            {{ related_product.name }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     <div class="b-section">

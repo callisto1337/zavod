@@ -60,8 +60,10 @@ def main(request):
     out = {}
     ind_articles = enumerate(Article.objects.filter(published=True).order_by('-date_created').all()[0:3])
     ind_news = enumerate(News.objects.filter(published=True).order_by('-date_created').all()[0:2])
+    black_friday_product = Product.objects.filter(is_black_friday=True).first()
     out.update({'ind_articles': ind_articles})
     out.update({'ind_news': ind_news})
+    out.update({'black_friday_product': black_friday_product})
     return render(request, 'index.html', out)
 
 

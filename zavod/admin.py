@@ -1,16 +1,21 @@
 from django.contrib import admin
 
 from .models import Article, CategoryProduct, Product, CustomUser, Tag, Question, News, Image, Gallery, GalleryImage, \
-    File, Employee, Property, ProductProperty
+    File, Employee, Property, ProductProperty, PopularProduct
 
 
 class ProductPropertyInline(admin.TabularInline):
     model = ProductProperty
 
 
+class PopularProductInline(admin.TabularInline):
+    model = PopularProduct
+
+
 class CategoryProductFields(admin.ModelAdmin):
     change_form_template = 'zavod/admin/change_form.html'
     list_display = ('name', 'slug', 'published')
+    inlines = (PopularProductInline,)
 admin.site.register(CategoryProduct, CategoryProductFields)
 
 

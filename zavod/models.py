@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.urls import reverse
 from django.contrib.auth.models import User, UserManager, AbstractBaseUser
-from django.contrib.postgres.fields import JSONField
+from zavod.constants import POPULAR_TYPE_CHOICES, HIT
 from zt.settings import EMAILS_FOR_FAQ
 
 
@@ -154,6 +154,8 @@ class Product(models.Model):
     seo_description = models.CharField(max_length=300, default='')
     seo_keywords = models.CharField(max_length=300, default='')
     images = models.ManyToManyField(Image, related_name='products', default=None, null=True, blank=True)
+    image_in_description = models.ForeignKey(Image, related_name='product_description', default=None, null=True, blank=True)
+    related_products = models.ManyToManyField('Product', related_name='related_to', default=None, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -177,6 +179,19 @@ class ProductProperty(models.Model):
     class Meta:
         verbose_name = 'Свойство продукта'
         verbose_name_plural = 'Свойства продуктов'
+
+
+class PopularProduct(models.Model):
+    category = models.ForeignKey(CategoryProduct, related_name='popularproduct')
+    product = models.ForeignKey(Product, related_name='popular')
+    type = models.IntegerField(choices=POPULAR_TYPE_CHOICES, default=HIT)
+
+    def __unicode__(self):
+        return u'{}: {} ({})'.format(self.category.name, self.product.name, self.type)
+
+    class Meta:
+        verbose_name = 'Популярный продукт в категории'
+        verbose_name_plural = 'Популярные продукты в категориях'
 
 
 class Article(models.Model):
