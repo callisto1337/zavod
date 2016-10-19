@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from django.forms import ModelForm, TextInput, EmailField, Form, FileField, ClearableFileInput, CharField, Textarea
+from django.forms import ModelForm, TextInput, EmailField, Form, FileField, ClearableFileInput, CharField, Textarea, \
+    NumberInput
 from django.contrib.auth.forms import UserCreationForm
 from zavod.models import Question
 from zavod.models import CustomUser
@@ -30,11 +31,14 @@ class LoginForm(UserCreationForm):
 class QuestionForm(ModelForm):
     class Meta:
         model = Question
-        fields = ['text']
+        fields = ['text', 'type']
         widgets = {
             'text': TextInput(attrs={'id': 'inputText',
                                      'placeholder': 'Текст вопроса',
                                      'required': 1}),
+            'type': NumberInput(attrs={'id': 'inputType',
+                                       'placeholder': 'Тип вопроса',
+                                       'required': 0}),
         }
 
 
