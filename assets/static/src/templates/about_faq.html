@@ -18,7 +18,7 @@
                 <div class="grid__column-14">
                     {% for question in questions %}
                         {% if question.type == 0 %}
-                            <div class="b-box b-box_faq js-faq">
+                            <div class="b-box b-box_faq js-faq" style="z-index: {{ forloop.revcounter }}">
                                 <div class="b-faq">
                                     <div class="grid__row">
                                         <div class="grid__column-1">
@@ -61,7 +61,7 @@
                 <div class="grid__column-14">
                     {% for question in questions %}
                         {% if question.type == 1 %}
-                            <div class="b-box b-box_faq js-faq">
+                            <div class="b-box b-box_faq js-faq" style="z-index: {{ forloop.revcounter }}">
                                 <div class="b-faq">
                                     <div class="grid__row">
                                         <div class="grid__column-1">

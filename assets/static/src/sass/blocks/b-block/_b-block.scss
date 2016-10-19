@@ -5,6 +5,7 @@
 		float: left;
 		width: 50%;
 		height: 420px;
+		position: relative;
 
 		// цветной фон
 		&_colorful {
@@ -16,15 +17,29 @@
 			position: relative;
 			text-align: center;
 			height: 100%;
+
+			&_absolute {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+			}
 		}
 
 		&__title {
 			font-size: 32.4px;
 			font-weight: 700;
 			line-height: 36px;
+			margin: 0 0 15px 0;
 
 			&_white {
 				color: #ffffff;
+			}
+
+			&_small {
+				font-size: 16.2px;
+				line-height: 20px;
+				margin: 0;
 			}
 		}
 	}
