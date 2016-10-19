@@ -90,6 +90,15 @@ def prajjsy(request):
     out = {}
     price_lists = CategoryProduct.objects.filter(published=True).exclude(price_list='').values_list('price_list').distinct().all()
     out.update({'price_lists': price_lists})
+    out.update({'vodovodjanye_podogrevateli': CategoryProduct.objects.filter(slug='vodovodjanye-podogrevateli').first()})
+    out.update({'parovodjanye_podogrevateli': CategoryProduct.objects.filter(slug='parovodjanye-podogrevateli').first()})
+    out.update({'podogrevateli_parovye': CategoryProduct.objects.filter(slug='podogrevateli-parovye-emkostnye-tipa-vpe-std').first()})
+    out.update({'serija_ts_565': CategoryProduct.objects.filter(slug='serija-ts-565').first()})
+    out.update({'serija_ts_566': CategoryProduct.objects.filter(slug='serija-ts-566').first()})
+    out.update({'serija_ts_567': CategoryProduct.objects.filter(slug='serija-ts-567').first()})
+    out.update({'grjazeviki_teplovykh_punktov': CategoryProduct.objects.filter(slug='grjazeviki-dlja-teplovykh-punktov-gtp-serija-ts-569').first()})
+    out.update({'vozdukhosborniki_a1i': CategoryProduct.objects.filter(slug='vozdukhosborniki-a1i').first()})
+    out.update({'elevatory': CategoryProduct.objects.filter(slug='elevatory').first()})
     out.update({'menu_active_item': 'prajjsy'})
     return render(request, 'prajjsy.html', out)
 
@@ -287,14 +296,19 @@ def gibkaja_sistema_skidok(request):
     return render(request, 'gibkaja_sistema_skidok.html', out)
 
 
-def articles(request, page_number=1):
+def articles(request, page_number=1, tag_in_url=None):
     out = {}
+    out.update({'url_for_pages': 'articles_page'})
     article_objects = Article.objects.filter(published=True)
     tag = request.GET.get('tag', None)
     sort_type = request.GET.get('sort_type', 'date_created')
     ctype = ContentType.objects.get_for_model(Article.objects.model)
     if tag:
         article_objects = article_objects.filter(tags=Tag.objects.filter(title=tag).first())
+    if tag_in_url:
+        out.update({'url_for_pages': 'articles_tag_page'})
+        out.update({'tag_in_url': tag_in_url})
+        article_objects = article_objects.filter(tags=Tag.objects.filter(title=tag_in_url).first())
     if sort_type == 'date_created':
         article_objects = article_objects.order_by('date_created')
     elif sort_type == 'popular':
@@ -335,40 +349,24 @@ def articles_detail(request, article_slug):
     article.save()
     related_article = Article.objects.filter(tags__in=article.tags.all()).exclude(pk=article.pk).order_by('-date_created').first()
     out.update({'article': article})
-    print(related_article)
-    print(article)
     out.update({'related_article': related_article})
     out.update({'menu_active_item': 'articles'})
     return render(request, 'articles_detail.html', out)
 
 
-def articles_tag(request, tag):
+def news_archive(request, page_number=1, tag_in_url=None):
     out = {}
-    articles = Article.objects.filter(tags__title=tag, published=True)\
-                      .order_by('-date_created').all()[:5]
-    out.update({'menu_active_item': 'articles'})
-    out.update({'articles': articles})
-    return render(request, 'articles.html', out)
-
-
-def articles_tag_page(request, page_number, tag):
-    out = {}
-    start = (int(page_number) - 1) * 5 + 1
-    articles = Article.objects.filter(tags__title=tag, published=True)\
-                      .order_by('-date_created').all()[start:start+5]
-    out.update({'menu_active_item': 'articles'})
-    out.update({'articles': articles})
-    return render(request, 'articles.html', out)
-
-
-def news_archive(request, page_number=1):
-    out = {}
+    out.update({'url_for_pages': 'news_archive_page'})
     news_objects = News.objects.filter(published=True)
     tag = request.GET.get('tag', None)
     sort_type = request.GET.get('sort_type', 'date_created')
     ctype = ContentType.objects.get_for_model(News.objects.model)
     if tag:
         news_objects = news_objects.filter(tags=Tag.objects.filter(title=tag).first())
+    if tag_in_url:
+        out.update({'url_for_pages': 'news_tag_page'})
+        out.update({'tag_in_url': tag_in_url})
+        news_objects = news_objects.filter(tags=Tag.objects.filter(title=tag_in_url).first())
     if sort_type == 'date_created':
         news_objects = news_objects.order_by('-date_created')
     elif sort_type == 'popular':
@@ -410,15 +408,6 @@ def news(request):
     return render(request, 'news.html', out)
 
 
-def news_page(request, page_number):
-    out = {}
-    start = (int(page_number) - 1) * 5 + 1
-    news = News.objects.filter(published=True).order_by('-date_created').all()[start:start+5]
-    out.update({'menu_active_item': 'news'})
-    out.update({'news': news})
-    return render(request, 'news.html', out)
-
-
 def news_detail(request, news_slug):
     out = {}
     news = get_object_or_404(News, slug=news_slug)
@@ -429,25 +418,6 @@ def news_detail(request, news_slug):
     out.update({'news': news})
     out.update({'related_news': related_news})
     return render(request, 'news_detail.html', out)
-
-
-def news_tag(request, tag):
-    out = {}
-    news = News.objects.filter(tags__title=tag, published=True)\
-                   .order_by('-date_created').all()[:5]
-    out.update({'menu_active_item': 'news'})
-    out.update({'news': news})
-    return render(request, 'news.html', out)
-
-
-def news_tag_page(request, page_number, tag):
-    out = {}
-    start = (int(page_number) - 1) * 5 + 1
-    news = News.objects.filter(tags__title=tag, published=True)\
-                       .order_by('-date_created').all()[start:start+5]
-    out.update({'menu_active_item': 'news'})
-    out.update({'news': news})
-    return render(request, 'news.html', out)
 
 
 def get_product(request, slug, parent_category_slug=None, out={}):

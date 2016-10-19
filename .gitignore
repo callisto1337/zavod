@@ -94,6 +94,6 @@ ENV/
 *.*~
 
 assets/static/node_modules/
-assets/media
+#assets/media
 zt/local_settings.py
 zavod/migrations

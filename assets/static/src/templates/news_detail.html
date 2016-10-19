@@ -55,9 +55,9 @@
                     </div>
                     <div class="b-info">
                         {% for tag in news.tags.all %}
-                            <div class="b-info__item b-info_left b-info_colorful b-info_italic">
-                                <i class="fa fa-tag" aria-hidden="true"></i> {{ tag.title }}
-                            </div>
+                            <a href="{% url "news_tag" tag.title %}" class="b-info__item b-info_left b-info_colorful b-info_italic">
+                                <i class="fa fa-tag" aria-hidden="true"></i>{{ tag.title }}
+                            </a>
                         {% endfor %}
                     </div>
                     {# end news #}

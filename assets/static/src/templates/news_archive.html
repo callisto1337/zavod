@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="grid__row">
-                <a href="../" class="b-section-back">Назад к панораме новостей</a>
+                <a href="{% url 'news' %}" class="b-section-back">Назад к панораме новостей</a>
             </div>
             {% for ind, one_news in ind_news %}
                 {% if ind|mod:2 == 0 %}
@@ -65,18 +65,36 @@
         {% if all_page_number|length <= 6 %}
             {% for page_number in all_page_number %}
             <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'news_archive_page' page_number %}">{{ page_number }}</a>
+                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+                {% if tag_in_url %}
+                    {% url url_for_pages tag_in_url page_number %}
+                {% else %}
+                    {% url url_for_pages page_number %}
+                {% endif %}
+                ">{{ page_number }}</a>
             </div>
             {% endfor %}
         {% else %}
             {% for page_number in all_page_number|slice:":6" %}
             <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'news_archive_page' page_number %}">{{ page_number }}</a>
+                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+                {% if tag_in_url %}
+                    {% url url_for_pages tag_in_url page_number %}
+                {% else %}
+                    {% url url_for_pages page_number %}
+                {% endif %}
+                ">{{ page_number }}</a>
             </div>
             {% endfor %}
             <div class="b-paginator__item">...</div>
             <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}" href="{% url 'news_archive_page' all_page_number|length %}">{{ all_page_number|length }}</a>
+                <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+                {% if tag_in_url %}
+                    {% url url_for_pages tag_in_url all_page_number|length %}
+                {% else %}
+                    {% url url_for_pages all_page_number|length %}
+                {% endif %}
+                ">{{ all_page_number|length }}</a>
             </div>
         {% endif %}
         </div>
