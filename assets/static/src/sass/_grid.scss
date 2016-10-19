@@ -1,5 +1,5 @@
 @mixin column {
-	float:left;
+	float: left;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -11,7 +11,6 @@
 }
 
 .grid {
-
 	&__row {
 		&:after {
 			clear: both;
@@ -92,4 +91,23 @@
 			margin-left: 36px;
 		}
 	}
+
+	// зачатки флюидного грида
+	&-fluid {
+
+		.grid__row {
+			margin-right: -15px;
+			margin-left: -15px;
+		}
+
+		.grid__column-6 {
+			width: 50%;
+			position: relative;
+			min-height: 1px;
+			padding-right: 15px;
+			padding-left: 15px;
+			float: left;
+		}
+	}
+
 }

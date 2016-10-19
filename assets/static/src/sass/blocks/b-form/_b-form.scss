@@ -1,0 +1,72 @@
+// Форма
+.b-form {
+
+	// любой контролл
+	&-control {
+		font-family: inherit;
+		font-weight: 300;
+		display: block;
+		width: 100%;
+		height: 44px;
+		padding: 14px;
+		font-size: 14.4px;
+		line-height: 1.42857143;
+		color: #000;
+		background-color: #ffffff;
+		background-image: none;
+		border: 1px solid #cecece;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+		&:focus {
+			border-color: #66afe9;
+			outline: 0;
+			border-color: #00955F;
+		}
+
+		&::-moz-placeholder {
+			color: #646464;
+			opacity: 1;
+		}
+		&:-ms-input-placeholder {
+			color: #646464;
+		}
+		&::-webkit-input-placeholder {
+			color: #646464;
+		}
+		&::-ms-expand {
+			border: 0;
+			background-color: transparent;
+		}
+
+		// в строку
+		&-inline {
+			display: inline-block;
+			width: auto;
+			vertical-align: middle;
+		}
+	}
+
+	// только для текстареа
+	textarea.b-form-control {
+		height: auto;
+	}
+
+	// группа
+	&-group {
+		margin-bottom: 15px;
+
+		// форма в строку
+		&-inline {
+			display: inline-block;
+			vertical-align: middle;
+			margin-bottom: 0;
+		}
+	}
+
+	.b-form-group-inline + .b-form-group-inline {
+		margin-left: 16px;
+	}
+}
