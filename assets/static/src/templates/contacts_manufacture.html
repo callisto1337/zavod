@@ -24,12 +24,12 @@
                            href="{% url "contacts" %}?location=manufacture">Производство</a>
                     </li>
                 </ul>
-                <h2 class="b-block__item__title b-block__item__title_white">+7 (495) 545-36-90 msk@zavodtriumph.ru</h2>
+                <h2 class="b-block__item__title b-block__item__title_white">+7 (351) 729-99-47 info@zavodtriumph.ru</h2>
                 <h3 class="b-block__item__title b-block__item__title_small b-block__item__title_white">
-                    Режим работы: с 7-00 до 19-00
+                    Режим работы: с 8-00 до 17-30
                 </h3>
                 <h3 class="b-block__item__title b-block__item__title_small b-block__item__title_white">
-                    (по московскому времени)
+                    (по челябинскому времени)
                 </h3>
 
                 <div class="b-section-social b-section-social_contacts">
@@ -65,17 +65,103 @@
             <div style="height:100%" id="map-office"></div>
             <div class="b-block__item__wrapper b-block__item__wrapper_absolute">
                 <h3 class="b-block__item__title b-block__item__title_small b-block__item__title_white">
-                    107014, г. Москва
+                    454008, г. Челябинск
                 </h3>
-                <h2 class="b-block__item__title b-block__item__title_white">ул. Стромынка, д.13-а</h2>
-                <h3 class="b-block__item__title b-block__item__title_small b-block__item__title_white">
-                    оф. 11 (м. Сокольники)
-                </h3>
+                <h2 class="b-block__item__title b-block__item__title_white">ул. Автодорожная, д.3</h2>
+            </div>
+        </div>
+        <div class="b-block__item">
+            <div class="b-block__item__wrapper">
+                <div id="contacts-employee">
+                    <div>
+                        <h3 class="b-block__item__title b-block__item__title_small">
+                            Менеджеры отдела продаж
+                        </h3>
+                        <div class="b-section__space"></div>
+                        <div class="grid__row">
+                            <div class="grid__column-2">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                            <div class="grid__column-2 grid__offset">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="b-block__item__title b-block__item__title_small">
+                            Менеджеры отдела продаж
+                        </h3>
+                        <div class="b-section__space"></div>
+                        <div class="grid__row">
+                            <div class="grid__column-2">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                            <div class="grid__column-2 grid__offset">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="b-block__item__title b-block__item__title_small">
+                            Менеджеры отдела продаж
+                        </h3>
+                        <div class="b-section__space"></div>
+                        <div class="grid__row">
+                            <div class="grid__column-2">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                            <div class="grid__column-2 grid__offset">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mouse"></div>
+            </div>
+        </div>
+        <div class="b-block__item b-block__item_grey">
+            <div class="b-block__item__wrapper">
             </div>
         </div>
         <script>
             function initMap() {
-                var myLatLng = {lat: 55.794402, lng: 37.6905963};
+                var myLatLng = {lat: 55.207169, lng: 61.365117};
 
                 // Create a map object and specify the DOM element for display.
                 var map = new google.maps.Map(document.getElementById('map-office'), {
@@ -204,4 +290,30 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyk6m7VRYi4bnncUZWMXKXYxqYAE-54gg&callback=initMap"
                 async defer></script>
     </div>
+{% endblock %}
+{% block extra-js %}
+    <script type="text/javascript" src="{% static 'js/vendor/mousewheel.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            var $slider = $('#contacts-employee');
+            $slider.slick({
+                vertical: true,
+                verticalSwiping: true,
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
+
+            $slider.mousewheel(function (e) {
+                e.preventDefault();
+
+                if (e.deltaY < 0) {
+                    $(this).slick('slickNext');
+                } else {
+                    $(this).slick('slickPrev');
+                }
+
+            });
+        });
+    </script>
 {% endblock %}

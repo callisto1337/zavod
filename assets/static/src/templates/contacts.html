@@ -20,7 +20,8 @@
                            href="{% url "contacts" %}?location=office">Офис</a>
                     </li>
                     <li class="b-tab__item">
-                        <a class="b-tab__item__link b-tab__item__link_white" href="{% url "contacts" %}?location=manufacture">Производство</a>
+                        <a class="b-tab__item__link b-tab__item__link_white"
+                           href="{% url "contacts" %}?location=manufacture">Производство</a>
                     </li>
                 </ul>
                 <h2 class="b-block__item__title b-block__item__title_white">+7 (495) 545-36-90 msk@zavodtriumph.ru</h2>
@@ -72,135 +73,249 @@
                 </h3>
             </div>
         </div>
-        <script>
-            function initMap() {
-                var myLatLng = {lat: 55.794402, lng: 37.6905963};
-
-                // Create a map object and specify the DOM element for display.
-                var map = new google.maps.Map(document.getElementById('map-office'), {
-                    center: myLatLng,
-                    scrollwheel: false,
-                    zoom: 16,
-                    minZoom: 16,
-                    maxZoom: 16,
-                    draggable: false,
-                    mapTypeControl: false,
-                    panControl: false,
-                    rotateControl: false,
-                    scaleControl: false,
-                    streetViewControl: false,
-                    zoomControl: false
-                });
-
-                map.setOptions({
-                    styles: [
-                        {elementType: 'geometry', stylers: [{color: '#1f4d44'}]},
-                        {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-                        {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-                        {
-                            featureType: 'administrative.locality',
-                            elementType: 'labels.text.fill',
-                            stylers: [{color: '#2f7063'}]
-                        },
-                        {
-                            featureType: 'poi',
-                            elementType: 'labels.text.fill',
-                            stylers: [{color: '#2f7063'}]
-                        },
-                        {
-                            featureType: 'poi.park',
-                            elementType: 'geometry',
-                            stylers: [{color: '#263c3f'}]
-                        },
-                        {
-                            featureType: 'poi.park',
-                            elementType: 'labels.text.fill',
-                            stylers: [{color: '#6b9a76'}]
-                        },
-                        {
-                            featureType: 'road',
-                            elementType: 'geometry',
-                            stylers: [{color: '#183b35'}]
-                        },
-                        {
-                            featureType: 'road',
-                            elementType: 'geometry.stroke',
-                            stylers: [{color: '#212a37'}]
-                        },
-                        {
-                            featureType: 'road',
-                            elementType: 'labels.text.fill',
-                            stylers: [{color: '#2f7063'}]
-                        },
-                        {
-                            featureType: 'road.highway',
-                            elementType: 'geometry',
-                            stylers: [{color: '#1a3f38'}]
-                        },
-                        {
-                            featureType: 'road.highway',
-                            elementType: 'geometry.stroke',
-                            stylers: [{color: '#1f2835'}]
-                        },
-                        {
-                            featureType: 'road.highway',
-                            elementType: 'labels.text.fill',
-                            stylers: [{color: '#2f7063'}]
-                        },
-                        {
-                            featureType: 'transit',
-                            elementType: 'geometry',
-                            stylers: [{color: '#2f3948'}]
-                        },
-                        {
-                            featureType: 'transit.station',
-                            elementType: 'labels.text.fill',
-                            stylers: [{color: '#d59563'}]
-                        },
-                        {
-                            featureType: 'water',
-                            elementType: 'geometry',
-                            stylers: [{color: '#1a3f38'}]
-                        },
-                        {
-                            featureType: 'water',
-                            elementType: 'labels.text.fill',
-                            stylers: [{color: '#515c6d'}]
-                        },
-                        {
-                            featureType: 'water',
-                            elementType: 'labels.text.stroke',
-                            stylers: [{color: '#17263c'}]
-                        },
-                        {
-                            featureType: 'poi.business',
-                            stylers: [{visibility: 'off'}]
-                        },
-                        {
-                            featureType: 'transit',
-                            elementType: 'labels.icon',
-                            stylers: [{visibility: 'off'}]
-                        }
-                    ]
-                });
-
-                var image = {
-                    url: '/static/img/marker.png',
-                    size: new google.maps.Size(21, 29),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(0, 29)
-                };
-
-                // Create a marker and set its position.
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: myLatLng,
-                    icon: image
-                });
-            }
-
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyk6m7VRYi4bnncUZWMXKXYxqYAE-54gg&callback=initMap"
-                async defer></script>
+        <div class="b-block__item">
+            <div class="b-block__item__wrapper">
+                <div id="contacts-employee">
+                    <div>
+                        <h3 class="b-block__item__title b-block__item__title_small">
+                            Менеджеры отдела продаж
+                        </h3>
+                        <div class="b-section__space"></div>
+                        <div class="grid__row">
+                            <div class="grid__column-2">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                            <div class="grid__column-2 grid__offset">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="b-block__item__title b-block__item__title_small">
+                            Менеджеры отдела продаж
+                        </h3>
+                        <div class="b-section__space"></div>
+                        <div class="grid__row">
+                            <div class="grid__column-2">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                            <div class="grid__column-2 grid__offset">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="b-block__item__title b-block__item__title_small">
+                            Менеджеры отдела продаж
+                        </h3>
+                        <div class="b-section__space"></div>
+                        <div class="grid__row">
+                            <div class="grid__column-2">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                            <div class="grid__column-2 grid__offset">
+                                <a class="b-image b-image-round" href="#">
+                                    <div class="b-image__container">
+                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                    </div>
+                                    <div class="b-image__title">Любовь Гордиенко</div>
+                                    <div class="b-image__caption">info@zavod.ru</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mouse"></div>
+            </div>
+        </div>
+        <div class="b-block__item b-block__item_grey">
+            <div class="b-block__item__wrapper">
+            </div>
+        </div>
     </div>
+    <script>
+        function initMap() {
+            var myLatLng = {lat: 55.794402, lng: 37.6905963};
+
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById('map-office'), {
+                center: myLatLng,
+                scrollwheel: false,
+                zoom: 16,
+                minZoom: 16,
+                maxZoom: 16,
+                draggable: false,
+                mapTypeControl: false,
+                panControl: false,
+                rotateControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                zoomControl: false
+            });
+
+            map.setOptions({
+                styles: [
+                    {elementType: 'geometry', stylers: [{color: '#1f4d44'}]},
+                    {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                    {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                    {
+                        featureType: 'administrative.locality',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#2f7063'}]
+                    },
+                    {
+                        featureType: 'poi',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#2f7063'}]
+                    },
+                    {
+                        featureType: 'poi.park',
+                        elementType: 'geometry',
+                        stylers: [{color: '#263c3f'}]
+                    },
+                    {
+                        featureType: 'poi.park',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#6b9a76'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry',
+                        stylers: [{color: '#183b35'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#212a37'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#2f7063'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'geometry',
+                        stylers: [{color: '#1a3f38'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#1f2835'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#2f7063'}]
+                    },
+                    {
+                        featureType: 'transit',
+                        elementType: 'geometry',
+                        stylers: [{color: '#2f3948'}]
+                    },
+                    {
+                        featureType: 'transit.station',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'geometry',
+                        stylers: [{color: '#1a3f38'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#515c6d'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.stroke',
+                        stylers: [{color: '#17263c'}]
+                    },
+                    {
+                        featureType: 'poi.business',
+                        stylers: [{visibility: 'off'}]
+                    },
+                    {
+                        featureType: 'transit',
+                        elementType: 'labels.icon',
+                        stylers: [{visibility: 'off'}]
+                    }
+                ]
+            });
+
+            var image = {
+                url: '/static/img/marker.png',
+                size: new google.maps.Size(21, 29),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 29)
+            };
+
+            // Create a marker and set its position.
+            var marker = new google.maps.Marker({
+                map: map,
+                position: myLatLng,
+                icon: image
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyk6m7VRYi4bnncUZWMXKXYxqYAE-54gg&callback=initMap"
+            async defer></script>
+{% endblock %}
+{% block extra-js %}
+    <script type="text/javascript" src="{% static 'js/vendor/mousewheel.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            var $slider = $('#contacts-employee');
+            $slider.slick({
+                vertical: true,
+                verticalSwiping: true,
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
+
+            $slider.mousewheel(function (e) {
+                e.preventDefault();
+
+                if (e.deltaY < 0) {
+                    $(this).slick('slickNext');
+                } else {
+                    $(this).slick('slickPrev');
+                }
+
+            });
+        });
+    </script>
 {% endblock %}

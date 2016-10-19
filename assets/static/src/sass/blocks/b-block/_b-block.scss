@@ -12,11 +12,17 @@
 			background-color: #00955F;
 		}
 
+		// сервый фон
+		&_grey {
+			background-color: #f4f4f4;
+		}
+
 		&__wrapper {
 			padding: 55px 90px;
 			position: relative;
 			text-align: center;
 			height: 100%;
+			overflow: hidden;
 
 			&_absolute {
 				position: absolute;
@@ -31,6 +37,7 @@
 			font-weight: 700;
 			line-height: 36px;
 			margin: 0 0 15px 0;
+			color: #000000;
 
 			&_white {
 				color: #ffffff;
