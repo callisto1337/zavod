@@ -4,4 +4,65 @@
 {% load static from staticfiles %}
 
 {% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs b-breadcrumbs_white">
+                <a class="b-breadcrumbs__link b-breadcrumbs_white" href="/">Главная</a> /
+            </div>
+        </div>
+    </div>
+    <div class="b-block">
+        <div class="b-block__item b-block__item_colorful">
+            <div class="b-block__item__wrapper">
+                <ul class="b-tab b-tab-nofloat">
+                    <li class="b-tab__item b-tab__item_active">
+                        <a class="b-tab__item__link b-tab__item__link_white" href="{% url "catalog" %}?expand=true">Офис</a>
+                    </li>
+                    <li class="b-tab__item">
+                        <a class="b-tab__item__link b-tab__item__link_white" href="{% url "catalog" %}?expand=false">Производство</a>
+                    </li>
+                </ul>
+                <h2 class="b-block__item__title b-block__item__title_white">+7 (495) 545-36-90 msk@zavodtriumph.ru</h2>
+
+                <div class="b-section-social b-section-social_contacts">
+                    <ul class="b-section-social-list">
+                        <li class="b-section-social-list__item">
+                            <a href="http://www.facebook.com/zavodtriumph.ru"><i class="fa fa-facebook"
+                                                                                 aria-hidden="true"></i></a>
+                        </li>
+                        <li class="b-section-social-list__item">
+                            <a href="http://vk.com/planttriumph"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="b-section-social-list__item">
+                            <a href="http://twitter.com/zavodtriumph"><i class="fa fa-twitter"
+                                                                         aria-hidden="true"></i></a>
+                        </li>
+                        <li class="b-section-social-list__item">
+                            <a href="https://plus.google.com/+ZavodtriumphRu"><i class="fa fa-google-plus"
+                                                                                 aria-hidden="true"></i></a>
+                        </li>
+                        <li class="b-section-social-list__item">
+                            <a href="http://www.youtube.com/user/zavodtriumph"><i class="fa fa-youtube"
+                                                                                  aria-hidden="true"></i></a>
+                        </li>
+                        <li class="b-section-social-list__item">
+                            <a href="http://instagram.com/zavodtriumph"><i class="fa fa-instagram"
+                                                                           aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="b-block__item">
+            
+        </div>
+    </div>
+
+    <div class="b-section b-section_borderless">
+        <div class="b-section__image">
+            <img src="{% static 'img/player.png' %}" alt="Картинка">
+        </div>
+    </div>
+    {#        </div>#}
+    {#    </div>#}
 {% endblock %}

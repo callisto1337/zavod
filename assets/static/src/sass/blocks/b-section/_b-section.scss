@@ -63,6 +63,16 @@
 		margin-bottom: 32px;
 		font-weight: 300;
 		margin-top: 0;
+
+		// Оформление для всех ссылок
+		a {
+			text-decoration: none;
+			color: #00955F;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 	}
 
 	// Картинка-хайлайт
@@ -112,24 +122,64 @@
 				-moz-osx-font-smoothing: grayscale;
 				color: #00955f;
 			}
+
+			// Оформление для всех ссылок
+			a {
+				text-decoration: none;
+				color: #00955F;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
 		}
 	}
 
 	&-social {
+		color: #333333;
+
 		&-list {
 			list-style: none;
 			margin: 0;
 			padding: 0;
+			color: inherit;
 
 			&__item {
 				float: left;
 				margin-right: 16px;
+				color: inherit;
 
 				a {
 					text-decoration: none;
-					color: #333333;
+					color: inherit;
 					font-size: 16.2px;
+
+					&:hover {
+						text-decoration: underline;
+					}
 				}
+			}
+
+			// clearfix
+			&:after {
+				content: " ";
+				visibility: hidden;
+				display: block;
+				height: 0;
+				clear: both;
+			}
+		}
+
+		&_contacts {
+			color: #ffffff;
+			position: absolute;
+			bottom: 55px;
+			left: 90px;
+			right: 90px;
+
+			.b-section-social-list__item {
+				float: none;
+				display: inline-block;
 			}
 		}
 	}

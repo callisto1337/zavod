@@ -277,8 +277,8 @@ def proizvodstvo_zavoda_triumf(request):
 
 def gibkaja_sistema_skidok(request):
     out = {}
-    out.update({'menu_active_item': 'about'})
-    return render(request, 'zavod/gibkaja_sistema_skidok.html', out)
+    out.update({'menu_active_item': 'prajjsy'})
+    return render(request, 'gibkaja_sistema_skidok.html', out)
 
 
 def articles(request, page_number=1):

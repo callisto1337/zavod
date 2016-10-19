@@ -4,4 +4,161 @@
 {% load static from staticfiles %}
 
 {% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-7">
+                    <h3 class="b-section-title">Прайс-листы</h3>
+                </div>
+                <div class="grid__column-6 grid__offset">
+                    <ul class="b-tab">
+                        <li class="b-tab__item b-tab__item_active">
+                            <a class="b-tab__item__link" href="{% url "prajjsy" %}">Прайс-листы</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "gibkaja_sistema_skidok" %}">Гибкая система скидок</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-12">
+                    <p class="b-section-subtitle">В данном разделе Вы можете ознакомиться с
+                        ориентировочными ценами Завода Триумф на производимую продукцию.</p>
+                </div>
+                <div class="grid__column-7">
+                    <p class="b-section-text">Уважаемые клиенты! Обращаем ваше внимание, что прайсовые цены в настоящее
+                        время носят ознакомительный характер в связи с экономическим положением в сырьевом
+                        секторе.</p>
+                    <p class="b-section-text">Скидки зависят от объема запрашиваемой продукции.</p>
+                    <p class="b-section-text">Наши менеджеры рады помочь Вам с выбором и ценой.</p>
+                    <p class="b-section-text">Заказать данную продукцию можно:</p>
+                    <ul class="b-section-list">
+                        <li class="b-section-list__item">по бесплатному телефону 8 (800) 555 92 20</li>
+                        <li class="b-section-list__item">отправить заявку по почте <a
+                                href="mailto:info@zavodtriumph.ru">info@zavodtriumph.ru</a></li>
+                        <li class="b-section-list__item">через форму на сайте, а так же заказать обратный звонок.</li>
+                    </ul>
+
+                    <p class="b-section-text">Каждая заявка рассматривается индивидуально.</p>
+                    <p class="b-section-text">
+                        Узнайте <a href="http://zavodtriumph.ru/prajjsy/gibkaja-sistema-skidok/">подробнее</a> о ценовой
+                        политике завода Триумф.
+                    </p>
+                </div>
+                <div class="grid__column-6 grid__offset">
+                    <div class="b-category-list-group b-category-list-group_inline">
+                        <ul class="b-category-list-group__list">
+
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Подогреватели
+                                    водоводяные.pdf</a>
+                            </li>
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Подогреватели
+                                    пароводяные.pdf</a>
+                            </li>
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Подогреватели паровые
+                                    емкостные ВПЕ (СТД).pdf</a>
+                            </li>
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Грязевики горизонтальные
+                                    ТС-565</a>
+                            </li>
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Грязевики горизонтальные
+                                    ТС-566</a>
+                            </li>
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Грязевики вертикальные
+                                    ТС-567, ТС-568</a>
+                            </li>
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Грязевики для тепловых
+                                    пунктов (ГТП, абонентские ТС-569)</a>
+                            </li>
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Воздухосборники А1И.pdf</a>
+                            </li>
+                            <li class="b-category-list-group__list__item">
+                                <a href="#" class="b-category-list-group__list__item-link">Элеваторы.pdf</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="b-section__space"></div>
+                    <p class="b-section-text">
+                        Для просмотра необходим <a href="http://get.adobe.com/reader/">Adobe Reader</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="b-section">
+        <div class="b-layout">
+            <div class="grid__row">
+                <div class="grid__column-4">
+                    <h3 class="subheading">Новинка производства</h3>
+                    <a class="b-image"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <h3 class="subheading">Последняя новость</h3>
+                    <div class="b-box">
+                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                            <div class="b-box__wrapper">
+                                <p class="b-box__author">
+                                    {{ news_for_bottom.date_created }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ news_for_bottom.title }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <h3 class="subheading">Видео как закалялась сталь</h3>
+                    {% if media_for_bottom %}
+                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                    {% endif %}
+                    <div class="b-box b-box_noshadow">
+                        <div class="b-box__image-halfsize">
+                            {% if media_for_bottom %}
+                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if media_for_bottom %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

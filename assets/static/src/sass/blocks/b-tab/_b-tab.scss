@@ -1,74 +1,94 @@
 // табы, используются для переключения видов
 .b-tab {
-    float: right;
-    list-style-type: none;
-    margin: 0 auto;
-    white-space: nowrap;
-    padding: 0;
-    margin-left: -8px;
+	float: right;
+	list-style-type: none;
+	margin: 0 auto;
+	white-space: nowrap;
+	padding: 0;
+	margin-left: -8px;
 
-    // Элемент таба
-    &__item {
-        margin-left: 24px;
-        display: inline-block;
-        border-radius: 2px;
+	// Элемент таба
+	&__item {
+		margin-left: 24px;
+		display: inline-block;
+		border-radius: 2px;
 
-        // При наведении
-        &:hover {
-            background-color: #007a4e;
+		// При наведении
+		&:hover {
+			background-color: #02704f;
+			box-shadow: inset 1px 2px 4px rgba(0, 0, 0, .35);
 
-            .b-tab__item__link {
-                color: #ffffff;
+			.b-tab__item__link {
+				color: #ffffff;
 
-                &__counter {
-                    color: #ffffff;
-                }
-            }
-        }
+				&__counter {
+					color: #ffffff;
+				}
+			}
+		}
 
-        // у первого не нужно оступа
-        &:first-of-type {
-            margin-left: 0;
-        }
+		// у первого не нужно оступа
+		&:first-of-type {
+			margin-left: 0;
+		}
 
-        // ссылка в табе
-        &__link {
-            font-size: 16.2px;
-            font-weight: 700;
-            line-height: 18px;
-            color: #00955f;
-            text-decoration: none;
-            display: block;
-            padding: 4px 8px;
+		// ссылка в табе
+		&__link {
+			font-size: 16.2px;
+			font-weight: 700;
+			line-height: 18px;
+			color: #00955f;
+			text-decoration: none;
+			display: block;
+			padding: 4px 8px;
 
-            // счетчик в табе
-            &__counter {
-                font-size: 12.6px;
-                font-weight: 300;
-                color: #777777;
-            }
-        }
+			// счетчик в табе
+			&__counter {
+				font-size: 12.6px;
+				font-weight: 300;
+				color: #777777;
+			}
+			// белая ссылка (см страницу Контакты)
+			&_white {
+				color: #ffffff;
+			}
+		}
 
-        // активный элемент
-        &_active {
-            background-color: #007a4e;
+		// активный элемент
+		&_active {
+			background-color: #02704f;
+			box-shadow: inset 1px 2px 4px rgba(0, 0, 0, .35);
 
-            .b-tab__item__link {
-                color: #ffffff;
-                cursor: default;
+			.b-tab__item__link {
+				color: #ffffff;
+				cursor: default;
 
-                &__counter {
-                    color: #ffffff;
-                }
-            }
+				&__counter {
+					color: #ffffff;
+				}
+			}
 
-        }
-    }
+		}
+	}
 
-    // выравниваниеп по левому краю
-    &-left {
-        float: left;
-        margin-bottom: 44px;
-        margin-left: 0;
-    }
+	// выравниваниеп по левому краю
+	&-left {
+		float: left;
+		margin-bottom: 44px;
+		margin-left: 0;
+	}
+	
+	&-nofloat {
+		float: none;
+		margin-left: 0;
+		margin-bottom: 55px;
+	}
+
+	&:after {
+		content: " ";
+		visibility: hidden;
+		display: block;
+		height: 0;
+		clear: both;
+	}
 }

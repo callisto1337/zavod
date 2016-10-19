@@ -1,0 +1,39 @@
+.b-block {
+	margin-top: -70px;
+
+	&__item {
+		float: left;
+		width: 50%;
+		height: 420px;
+
+		// цветной фон
+		&_colorful {
+			background-color: #00955F;
+		}
+
+		&__wrapper {
+			padding: 55px 90px;
+			position: relative;
+			text-align: center;
+			height: 100%;
+		}
+
+		&__title {
+			font-size: 32.4px;
+			font-weight: 700;
+			line-height: 36px;
+
+			&_white {
+				color: #ffffff;
+			}
+		}
+	}
+
+	&:after {
+		content: " ";
+		visibility: hidden;
+		display: block;
+		height: 0;
+		clear: both;
+	}
+}

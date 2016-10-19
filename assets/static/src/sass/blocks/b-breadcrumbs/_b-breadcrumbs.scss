@@ -1,16 +1,21 @@
 .b-breadcrumbs {
-    font-size: 10.8px;
-    font-weight: 300;
-    color: #a1a1a1;
+	font-size: 10.8px;
+	font-weight: 300;
+	color: #a1a1a1;
 
-    &__link {
-        font-size: inherit;
-        font-weight: inherit;
-        color: inherit;
-        text-decoration: none;
-        
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+	&__link {
+		font-size: inherit;
+		font-weight: inherit;
+		color: inherit;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+	}
+
+	&_white {
+		color: white;
+	}
 }

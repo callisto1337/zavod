@@ -4,4 +4,122 @@
 {% load static from staticfiles %}
 
 {% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> / <a class="b-breadcrumbs__link"
+                                                                         href="{% url "dostavka" %}">Доставка</a>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-7">
+                    <h3 class="b-section-title">География продаж</h3>
+                </div>
+                <div class="grid__column-7">
+                    <ul class="b-tab">
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "dostavka" %}">Доставка</a>
+                        </li>
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "mezhdunarodnaja_dostavka" %}">Международная
+                                доставка</a>
+                        </li>
+                        <li class="b-tab__item b-tab__item_active">
+                            <a class="b-tab__item__link" href="#">География продаж</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-12">
+                    <p class="b-section-text">
+                        Наша поставляемая продукция: различные <a
+                            href="http://zavodtriumph.ru/catalog/vodovodjanye-podogrevateli/teploobmennik-vodovodjanoy/">теплообменники
+                        ВВП</a>, <a href="http://zavodtriumph.ru/catalog/parovodjanye-podogrevateli/">ПП1, ПП2</a>, <a
+                            href="http://zavodtriumph.ru/catalog/emkostnoe-oborudovanie/podogrevateli-parovye-emkostnye-tipa-vpe-std/">ВПЕ</a>,
+                        <a href="http://zavodtriumph.ru/catalog/grjazevik/">грязевики</a>, <a
+                            href="http://zavodtriumph.ru/catalog/vozdukhosborniki-a1i/">воздухосборники</a>, <a
+                            href="http://zavodtriumph.ru/catalog/registry-otopitelnye/">регистры отопления</a>, <a
+                            href="http://zavodtriumph.ru/catalog/konvektory-otoplenija/">конвекторы отопительные</a>
+                        — уже сейчас находится в эксплуатации на предприятиях всех крупных городов
+                        России.
+                    </p>
+                    <p class="b-section-text">
+                        Мы имеем возможность поставить наше оборудование в любые города, поселки, села нашей большой
+                        страны.
+                    </p>
+                    <p class="b-section-text">
+                        Поскольку мы с одинаковой тщательностью и ответственностью относимся к выполнению
+                        работ по каждому договору, вне зависимости от его объема, продукцию нашего
+                        завода можно встретить и в небольших городах Российской Федерации. Кроме того мы имеем
+                        большой опыт поставок подогревателей, различного теплообменного оборудования и оснащения
+                        для систем отопления в республику Казахстан, Узбекистан, Кыргызстан, Белоруссию.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="b-section">
+        <div class="b-layout">
+            <div class="grid__row">
+                <div class="grid__column-4">
+                    <h3 class="subheading">Новинка производства</h3>
+                    <a class="b-image"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <h3 class="subheading">Последняя новость</h3>
+                    <div class="b-box">
+                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                            <div class="b-box__wrapper">
+                                <p class="b-box__author">
+                                    {{ news_for_bottom.date_created }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ news_for_bottom.title }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <h3 class="subheading">Видео как закалялась сталь</h3>
+                    {% if media_for_bottom %}
+                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                    {% endif %}
+                    <div class="b-box b-box_noshadow">
+                        <div class="b-box__image-halfsize">
+                            {% if media_for_bottom %}
+                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if media_for_bottom %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

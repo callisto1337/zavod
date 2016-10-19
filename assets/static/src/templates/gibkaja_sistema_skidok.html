@@ -1,0 +1,149 @@
+{% extends "blocks/base.html" %}
+
+{# TODO: remove that loading #}
+{% load static from staticfiles %}
+
+{% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="/">Главная</a> / <a class="b-breadcrumbs__link"
+                                                                         href="{% url "prajjsy" %}">Прайс-листы</a> /
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-7">
+                    <h3 class="b-section-title">Гибкая система скидок</h3>
+                </div>
+                <div class="grid__column-6 grid__offset">
+                    <ul class="b-tab">
+                        <li class="b-tab__item">
+                            <a class="b-tab__item__link" href="{% url "prajjsy" %}">Прайс-листы</a>
+                        </li>
+                        <li class="b-tab__item b-tab__item_active">
+                            <a class="b-tab__item__link" href="{% url "gibkaja_sistema_skidok" %}">Гибкая система
+                                скидок</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-12">
+                    <h2 class="b-section-subtitle">
+                        Новый уровень развития
+                    </h2>
+                    <p class="b-section-text">
+                        На протяжении нескольких лет продукция Завода Триумф подтверждала высокий уровень репутации:
+                        компания была оценена экспертами как <a href="http://zavodtriumph.ru/nagrady/">Лучший товар
+                        года</a>, получила Национальный знак качества, вошла в список <a
+                            href="http://zavodtriumph.ru/news/zavod-triumf-zheleznyjj-postavshhik-2016-goda/">«Железной
+                        сотни поставщиков»</a>. Основным критерием стало стабильное качество производимых товаров. <a
+                            href="http://zavodtriumph.ru/about/nash-kollektiv/">Квалифицированные работники</a>,
+                        высококачественная <a href="http://zavodtriumph.ru/dokumentatsija/">сертифицированная</a>
+                        продукция, оперативное выполнение заказов, быстрое реагирование на изменения на рынке
+                        теплообменного оборудования, – все это вывело завод на новый уровень
+                        развития. <a href="http://zavodtriumph.ru/dokumentatsija/tovarnye-znaki/">Завод Триумф владелец
+                        собственной торговой марки и бренда</a>.
+                    </p>
+                    <h2 class="b-section-subtitle">
+                        Ценовая политика
+                    </h2>
+                    <p class="b-section-text">
+                        Освоение новейших технологий и разработки конструкторского отдела позволяют без промедления
+                        решать производственные вопросы. Инновационная стратегия организации связана с заменой парка
+                        станков и улучшением технологии производства. Стратегическое планирование, грамотное управление
+                        и развитая система маркетинга позволили добиться результатов: рациональное распределению
+                        ресурсов и рост производства обусловили стабильное положение компании на рынке. Взаимосвязанные
+                        факторы дали возможность взглянуть на цены продукции под иным углом и выйти на новые направления
+                        развития.
+                    </p>
+                    <p class="b-section-text">
+                        Продукция Завода Триумф используется на <a href="http://zavodtriumph.ru/partnery/">промышленных
+                        предприятиях</a> и в жилищно-коммунальной отрасли. Бюджетные предприятия, в отличие от
+                        коммерческих, не всегда располагают достаточным количеством выделенных средств для единоразовой
+                        закупки необходимой продукции. За счет выхода на новый уровень развития, открытия
+                        дополнительных цехов и создания новых бригад специалистов Завод Триумф рассмотрел
+                        возможность предоставления скидок на свою продукцию. Гибкая система скидок зависит от
+                        наименования продукции, объема закупки, материалов, из которых изготовлена, <a
+                            href="http://zavodtriumph.ru/geografija-prodazh/">от региона, куда идет поставка</a> и
+                        других факторов. Цены в <a href="http://zavodtriumph.ru/prajjsy/">прайс-листах</a> носят
+                        ознакомительный характер, окончательную стоимость вы можете получить, связавшись с нашими
+                        менеджерами по телефонам:
+                    </p>
+                    <div class="b-category-list-group">
+                        <p>г. Москва +7 (495) 545-36-90</p>
+                        <p>г. Челябинск +7 (351) 729-99-47</p>
+                        <p>Бесплатно по России 8 (800) 555-92-20</p>
+                    </div>
+                    <p class="b-section-text">
+                        Вы также можете отправить заявку по электронной почте <a href="mailto:info@zavodtriumph.ru">info@zavodtriumph.ru</a> или заказать на сайте обратный звонок.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="b-section">
+            <div class="b-layout">
+                <div class="grid__row">
+                    <div class="grid__column-4">
+                        <h3 class="subheading">Новинка производства</h3>
+                        <a class="b-image"
+                           href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                            <div class="b-box">
+                                <div class="b-box__wrapper">
+                                    <div class="b-box__image-left">
+                                        {% if product_for_bottom.images.first %}
+                                            <img src="{{ product_for_bottom.images.first.image.url }}"
+                                                 alt="Пример Продукта">
+                                        {% else %}
+                                            <img src="{% static 'img/products/product_sale.png' %}"
+                                                 alt="Пример Продукта">
+                                        {% endif %}
+                                    </div>
+                                    <p class="b-box__author">
+                                        {{ product_for_bottom.category.name }}
+                                    </p>
+                                    <p class="b-box__text">
+                                        {{ product_for_bottom.name }}
+                                    </p>
+                                    <div class="b-box__sale">Хит</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <h3 class="subheading">Последняя новость</h3>
+                        <div class="b-box">
+                            <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                                <div class="b-box__wrapper">
+                                    <p class="b-box__author">
+                                        {{ news_for_bottom.date_created }}
+                                    </p>
+                                    <p class="b-box__text">
+                                        {{ news_for_bottom.title }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <h3 class="subheading">Видео как закалялась сталь</h3>
+                        {% if media_for_bottom %}
+                            <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                        {% endif %}
+                        <div class="b-box b-box_noshadow">
+                            <div class="b-box__image-halfsize">
+                                {% if media_for_bottom %}
+                                    <img src="{{ media_for_bottom.cover_image.gallery_image.url }}"
+                                         alt="Пример баннера">
+                                {% else %}
+                                    <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if media_for_bottom %}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
