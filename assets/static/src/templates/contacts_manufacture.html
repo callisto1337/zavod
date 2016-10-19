@@ -15,12 +15,13 @@
         <div class="b-block__item b-block__item_colorful">
             <div class="b-block__item__wrapper">
                 <ul class="b-tab b-tab-nofloat">
-                    <li class="b-tab__item b-tab__item_active">
+                    <li class="b-tab__item">
                         <a class="b-tab__item__link b-tab__item__link_white"
                            href="{% url "contacts" %}?location=office">Офис</a>
                     </li>
-                    <li class="b-tab__item">
-                        <a class="b-tab__item__link b-tab__item__link_white" href="{% url "contacts" %}?location=manufacture">Производство</a>
+                    <li class="b-tab__item b-tab__item_active">
+                        <a class="b-tab__item__link b-tab__item__link_white"
+                           href="{% url "contacts" %}?location=manufacture">Производство</a>
                     </li>
                 </ul>
                 <h2 class="b-block__item__title b-block__item__title_white">+7 (495) 545-36-90 msk@zavodtriumph.ru</h2>

@@ -79,7 +79,11 @@ def search(request):
 def contacts(request):
     out = {}
     out.update({'menu_active_item': 'contacts'})
-    return render(request, 'contacts.html', out)
+    location = request.GET.get('location', 'office')
+    if location == 'manufacture':
+        return render(request, 'contacts_manufacture.html', out)
+    else:
+        return render(request, 'contacts.html', out)
 
 
 def prajjsy(request):
