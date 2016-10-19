@@ -10,6 +10,14 @@
 	min-height: 1px;
 }
 
+@mixin fluid-column {
+	position: relative;
+	min-height: 1px;
+	padding-right: 9px;
+	padding-left: 9px;
+	float: left;
+}
+
 .grid {
 	&__row {
 		&:after {
@@ -93,21 +101,77 @@
 	}
 
 	// зачатки флюидного грида
+	// считаем пока, что колонок 14
 	&-fluid {
 
 		.grid__row {
-			margin-right: -15px;
-			margin-left: -15px;
+			margin-right: -9px;
+			margin-left: -9px;
 		}
 
+		.grid__row-btm {
+			margin-bottom: 18px;
+		}
+
+		.grid__row-top {
+			margin-top: 18px;
+		}
+
+		.grid__column-1 {
+			@include fluid-column;
+			width: 7.14285714%;
+		}
+		.grid__column-2 {
+			@include fluid-column;
+			width: 14.28571429%;
+		}
+		.grid__column-3 {
+			@include fluid-column;
+			width: 21.42857143%;
+		}
+		.grid__column-4 {
+			@include fluid-column;
+			width: 28.57142857%;
+		}
+		.grid__column-5 {
+			@include fluid-column;
+			width: 35.71428571%;
+		}
 		.grid__column-6 {
+			@include fluid-column;
+			width: 42.85714286%;
+		}
+		.grid__column-7 {
+			@include fluid-column;
 			width: 50%;
-			position: relative;
-			min-height: 1px;
-			padding-right: 15px;
-			padding-left: 15px;
-			float: left;
+		}
+		.grid__column-8 {
+			@include fluid-column;
+			width: 57.14285714%;
+		}
+		.grid__column-9 {
+			@include fluid-column;
+			width: 64.28571429%;
+		}
+		.grid__column-10 {
+			@include fluid-column;
+			width: 71.42857143%;
+		}
+		.grid__column-11 {
+			@include fluid-column;
+			width: 78.57142857%;
+		}
+		.grid__column-12 {
+			@include fluid-column;
+			width: 85.71428571%;
+		}
+		.grid__column-13 {
+			@include fluid-column;
+			width: 92.85714286%;
+		}
+		.grid__column-14 {
+			@include fluid-column;
+			width: 100%;
 		}
 	}
-
 }
