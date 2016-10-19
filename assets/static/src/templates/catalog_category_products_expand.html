@@ -42,7 +42,7 @@
                     <a href="../" class="b-section-back">Назад к каталогу</a>
                 {% endif %}
             </div>
-            {% if ind_products|length %}
+            {% if products %}
                 <div class="b-section b-section_large b-section_borderless">
                 {% for ind, product in ind_products %}
                     {% if ind|mod:3 == 0 %}
