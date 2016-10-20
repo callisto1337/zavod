@@ -410,9 +410,14 @@ def news_archive(request, page_number=1, tag_in_url=None):
 
 def news(request):
     out = {}
-    news = News.objects.filter(published=True).order_by('-date_created').all()[:5]
+    news = News.objects.filter(published=True).order_by('-date_created').all()
+    articles = Article.objects.filter(published=True).order_by('-date_created').all()
     out.update({'menu_active_item': 'news'})
-    out.update({'news': news})
+    out.update({'slider_news': news[:3]})
+    out.update({'medium_news': news[3:5]})
+    out.update({'one_line_news': news[5:9]})
+    out.update({'image_articles': articles[0:2]})
+    out.update({'not_image_articles': articles[2]})
     return render(request, 'news.html', out)
 
 

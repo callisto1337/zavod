@@ -89,7 +89,7 @@
 
                     <div class="b-box b-box-grey b-box_nohover">
                         <div class="b-box__wrapper">
-                            <a class="b-btn b-btn__fullwidth" href="#">
+                            <a class="b-btn b-btn__fullwidth" data-toggle="modal" data-target="#order" href="#">
                                 <span class="b-btn__text">Заказать</span>
                             </a>
                         </div>
@@ -200,6 +200,47 @@
                     {% if media_for_bottom %}
                         </a>
                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra-html %}
+    <div class="modal fade" id="order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="modal__close close" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-body">
+                    <div class="b-block__item__wrapper">
+                        <div class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                            Заказать продукцию
+                        </div>
+                        <div class="b-section__space"></div>
+                        <form class="b-form" method="get" action="https://yandex.ru">
+                            <div class="b-form-group">
+                                <input type="text" class="b-form-control" placeholder="Ваше имя" required="">
+                            </div>
+
+                            <div class="b-form-group">
+                                <input type="text" class="b-form-control" placeholder="Контактный телефон"
+                                       required="">
+                            </div>
+                            <div class="b-form-group">
+                                <input type="text" class="b-form-control" placeholder="Email"
+                                       required="">
+                            </div>
+                            <div class="b-form-group">
+                                <input type="file" id="file" multiple>
+                                {% comment %}<i class="fa fa-paperclip pull-right" aria-hidden="true"></i>{% endcomment %}
+                            </div>
+                            <div class="b-form-group">
+                                <textarea class="b-form-control" rows="4" placeholder="Комментарий"></textarea>
+                            </div>
+                            <button type="submit" class="b-btn b-btn__fullwidth">
+                                <span class="b-btn__text">Отправить</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

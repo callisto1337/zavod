@@ -143,7 +143,9 @@
                     {% if black_friday_product %}
                         <div class="grid__column-4 grid__offset">
                             <h3 class="subheading">Черная пятница!</h3>
-                            <a class="b-link_pseudo" href="#" title="{{ black_friday_product.name }}">
+                            <a class="b-link_pseudo"
+                               href="{% url 'catalog_category_inside' black_friday_product.category.slug black_friday_product.slug %}"
+                               title="{{ black_friday_product.name }}">
                                 <div class="b-box">
                                     <div class="b-box__wrapper">
                                         <div class="b-box__image">
