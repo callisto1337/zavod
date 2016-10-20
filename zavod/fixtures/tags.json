@@ -131,5 +131,33 @@
     "fields": {
       "title": "рсо"
     }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 20,
+    "fields": {
+      "title": "отопление"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 21,
+    "fields": {
+      "title": "праздники"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 22,
+    "fields": {
+      "title": "форум"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 23,
+    "fields": {
+      "title": "обзор"
+    }
   }
 ]
