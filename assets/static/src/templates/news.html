@@ -17,8 +17,9 @@
                         <div id="news-slider">
                             {% comment %} Тут первые три новости {% endcomment %}
                             {% for news in slider_news %}
-                                <a class="b-link_pseudo" href="{% url "news_detail" news.slug %}">
-                                    <div class="b-box b-box-green b-box_nohover b-box_468">
+                                <div class="b-box b-box_nohover b-box_noshadow b-box_468 b-box-green">
+                                    <a class="b-link_pseudo" href="{% url "news_detail" news.slug %}"
+                                       title="{{ news.title }}">
                                         <div class="b-box__image-fullsize">
                                             {% if news.images.first %}
                                                 <img src="{{ news.images.first.image.url }}" alt="">
@@ -29,7 +30,7 @@
                                         <div class="b-box__wrapper">
                                             <h1 class="b-box__header b-box__header-big">{{ news.title }}</h1>
                                             <div class="b-box__text">
-                                                {{ news.text | truncatechars:300 | striptags | safe }}
+                                                {{ news.text | truncatechars_html:300 | striptags }}
                                             </div>
                                         </div>
                                         <div class="b-box__footer">
@@ -38,16 +39,21 @@
                                                 {% get_comment_count for news as comment_count %}
                                                 <span class="b-box__footer-right"><i class="fa fa-comments"
                                                                                      aria-hidden="true"></i> {{ comment_count }}</span>
-                                                <span class="b-box__footer-right"><i class="fa fa-eye" aria-hidden="true"></i> {{ news.views }}</span>
+                                                <span class="b-box__footer-right"><i class="fa fa-eye"
+                                                                                     aria-hidden="true"></i> {{ news.views }}</span>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
+
                             {% endfor %}
                         </div>
+
+
                         <div class="grid__row grid__row-top">
                             {% for news in medium_news %}
-                                <a class="b-link_pseudo" href="{% url "news_detail" news.slug %}">
+                                <a class="b-link_pseudo" href="{% url "news_detail" news.slug %}"
+                                   title="{{ news.title }}">
                                     <div class="grid__column-7">
                                         <div class="b-box b-box_388">
                                             <div class="b-box__image-fullsize">
@@ -82,12 +88,13 @@
                             <div class="b-list">
                                 <div class="b-list__item b-list__item_head">Одной строкой</div>
                                 {% for news in one_line_news %}
-                                    <div class="b-list__item">
+                                    <div class="b-list__item b-list__item_height_101">
                                         <div class="b-list__item__extra">
                                             {{ news.date_created|date:"d F Y"|lower }} г.
                                         </div>
                                         {% comment %} НЕ БОЛЬШЕ ДВУХ СТРОК (используй truncatechars) {% endcomment %}
-                                        <a href="{% url "news_detail" news.slug %}" class="b-list__item__link">
+                                        <a href="{% url "news_detail" news.slug %}" class="b-list__item__link"
+                                           title="{{ news.title }}">
                                             {{ news.title | truncatechars:75 }}
                                         </a>
                                     </div>
@@ -130,7 +137,8 @@
                                 начало итерации, по разным цветам можно итерироватьс помощью cycle
                                 {% endcomment %}
                                 {% for article in image_articles %}
-                                    <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}">
+                                    <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}"
+                                       title="{{ article.title }}">
                                         <div class="b-list__item b-list__item_nopadding">
                                             <div class="b-box b-box_nohover {% cycle 'b-box-red' 'b-box-green' %} b-box_244">
                                                 <div class="b-box__image-fullsize">
@@ -141,9 +149,9 @@
                                                     {% endif %}
                                                 </div>
                                                 <div class="b-box__wrapper">
-                                                    <h1 class="b-box__header">{{ article.title }}</h1>
+                                                    <h1 class="b-box__header">{{ article.title | truncatechars:25 }}</h1>
                                                     <div class="b-box__text">
-                                                        {{ article.text | truncatechars:75 | safe }}
+                                                        {{ article.text | striptags | truncatechars:50 }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,13 +162,14 @@
                                 Обрати внимание, что тут другая высота, для последнего нужен
                                 класс b-box_205 и без картинки (просто не отображать)
                                 {% endcomment %}
-                                <a class="b-link_pseudo" href="{% url "articles_detail" not_image_articles.slug %}">
+                                <a class="b-link_pseudo" href="{% url "articles_detail" not_image_articles.slug %}"
+                                   title="{{ not_image_articles.title }}">
                                     <div class="b-list__item b-list__item_nopadding">
                                         <div class="b-box b-box_nohover b-box-black b-box_205">
                                             <div class="b-box__wrapper">
-                                                <h1 class="b-box__header">{{ not_image_articles.title }}</h1>
+                                                <h1 class="b-box__header">{{ not_image_articles.title | truncatechars:35 }}</h1>
                                                 <div class="b-box__text">
-                                                    {{ not_image_articles.text | truncatechars:75 | safe }}
+                                                    {{ not_image_articles.text | striptags | truncatechars:70 }}
                                                 </div>
                                             </div>
                                         </div>

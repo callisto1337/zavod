@@ -90,6 +90,8 @@ th {
 	height: 468px;
 	width: 621px;
 	overflow: hidden;
+	box-shadow: 0 0 4px rgba(0, 0, 0, .12),
+	1px 2px 4px rgba(0, 0, 0, .08);
 
 	.news-slider-dots {
 		position: absolute;
