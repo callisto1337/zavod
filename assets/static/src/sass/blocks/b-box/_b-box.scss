@@ -77,6 +77,10 @@
 		margin: 0;
 	}
 
+	&__body {
+		overflow: hidden;
+	}
+
 	&__footer {
 		border-top: 1px solid #e8e8e8;
 
@@ -90,6 +94,7 @@
 
 		&-right {
 			float: right;
+			margin-left: 16px;
 		}
 	}
 
@@ -148,6 +153,11 @@
 		.b-box__text, .b-box__header {
 			color: #ffffff;
 		}
+
+		.b-box__footer, .b-box__footer-left, .b-box__footer-right {
+			border-color: #26a577;
+			color: #80caaf;
+		}
 	}
 
 	&-black {
@@ -177,6 +187,108 @@
 
 		&:hover {
 			cursor: pointer;
+		}
+	}
+
+	// Во многих местах боксы должы быть фиксированной высоты, увы
+	// Извини меня, человек, который это поддерживает
+	&_468 {
+		height: 468px !important; // это хак для слайдера, иначе ужимается низ, который абсолют
+
+		.b-box__image-fullsize {
+			margin: 0;
+
+			img {
+				height: 270px;
+				width: 100%;
+			}
+		}
+
+		.b-box__header-big {
+			max-width: 100%;
+		}
+
+		.b-box__footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 45px;
+		}
+	}
+
+	&_388 {
+		height: 388px;
+
+		.b-box__image-fullsize {
+			margin: 0;
+
+			img {
+				height: 180px;
+				width: 100%;
+			}
+		}
+
+		.b-box__footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+	}
+
+	&_342 {
+		height: 342px;
+
+		.b-box__image-fullsize {
+			margin: 0;
+
+			img {
+				height: 171px;
+				width: 100%;
+			}
+		}
+
+		.b-box__body {
+			height: 171px;
+		}
+
+		.b-box__footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+	}
+
+	&_244 {
+		height: 244px;
+
+		.b-box__image-fullsize {
+			margin: 0;
+
+			img {
+				height: 90px;
+				width: 100%;
+			}
+		}
+
+		.b-box__footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+	}
+
+	&_205 {
+		height: 205px;
+
+		.b-box__footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
 		}
 	}
 }

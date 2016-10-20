@@ -27,31 +27,31 @@
                 {% else %}
                     <div class="grid__column-custom-612 grid__offset-small">
                 {% endif %}
-                <a class="b-image b-image-round" href="{% url "news_detail" one_news.slug %}">
-                    <div class="b-box">
-                        <div class="b-box__image-fullsize">
-                            {% if one_news.images.first %}
-                                <img src="{{ one_news.images.first.image.url }}" alt="Пример баннера">
-                            {% else %}
-                                <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
-                            {% endif %}
-                        </div>
+            <a class="b-image b-image-round" href="{% url "news_detail" one_news.slug %}">
+                <div class="b-box">
+                    <div class="b-box__image-fullsize">
+                        {% if one_news.images.first %}
+                            <img src="{{ one_news.images.first.image.url }}" alt="Пример баннера">
+                        {% else %}
+                            <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
+                        {% endif %}
+                    </div>
+                    <div class="b-box__wrapper">
+                        <h4 class="b-box__header b-box__header-big">{{ one_news.title }}</h4>
+                        <p class="b-box__text">
+                            {{ one_news.text | truncatewords:20 | striptags | safe }}
+                        </p>
+                    </div>
+                    <div class="b-box__footer">
                         <div class="b-box__wrapper">
-                            <h4 class="b-box__header b-box__header-big">{{ one_news.title }}</h4>
-                            <p class="b-box__text">
-                                {{ one_news.text | truncatewords:20 | striptags | safe }}
-                            </p>
-                        </div>
-                        <div class="b-box__footer">
-                            <div class="b-box__wrapper">
-                                <span class="b-box__footer-left">{{ one_news.date_created|date:"d F Y"|lower }} г.</span>
-                                {% get_comment_count for one_news as comment_count %}
-                                <span class="b-box__footer-right"><i class="fa fa-comments"
-                                                                     aria-hidden="true"></i> {{ comment_count }}</span>
-                            </div>
+                            <span class="b-box__footer-left">{{ one_news.date_created|date:"d F Y"|lower }} г.</span>
+                            {% get_comment_count for one_news as comment_count %}
+                            <span class="b-box__footer-right"><i class="fa fa-comments"
+                                                                 aria-hidden="true"></i> {{ comment_count }}</span>
                         </div>
                     </div>
-                </a>
+                </div>
+            </a>
             </div>
             {% if ind|mod:2 == 1 %}
                 </div>
@@ -62,41 +62,44 @@
     </div>
     <div class="b-layout">
         <div class="b-paginator">
-        {% if all_page_number|length <= 6 %}
-            {% for page_number in all_page_number %}
-            <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+            {% if all_page_number|length <= 6 %}
+                {% for page_number in all_page_number %}
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="
                 {% if tag_in_url %}
                     {% url url_for_pages tag_in_url page_number %}
                 {% else %}
                     {% url url_for_pages page_number %}
                 {% endif %}
                 ">{{ page_number }}</a>
-            </div>
-            {% endfor %}
-        {% else %}
-            {% for page_number in all_page_number|slice:":6" %}
-            <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for page_number in all_page_number|slice:":6" %}
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="
                 {% if tag_in_url %}
                     {% url url_for_pages tag_in_url page_number %}
                 {% else %}
                     {% url url_for_pages page_number %}
                 {% endif %}
                 ">{{ page_number }}</a>
-            </div>
-            {% endfor %}
-            <div class="b-paginator__item">...</div>
-            <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+                    </div>
+                {% endfor %}
+                <div class="b-paginator__item">...</div>
+                <div class="b-paginator__item">
+                    <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}"
+                       href="
                 {% if tag_in_url %}
                     {% url url_for_pages tag_in_url all_page_number|length %}
                 {% else %}
                     {% url url_for_pages all_page_number|length %}
                 {% endif %}
                 ">{{ all_page_number|length }}</a>
-            </div>
-        {% endif %}
+                </div>
+            {% endif %}
         </div>
     </div>
     <div class="b-section">
@@ -104,7 +107,7 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image"
+                    <a class="b-link_pseudo"
                        href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
                         <div class="b-box">
                             <div class="b-box__wrapper">
@@ -129,9 +132,8 @@
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                    <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                        <div class="b-box">
                             <div class="b-box__wrapper">
                                 <p class="b-box__author">
                                     {{ news_for_bottom.date_created }}
@@ -140,8 +142,8 @@
                                     {{ news_for_bottom.title }}
                                 </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>

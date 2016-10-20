@@ -15,11 +15,11 @@
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if product.category.parent_id %}
                     / <a class="b-breadcrumbs__link"
-                        href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
+                         href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
                 {% endif %}
                 {% if product.category %}
                     / <a class="b-breadcrumbs__link"
-                        href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
+                         href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
                 {% endif %}
             </div>
             <div class="grid__row">
@@ -120,7 +120,7 @@
                     <div class="b-inner b-inner_simple">
                         <div class="b-slider js-slider">
                             <ul class="b-slider">
-                                {% for image in product.images.all%}
+                                {% for image in product.images.all %}
                                     <li class="b-slider__item">
                                         <img src="{{ image.image.url }}" alt="{{ image.image.title }}">
                                     </li>
@@ -168,7 +168,7 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image"
+                    <a class="b-link_pseudo"
                        href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
                         <div class="b-box">
                             <div class="b-box__wrapper">
@@ -193,9 +193,8 @@
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                    <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                        <div class="b-box">
                             <div class="b-box__wrapper">
                                 <p class="b-box__author">
                                     {{ news_for_bottom.date_created }}
@@ -204,16 +203,26 @@
                                     {{ news_for_bottom.title }}
                                 </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>
+                    {% if media_for_bottom %}
+                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                    {% endif %}
                     <div class="b-box b-box_noshadow">
                         <div class="b-box__image-halfsize">
-                            <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% if media_for_bottom %}
+                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
+                            {% else %}
+                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
+                            {% endif %}
                         </div>
                     </div>
+                    {% if media_for_bottom %}
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -8,13 +8,249 @@
         <div class="b-layout">
             <div class="b-breadcrumbs">
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
-                <a class="b-breadcrumbs__link" href="{% url "news" %}">Новости</a>
+                <a class="b-breadcrumbs__link" href="{% url "news" %}">Новости</a> /
             </div>
-            <div class="grid__row">
-                <div class="grid__column-3">
-                    {% for one_news in news %}
-                        <li>{{ one_news.title }}</li>
-                    {% endfor %}
+            <div class="grid-fluid">
+                <div class="grid__row">
+                    <div class="grid__column-7">
+                        <div id="news-slider">
+                            {% comment %} Тут первые три новости {% endcomment %}
+                            <div class="b-box b-box-green b-box_nohover b-box_468">
+                                <div class="b-box__image-fullsize">
+                                    <img src="{% static 'img/player.png' %}" alt="">
+                                </div>
+                                <div class="b-box__wrapper">
+                                    <h1 class="b-box__header b-box__header-big">Качественный бойлер за копейки теперь в
+                                        продаже в Москве</h1>
+                                    <div class="b-box__text">
+                                        Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и
+                                        журналистов, создателей научных заявок и отчетов — для всех.
+                                    </div>
+                                </div>
+                                <div class="b-box__footer">
+                                    <div class="b-box__wrapper">
+                                        <span class="b-box__footer-left">24 января 2019 г.</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-comments"
+                                                                             aria-hidden="true"></i> 0</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-eye" aria-hidden="true"></i> 1093</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="b-box b-box-green b-box_nohover b-box_468">
+                                <div class="b-box__image-fullsize">
+                                    <img src="{% static 'img/player.png' %}" alt="">
+                                </div>
+                                <div class="b-box__wrapper">
+                                    <h1 class="b-box__header b-box__header-big">Качественный бойлер за копейки теперь в
+                                        продаже в Москве</h1>
+                                    <div class="b-box__text">
+                                        Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и
+                                        журналистов, создателей научных заявок и отчетов — для всех.
+                                    </div>
+                                </div>
+                                <div class="b-box__footer">
+                                    <div class="b-box__wrapper">
+                                        <span class="b-box__footer-left">24 января 2019 г.</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-comments"
+                                                                             aria-hidden="true"></i> 0</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-eye" aria-hidden="true"></i> 1093</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="b-box b-box-green b-box_nohover b-box_468">
+                                <div class="b-box__image-fullsize">
+                                    <img src="{% static 'img/player.png' %}" alt="">
+                                </div>
+                                <div class="b-box__wrapper">
+                                    <h1 class="b-box__header b-box__header-big">Качественный бойлер за копейки теперь в
+                                        продаже в Москве</h1>
+                                    <div class="b-box__text">
+                                        Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров и
+                                        журналистов, создателей научных заявок и отчетов — для всех.
+                                    </div>
+                                </div>
+                                <div class="b-box__footer">
+                                    <div class="b-box__wrapper">
+                                        <span class="b-box__footer-left">24 января 2019 г.</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-comments"
+                                                                             aria-hidden="true"></i> 0</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-eye" aria-hidden="true"></i> 1093</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid__row grid__row-top">
+                            <div class="grid__column-7">
+                                <div class="b-box b-box_388">
+                                    <div class="b-box__image-fullsize">
+                                        <img src="{% static 'img/player.png' %}" alt="">
+                                    </div>
+                                    <div class="b-box__wrapper">
+                                        <h1 class="b-box__header">Качественный бойлер за копейки
+                                            теперь в
+                                            продаже в Москве</h1>
+                                        <div class="b-box__text">
+                                            Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров
+                                        </div>
+                                    </div>
+                                    <div class="b-box__footer">
+                                        <div class="b-box__wrapper">
+                                            <span class="b-box__footer-left">24 января 2019 г.</span>
+                                            <span class="b-box__footer-right"><i class="fa fa-comments"
+                                                                                 aria-hidden="true"></i> 0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid__column-7">
+                                <div class="b-box b-box_388">
+                                    <div class="b-box__image-fullsize">
+                                        <img src="{% static 'img/player.png' %}" alt="">
+                                    </div>
+                                    <div class="b-box__wrapper">
+                                        <h1 class="b-box__header">Качественный бойлер за копейки
+                                            теперь в
+                                            продаже в Москве</h1>
+                                        <div class="b-box__text">
+                                            Служба Яндекс.Рефераты предназначена для студентов и школьников, дизайнеров
+                                        </div>
+                                    </div>
+                                    <div class="b-box__footer">
+                                        <div class="b-box__wrapper">
+                                            <span class="b-box__footer-left">24 января 2019 г.</span>
+                                            <span class="b-box__footer-right"><i class="fa fa-comments"
+                                                                                 aria-hidden="true"></i> 0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid__column-4">
+                        <div class="b-box b-box_nohover">
+                            <div class="b-list">
+                                <div class="b-list__item b-list__item_head">Одной строкой</div>
+                                <div class="b-list__item">
+                                    <div class="b-list__item__extra">
+                                        Сегодня 10:55
+                                    </div>
+                                    {% comment %} НЕ БОЛЬШЕ ДВУХ СТРОК (используй truncatechars) {% endcomment %}
+                                    <a href="#" class="b-list__item__link">
+                                        Служба Яндекс.Рефераты предназначена для студентов и школьников
+                                    </a>
+                                </div>
+                                <div class="b-list__item">
+                                    <div class="b-list__item__extra">
+                                        Сегодня 10:55
+                                    </div>
+                                    <a href="#" class="b-list__item__link">
+                                        Служба Яндекс.Рефераты предназначена для студентов и школьников
+                                    </a>
+                                </div>
+                                <div class="b-list__item">
+                                    <div class="b-list__item__extra">
+                                        Сегодня 10:55
+                                    </div>
+                                    <a href="#" class="b-list__item__link">
+                                        Служба Яндекс.Рефераты предназначена для студентов и школьников
+                                    </a>
+                                </div>
+                                <div class="b-list__item">
+                                    <div class="b-list__item__extra">
+                                        Сегодня 10:55
+                                    </div>
+                                    <a href="#" class="b-list__item__link">
+                                        Служба Яндекс.Рефераты предназначена для студентов и школьников
+                                    </a>
+                                </div>
+
+                                <div class="b-list__item b-list__item_footer">
+                                    <a class="b-btn b-btn__fullwidth" href="/news/archive/">
+                                        <span class="b-btn__text">Еще новости</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid__row grid__row-top">
+                            <div class="grid__column-14">
+                                <div class="b-box b-box_nohover b-box-grey">
+                                    <div class="b-block__item__wrapper">
+                                        <h3 class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                                            Получите новости на вашу почту
+                                        </h3>
+                                        <div class="b-section__space"></div>
+                                        <form class="b-form" method="get" action="https://yandex.ru">
+                                            <div class="b-form-group">
+                                                <input type="text" class="b-form-control" placeholder="Ваш E-mail"
+                                                       required="">
+                                            </div>
+                                            <button type="submit" class="b-btn b-btn__fullwidth">
+                                                <span class="b-btn__text">Подписаться</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid__column-3">
+                        <div class="b-box b-box_nohover">
+                            <div class="b-list b-list_noborder">
+                                <div class="b-list__item b-list__item_head">Еще у нас есть статьи</div>
+                                {% comment %}
+                                начало итерации, по разным цветам можно итерироватьс помощью cycle
+                                {% endcomment %}
+                                <div class="b-list__item b-list__item_nopadding">
+                                    <div class="b-box b-box_nohover b-box-red b-box_244">
+                                        <div class="b-box__image-fullsize">
+                                            <img src="{% static 'img/player.png' %}" alt="">
+                                        </div>
+                                        <div class="b-box__wrapper">
+                                            <h1 class="b-box__header">Качественный бойлер за копейки</h1>
+                                            <div class="b-box__text">
+                                                Служба Яндекс.Рефераты предназначена для студентов и школьников,
+                                                дизайнеров
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="b-list__item b-list__item_nopadding">
+                                    <div class="b-box b-box_nohover b-box-green b-box_244">
+                                        <div class="b-box__image-fullsize">
+                                            <img src="{% static 'img/player.png' %}" alt="">
+                                        </div>
+                                        <div class="b-box__wrapper">
+                                            <h1 class="b-box__header">Качественный бойлер за копейки</h1>
+                                            <div class="b-box__text">
+                                                Служба Яндекс.Рефераты предназначена для студентов и школьников,
+                                                дизайнеров
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% comment %}
+                                Обрати внимание, что тут другая высота, для последнего нужен
+                                класс b-box_205 и без картинки (просто не отображать)
+                                {% endcomment %}
+                                <div class="b-list__item b-list__item_nopadding">
+                                    <div class="b-box b-box_nohover b-box-black b-box_205">
+                                        <div class="b-box__wrapper">
+                                            <h1 class="b-box__header">Качественный бойлер за копейки</h1>
+                                            <div class="b-box__text">
+                                                Служба Яндекс.Рефераты предназначена для студентов и школьников,
+                                                дизайнеров
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="b-list__item b-list__item_footer">
+                                    <a class="b-btn b-btn__fullwidth" href="/news/archive/">
+                                        <span class="b-btn__text">Еще новости</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,30 +260,33 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                    <a class="b-link_pseudo"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
                     </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                    <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                        <div class="b-box">
                             <div class="b-box__wrapper">
                                 <p class="b-box__author">
                                     {{ news_for_bottom.date_created }}
@@ -56,8 +295,8 @@
                                     {{ news_for_bottom.title }}
                                 </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>
@@ -80,4 +319,23 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra-js %}
+    <script>
+        $(document).ready(function () {
+            var $slider = $('#news-slider');
+            $slider.slick({
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                draggable: false,
+                swipe: false,
+                swipeToSlide: false,
+                autoplay: true,
+                dots: true,
+                dotsClass: 'news-slider-dots'
+            });
+        });
+    </script>
 {% endblock %}

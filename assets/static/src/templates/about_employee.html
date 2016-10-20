@@ -5,79 +5,91 @@
 
 {% block content %}
     <div class="b-section b-section_short">
-        <div class="b-layout">
+    <div class="b-layout">
 
-            <div class="b-breadcrumbs">
-                <a class="b-breadcrumbs__link" href="/">Главная</a> / <a class="b-breadcrumbs__link" href="{% url "about" %}">О компании</a>
-            </div>
+        <div class="b-breadcrumbs">
+            <a class="b-breadcrumbs__link" href="/">Главная</a> / <a class="b-breadcrumbs__link"
+                                                                     href="{% url "about" %}">О компании</a>
+        </div>
 
-            <div class="grid__row">
-                <div class="grid__column-7">
-                    <h3 class="b-section-title">Сотрудники компании</h3>
-                </div>
-                <div class="grid__column-7">
-                    <ul class="b-tab">
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{% url "about" %}">Триумф</a>
-                        </li>
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{% url "nagrady" %}">Награды</a>
-                        </li>
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{% url "partnery" %}">Партнеры</a>
-                        </li>
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{% url "otzyvy" %}">Отзывы</a>
-                        </li>
-                        <li class="b-tab__item b-tab__item_active">
-                            <a class="b-tab__item__link" href="#">Сотрудники</a>
-                        </li>
-                        <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{% url "vacancy" %}">Вакансии</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="grid__row">
+            <div class="grid__column-7">
+                <h3 class="b-section-title">Сотрудники компании</h3>
             </div>
-            <div class="grid__row">
-                <div class="grid__column-12">
-                    <p class="b-section-text">«Завод Триумф» – предприятие, производящее оборудование для предприятий различной сферы деятельности, а также жилищно-коммунального хозяйства. На Заводе Триумф трудятся одаренные и талантливые люди. </p>
-                </div>
+            <div class="grid__column-7">
+                <ul class="b-tab">
+                    <li class="b-tab__item">
+                        <a class="b-tab__item__link" href="{% url "about" %}">Триумф</a>
+                    </li>
+                    <li class="b-tab__item">
+                        <a class="b-tab__item__link" href="{% url "nagrady" %}">Награды</a>
+                    </li>
+                    <li class="b-tab__item">
+                        <a class="b-tab__item__link" href="{% url "partnery" %}">Партнеры</a>
+                    </li>
+                    <li class="b-tab__item">
+                        <a class="b-tab__item__link" href="{% url "otzyvy" %}">Отзывы</a>
+                    </li>
+                    <li class="b-tab__item b-tab__item_active">
+                        <a class="b-tab__item__link" href="#">Сотрудники</a>
+                    </li>
+                    <li class="b-tab__item">
+                        <a class="b-tab__item__link" href="{% url "vacancy" %}">Вакансии</a>
+                    </li>
+                </ul>
             </div>
+        </div>
+        <div class="grid__row">
+            <div class="grid__column-12">
+                <p class="b-section-text">«Завод Триумф» – предприятие, производящее оборудование для предприятий
+                    различной сферы деятельности, а также жилищно-коммунального хозяйства. На Заводе Триумф трудятся
+                    одаренные и талантливые люди. </p>
+            </div>
+        </div>
 
-            {% for set_by_five_employees in employees %}
-                <div class="grid__row grid__row-btm">
-                    {% for employee in set_by_five_employees %}
-                        {% if employee.is_first %}
-                            <div class="grid__column-2 ">
-                        {% else %}
-                            <div class="grid__column-2 grid__offset">
-                        {% endif %}
-                        <a class="b-image b-image-round" href="{% url "employee_info" employee.name %}">
-                            <div class="b-image__container">
-                                {% if employee.image %}
-                                    <img src="{{ employee.image.image.url }}" alt="Пример награды">
-                                {% else %}
-                                    <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                                {% endif %}
-                            </div>
-                            <div class="b-image__title">{{ employee.first_name }} {{ employee.last_name }}</div>
-                            <div class="b-image__caption">{{ employee.position }}</div>
-                        </a>
-                    </div>
-                    {% endfor %}
+        {% for set_by_five_employees in employees %}
+            <div class="grid__row grid__row-btm">
+            {% for employee in set_by_five_employees %}
+                {% if employee.is_first %}
+                    <div class="grid__column-2 ">
+                {% else %}
+                    <div class="grid__column-2 grid__offset">
+                {% endif %}
+            <a class="b-image b-image-round" href="{% url "employee_info" employee.name %}">
+                <div class="b-image__container">
+                    {% if employee.image %}
+                        <img src="{{ employee.image.image.url }}" alt="Пример награды">
+                    {% else %}
+                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                    {% endif %}
                 </div>
+                <div class="b-image__title">{{ employee.first_name }} {{ employee.last_name }}</div>
+                <div class="b-image__caption">{{ employee.position }}</div>
+            </a>
+            </div>
             {% endfor %}
-            <div class="grid__row">
-                <div class="grid__column-9">
-                    <p class="b-section-text">За плечами трудности, которые сплотили и воспитали команду профессионалов, которым не страшны никакие не выполнимые задачи.</p>
-                    <p class="b-section-text">Мы горды тем, что именно у нас работают все те люди, которые нзывают себя коллективом Завода Триумф. И руководство предприятия прилагает все усилия для того, чтобы каждый сотрудник раскрыл свои возможности, самореализовался и самое главное получал удовольствие от того дела, которыс он занимается на предприятии. Компания привлекает для производства своей продукции только лучших специалистов, уделяет значительное внимание для их развития, их мотивации, предоставляет реализовать возможность карьерного роста, а так же и самореализации.</p>
-                    <p class="b-section-text">Завод гордится своими трудовыми ресурсами, которые обеспечивают устойчивость компании для сохранения своих позиций на рынке теплообменного оборудования, тем самым, приводя к развитию экономики страны в целом.</p>
-                </div>
-                <div class="grid__column-4 grid__offset">
-{# @TODO fix this inline styles #}
-                    <h4 class="b-section-subtitle" style="margin-top: 230px;">Благодаря нашей дружной, сплоченной, единой команде, Завод смог выйти на рынок не только России, но и стран Содружества.</h4>
-                </div>
+        </div>
+        {% endfor %}
+        <div class="grid__row">
+            <div class="grid__column-9">
+                <p class="b-section-text">За плечами трудности, которые сплотили и воспитали команду профессионалов,
+                    которым не страшны никакие не выполнимые задачи.</p>
+                <p class="b-section-text">Мы горды тем, что именно у нас работают все те люди, которые нзывают себя
+                    коллективом Завода Триумф. И руководство предприятия прилагает все усилия для того, чтобы каждый
+                    сотрудник раскрыл свои возможности, самореализовался и самое главное получал удовольствие от того
+                    дела, которыс он занимается на предприятии. Компания привлекает для производства своей продукции
+                    только лучших специалистов, уделяет значительное внимание для их развития, их мотивации,
+                    предоставляет реализовать возможность карьерного роста, а так же и самореализации.</p>
+                <p class="b-section-text">Завод гордится своими трудовыми ресурсами, которые обеспечивают устойчивость
+                    компании для сохранения своих позиций на рынке теплообменного оборудования, тем самым, приводя к
+                    развитию экономики страны в целом.</p>
             </div>
+            <div class="grid__column-4 grid__offset">
+                {# @TODO fix this inline styles #}
+                <h4 class="b-section-subtitle" style="margin-top: 230px;">Благодаря нашей дружной, сплоченной, единой
+                    команде, Завод смог выйти на рынок не только России, но и стран Содружества.</h4>
+            </div>
+        </div>
         </div>
     </div>
     <div class="b-section">
@@ -85,30 +97,33 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                    <a class="b-link_pseudo"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
                     </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                    <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                        <div class="b-box">
                             <div class="b-box__wrapper">
                                 <p class="b-box__author">
                                     {{ news_for_bottom.date_created }}
@@ -117,8 +132,8 @@
                                     {{ news_for_bottom.title }}
                                 </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>

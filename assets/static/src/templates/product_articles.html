@@ -15,10 +15,12 @@
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if product.category.parent_id %}
-                    / <a class="b-breadcrumbs__link" href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
+                    /<a class="b-breadcrumbs__link"
+                        href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
                 {% endif %}
                 {% if product.category %}
-                    / <a class="b-breadcrumbs__link" href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
+                    /<a class="b-breadcrumbs__link"
+                        href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
                 {% endif %}
             </div>
             <div class="grid__row">
@@ -28,7 +30,8 @@
             </div>
             <div class="grid__row">
                 {% if product.category %}
-                    <a href="{% url "catalog_category" product.category.slug %}" class="b-section-back">Назад к каталогу</a>
+                    <a href="{% url "catalog_category" product.category.slug %}" class="b-section-back">Назад к
+                        каталогу</a>
                 {% else %}
                     <a href="../" class="b-section-back">Назад к каталогу</a>
                 {% endif %}
@@ -49,7 +52,8 @@
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=articles">Статьи</a>
                         </li>
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы <span class="b-tab__item__link__counter">{{ comments_count }}</span></a>
+                            <a class="b-tab__item__link" href="{{ request.path }}?tab=review">Отзывы <span
+                                    class="b-tab__item__link__counter">{{ comments_count }}</span></a>
                         </li>
                     </ul>
                 </div>
@@ -63,143 +67,149 @@
                         {% else %}
                             <div class="grid__column-4 grid__offset">
                         {% endif %}
-                            <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
-                                <div class="b-box {% if ind|mod:3 == 0 %} b-box-red {% endif %} {% if ind|mod:3 == 1 %} b-box-green {% endif %} {% if ind|mod:3 == 2 %} b-box-black {% endif %}">
-                                    <div class="b-box__image-fullsize">
-                                        {% if article.images.first %}
-                                            <img src="{{ article.images.first.image.url }}" alt="Пример награды">
-                                        {% else %}
-                                            <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
-                                        {% endif %}
-                                    </div>
-                                    <div class="b-box__wrapper">
-                                        <div class="b-box__author">{{ article.author }}</div>
-                                        <h4 class="b-box__header">{{ article.title }}</h4>
-                                        <p class="b-box__text">
-                                            {{ article.text | safe }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
+                    <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
+                        <div class="b-box {% if ind|mod:3 == 0 %} b-box-red {% endif %} {% if ind|mod:3 == 1 %} b-box-green {% endif %} {% if ind|mod:3 == 2 %} b-box-black {% endif %}">
+                            <div class="b-box__image-fullsize">
+                                {% if article.images.first %}
+                                    <img src="{{ article.images.first.image.url }}" alt="Пример награды">
+                                {% else %}
+                                    <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
+                                {% endif %}
+                            </div>
+                            <div class="b-box__wrapper">
+                                <div class="b-box__author">{{ article.author }}</div>
+                                <h4 class="b-box__header">{{ article.title }}</h4>
+                                <p class="b-box__text">
+                                    {{ article.text | safe }}
+                                </p>
+                            </div>
                         </div>
-                        {% if not ind|divisibleby:2 %}
+                    </a>
+                    </div>
+                    {% if not ind|divisibleby:2 %}
                         </div>
-                        {% endif %}
+                    {% endif %}
                     {% endfor %}
-                </div>
-                <div class="grid__column-4 grid__offset">
-                    <ul class="b-property">
-                        {% for property in product.properties.all %}
-                            {% if "Цена" in property.property.title %}
-                                <li class="b-property__item">
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <ul class="b-property">
+                            {% for property in product.properties.all %}
+                                {% if "Цена" in property.property.title %}
+                                    <li class="b-property__item">
                                     <span class="b-property__key">{{ property.property.title }}
                                         {% if property.property.units %}
                                             , {{ property.property.units }}
                                         {% endif %}</span>
-                                    <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-
-                        {#                        {% for property in product.string_properties %}#}
-                        {#                            <li class="b-property__item">{{ property }}</li>#}
-                        {#                        {% endfor %}#}
-                    </ul>
-
-                    <div class="b-box b-box-grey b-box_nohover">
-                        <div class="b-box__wrapper">
-                            <a class="b-btn b-btn__fullwidth" href="#">
-                                <span class="b-btn__text">Заказать</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="b-inner b-inner_simple">
-                        <div class="b-slider js-slider">
-                            <ul class="b-slider">
-                                {% for image in product.images.all%}
-                                    <li class="b-slider__item">
-                                        <img src="{{ image.image.url }}" alt="{{ image.image.title }}">
+                                        <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
                                     </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
+                                {% endif %}
+                            {% endfor %}
 
-                    <ul class="b-property">
-                        {% for property in product.properties.all %}
-                            {% if "Цена" not in property.property.title %}
-                                <li class="b-property__item">
+                            {#                        {% for property in product.string_properties %}#}
+                            {#                            <li class="b-property__item">{{ property }}</li>#}
+                            {#                        {% endfor %}#}
+                        </ul>
+
+                        <div class="b-box b-box-grey b-box_nohover">
+                            <div class="b-box__wrapper">
+                                <a class="b-btn b-btn__fullwidth" href="#">
+                                    <span class="b-btn__text">Заказать</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="b-inner b-inner_simple">
+                            <div class="b-slider js-slider">
+                                <ul class="b-slider">
+                                    {% for image in product.images.all %}
+                                        <li class="b-slider__item">
+                                            <img src="{{ image.image.url }}" alt="{{ image.image.title }}">
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <ul class="b-property">
+                            {% for property in product.properties.all %}
+                                {% if "Цена" not in property.property.title %}
+                                    <li class="b-property__item">
                                     <span class="b-property__key">{{ property.property.title }}
                                         {% if property.property.units %}
                                             , {{ property.property.units }}
                                         {% endif %}</span>
-                                    <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
+                                        <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="b-section">
-        <div class="b-layout">
-            <div class="grid__row">
-                <div class="grid__column-4">
-                    <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+        <div class="b-section">
+            <div class="b-layout">
+                <div class="grid__row">
+                    <div class="grid__column-4">
+                        <h3 class="subheading">Новинка производства</h3>
+                        <a class="b-link_pseudo"
+                           href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                            <div class="b-box">
+                                <div class="b-box__wrapper">
+                                    <div class="b-box__image-left">
+                                        {% if product_for_bottom.images.first %}
+                                            <img src="{{ product_for_bottom.images.first.image.url }}"
+                                                 alt="Пример Продукта">
+                                        {% else %}
+                                            <img src="{% static 'img/products/product_sale.png' %}"
+                                                 alt="Пример Продукта">
+                                        {% endif %}
+                                    </div>
+                                    <p class="b-box__author">
+                                        {{ product_for_bottom.category.name }}
+                                    </p>
+                                    <p class="b-box__text">
+                                        {{ product_for_bottom.name }}
+                                    </p>
+                                    <div class="b-box__sale">Хит</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <h3 class="subheading">Последняя новость</h3>
+                        <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                            <div class="b-box">
+                                <div class="b-box__wrapper">
+                                    <p class="b-box__author">
+                                        {{ news_for_bottom.date_created }}
+                                    </p>
+                                    <p class="b-box__text">
+                                        {{ news_for_bottom.title }}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <h3 class="subheading">Видео как закалялась сталь</h3>
+                        {% if media_for_bottom %}
+                            <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                        {% endif %}
+                        <div class="b-box b-box_noshadow">
+                            <div class="b-box__image-halfsize">
+                                {% if media_for_bottom %}
+                                    <img src="{{ media_for_bottom.cover_image.gallery_image.url }}"
+                                         alt="Пример баннера">
+                                {% else %}
+                                    <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
                                 {% endif %}
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
-                    </a>
-                </div>
-                <div class="grid__column-4 grid__offset">
-                    <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
-                            <div class="b-box__wrapper">
-                                <p class="b-box__author">
-                                    {{ news_for_bottom.date_created }}
-                                </p>
-                                <p class="b-box__text">
-                                    {{ news_for_bottom.title }}
-                                </p>
-                            </div>
-                        </a>
+                        {% if media_for_bottom %}
+                            </a>
+                        {% endif %}
                     </div>
-                </div>
-                <div class="grid__column-4 grid__offset">
-                    <h3 class="subheading">Видео как закалялась сталь</h3>
-                    {% if media_for_bottom %}
-                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
-                    {% endif %}
-                    <div class="b-box b-box_noshadow">
-                        <div class="b-box__image-halfsize">
-                            {% if media_for_bottom %}
-                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
-                            {% else %}
-                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% if media_for_bottom %}
-                        </a>
-                    {% endif %}
                 </div>
             </div>
         </div>

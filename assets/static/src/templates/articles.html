@@ -18,68 +18,72 @@
                 {% else %}
                     <div class="grid__column-4 grid__offset">
                 {% endif %}
-                    <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
-                        <div class="b-box {% if ind == 0 %} b-box-red {% endif %} {% if ind == 1 %} b-box-green {% endif %} {% if ind == 2 %} b-box-black {% endif %} {% if ind == 3 %} b-box-red {% endif %} {% if ind == 4 %} b-box-green {% endif %} {% if ind == 5 %} b-box-green {% endif %} {% if ind == 6 %} b-box-black {% endif %} {% if ind == 7 %} b-box-red {% endif %}">
-                            <div class="b-box__image-fullsize">
-                                {% if article.images.first %}
-                                    <img src="{{ article.images.first.image.url }}" alt="Пример награды">
-                                {% else %}
-                                    <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
-                                {% endif %}
-                            </div>
-                            <div class="b-box__wrapper">
-                                <div class="b-box__author">{{ article.author }}</div>
-                                <h4 class="b-box__header">{{ article.title }}</h4>
-                                <p class="b-box__text">
-                                    {{ article.text | safe }}
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+            <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
+                <div class="b-box {% if ind == 0 %} b-box-red {% endif %} {% if ind == 1 %} b-box-green {% endif %} {% if ind == 2 %} b-box-black {% endif %} {% if ind == 3 %} b-box-red {% endif %} {% if ind == 4 %} b-box-green {% endif %} {% if ind == 5 %} b-box-green {% endif %} {% if ind == 6 %} b-box-black {% endif %} {% if ind == 7 %} b-box-red {% endif %}">
+                    <div class="b-box__image-fullsize">
+                        {% if article.images.first %}
+                            <img src="{{ article.images.first.image.url }}" alt="Пример награды">
+                        {% else %}
+                            <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
+                        {% endif %}
+                    </div>
+                    <div class="b-box__wrapper">
+                        <div class="b-box__author">{{ article.author }}</div>
+                        <h4 class="b-box__header">{{ article.title }}</h4>
+                        <p class="b-box__text">
+                            {{ article.text | safe }}
+                        </p>
+                    </div>
                 </div>
-                {% if ind|add:1|mod:3 == 2 or ind == 1 %}
+            </a>
+            </div>
+            {% if ind|add:1|mod:3 == 2 or ind == 1 %}
                 </div>
-                {% endif %}
+            {% endif %}
             {% endfor %}
+            </div>
         </div>
-    </div>
-    <div class="b-layout">
-        <div class="b-paginator">
-        {% if all_page_number|length <= 8 %}
-            {% for page_number in all_page_number %}
-            <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+        <div class="b-layout">
+            <div class="b-paginator">
+                {% if all_page_number|length <= 8 %}
+                    {% for page_number in all_page_number %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="
                 {% if tag_in_url %}
                     {% url url_for_pages tag_in_url page_number %}
                 {% else %}
                     {% url url_for_pages page_number %}
                 {% endif %}
                 ">{{ page_number }}</a>
-            </div>
-            {% endfor %}
-        {% else %}
-            {% for page_number in all_page_number|slice:":6" %}
-            <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for page_number in all_page_number|slice:":6" %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="
                 {% if tag_in_url %}
                     {% url url_for_pages tag_in_url page_number %}
                 {% else %}
                     {% url url_for_pages page_number %}
                 {% endif %}
                 ">{{ page_number }}</a>
-            </div>
-            {% endfor %}
-            <div class="b-paginator__item">...</div>
-            <div class="b-paginator__item">
-                <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}" href="
+                        </div>
+                    {% endfor %}
+                    <div class="b-paginator__item">...</div>
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="
                 {% if tag_in_url %}
                     {% url url_for_pages tag_in_url all_page_number|length %}
                 {% else %}
                     {% url url_for_pages all_page_number|length %}
                 {% endif %}
                 ">{{ all_page_number|length }}</a>
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
         </div>
     </div>
     <div class="b-section">
@@ -87,30 +91,33 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                    <a class="b-link_pseudo"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
                     </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                    <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                        <div class="b-box">
                             <div class="b-box__wrapper">
                                 <p class="b-box__author">
                                     {{ news_for_bottom.date_created }}
@@ -119,8 +126,8 @@
                                     {{ news_for_bottom.title }}
                                 </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>

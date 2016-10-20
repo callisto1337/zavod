@@ -28,18 +28,21 @@
             </div>
             <div class="grid__row">
                 <div class="grid__column-12">
-                    <p class="b-section-subtitle b-section-subtitle_inline">«Завод Триумф» - один из ведущих производителей теплообменного оборудования в России,  неоднократно получал Национальный знак качества, а наша продукция – титул «Лучший товар года». Мы также выполняем заказы для СНГ и Европы.</p>
+                    <p class="b-section-subtitle b-section-subtitle_inline">«Завод Триумф» - один из ведущих
+                        производителей теплообменного оборудования в России, неоднократно получал Национальный знак
+                        качества, а наша продукция – титул «Лучший товар года». Мы также выполняем заказы для СНГ и
+                        Европы.</p>
                 </div>
             </div>
 
             <div class="b-section b-section_borderless">
                 {% for ind, category_product in ind_category_products %}
-                {% if ind|mod:3 == 0 %}
-                    <div class="grid__row grid__row-btm">
-                    <div class="grid__column-4">
-                {% else %}
-                    <div class="grid__column-4 grid__offset">
-                {% endif %}
+                    {% if ind|mod:3 == 0 %}
+                        <div class="grid__row grid__row-btm">
+                        <div class="grid__column-4">
+                    {% else %}
+                        <div class="grid__column-4 grid__offset">
+                    {% endif %}
                 <a class="b-link b-link_pseudo" href="{% url "catalog_category" category_product.slug %}">
                     <div class="b-box">
                         <div class="b-box__wrapper">
@@ -60,107 +63,59 @@
                                 {% endif %}
                                 {% if category_product.number != 0 and category_product.price_list %}
                                     <a class="b-link b-link_pseudo" href="{{ category_product.price_list.url }}">
-                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Прайс-лист</span>
+                                        <span class="b-box__footer-right"><i class="fa fa-file-pdf-o"
+                                                                             aria-hidden="true"></i> Прайс-лист</span>
                                     </a>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 </a>
-            </div>
-            {% if ind|add:1|mod:3 == 0 %}
                 </div>
-            {% endif %}
-            {% endfor %}
-            </div>
-            <div class="grid__row">
-                <div class="grid__column-9">
-                    <p class="b-section-text">
-                        Вы можете купить готовую продукцию (из каталога на нашем сайте) или заказать изготовление по индивидуальным размерам.
-                    </p>
-                    <p class="b-section-text">
-                        В рамках партнерских соглашений мы также осуществляем сборку и последующую реализацию по выгодным ценам теплообменного оборудования ведущих производителей Германии, Швеции и других стран.
-                    </p>
-                    <h3 class="b-section-subtitle b-section-subtitle_colorful">
-                        Каталог теплообменного оборудования
-                    </h3>
-                    <p class="b-section-text">
-                        В нашем каталоге представлено теплообменное оборудование всех наиболее востребованных типов. Если вам необходима консультация или вы не нашли на нашем сайте то, что искали – обязательно позвоните нам, мы предоставим всю актуальную информацию и ответим на ваши вопросы.
-                    </p>
+                {% if ind|add:1|mod:3 == 0 %}
+                    </div>
+                {% endif %}
+                {% endfor %}
                 </div>
-                <div class="grid__column-4 grid__offset">
-                    <img class="b-section-logotype" src="{% static 'img/logotype_square.png' %}" alt="Логотип_маленький">
-                    <h4 class="b-section-subtitle">Все работы выполняются:</h4>
-                    <ul class="b-section-list">
-                        <li class="b-section-list__item">На высокоточных станках с УЧПУ, в том числе без участия человека,</li>
-                        <li class="b-section-list__item">под контролем первоклассных мастеров завода с многолетним опытом,</li>
-                        <li class="b-section-list__item">на оборудовании, прошедшем государственную  аттестацию.</li>
-                    </ul>
+                <div class="grid__row">
+                    <div class="grid__column-9">
+                        <p class="b-section-text">
+                            Вы можете купить готовую продукцию (из каталога на нашем сайте) или заказать изготовление по
+                            индивидуальным размерам.
+                        </p>
+                        <p class="b-section-text">
+                            В рамках партнерских соглашений мы также осуществляем сборку и последующую реализацию по
+                            выгодным ценам теплообменного оборудования ведущих производителей Германии, Швеции и других
+                            стран.
+                        </p>
+                        <h3 class="b-section-subtitle b-section-subtitle_colorful">
+                            Каталог теплообменного оборудования
+                        </h3>
+                        <p class="b-section-text">
+                            В нашем каталоге представлено теплообменное оборудование всех наиболее востребованных типов.
+                            Если вам необходима консультация или вы не нашли на нашем сайте то, что искали – обязательно
+                            позвоните нам, мы предоставим всю актуальную информацию и ответим на ваши вопросы.
+                        </p>
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <img class="b-section-logotype" src="{% static 'img/logotype_square.png' %}"
+                             alt="Логотип_маленький">
+                        <h4 class="b-section-subtitle">Все работы выполняются:</h4>
+                        <ul class="b-section-list">
+                            <li class="b-section-list__item">На высокоточных станках с УЧПУ, в том числе без участия
+                                человека,
+                            </li>
+                            <li class="b-section-list__item">под контролем первоклассных мастеров завода с многолетним
+                                опытом,
+                            </li>
+                            <li class="b-section-list__item">на оборудовании, прошедшем государственную аттестацию.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div class="b-section">
-        <div class="b-layout">
-            <div class="grid__row">
-                <div class="grid__column-4">
-                    <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
-                            </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="grid__column-4 grid__offset">
-                    <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
-                            <div class="b-box__wrapper">
-                                <p class="b-box__author">
-                                    {{ news_for_bottom.date_created }}
-                                </p>
-                                <p class="b-box__text">
-                                    {{ news_for_bottom.title }}
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="grid__column-4 grid__offset">
-                    <h3 class="subheading">Видео как закалялась сталь</h3>
-                    {% if media_for_bottom %}
-                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
-                    {% endif %}
-                    <div class="b-box b-box_noshadow">
-                        <div class="b-box__image-halfsize">
-                            {% if media_for_bottom %}
-                                <img src="{{ media_for_bottom.cover_image.gallery_image.url }}" alt="Пример баннера">
-                            {% else %}
-                                <img src="{% static 'img/news/news2.png' %}" alt="Пример баннера">
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% if media_for_bottom %}
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 

@@ -19,7 +19,8 @@
                             <a class="b-tab__item__link" href="{% url "prajjsy" %}">Прайс-листы</a>
                         </li>
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{% url "gibkaja_sistema_skidok" %}">Гибкая система скидок</a>
+                            <a class="b-tab__item__link" href="{% url "gibkaja_sistema_skidok" %}">Гибкая система
+                                скидок</a>
                         </li>
                     </ul>
                 </div>
@@ -54,35 +55,43 @@
                         <ul class="b-category-list-group__list">
 
                             <li class="b-category-list-group__list__item">
-                                <a href="{{ vodovodjanye_podogrevateli.price_list.url }}" class="b-category-list-group__list__item-link">Подогреватели
+                                <a href="{{ vodovodjanye_podogrevateli.price_list.url }}"
+                                   class="b-category-list-group__list__item-link">Подогреватели
                                     водоводяные.pdf</a>
                             </li>
                             <li class="b-category-list-group__list__item">
-                                <a href="{{ parovodjanye_podogrevateli.price_list.url }}" class="b-category-list-group__list__item-link">Подогреватели
+                                <a href="{{ parovodjanye_podogrevateli.price_list.url }}"
+                                   class="b-category-list-group__list__item-link">Подогреватели
                                     пароводяные.pdf</a>
                             </li>
                             <li class="b-category-list-group__list__item">
-                                <a href="{{ podogrevateli_parovye.price_list.url }}" class="b-category-list-group__list__item-link">Подогреватели паровые
+                                <a href="{{ podogrevateli_parovye.price_list.url }}"
+                                   class="b-category-list-group__list__item-link">Подогреватели паровые
                                     емкостные ВПЕ (СТД).pdf</a>
                             </li>
                             <li class="b-category-list-group__list__item">
-                                <a href="{{ serija_ts_565.price_list.url }}" class="b-category-list-group__list__item-link">Грязевики горизонтальные
+                                <a href="{{ serija_ts_565.price_list.url }}"
+                                   class="b-category-list-group__list__item-link">Грязевики горизонтальные
                                     ТС-565</a>
                             </li>
                             <li class="b-category-list-group__list__item">
-                                <a href="{{ serija_ts_566.price_list.url }}" class="b-category-list-group__list__item-link">Грязевики горизонтальные
+                                <a href="{{ serija_ts_566.price_list.url }}"
+                                   class="b-category-list-group__list__item-link">Грязевики горизонтальные
                                     ТС-566</a>
                             </li>
                             <li class="b-category-list-group__list__item">
-                                <a href="{{ serija_ts_567.price_list.url }}" class="b-category-list-group__list__item-link">Грязевики вертикальные
+                                <a href="{{ serija_ts_567.price_list.url }}"
+                                   class="b-category-list-group__list__item-link">Грязевики вертикальные
                                     ТС-567, ТС-568</a>
                             </li>
                             <li class="b-category-list-group__list__item">
-                                <a href="{{ grjazeviki_teplovykh_punktov.price_list.url }}" class="b-category-list-group__list__item-link">Грязевики для тепловых
+                                <a href="{{ grjazeviki_teplovykh_punktov.price_list.url }}"
+                                   class="b-category-list-group__list__item-link">Грязевики для тепловых
                                     пунктов (ГТП, абонентские ТС-569)</a>
                             </li>
                             <li class="b-category-list-group__list__item">
-                                <a href="{{ vozdukhosborniki_a1i.price_list.url }}" class="b-category-list-group__list__item-link">Воздухосборники А1И.pdf</a>
+                                <a href="{{ vozdukhosborniki_a1i.price_list.url }}"
+                                   class="b-category-list-group__list__item-link">Воздухосборники А1И.pdf</a>
                             </li>
                             <li class="b-category-list-group__list__item">
                                 <a href="{{ elevatory.price_list.url }}" class="b-category-list-group__list__item-link">Элеваторы.pdf</a>
@@ -102,7 +111,7 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image"
+                    <a class="b-link_pseudo"
                        href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
                         <div class="b-box">
                             <div class="b-box__wrapper">
@@ -127,8 +136,8 @@
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                    <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                        <div class="b-box">
                             <div class="b-box__wrapper">
                                 <p class="b-box__author">
                                     {{ news_for_bottom.date_created }}
@@ -137,8 +146,8 @@
                                     {{ news_for_bottom.title }}
                                 </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>

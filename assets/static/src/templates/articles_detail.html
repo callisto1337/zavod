@@ -55,7 +55,8 @@
                     </div>
                     <div class="b-info">
                         {% for tag in article.tags.all %}
-                            <a href="{% url "articles_tag" tag.title %}" class="b-info__item b-info_left b-info_colorful b-info_italic">
+                            <a href="{% url "articles_tag" tag.title %}"
+                               class="b-info__item b-info_left b-info_colorful b-info_italic">
                                 <i class="fa fa-tag" aria-hidden="true"></i>{{ tag.title }}
                             </a>
                         {% endfor %}
@@ -102,15 +103,17 @@
                     {#                            {% render_comment_form for news %}#}
                 </div>
                 <div class="grid__column-4 grid__offset">
-                            <div class="b-list__item b-list__item_head">Также читайте</div>
-                            {% if related_article %}
-                                <div class="grid__row grid__row-btm">
-                                <div class="grid__column-4">
-                                <a class="b-image b-image-round" href="{% url "articles_detail" related_article.slug %}">
+                    <div class="b-list__item b-list__item_head">Также читайте</div>
+                    {% if related_article %}
+                        <div class="grid__row grid__row-btm">
+                            <div class="grid__column-4">
+                                <a class="b-image b-image-round"
+                                   href="{% url "articles_detail" related_article.slug %}">
                                     <div class="b-box b-box-green">
                                         <div class="b-box__image-fullsize">
                                             {% if related_article.images.first %}
-                                                <img src="{{ related_article.images.first.image.url }}" alt="Пример награды">
+                                                <img src="{{ related_article.images.first.image.url }}"
+                                                     alt="Пример награды">
                                             {% else %}
                                                 <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
                                             {% endif %}
@@ -125,8 +128,8 @@
                                     </div>
                                 </a>
                             </div>
-                            </div>
-                            {% endif %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -136,30 +139,33 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image" href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}"><div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image-left">
-                                {% if product_for_bottom.images.first %}
-                                    <img src="{{ product_for_bottom.images.first.image.url }}" alt="Пример Продукта">
-                                {%  else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                    <a class="b-link_pseudo"
+                       href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
+                        <div class="b-box">
+                            <div class="b-box__wrapper">
+                                <div class="b-box__image-left">
+                                    {% if product_for_bottom.images.first %}
+                                        <img src="{{ product_for_bottom.images.first.image.url }}"
+                                             alt="Пример Продукта">
+                                    {% else %}
+                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                    {% endif %}
+                                </div>
+                                <p class="b-box__author">
+                                    {{ product_for_bottom.category.name }}
+                                </p>
+                                <p class="b-box__text">
+                                    {{ product_for_bottom.name }}
+                                </p>
+                                <div class="b-box__sale">Хит</div>
                             </div>
-                            <p class="b-box__author">
-                                {{ product_for_bottom.category.name }}
-                            </p>
-                            <p class="b-box__text">
-                                {{ product_for_bottom.name }}
-                            </p>
-                            <div class="b-box__sale">Хит</div></div>
                         </div>
                     </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                    <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                        <div class="b-box">
                             <div class="b-box__wrapper">
                                 <p class="b-box__author">
                                     {{ news_for_bottom.date_created }}
@@ -168,8 +174,8 @@
                                     {{ news_for_bottom.title }}
                                 </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>
