@@ -66,7 +66,7 @@
                                             <div class="b-box__wrapper">
                                                 <h1 class="b-box__header">{{ news.title }}</h1>
                                                 <div class="b-box__text">
-                                                    {{ news.text | truncatechars:120 | striptags | safe }}
+                                                    {{ news.text | truncatechars_html:120 | striptags }}
                                                 </div>
                                             </div>
                                             <div class="b-box__footer">
