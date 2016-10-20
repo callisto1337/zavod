@@ -143,25 +143,29 @@
                     {% if black_friday_product %}
                         <div class="grid__column-4 grid__offset">
                             <h3 class="subheading">Черная пятница!</h3>
-                            <div class="b-box">
-                                <div class="b-box__wrapper">
-                                    <div class="b-box__image">
-                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                    </div>
-                                    <h4 class="b-box__header">{{ black_friday_product.name }}</h4>
-                                    <p class="b-box__text">
-                                        {{ black_friday_product.product_text | truncatewords:20 | striptags | safe }}
-                                    </p>
-                                    <div class="b-box__sale">-{{ black_friday_product.black_friday_discount }}%</div>
-                                </div>
-                                <div class="b-box__footer">
+                            <a class="b-link_pseudo" href="#" title="{{ black_friday_product.name }}">
+                                <div class="b-box">
                                     <div class="b-box__wrapper">
-                                        {#                                        <span class="b-box__footer-left">44 позиции</span>#}
-                                        <span class="b-box__footer-right"><i class="fa fa-picture-o"
-                                                                             aria-hidden="true"></i> {{ black_friday_product.images.all | length }} фото</span>
+                                        <div class="b-box__image">
+                                            <img src="{% static 'img/products/product_sale.png' %}"
+                                                 alt="Пример Продукта">
+                                        </div>
+                                        <h4 class="b-box__header">{{ black_friday_product.name }}</h4>
+                                        <p class="b-box__text">
+                                            {{ black_friday_product.product_text | truncatewords:20 | striptags | safe }}
+                                        </p>
+                                        <div class="b-box__sale">-{{ black_friday_product.black_friday_discount }}%
+                                        </div>
+                                    </div>
+                                    <div class="b-box__footer">
+                                        <div class="b-box__wrapper">
+                                            {#                                        <span class="b-box__footer-left">44 позиции</span>#}
+                                            <span class="b-box__footer-right"><i class="fa fa-picture-o"
+                                                                                 aria-hidden="true"></i> {{ black_friday_product.images.all | length }} фото</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     {% endif %}
                 </div>
@@ -264,11 +268,13 @@
                     <div class="b-box__image-fullsize">
                         <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
                     </div>
-                    <div class="b-box__wrapper">
-                        <h4 class="b-box__header b-box__header-big">{{ news.title }}</h4>
-                        <p class="b-box__text">
-                            {{ news.text | striptags | truncatewords:20 }}
-                        </p>
+                    <div class="b-box__body">
+                        <div class="b-box__wrapper">
+                            <h4 class="b-box__header b-box__header-big">{{ news.title }}</h4>
+                            <p class="b-box__text">
+                                {{ news.text | striptags | truncatewords:20 }}
+                            </p>
+                        </div>
                     </div>
                     <div class="b-box__footer">
                         <div class="b-box__wrapper">
@@ -303,12 +309,15 @@
                                 <img src="{{ article.images.first.image.url }}" alt="Пример награды">
                             {% else %}
                                 <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
-                            {% endif %}                                </div>
-                        <div class="b-box__wrapper">
-                            <h4 class="b-box__header">{{ article.title }}</h4>
-                            <p class="b-box__text">
-                                {{ article.text|striptags|truncatewords:10 }}
-                            </p>
+                            {% endif %}
+                        </div>
+                        <div class="b-box__body">
+                            <div class="b-box__wrapper">
+                                <h4 class="b-box__header">{{ article.title }}</h4>
+                                <p class="b-box__text">
+                                    {{ article.text|striptags|truncatewords:10 }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </a>
@@ -356,4 +365,3 @@
         </div>
     </div>
 {% endblock %}
-

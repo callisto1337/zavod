@@ -108,45 +108,45 @@
 
     {% if category.popularproduct.all %}
         <div class="b-section">
-            <div class="b-layout">
-                <div class="grid__row">
-                    <h3 class="subheading">Популярные товары</h3>
-                    {% for popularproduct in category.popularproduct.all %}
-                        {% if forloop.counter > 1 %}
-                            <div class="grid__column-4 grid__offset">
-                        {% else %}
-                            <div class="grid__column-4">
-                        {% endif %}
-                            <a class="b-image"
-                               href="{% url 'catalog_category_inside' popularproduct.product.category.slug popularproduct.product.slug %}">
-                                <div class="b-box">
-                                    <div class="b-box__wrapper">
-                                        <div class="b-box__image-left">
-                                            {% if popularproduct.product.images.first %}
-                                                <img src="{{ popularproduct.product.images.first.image.url }}"
-                                                     alt="Пример Продукта">
-                                            {% else %}
-                                                <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                            {% endif %}
-                                        </div>
-                                        <p class="b-box__author">
-                                            {{ popularproduct.product.category.name }}
-                                        </p>
-                                        <p class="b-box__text">
-                                            {{ popularproduct.product.name }}
-                                        </p>
-                                    {% if popularproduct.type == 0 %}
-                                        <div class="b-box__sale">Хит</div>
-                                    {% elif popularproduct.type == 1 %}
-                                        <div class="b-box__sale">Скидка!</div>
-                                    {% elif popularproduct.type == 2 %}
-                                        <div class="b-box__sale">Новинка</div>
-                                    {% endif %}
-                                    </div>
-                                </div>
-                            </a>
+        <div class="b-layout">
+            <div class="grid__row">
+                <h3 class="subheading">Популярные товары</h3>
+                {% for popularproduct in category.popularproduct.all %}
+                    {% if forloop.counter > 1 %}
+                        <div class="grid__column-4 grid__offset">
+                    {% else %}
+                        <div class="grid__column-4">
+                    {% endif %}
+                <a class="b-image"
+                   href="{% url 'catalog_category_inside' popularproduct.product.category.slug popularproduct.product.slug %}">
+                    <div class="b-box">
+                        <div class="b-box__wrapper">
+                            <div class="b-box__image-left">
+                                {% if popularproduct.product.images.first %}
+                                    <img src="{{ popularproduct.product.images.first.image.url }}"
+                                         alt="Пример Продукта">
+                                {% else %}
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
+                                {% endif %}
+                            </div>
+                            <p class="b-box__author">
+                                {{ popularproduct.product.category.name }}
+                            </p>
+                            <p class="b-box__text">
+                                {{ popularproduct.product.name }}
+                            </p>
+                            {% if popularproduct.type == 0 %}
+                                <div class="b-box__sale">Хит</div>
+                            {% elif popularproduct.type == 1 %}
+                                <div class="b-box__sale">Скидка!</div>
+                            {% elif popularproduct.type == 2 %}
+                                <div class="b-box__sale">Новинка</div>
+                            {% endif %}
                         </div>
-                    {% endfor %}
+                    </div>
+                </a>
+                </div>
+                {% endfor %}
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@
             <div class="grid__row">
                 <div class="grid__column-4">
                     <h3 class="subheading">Новинка производства</h3>
-                    <a class="b-image"
+                    <a class="b-link_pseudo"
                        href="{% url 'catalog_category_inside' product_for_bottom.category.slug product_for_bottom.slug %}">
                         <div class="b-box">
                             <div class="b-box__wrapper">
@@ -182,9 +182,8 @@
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Последняя новость</h3>
-
-                    <div class="b-box">
-                        <a class="b-image" href="{% url 'news_detail' news_for_bottom.slug %}">
+                    <a class="b-link_pseudo" href="{% url 'news_detail' news_for_bottom.slug %}">
+                        <div class="b-box">
                             <div class="b-box__wrapper">
                                 <p class="b-box__author">
                                     {{ news_for_bottom.date_created }}
@@ -193,13 +192,13 @@
                                     {{ news_for_bottom.title }}
                                 </p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <h3 class="subheading">Видео как закалялась сталь</h3>
                     {% if media_for_bottom %}
-                        <a class="b-image" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
+                        <a class="b-link_pseudo" href="{% url 'photogallery_detail' media_for_bottom.slug %}">
                     {% endif %}
                     <div class="b-box b-box_noshadow">
                         <div class="b-box__image-halfsize">

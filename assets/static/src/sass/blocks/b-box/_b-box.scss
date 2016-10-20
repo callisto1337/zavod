@@ -5,7 +5,6 @@
 	background-color: #ffffff;
 	height: 100%;
 
-
 	&__wrapper {
 		padding: 16px 32px;
 
@@ -76,6 +75,10 @@
 		color: #292929;
 		line-height: 16.2px;
 		margin: 0;
+	}
+
+	&__body {
+		overflow: hidden;
 	}
 
 	&__footer {
@@ -190,13 +193,19 @@
 	// Во многих местах боксы должы быть фиксированной высоты, увы
 	// Извини меня, человек, который это поддерживает
 	&_468 {
-		height: 468px!important; // это хак для слайдера, иначе ужимается низ, который абсолют
+		height: 468px !important; // это хак для слайдера, иначе ужимается низ, который абсолют
 
 		.b-box__image-fullsize {
+			margin: 0;
+
 			img {
 				height: 270px;
 				width: 100%;
 			}
+		}
+
+		.b-box__header-big {
+			max-width: 100%;
 		}
 
 		.b-box__footer {
@@ -212,6 +221,8 @@
 		height: 388px;
 
 		.b-box__image-fullsize {
+			margin: 0;
+
 			img {
 				height: 180px;
 				width: 100%;
@@ -230,10 +241,16 @@
 		height: 342px;
 
 		.b-box__image-fullsize {
+			margin: 0;
+
 			img {
 				height: 171px;
 				width: 100%;
 			}
+		}
+
+		.b-box__body {
+			height: 171px;
 		}
 
 		.b-box__footer {
@@ -248,6 +265,8 @@
 		height: 244px;
 
 		.b-box__image-fullsize {
+			margin: 0;
+
 			img {
 				height: 90px;
 				width: 100%;
