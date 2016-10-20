@@ -297,7 +297,7 @@
                     <div class="grid__column-4 grid__offset">
                 {% endif %}
             <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}">
-                <div class="b-box {% if ind|mod:3 == 0 %} b-box-red {% endif %} {% if ind|mod:3 == 1 %} b-box-green {% endif %} {% if ind|mod:3 == 2 %} b-box-black {% endif %}">
+                <div class="b-box {% cycle 'b-box-red' 'b-box-green' 'b-box-black' %}">
                     <div class="b-box__image-fullsize">
                         {% if article.images.first %}
                             <img src="{{ article.images.first.image.url }}" alt="Пример награды">

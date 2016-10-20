@@ -151,7 +151,6 @@ th {
 	-ms-user-select: text !important;
 	user-select: text !important;
 }
-
 .slick-list.draggable {
 	-webkit-user-select: none !important;
 	-khtml-user-select: none !important;
@@ -159,7 +158,9 @@ th {
 	-ms-user-select: none !important;
 	user-select: none !important;
 }
-
+.slick-dotted.slick-slider {
+	margin-bottom: 0 !important;
+}
 // * {
 // 	background: #000 !important;
 // 	color: #0f0 !important;
