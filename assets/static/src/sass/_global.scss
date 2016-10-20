@@ -67,6 +67,7 @@ th {
 	padding: 0;
 }
 
+// slider on contact page
 #contacts-employee {
 	width: 540px;
 	height: 308px;
@@ -143,6 +144,35 @@ th {
 	}
 }
 
+#partners {
+	height: 86px;
+	overflow: hidden;
+
+	.b-slider__item {
+		margin: 0 auto;
+		text-align: center;
+
+		img {
+			max-width: 100%;
+			height: auto;
+			width: auto;
+			margin-bottom: 16px;
+		}
+
+		&-title {
+			font-size: 16.2px;
+			font-weight: 700;
+			color: #292929;
+		}
+
+		&-desc {
+			font-size: 12.6px;
+			font-weight: 300;
+			color: #868686;
+		}
+	}
+}
+
 // Slick
 .slick-slider {
 	-webkit-user-select: text !important;
@@ -151,6 +181,7 @@ th {
 	-ms-user-select: text !important;
 	user-select: text !important;
 }
+
 .slick-list.draggable {
 	-webkit-user-select: none !important;
 	-khtml-user-select: none !important;
@@ -158,9 +189,11 @@ th {
 	-ms-user-select: none !important;
 	user-select: none !important;
 }
+
 .slick-dotted.slick-slider {
 	margin-bottom: 0 !important;
 }
+
 // * {
 // 	background: #000 !important;
 // 	color: #0f0 !important;

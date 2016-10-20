@@ -54,6 +54,7 @@
 		padding: 0;
 		display: block;
 		max-width: 440px;
+		word-wrap: break-word;
 
 		&-big {
 			font-size: 27px;
@@ -75,6 +76,7 @@
 		color: #292929;
 		line-height: 16.2px;
 		margin: 0;
+		word-wrap: break-word;
 	}
 
 	&__body {
@@ -206,6 +208,10 @@
 
 		.b-box__header-big {
 			max-width: 100%;
+		}
+
+		.b-box__body {
+			height: 153px;
 		}
 
 		.b-box__footer {
