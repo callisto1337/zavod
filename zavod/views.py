@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import logging
+import collections
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.contenttypes.models import ContentType
 from django.core.mail import EmailMessage
@@ -10,7 +11,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout as auth_logout, authenticate, login
 from zavod.forms import QuestionForm, CustomUserCreationForm, CallbackForm
 from zavod.constants import SPECIAL_FILTER_PARAMS
-from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage, Question, Employee, Tag
+from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage, Question, Employee, Tag, \
+    ProductProperty, Property, Department
 from zt.settings import EMAILS_FOR_CALLBACK
 
 
@@ -78,6 +80,12 @@ def search(request):
 
 def contacts(request):
     out = {}
+    employees_by_departments = []
+    departments = Department.objects.all()
+    for department in departments:
+        chunks = [department.employees.all()[x:x+2] for x in xrange(0, len(department.employees.all()), 2)]
+        employees_by_departments += chunks
+    out.update({'employees_by_departments': employees_by_departments})
     out.update({'menu_active_item': 'contacts'})
     location = request.GET.get('location', 'office')
     if location == 'manufacture':
@@ -504,12 +512,32 @@ def catalog_category(request, category_slug, parent_category_slug=None):
         else:
             title = 'Список продуктов'
             products = Product.objects.all().filter(category=category, published=True)
+            for product in products:
+                product.properties_dict = product.properties.values('property__title', 'value')
             template_name = 'catalog_category_products.html'
             ind_products = enumerate(products)
+            properties = []
+            properties_ids = ProductProperty.objects.filter(product__in=products).values_list('property', flat=True).distinct().all()
+            for property_id in properties_ids:
+                properties.append(Property.objects.get(pk=property_id))
+            properties.sort()
+            for product in products:
+                product.properties_dict = {}
+                for property in properties:
+                    product.properties_dict.update(
+                        {
+                            property.title: ProductProperty.objects.filter(product=product, property=property).first().value
+                        }
+                    )
+                product.properties_dict = collections.OrderedDict(sorted(product.properties_dict.items()))
+            new_properties = []
+            for property in properties:
+                new_properties.append(u'{}, {}'.format(property.title, property.units))
+            new_properties.sort()
             if request.GET.get('expand', 'true') == 'true':
                 template_name = 'catalog_category_products_expand.html'
             out.update({'products': products, 'parent': category, 'title': title, 'category': category,
-                        'request': request, 'ind_products': ind_products})
+                        'request': request, 'ind_products': ind_products, 'properties': new_properties})
             return render(request, template_name, out)
     else:
         return get_product(request, category_slug, parent_category_slug, out)

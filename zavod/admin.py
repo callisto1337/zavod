@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Article, CategoryProduct, Product, CustomUser, Tag, Question, News, Image, Gallery, GalleryImage, \
-    File, Employee, Property, ProductProperty, PopularProduct
+    File, Employee, Property, ProductProperty, PopularProduct, Department
 
 
 class ProductPropertyInline(admin.TabularInline):
@@ -51,6 +51,11 @@ admin.site.register(Tag, TagFields)
 class QuestionFields(admin.ModelAdmin):
     list_display = ('text', 'answer', 'published')
 admin.site.register(Question, QuestionFields)
+
+
+class DepartmentFields(admin.ModelAdmin):
+    list_display = ('title',)
+admin.site.register(Department, DepartmentFields)
 
 
 class NewsFields(admin.ModelAdmin):

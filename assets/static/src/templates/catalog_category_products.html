@@ -46,8 +46,8 @@
                             <thead>
                             <tr>
                                 <th>Позиция</th>
-                                {% for key, value in products.first.properties.items %}
-                                    <th>{{ key }}</th>
+                                {% for property in properties %}
+                                    <th>{{ property }}</th>
                                 {% endfor %}
                                 <th></th>
                             </tr>
@@ -58,9 +58,10 @@
                                     <td>
                                         <a href="{% url "catalog_category_inside" product.category.slug product.slug %}">
                                             {{ product.name }}
+                                            {{ product.properties_dict.0.value }}
                                         </a>
                                     </td>
-                                    {% for key, value in product.properties.items %}
+                                    {% for key, value in product.properties_dict.items %}
                                         {% if "Цена" not in key %}
                                             <td>{{ value }}</td>
                                         {% else %}

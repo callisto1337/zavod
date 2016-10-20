@@ -278,6 +278,7 @@ class Department(models.Model):
 
 
 class Employee(models.Model):
+    email = models.EmailField(max_length=50, default='')
     name = models.CharField(max_length=50, null=False)
     first_name = models.CharField(max_length=50, default='')
     last_name = models.CharField(max_length=50, default='')

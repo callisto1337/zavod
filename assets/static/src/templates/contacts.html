@@ -76,84 +76,44 @@
         <div class="b-block__item">
             <div class="b-block__item__wrapper">
                 <div id="contacts-employee">
-                    <div>
-                        <h3 class="b-block__item__title b-block__item__title_small">
-                            Менеджеры отдела продаж
-                        </h3>
-                        <div class="b-section__space"></div>
-                        <div class="grid__row">
-                            <div class="grid__column-2">
-                                <a class="b-image b-image-round" href="#">
-                                    <div class="b-image__container">
-                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                    {% for employees in employees_by_departments %}
+                        <div>
+                            <h3 class="b-block__item__title b-block__item__title_small">
+                                {{ employees.0.department.title }}
+                            </h3>
+                            <div class="b-section__space"></div>
+                            <div class="grid__row">
+                                <div class="grid__column-2">
+                                    <a class="b-image b-image-round" href="{% url "employee_info" employees.0.name %}">
+                                        <div class="b-image__container">
+                                            {% if employees.0.image %}
+                                                <img src="{{ employees.0.image.image.url }}" alt="Пример награды">
+                                            {% else %}
+                                                <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                            {% endif %}
+                                        </div>
+                                        <div class="b-image__title">{{ employees.0.first_name }} {{ employees.0.last_name }}</div>
+                                        <div class="b-image__caption">{{ employees.0.email }}</div>
+                                    </a>
+                                </div>
+                                {% if employees.1 %}
+                                    <div class="grid__column-2 grid__offset">
+                                        <a class="b-image b-image-round" href="{% url "employee_info" employees.1.name %}">
+                                            <div class="b-image__container">
+                                                {% if employees.1.image %}
+                                                    <img src="{{ employees.1.image.image.url }}" alt="Пример награды">
+                                                {% else %}
+                                                    <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
+                                                {% endif %}
+                                            </div>
+                                            <div class="b-image__title">{{ employees.1.first_name }} {{ employees.1.last_name }}</div>
+                                            <div class="b-image__caption">{{ employees.1.email }}</div>
+                                        </a>
                                     </div>
-                                    <div class="b-image__title">Любовь Гордиенко</div>
-                                    <div class="b-image__caption">info@zavod.ru</div>
-                                </a>
-                            </div>
-                            <div class="grid__column-2 grid__offset">
-                                <a class="b-image b-image-round" href="#">
-                                    <div class="b-image__container">
-                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                                    </div>
-                                    <div class="b-image__title">Любовь Гордиенко</div>
-                                    <div class="b-image__caption">info@zavod.ru</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="b-block__item__title b-block__item__title_small">
-                            Менеджеры отдела продаж
-                        </h3>
-                        <div class="b-section__space"></div>
-                        <div class="grid__row">
-                            <div class="grid__column-2">
-                                <a class="b-image b-image-round" href="#">
-                                    <div class="b-image__container">
-                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                                    </div>
-                                    <div class="b-image__title">Любовь Гордиенко</div>
-                                    <div class="b-image__caption">info@zavod.ru</div>
-                                </a>
-                            </div>
-                            <div class="grid__column-2 grid__offset">
-                                <a class="b-image b-image-round" href="#">
-                                    <div class="b-image__container">
-                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                                    </div>
-                                    <div class="b-image__title">Любовь Гордиенко</div>
-                                    <div class="b-image__caption">info@zavod.ru</div>
-                                </a>
+                                {% endif %}
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <h3 class="b-block__item__title b-block__item__title_small">
-                            Менеджеры отдела продаж
-                        </h3>
-                        <div class="b-section__space"></div>
-                        <div class="grid__row">
-                            <div class="grid__column-2">
-                                <a class="b-image b-image-round" href="#">
-                                    <div class="b-image__container">
-                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                                    </div>
-                                    <div class="b-image__title">Любовь Гордиенко</div>
-                                    <div class="b-image__caption">info@zavod.ru</div>
-                                </a>
-                            </div>
-                            <div class="grid__column-2 grid__offset">
-                                <a class="b-image b-image-round" href="#">
-                                    <div class="b-image__container">
-                                        <img src="{% static 'img/employee/example.png' %}" alt="Пример награды">
-                                    </div>
-                                    <div class="b-image__title">Любовь Гордиенко</div>
-                                    <div class="b-image__caption">info@zavod.ru</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
                 <div id="mouse"></div>
             </div>

@@ -1,80 +1,91 @@
 [
   {
+    "model": "zavod.department",
+    "pk": 1,
+    "fields": {
+      "title": "Менеджеры отдела продаж"
+    }
+  },
+  {
+    "model": "zavod.department",
+    "pk": 2,
+    "fields": {
+      "title": "Администраторы"
+    }
+  },
+  {
     "model": "zavod.employee",
     "pk": 1,
     "fields": {
+      "email": "irina@zavod.ru",
       "published": true,
       "name": "irina1",
       "first_name": "Ирина",
       "last_name": "Иванчина",
       "position": "Менеджер",
       "text": "Чудесный работник",
-      "image": 2
+      "image": 2,
+      "department": 1
     }
   },
   {
     "model": "zavod.employee",
     "pk": 2,
     "fields": {
+      "email": "irina@zavod.ru",
       "published": true,
       "name": "irina2",
       "first_name": "Ирина",
       "last_name": "Иванчина",
       "position": "Менеджер",
       "text": "Чудесный работник",
-      "image": 2
+      "image": 2,
+      "department": 1
     }
   },
   {
     "model": "zavod.employee",
     "pk": 3,
     "fields": {
+      "email": "irina@zavod.ru",
       "published": true,
       "name": "irina3",
       "first_name": "Ирина",
       "last_name": "Иванчина",
       "position": "Менеджер",
       "text": "Чудесный работник",
-      "image": 2
+      "image": 2,
+      "department": 1
     }
   },
   {
     "model": "zavod.employee",
     "pk": 4,
     "fields": {
+      "email": "irina@zavod.ru",
       "published": true,
       "name": "irina4",
       "first_name": "Ирина",
       "last_name": "Иванчина",
       "position": "Менеджер",
       "text": "Чудесный работник",
-      "image": 2
+      "image": 2,
+      "department": 2
     }
   },
   {
     "model": "zavod.employee",
     "pk": 5,
     "fields": {
+      "email": "irina@zavod.ru",
       "published": true,
       "name": "irina5",
       "first_name": "Ирина",
       "last_name": "Иванчина",
       "position": "Менеджер",
       "text": "Чудесный работник",
-      "image": 2
-    }
-  },
-  {
-    "model": "zavod.employee",
-    "pk": 6,
-    "fields": {
-      "published": true,
-      "name": "irina6",
-      "first_name": "Ирина",
-      "last_name": "Иванчина",
-      "position": "Менеджер",
-      "text": "Чудесный работник",
-      "image": 2
+      "image": 2,
+      "department": 2
     }
   }
 ]
