@@ -195,6 +195,7 @@
 		.b-box__image-fullsize {
 			img {
 				height: 270px;
+				width: 100%;
 			}
 		}
 
@@ -213,6 +214,25 @@
 		.b-box__image-fullsize {
 			img {
 				height: 180px;
+				width: 100%;
+			}
+		}
+
+		.b-box__footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+	}
+
+	&_342 {
+		height: 342px;
+
+		.b-box__image-fullsize {
+			img {
+				height: 171px;
+				width: 100%;
 			}
 		}
 
@@ -230,6 +250,7 @@
 		.b-box__image-fullsize {
 			img {
 				height: 90px;
+				width: 100%;
 			}
 		}
 

@@ -267,7 +267,7 @@
                     <div class="b-box__wrapper">
                         <h4 class="b-box__header b-box__header-big">{{ news.title }}</h4>
                         <p class="b-box__text">
-                            {{ news.text | truncatewords:20 | safe }}
+                            {{ news.text | striptags | truncatewords:20 }}
                         </p>
                     </div>
                     <div class="b-box__footer">
@@ -287,34 +287,34 @@
         </div>
     </div>
     <div class="b-section b-section_large">
-    <div class="b-layout">
-        <h3 class="b-section-title">Наши статьи</h3>
-        <div class="grid__row">
-            {% for ind, article in ind_articles %}
-                {% if ind == 0 %}
-                    <div class="grid__column-4">
-                {% else %}
-                    <div class="grid__column-4 grid__offset">
-                {% endif %}
-            <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}">
-                <div class="b-box {% cycle 'b-box-red' 'b-box-green' 'b-box-black' %}">
-                    <div class="b-box__image-fullsize">
-                        {% if article.images.first %}
-                            <img src="{{ article.images.first.image.url }}" alt="Пример награды">
-                        {% else %}
-                            <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
-                        {% endif %}                                </div>
-                    <div class="b-box__wrapper">
-                        <div class="b-box__author">{{ article.author }}</div>
-                        <h4 class="b-box__header">{{ article.title }}</h4>
-                        <p class="b-box__text">
-                            {{ article.text | safe }}
-                        </p>
+        <div class="b-layout">
+            <h3 class="b-section-title">Наши статьи</h3>
+            <div class="grid__row">
+                {% for ind, article in ind_articles %}
+                    {% if ind == 0 %}
+                        <div class="grid__column-4">
+                    {% else %}
+                        <div class="grid__column-4 grid__offset">
+                    {% endif %}
+                <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}">
+                    <div class="b-box b-box_342 {% cycle 'b-box-red' 'b-box-green' 'b-box-black' %}">
+                        <div class="b-box__image-fullsize">
+                            {% if article.images.first %}
+                                <img src="{{ article.images.first.image.url }}" alt="Пример награды">
+                            {% else %}
+                                <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
+                            {% endif %}                                </div>
+                        <div class="b-box__wrapper">
+                            <h4 class="b-box__header">{{ article.title }}</h4>
+                            <p class="b-box__text">
+                                {{ article.text|striptags|truncatewords:10 }}
+                            </p>
+                        </div>
                     </div>
+                </a>
                 </div>
-            </a>
-            </div>
-            {% endfor %}
+                {% endfor %}
+                </div>
             </div>
         </div>
     </div>
