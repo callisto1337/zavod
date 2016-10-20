@@ -30,9 +30,9 @@
                         <div class="b-info__item b-info_left b-info__date">
                             {{ article.date_created|date:"d F Y"|lower }}
                         </div>
-                        <div class="b-info__item b-info_left">
+                        {% comment %}<div class="b-info__item b-info_left">
                             <i class="fa fa-user" aria-hidden="true"></i> {{ article.author }}
-                        </div>
+                        </div>{% endcomment %}
                         {% get_comment_count for article as comment_count %}
                         <div class="b-info__item b-info_right">
                             <i class="fa fa-comments" aria-hidden="true"></i> {{ comment_count }}
