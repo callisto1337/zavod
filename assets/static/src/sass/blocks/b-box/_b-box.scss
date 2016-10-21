@@ -41,7 +41,7 @@
 
 			img {
 				width: 360px;
-				height: 108px;
+				height: 90px;
 			}
 		}
 	}
@@ -97,6 +97,17 @@
 		&-right {
 			float: right;
 			margin-left: 16px;
+
+			a {
+				color: #777777;
+				font-size: 12.6px;
+				font-weight: 300;
+				line-height: 12.6px;
+
+				&:hover {
+					color: #00955F;
+				}
+			}
 		}
 	}
 
@@ -243,6 +254,36 @@
 		}
 	}
 
+	&_360 {
+		height: 360px;
+
+		.b-box__image {
+			width: auto;
+
+			img {
+				margin: 0 auto;
+				height: 150px;
+				width: auto;
+				max-width: 100%;
+			}
+		}
+
+		.b-box__wrapper {
+			position: relative;
+		}
+
+		.b-box__footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+
+			.b-box__wrapper {
+				position: static;
+			}
+		}
+	}
+
 	&_342 {
 		height: 342px;
 
@@ -295,6 +336,27 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
+		}
+	}
+
+	&_90 {
+		height: 90px;
+
+		.b-box__wrapper {
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.b-box__image {
+			float: left;
+			margin: 0 16px 0 0;
+			width: auto;
+
+			img {
+				height: 58px;
+				width: auto;
+				margin: 0;
+			}
 		}
 	}
 }

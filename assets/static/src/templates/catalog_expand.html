@@ -43,8 +43,8 @@
                     {% else %}
                         <div class="grid__column-4 grid__offset">
                     {% endif %}
-                <a class="b-link b-link_pseudo" href="{% url "catalog_category" category_product.slug %}">
-                    <div class="b-box">
+                <a class="b-link_pseudo" href="{% url "catalog_category" category_product.slug %}">
+                    <div class="b-box b-box_360">
                         <div class="b-box__wrapper">
                             <div class="b-box__image">
                                 {% if category_product.images.first %}
@@ -54,21 +54,24 @@
                                 {% endif %}
                             </div>
                             <h4 class="b-box__header">{{ category_product.name }}</h4>
-                            <p class="b-box__text">{{ category_product.text | truncatewords:20 | striptags | safe }}</p>
+                            <p class="b-box__text">{{ category_product.text | striptags | truncatewords:20 | safe }}</p>
                         </div>
-                        <div class="b-box__footer">
-                            <div class="b-box__wrapper">
-                                {% if category_product.number > 0 %}
-                                    <span class="b-box__footer-left">{{ category_product.number }} позиции</span>
-                                {% endif %}
-                                {% if category_product.number != 0 and category_product.price_list %}
-                                    <a class="b-link b-link_pseudo" href="{{ category_product.price_list.url }}">
+
+                        {% if category_product.number > 0 or category_product.number != 0 and category_product.price_list %}
+                            <div class="b-box__footer">
+                                <div class="b-box__wrapper">
+                                    {% if category_product.number > 0 %}
+                                        <span class="b-box__footer-left">{{ category_product.number }} позиции</span>
+                                    {% endif %}
+                                    {% if category_product.number != 0 and category_product.price_list %}
+                                        <a class="b-link b-link_pseudo" href="{{ category_product.price_list.url }}">
                                         <span class="b-box__footer-right"><i class="fa fa-file-pdf-o"
                                                                              aria-hidden="true"></i> Прайс-лист</span>
-                                    </a>
-                                {% endif %}
+                                        </a>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </a>
                 </div>
@@ -76,44 +79,44 @@
                     </div>
                 {% endif %}
                 {% endfor %}
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-9">
+                    <p class="b-section-text">
+                        Вы можете купить готовую продукцию (из каталога на нашем сайте) или заказать изготовление по
+                        индивидуальным размерам.
+                    </p>
+                    <p class="b-section-text">
+                        В рамках партнерских соглашений мы также осуществляем сборку и последующую реализацию по
+                        выгодным ценам теплообменного оборудования ведущих производителей Германии, Швеции и других
+                        стран.
+                    </p>
+                    <h3 class="b-section-subtitle b-section-subtitle_colorful">
+                        Каталог теплообменного оборудования
+                    </h3>
+                    <p class="b-section-text">
+                        В нашем каталоге представлено теплообменное оборудование всех наиболее востребованных типов.
+                        Если вам необходима консультация или вы не нашли на нашем сайте то, что искали – обязательно
+                        позвоните нам, мы предоставим всю актуальную информацию и ответим на ваши вопросы.
+                    </p>
                 </div>
-                <div class="grid__row">
-                    <div class="grid__column-9">
-                        <p class="b-section-text">
-                            Вы можете купить готовую продукцию (из каталога на нашем сайте) или заказать изготовление по
-                            индивидуальным размерам.
-                        </p>
-                        <p class="b-section-text">
-                            В рамках партнерских соглашений мы также осуществляем сборку и последующую реализацию по
-                            выгодным ценам теплообменного оборудования ведущих производителей Германии, Швеции и других
-                            стран.
-                        </p>
-                        <h3 class="b-section-subtitle b-section-subtitle_colorful">
-                            Каталог теплообменного оборудования
-                        </h3>
-                        <p class="b-section-text">
-                            В нашем каталоге представлено теплообменное оборудование всех наиболее востребованных типов.
-                            Если вам необходима консультация или вы не нашли на нашем сайте то, что искали – обязательно
-                            позвоните нам, мы предоставим всю актуальную информацию и ответим на ваши вопросы.
-                        </p>
-                    </div>
-                    <div class="grid__column-4 grid__offset">
-                        <img class="b-section-logotype" src="{% static 'img/logotype_square.png' %}"
-                             alt="Логотип_маленький">
-                        <h4 class="b-section-subtitle">Все работы выполняются:</h4>
-                        <ul class="b-section-list">
-                            <li class="b-section-list__item">На высокоточных станках с УЧПУ, в том числе без участия
-                                человека,
-                            </li>
-                            <li class="b-section-list__item">под контролем первоклассных мастеров завода с многолетним
-                                опытом,
-                            </li>
-                            <li class="b-section-list__item">на оборудовании, прошедшем государственную аттестацию.</li>
-                        </ul>
-                    </div>
+                <div class="grid__column-4 grid__offset">
+                    <img class="b-section-logotype" src="{% static 'img/logotype_square.png' %}"
+                         alt="Логотип_маленький">
+                    <h4 class="b-section-subtitle">Все работы выполняются:</h4>
+                    <ul class="b-section-list">
+                        <li class="b-section-list__item">На высокоточных станках с УЧПУ, в том числе без участия
+                            человека,
+                        </li>
+                        <li class="b-section-list__item">под контролем первоклассных мастеров завода с многолетним
+                            опытом,
+                        </li>
+                        <li class="b-section-list__item">на оборудовании, прошедшем государственную аттестацию.</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 
