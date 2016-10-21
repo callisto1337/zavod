@@ -56,8 +56,9 @@
         </div>
 
     </div>
-{#        <form action="/about/chasto-zadavaemye-voprosy-faq/" method="post">{% csrf_token %}#}
-{#        {{ question_form }}#}
-{#        <input type="submit" value="Submit" />#}
-{#        </form>#}
+    {% include 'blocks/bottom.html' %}
+    {#        <form action="/about/chasto-zadavaemye-voprosy-faq/" method="post">{% csrf_token %}#}
+    {#        {{ question_form }}#}
+    {#        <input type="submit" value="Submit" />#}
+    {#        </form>#}
 {% endblock %}
