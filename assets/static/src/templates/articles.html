@@ -18,8 +18,8 @@
                 {% else %}
                     <div class="grid__column-4 grid__offset">
                 {% endif %}
-            <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
-                <div class="b-box {% if ind == 0 %} b-box-red {% endif %} {% if ind == 1 %} b-box-green {% endif %} {% if ind == 2 %} b-box-black {% endif %} {% if ind == 3 %} b-box-red {% endif %} {% if ind == 4 %} b-box-green {% endif %} {% if ind == 5 %} b-box-green {% endif %} {% if ind == 6 %} b-box-black {% endif %} {% if ind == 7 %} b-box-red {% endif %}">
+            <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}">
+                <div class="b-box b-box_342 {% cycle 'b-box-red' 'b-box-green' 'b-box-black' %}">
                     <div class="b-box__image-fullsize">
                         {% if article.images.first %}
                             <img src="{{ article.images.first.image.url }}" alt="Пример награды">
@@ -28,10 +28,9 @@
                         {% endif %}
                     </div>
                     <div class="b-box__wrapper">
-                        <div class="b-box__author">{{ article.author }}</div>
                         <h4 class="b-box__header">{{ article.title }}</h4>
                         <p class="b-box__text">
-                            {{ article.text | safe }}
+                            {{ article.text|striptags|truncatechars:120 }}
                         </p>
                     </div>
                 </div>
