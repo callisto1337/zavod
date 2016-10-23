@@ -53,7 +53,7 @@ urlpatterns = [
     url(r'^dokumentatsija/tovarnye-znaki/tovarnyjj-znak-zachem-on/$', views.tovarnyjj_znak_zachem_on,
         name='tovarnyjj_znak_zachem_on'),
     url(r'^photogallery/$', views.photogallery, name='photogallery'),
-    url(r'^photogallery/(?P<photogallery_slug>[-\w]+)/$', views.photogallery_detail, name='photogallery_detail'),
+    url(r'^photogallery/(?P<photogallery_slug>[-\w]+)/$', views.photogallery_detail_page, name='photogallery_detail'),
     url(r'^photogallery/(?P<photogallery_slug>[-\w]+)/page-(?P<page_number>[0-9]+)/$', views.photogallery_detail_page, name='photogallery_detail_page'),
     url(r'^about/$', views.about, name='about'),
     url(r'^about/otzyvy/$', views.otzyvy, name='otzyvy'),

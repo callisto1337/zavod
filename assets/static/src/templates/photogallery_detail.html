@@ -2,6 +2,38 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load extras %}
 
 {% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
+                <a class="b-breadcrumbs__link" href="{% url "photogallery" %}>">Фотогалерея</a>
+            </div>
+        </div>
+        <div class="grid__row">
+            {% for item in gallery.gallery_images %}
+                {% if forloop|mod:2 == 0 %}
+                    <div class="grid__row grid__row-btm">
+                    <div class="grid__column-custom-612">
+                {% else %}
+                    <div class="grid__column-custom-612">
+                {% endif %}
+                <div class="b-box">
+                    <div class="b-box__image-fullsize">
+                        {% if item.cover_image %}
+                            <img src="{{ item.gallery_image.url }}" alt="Пример баннера">
+                        {% else %}
+                            <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if forloop|mod:2 == 1 %}
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

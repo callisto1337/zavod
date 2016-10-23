@@ -176,26 +176,30 @@
                             Заказать продукцию
                         </div>
                         <div class="b-section__space"></div>
-                        <form class="b-form" method="get" action="https://yandex.ru">
+                        <form class="b-form" method="post" action="{{ request.path }}" enctype="multipart/form-data">
+                            {% csrf_token %}
                             <div class="b-form-group">
-                                <input type="text" class="b-form-control" placeholder="Ваше имя" required="">
+                                <input type="text" class="b-form-control" placeholder="Ваше имя"
+                                       id="id_name" maxlength="200" name="name" required="">
                             </div>
 
                             <div class="b-form-group">
-                                <input type="text" class="b-form-control" placeholder="Контактный телефон"
-                                       required="">
+                                <input class="b-form-control" placeholder="Контактный телефон"
+                                       id="id_phone" maxlength="50" name="phone">
                             </div>
                             <div class="b-form-group">
-                                <input type="text" class="b-form-control" placeholder="Email"
-                                       required="">
+                                <input class="b-form-control" placeholder="Email"
+                                       id="id_email" name="email" type="email" required="">
                             </div>
                             <div class="b-form-group">
-                                <input type="file" id="file" multiple>
+                                <input type="file" id="id_file_field" name="file_field" multiple="">
                                 {% comment %}<i class="fa fa-paperclip pull-right" aria-hidden="true"></i>{% endcomment %}
                             </div>
                             <div class="b-form-group">
-                                <textarea class="b-form-control" rows="4" placeholder="Комментарий"></textarea>
+                                <textarea id="id_comment" maxlength="500" name="comment" required=""
+                                          class="b-form-control" rows="4" placeholder="Комментарий"></textarea>
                             </div>
+                            <input id="id_product" maxlength="500" name="product" type="hidden" value="{{ product.name }}">
                             <button type="submit" class="b-btn b-btn__fullwidth">
                                 <span class="b-btn__text">Отправить</span>
                             </button>

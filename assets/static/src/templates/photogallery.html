@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load extras %}
 
 {% block content %}
     <div class="b-section b-section_short">
@@ -10,15 +11,40 @@
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "photogallery" %}>">Фотогалерея</a>
             </div>
-            <div class="grid__row">
-                <div class="grid__column-3">
-                    {% for item in gallery %}
-                        <li>{{ item.title }}</li>
-                        <li>{{ item.galleryimage.all | length }}</li>
-                        <li>{{ item.date_created }}</li>
-                    {% endfor %}
+{#            <div class="grid__row">#}
+{#                <div class="grid__column-3">#}
+{#                    {% for item in gallery %}#}
+{#                        <li>{{ item.title }}</li>#}
+{#                        <li>{{ item.galleryimage.all | length }}</li>#}
+{#                        <li>{{ item.date_created }}</li>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+        <div class="grid__row">
+            {% for item in gallery %}
+                {% if forloop|mod:2 == 0 %}
+                    <div class="grid__row grid__row-btm">
+                    <div class="grid__column-custom-612">
+                {% else %}
+                    <div class="grid__column-custom-612">
+                {% endif %}
+            <a class="b-image" href="{% url "photogallery_detail" item.slug %}">
+                <div class="b-box">
+                    <div class="b-box__image-fullsize">
+                        {% if item.cover_image %}
+                            <img src="{{ item.cover_image.gallery_image.url }}" alt="Пример баннера">
+                        {% else %}
+                            <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
+                        {% endif %}
+                    </div>
                 </div>
+            </a>
             </div>
+            {% if forloop|mod:2 == 1 %}
+                </div>
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

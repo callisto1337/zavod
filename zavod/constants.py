@@ -13,3 +13,15 @@ POPULAR_TYPE_CHOICES = (
     (SALE, u'Скидка!'),
     (NEW, u'Новинка'),
 )
+
+SUBSCRIPTION_TYPE = {
+    u'Нет': 0,
+    u'Новости': 1,
+    u'Статьи': 2,
+}
+SUBSCRIPTION_TYPE_CHOICES = (
+    (0, u'Нет'),
+    (1, u'Новости'),
+    (2, u'Статьи'),
+)
+

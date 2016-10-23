@@ -124,6 +124,26 @@
                         </div>
                     </div>
                 </div>
+                <div class="grid__column-4 grid__offset">
+                    <div class="b-box b-box_nohover b-box-grey">
+                        <div class="b-block__item__wrapper">
+                            <h3 class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                                Получите новости на вашу почту
+                            </h3>
+                            <div class="b-section__space"></div>
+                            <form class="b-form" method="post" action="{{ request.path }}">
+                                {% csrf_token %}
+                                <div class="b-form-group">
+                                    <input id="id_email" maxlength="50" name="email" type="email"
+                                           class="b-form-control" placeholder="Ваш E-mail" required="">
+                                </div>
+                                <button type="submit" class="b-btn b-btn__fullwidth">
+                                    <span class="b-btn__text">Подписаться</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

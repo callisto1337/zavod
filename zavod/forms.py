@@ -3,7 +3,7 @@
 from django.forms import ModelForm, TextInput, EmailField, Form, FileField, ClearableFileInput, CharField, Textarea, \
     NumberInput
 from django.contrib.auth.forms import UserCreationForm
-from zavod.models import Question
+from zavod.models import Question, Subscription
 from zavod.models import CustomUser
 
 
@@ -38,7 +38,7 @@ class QuestionForm(ModelForm):
                                      'required': 1}),
             'type': NumberInput(attrs={'id': 'inputType',
                                        'placeholder': 'Тип вопроса',
-                                       'required': 0}),
+                                       'required': False}),
         }
 
 
@@ -47,5 +47,12 @@ class CallbackForm(Form):
     email = EmailField(required=True)
     phone = CharField(max_length=50, required=True)
     comment = CharField(max_length=500, required=True)
-    product = CharField(max_length=500, required=True)
+    product = CharField(max_length=500, required=False)
     file_field = FileField(widget=ClearableFileInput(attrs={'multiple': True}), required=False)
+
+
+class SubscriptionForm(ModelForm):
+    class Meta:
+        model = Subscription
+        fields = ("email",)
+

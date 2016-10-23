@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.urls import reverse
 from django.contrib.auth.models import User, UserManager, AbstractBaseUser
-from zavod.constants import POPULAR_TYPE_CHOICES, HIT
+from zavod.constants import POPULAR_TYPE_CHOICES, HIT, SUBSCRIPTION_TYPE, SUBSCRIPTION_TYPE_CHOICES
 from zt.settings import EMAILS_FOR_FAQ
 
 
@@ -291,6 +291,15 @@ class Employee(models.Model):
     class Meta:
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
+
+
+class Subscription(models.Model):
+    email = models.EmailField(max_length=50, default='')
+    type = models.IntegerField(choices=SUBSCRIPTION_TYPE_CHOICES, default=SUBSCRIPTION_TYPE[u'Нет'])
+
+    class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
 
 
 def email_question(sender, instance, created, **kwargs):

@@ -120,29 +120,33 @@
         </div>
         <div class="b-block__item b-block__item_grey">
             <div class="b-block__item__wrapper">
-                <form class="b-form" method="get" action="https://yandex.ru">
+                <form class="b-form" method="post" action="{{ request.path }}">
+                    {% csrf_token %}
                     <div class="b-form-group">
-                        <input type="text" class="b-form-control" placeholder="Ваше имя" required>
+                        <input type="text" class="b-form-control" placeholder="Ваше имя"
+                               id="id_name" maxlength="200" name="name" required="">
                     </div>
                     <div class="grid-fluid">
                         <div class="grid__row">
                             <div class="grid__column-7">
                                 <div class="b-form-group">
-                                    <input type="text" class="b-form-control"
-                                           placeholder="Контактный телефон" required>
+                                    <input class="b-form-control" placeholder="Контактный телефон"
+                                        id="id_phone" maxlength="50" name="phone">
                                 </div>
                             </div>
                             <div class="grid__column-7">
                                 <div class="b-form-group">
-                                    <input type="text" class="b-form-control"
-                                           placeholder="Email для ответа" required>
+                                    <input class="b-form-control" placeholder="Email для ответа"
+                                        id="id_email" name="email" type="email" required="">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="b-form-group">
-                        <textarea class="b-form-control" rows="4" placeholder="Ваше сообщение"></textarea>
+                        <textarea id="id_comment" maxlength="500" name="comment" required=""
+                                  class="b-form-control" rows="4" placeholder="Ваше сообщение"></textarea>
                     </div>
+                    <input id="id_product" maxlength="500" name="product" type="hidden" value="0">
                     <button type="submit" class="b-btn b-btn__fullwidth">
                         <span class="b-btn__text">Отправить</span>
                     </button>

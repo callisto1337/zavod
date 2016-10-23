@@ -9,10 +9,10 @@ from watson import search as watson
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout as auth_logout, authenticate, login
-from zavod.forms import QuestionForm, CustomUserCreationForm, CallbackForm
-from zavod.constants import SPECIAL_FILTER_PARAMS
+from zavod.forms import QuestionForm, CustomUserCreationForm, CallbackForm, SubscriptionForm
+from zavod.constants import SPECIAL_FILTER_PARAMS, SUBSCRIPTION_TYPE
 from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage, Question, Employee, Tag, \
-    ProductProperty, Property, Department
+    ProductProperty, Property, Department, Subscription
 from zt.settings import EMAILS_FOR_CALLBACK
 
 
@@ -87,6 +87,25 @@ def contacts(request):
         employees_by_departments += chunks
     out.update({'employees_by_departments': employees_by_departments})
     out.update({'menu_active_item': 'contacts'})
+    if request.method == 'POST':
+        callback_form = CallbackForm(request.POST)
+        if callback_form.is_valid():
+            kwargs = dict(
+                to=EMAILS_FOR_CALLBACK,
+                from_email='from@example.com',
+                subject=u'Письмо с сайта zavod',
+                body=u'Через форму обратной связи было отправлено сообщение. Автор: {} (телефон для связи - {}, email - {}).\nСообщение:\n\n"{}"'.format(
+                    callback_form.cleaned_data['name'],
+                    callback_form.cleaned_data['phone'],
+                    callback_form.cleaned_data['email'],
+                    callback_form.cleaned_data['comment'],
+                ),
+            )
+            message = EmailMessage(**kwargs)
+            message.send()
+            logger.info(u'Send callback with text: {}'.format(kwargs['body']))
+    callback_form = CallbackForm()
+    out.update({'callback_form': callback_form})
     location = request.GET.get('location', 'office')
     if location == 'manufacture':
         return render(request, 'contacts_manufacture.html', out)
@@ -189,19 +208,12 @@ def photogallery(request):
     return render(request, 'photogallery.html', out)
 
 
-def photogallery_detail_page(request, page_number, photogallery_slug):
+def photogallery_detail_page(request, photogallery_slug, page_number=1):
     out = {}
     gallery = get_object_or_404(Gallery, slug=photogallery_slug)
+    print(gallery)
     start = (int(page_number) - 1) * 5 + 1
     gallery.gallery_images = GalleryImage.objects.filter(gallery=gallery).all()[start:start+5]
-    out.update({'menu_active_item': 'gallery'})
-    out.update({'gallery': gallery})
-    return render(request, 'photogallery_detail.html', out)
-
-
-def photogallery_detail(request, photogallery_slug):
-    out = {}
-    gallery = get_object_or_404(Gallery, slug=photogallery_slug)
     out.update({'menu_active_item': 'gallery'})
     out.update({'gallery': gallery})
     return render(request, 'photogallery_detail.html', out)
@@ -347,6 +359,15 @@ def articles(request, page_number=1, tag_in_url=None):
     if article_objects.count() % 8:
         all_page_count += 1
     out.update({'all_page_number': range(1, all_page_count)})
+    if request.method == 'POST':
+        subscription_form = SubscriptionForm(request.POST)
+        if subscription_form.is_valid():
+            Subscription.objects.create(
+                email=subscription_form.cleaned_data['email'],
+                type=SUBSCRIPTION_TYPE[u'Статьи']
+            )
+    subscription_form = SubscriptionForm()
+    out.update({'subscription_form': subscription_form})
     return render(request, 'articles.html', out)
 
 
@@ -359,6 +380,15 @@ def articles_detail(request, article_slug):
     out.update({'article': article})
     out.update({'related_article': related_article})
     out.update({'menu_active_item': 'articles'})
+    if request.method == 'POST':
+        subscription_form = SubscriptionForm(request.POST)
+        if subscription_form.is_valid():
+            Subscription.objects.create(
+                email=subscription_form.cleaned_data['email'],
+                type=SUBSCRIPTION_TYPE[u'Статьи']
+            )
+    subscription_form = SubscriptionForm()
+    out.update({'subscription_form': subscription_form})
     return render(request, 'articles_detail.html', out)
 
 
@@ -418,6 +448,15 @@ def news(request):
     out.update({'one_line_news': news[5:9]})
     out.update({'image_articles': articles[0:2]})
     out.update({'not_image_articles': articles[2]})
+    if request.method == 'POST':
+        subscription_form = SubscriptionForm(request.POST)
+        if subscription_form.is_valid():
+            Subscription.objects.create(
+                email=subscription_form.cleaned_data['email'],
+                type=SUBSCRIPTION_TYPE[u'Новости']
+            )
+    subscription_form = SubscriptionForm()
+    out.update({'subscription_form': subscription_form})
     return render(request, 'news.html', out)
 
 
@@ -430,6 +469,15 @@ def news_detail(request, news_slug):
     out.update({'menu_active_item': 'news'})
     out.update({'news': news})
     out.update({'related_news': related_news})
+    if request.method == 'POST':
+        subscription_form = SubscriptionForm(request.POST)
+        if subscription_form.is_valid():
+            Subscription.objects.create(
+                email=subscription_form.cleaned_data['email'],
+                type=SUBSCRIPTION_TYPE[u'Новости']
+            )
+    subscription_form = SubscriptionForm()
+    out.update({'subscription_form': subscription_form})
     return render(request, 'news_detail.html', out)
 
 

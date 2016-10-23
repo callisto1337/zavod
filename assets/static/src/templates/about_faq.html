@@ -13,6 +13,11 @@
                 <div class="grid__column-7">
                     <h3 class="b-section-title">Часто задаваемые вопросы</h3>
                 </div>
+                <div class="grid__column-7">
+                    <a class="b-link_pseudo" data-toggle="modal" data-target="#faq" href="#">
+                        <span class="b-section-title">Задайте свой вопрос</span>
+                    </a>
+                </div>
             </div>
             <div class="grid__row">
                 <div class="grid__column-14">
@@ -57,8 +62,33 @@
 
     </div>
     {% include 'blocks/bottom.html' %}
-    {#        <form action="/about/chasto-zadavaemye-voprosy-faq/" method="post">{% csrf_token %}#}
-    {#        {{ question_form }}#}
-    {#        <input type="submit" value="Submit" />#}
-    {#        </form>#}
+{% endblock %}
+
+{% block extra-html %}
+    <div class="modal fade" id="faq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="modal__close close" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-body">
+                    <div class="b-block__item__wrapper">
+                        <div class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                            Задать вопрос
+                        </div>
+                        <div class="b-section__space"></div>
+                        <form class="b-form" method="post" action="{{ request.path }}">
+                            {% csrf_token %}
+                            <div class="b-form-group">
+                                <textarea id="inputText" maxlength="500" name="text" required=""
+                                          class="b-form-control" rows="4" placeholder="Ваш вопрос"></textarea>
+                            </div>
+                            <input id="inputType" name="type" placeholder="Тип вопроса" type="hidden" value="0" required="">
+                            <button type="submit" class="b-btn b-btn__fullwidth">
+                                <span class="b-btn__text">Отправить</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

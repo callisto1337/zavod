@@ -11,6 +11,7 @@
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "articles" %}">Статьи</a>
             </div>
+        {% if not current_page_number or current_page_number == 1%}
             {% for ind, article in ind_articles %}
                 {% if ind == 0 or ind == 2 or ind|add:1|mod:3 == 0 %}
                     <div class="grid__row grid__row-btm">
@@ -36,11 +37,67 @@
                 </div>
             </a>
             </div>
+            {% if ind == 1 %}
+                <div class="grid__column-4 grid__offset">
+                    <div class="b-box b-box_nohover b-box-grey">
+                        <div class="b-block__item__wrapper">
+                            <h3 class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                                Хотите быть в курсе всех клевых новинок, знать что происходит?
+                                <p></p>
+                                Получите новые статьи на почту
+                            </h3>
+                            <div class="b-section__space"></div>
+                            <form class="b-form" method="post" action="{{ request.path }}">
+                                {% csrf_token %}
+                                <div class="b-form-group">
+                                    <input id="id_email" maxlength="50" name="email" type="email"
+                                           class="b-form-control" placeholder="Ваш E-mail" required="">
+                                </div>
+                                <button type="submit" class="b-btn b-btn__fullwidth">
+                                    <span class="b-btn__text">Подписаться</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
             {% if ind|add:1|mod:3 == 2 or ind == 1 %}
                 </div>
             {% endif %}
             {% endfor %}
             </div>
+            {% else %}
+            {% for ind, article in ind_articles %}
+                {% if ind == 0 or ind|mod:3 == 0 %}
+                    <div class="grid__row grid__row-btm">
+                    <div class="grid__column-4">
+                {% else %}
+                    <div class="grid__column-4 grid__offset">
+                {% endif %}
+            <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}">
+                <div class="b-box b-box_342 {% cycle 'b-box-red' 'b-box-green' 'b-box-black' %}">
+                    <div class="b-box__image-fullsize">
+                        {% if article.images.first %}
+                            <img src="{{ article.images.first.image.url }}" alt="Пример награды">
+                        {% else %}
+                            <img src="{% static 'img/news/example.png' %}" alt="Пример баннера">
+                        {% endif %}
+                    </div>
+                    <div class="b-box__wrapper">
+                        <h4 class="b-box__header">{{ article.title }}</h4>
+                        <p class="b-box__text">
+                            {{ article.text|striptags|truncatechars:120 }}
+                        </p>
+                    </div>
+                </div>
+            </a>
+            </div>
+            {% if ind|mod:3 == 2 %}
+                </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+        {% endif %}
         </div>
         <div class="b-layout">
             <div class="b-paginator">
