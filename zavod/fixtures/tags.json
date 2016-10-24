@@ -159,5 +159,40 @@
     "fields": {
       "title": "обзор"
     }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 24,
+    "fields": {
+      "title": "идеи"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 25,
+    "fields": {
+      "title": "скидки"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 26,
+    "fields": {
+      "title": "cityenergy"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 27,
+    "fields": {
+      "title": "видео"
+    }
+  },
+  {
+    "model": "zavod.tag",
+    "pk": 28,
+    "fields": {
+      "title": "награды"
+    }
   }
 ]

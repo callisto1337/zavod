@@ -9,7 +9,7 @@ def news_for_bottom(request):
 
 
 def product_for_bottom(request):
-    product_for_bottom = Product.objects.filter(published=True).order_by('?').first()
+    product_for_bottom = Product.objects.filter(published=True).exclude(category=None).order_by('?').first()
     return {'product_for_bottom': product_for_bottom}
 
 
@@ -19,5 +19,8 @@ def media_for_bottom(request):
 
 
 def black_friday_product(request):
-    black_friday_product = Product.objects.filter(published=True, is_black_friday=True).order_by('?').first()
+    black_friday_product = Product.objects.\
+        filter(published=True, is_black_friday=True).\
+        exclude(category=None).\
+        order_by('?').first()
     return {'black_friday_product': black_friday_product}

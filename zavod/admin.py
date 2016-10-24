@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Article, CategoryProduct, Product, CustomUser, Tag, Question, News, Image, Gallery, GalleryImage, \
-    File, Employee, Property, ProductProperty, PopularProduct, Department
+    File, Employee, Property, ProductProperty, PopularProduct, Department, GalleryVideo
 
 
 class ProductPropertyInline(admin.TabularInline):
@@ -10,6 +10,10 @@ class ProductPropertyInline(admin.TabularInline):
 
 class PopularProductInline(admin.TabularInline):
     model = PopularProduct
+
+
+class CategoryProductInline(admin.TabularInline):
+    model = CategoryProduct.galleries.through
 
 
 class CategoryProductFields(admin.ModelAdmin):
@@ -80,9 +84,13 @@ class GalleryImageInline(admin.StackedInline):
     model = GalleryImage
 
 
+class GalleryVideoInline(admin.StackedInline):
+    model = GalleryVideo
+
+
 class GalleryFields(admin.ModelAdmin):
     list_display = ('name', 'slug', 'published')
-    inlines = [GalleryImageInline]
+    inlines = [GalleryImageInline, GalleryVideoInline, CategoryProductInline]
 admin.site.register(Gallery, GalleryFields)
 
 

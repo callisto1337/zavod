@@ -116,6 +116,7 @@ class CategoryProduct(models.Model):
     text = models.TextField(default='')
     images = models.ManyToManyField(Image, related_name='categories', default=None, null=True, blank=True)
     files = models.ManyToManyField(File, related_name='categories', default=None, null=True, blank=True)
+    galleries = models.ManyToManyField('Gallery', related_name='categories', default=None, null=True, blank=True)
     price_list = models.FileField(upload_to='media/price_lists/', blank=True, null=True)
 
     def __unicode__(self):
@@ -233,7 +234,7 @@ class Gallery(models.Model):
     seo_description = models.CharField(max_length=100, default='')
     seo_keywords = models.CharField(max_length=100, default='')
     date_created = models.DateTimeField(auto_now=True)
-    cover_image = models.ForeignKey('GalleryImage', default=None, blank=True, null=True, related_name='cover_image')
+    cover_image = models.ImageField(upload_to='media/gallery/', blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -256,6 +257,19 @@ class GalleryImage(models.Model):
     class Meta:
         verbose_name = 'Изображение в галерее'
         verbose_name_plural = 'Изображения в галерее'
+
+
+class GalleryVideo(models.Model):
+    gallery = models.ForeignKey(Gallery, related_name='galleryvideo')
+    video_url = models.CharField(max_length=500, default='', blank=True, null=True)
+    cover_image = models.ImageField(upload_to='media/gallery/', blank=True, null=True)
+
+    def __unicode__(self):
+        return self.video_url
+
+    class Meta:
+        verbose_name = 'Видео в галерее'
+        verbose_name_plural = 'Видео в галерее'
 
 
 class Question(models.Model):

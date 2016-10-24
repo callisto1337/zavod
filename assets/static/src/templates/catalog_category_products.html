@@ -69,7 +69,8 @@
                                         {% endif %}
                                     {% endfor %}
                                     <td>
-                                        <a class="b-btn" href="#">
+                                        <a class="b-btn" data-toggle="modal" data-target="#order" href="#"
+                                           data-product-id="{{ product.name }}">
                                             <span class="b-btn__text">Заказать</span>
                                         </a>
                                     </td>
@@ -154,4 +155,66 @@
     {% endif %}
 
     {% include 'blocks/bottom.html' %}
+{% endblock %}
+
+{% block extra-html %}
+    <div class="modal fade" id="order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="modal__close close" data-dismiss="modal" aria-label="Close"></a>
+
+                <div class="modal-body">
+                    <div class="b-block__item__wrapper">
+                        <div class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                            Заказать продукцию
+                        </div>
+                        <div class="b-section__space"></div>
+                        <form class="b-form" method="post" action="{{ request.path }}?expand=false" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="b-form-group">
+                                <input type="text" class="b-form-control" placeholder="Ваше имя"
+                                       id="id_name" maxlength="200" name="name" required="">
+                            </div>
+
+                            <div class="b-form-group">
+                                <input class="b-form-control" placeholder="Контактный телефон"
+                                       id="id_phone" maxlength="50" name="phone">
+                            </div>
+                            <div class="b-form-group">
+                                <input class="b-form-control" placeholder="Email"
+                                       id="id_email" name="email" type="email" required="">
+                            </div>
+                            <div class="b-form-group">
+                                <input type="file" id="id_file_field" name="file_field" multiple="">
+                                {% comment %}<i class="fa fa-paperclip pull-right" aria-hidden="true"></i>{% endcomment %}
+                            </div>
+                            <div class="b-form-group">
+                                <textarea id="id_comment" maxlength="500" name="comment" required=""
+                                          class="b-form-control" rows="4" placeholder="Комментарий"></textarea>
+                            </div>
+                            <input id="id_product" maxlength="500" name="product" type="hidden" value="">
+                            <button type="submit" class="b-btn b-btn__fullwidth">
+                                <span class="b-btn__text">Отправить</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra-js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#order').on('show.bs.modal', function (e) {
+
+                //get data-id attribute of the clicked element
+                var productId = $(e.relatedTarget).data('product-id');
+
+                //populate the textbox
+                $(e.currentTarget).find('input[name="product"]').val(productId);
+            });
+        });
+    </script>
 {% endblock %}

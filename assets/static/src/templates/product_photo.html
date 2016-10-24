@@ -59,12 +59,26 @@
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">
-                    {% for product_image in product.images.all %}
-                        <div class="grid__row grid__row-btm">
-                            <div class="b-section__image">
-                                <img src="{{ product_image.image.url }}" alt="{{ product_image.image.title }}">
+                    {% if not galleries %}
+                        Фото или видео к товару нет
+                    {% endif %}
+                    {% for gallery in galleries %}
+                        {% if gallery.galleryvideo.first %}
+                            <div class="grid__row grid__row-btm">
+                                <div class="b-section__image">
+                                    {{ gallery.galleryvideo.first.video_url }}
+                                </div>
                             </div>
-                        </div>
+                        {% else %}
+                            <div class="grid__row grid__row-btm">
+                                <div class="b-section__image">
+                                    <a class="b-link_pseudo" href="{% url "photogallery_detail" gallery.slug %}">
+                                        <img src="{{ gallery.cover_image.url }}"
+                                             alt="{{ gallery.cover_image.title }}">
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="grid__column-4 grid__offset">

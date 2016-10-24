@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from itertools import chain
 import re
 import logging
 import collections
@@ -196,11 +197,12 @@ def zachem_nuzhna_dokumentatsija(request):
     return render(request, 'zachem_nuzhna_dokumentatsija.html', out)
 
 
-def photogallery(request):
+def photogallery(request, page_number=1):
     out = {}
-    events = Gallery.objects.filter(type='event', published=True).order_by('-date_created').all()
-    products = Gallery.objects.filter(type='product', published=True).order_by('-date_created').all()
-    gallery = Gallery.objects.filter(published=True).order_by('-date_created').all()
+    start = (int(page_number) - 1) * 5
+    events = Gallery.objects.filter(type='event', published=True, galleryvideo=None).order_by('-date_created').all()[start:start+5]
+    products = Gallery.objects.filter(type='product', published=True, galleryvideo=None).order_by('-date_created').all()[start:start+5]
+    gallery = Gallery.objects.filter(published=True, galleryvideo=None).order_by('-date_created').all()[start:start+5]
     out.update({'events': events})
     out.update({'products': products})
     out.update({'gallery': gallery})
@@ -211,12 +213,24 @@ def photogallery(request):
 def photogallery_detail_page(request, photogallery_slug, page_number=1):
     out = {}
     gallery = get_object_or_404(Gallery, slug=photogallery_slug)
-    print(gallery)
-    start = (int(page_number) - 1) * 5 + 1
+    start = (int(page_number) - 1) * 5
     gallery.gallery_images = GalleryImage.objects.filter(gallery=gallery).all()[start:start+5]
     out.update({'menu_active_item': 'gallery'})
     out.update({'gallery': gallery})
     return render(request, 'photogallery_detail.html', out)
+
+
+def videogallery(request, page_number=1):
+    out = {}
+    start = (int(page_number) - 1) * 5
+    events = Gallery.objects.filter(type='event', published=True).exclude(galleryvideo=None).order_by('-date_created').all()[start:start+5]
+    products = Gallery.objects.filter(type='product', published=True).exclude(galleryvideo=None).order_by('-date_created').all()[start:start+5]
+    gallery = Gallery.objects.filter(published=True).exclude(galleryvideo=None).order_by('-date_created').all()[start:start+5]
+    out.update({'events': events})
+    out.update({'products': products})
+    out.update({'gallery': gallery})
+    out.update({'menu_active_item': 'gallery'})
+    return render(request, 'videogallery.html', out)
 
 
 def about(request):
@@ -490,6 +504,11 @@ def get_product(request, slug, parent_category_slug=None, out={}):
     elif tab == 'docs':
         template_name = 'product_docs.html'
     elif tab == 'photo':
+        galleries = product.category.galleries.filter(published=True).all()
+        if product.category.parent_id:
+            galleries = chain(galleries, product.category.parent_id.galleries.filter(published=True).all())
+        galleries = set(galleries)
+        out.update({'galleries': galleries})
         template_name = 'product_photo.html'
     elif tab == 'articles':
         template_name = 'product_articles.html'
@@ -591,6 +610,28 @@ def catalog_category(request, category_slug, parent_category_slug=None):
                 template_name = 'catalog_category_products_expand.html'
             out.update({'products': products, 'parent': category, 'title': title, 'category': category,
                         'request': request, 'ind_products': ind_products, 'properties': new_properties})
+            if request.method == 'POST':
+                callback_form = CallbackForm(request.POST, request.FILES)
+                if callback_form.is_valid():
+                    kwargs = dict(
+                        to=EMAILS_FOR_CALLBACK,
+                        from_email='from@example.com',
+                        subject=u'Заказ продукции',
+                        body=u'Поступил запрос на заказ продукции {} от {} (телефон для связи - {}, email - {}) с комментарием:\n\n"{}"'.format(
+                            callback_form.cleaned_data['product'],
+                            callback_form.cleaned_data['name'],
+                            callback_form.cleaned_data['phone'],
+                            callback_form.cleaned_data['email'],
+                            callback_form.cleaned_data['comment'],
+                        ),
+                    )
+                    message = EmailMessage(**kwargs)
+                    for attachment in request.FILES.getlist('file_field'):
+                        message.attach(attachment.name, attachment.read(), attachment.content_type)
+                    message.send()
+                    logger.info(u'Send callback with text: {}'.format(kwargs['body']))
+            callback_form = CallbackForm()
+            out.update({'callback_form': callback_form})
             return render(request, template_name, out)
     else:
         return get_product(request, category_slug, parent_category_slug, out)
