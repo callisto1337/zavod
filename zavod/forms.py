@@ -51,6 +51,13 @@ class CallbackForm(Form):
     file_field = FileField(widget=ClearableFileInput(attrs={'multiple': True}), required=False)
 
 
+class CallMeForm(Form):
+    name = CharField(max_length=200, required=True)
+    phone = CharField(max_length=50, required=True)
+    time_from = CharField(max_length=50, required=True)
+    time_to = CharField(max_length=50, required=True)
+
+
 class SubscriptionForm(ModelForm):
     class Meta:
         model = Subscription

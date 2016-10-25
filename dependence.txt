@@ -6,3 +6,4 @@ Pillow==2.6.1
 python-social-auth==0.2.21
 sorl-thumbnail==12.3
 django-wysiwyg==0.8.0
+django-ckeditor==5.1.1

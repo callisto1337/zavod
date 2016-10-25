@@ -53,4 +53,47 @@
             </div>
         </div>
     </div>
+
+    {% block extra-html %}
+        <div class="modal fade" id="callme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <a href="#" class="modal__close close" data-dismiss="modal" aria-label="Close"></a>
+                    <div class="modal-body">
+                        <div class="b-block__item__wrapper">
+                            <div class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                                Форма обратного звонка
+                            </div>
+                            <div class="b-section__space"></div>
+                            <form class="b-form" method="post" action="{% url "callme_form_process" callme_form_url %}">
+{#                            <form class="b-form" method="post" action="{% url "callme_form_process" request.path %}">#}
+                                {% csrf_token %}
+                                <div class="b-form-group">
+                                    <input type="text" class="b-form-control" placeholder="Ваше имя"
+                                           id="id_name" maxlength="200" name="name" required="">
+                                </div>
+                                <div class="b-form-group">
+                                    <input class="b-form-control" placeholder="Контактный телефон" required=""
+                                           id="id_phone" maxlength="50" name="phone">
+                                </div>
+                                Удобное время для звонка
+                                <div class="b-form-group">
+                                    <input class="b-form-control" placeholder="От" type="text" required=""
+                                           id="id_time_from" maxlength="50" name="time_from">
+                                </div>
+                                <div class="b-form-group">
+                                    <input class="b-form-control" placeholder="До" type="text" required=""
+                                           id="id_time_to" maxlength="50" name="time_to">
+                                </div>
+                                <button type="submit" class="b-btn b-btn__fullwidth">
+                                    <span class="b-btn__text">Отправить</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
 {% endblock %}

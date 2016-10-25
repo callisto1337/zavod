@@ -67,8 +67,8 @@
                         {% else %}
                             <div class="grid__column-4 grid__offset">
                         {% endif %}
-                    <a class="b-image b-image-round" href="{% url "articles_detail" article.slug %}">
-                        <div class="b-box {% if ind|mod:3 == 0 %} b-box-red {% endif %} {% if ind|mod:3 == 1 %} b-box-green {% endif %} {% if ind|mod:3 == 2 %} b-box-black {% endif %}">
+                    <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}">
+                        <div class="b-box b-box_388 {% cycle 'b-box-red' 'b-box-green' 'b-box-black' %}">
                             <div class="b-box__image-fullsize">
                                 {% if article.images.first %}
                                     <img src="{{ article.images.first.image.url }}" alt="Пример награды">
@@ -77,10 +77,10 @@
                                 {% endif %}
                             </div>
                             <div class="b-box__wrapper">
-                                <div class="b-box__author">{{ article.author }}</div>
                                 <h4 class="b-box__header">{{ article.title }}</h4>
+
                                 <p class="b-box__text">
-                                    {{ article.text | safe }}
+                                    {{ article.text | striptags | truncatewords:20 }}
                                 </p>
                             </div>
                         </div>
@@ -89,60 +89,63 @@
                     {% if not ind|divisibleby:2 %}
                         </div>
                     {% endif %}
+                    {% if forloop.last and forloop.counter0|divisibleby:2 %}
+                        </div>
+                    {% endif %}
                     {% endfor %}
-                    </div>
-                    <div class="grid__column-4 grid__offset">
-                        <ul class="b-property">
-                            {% for property in product.properties.all %}
-                                {% if "Цена" in property.property.title %}
-                                    <li class="b-property__item">
+{#                    </div>#}
+                </div>
+                <div class="grid__column-4 grid__offset">
+                    <ul class="b-property">
+                        {% for property in product.properties.all %}
+                            {% if "Цена" in property.property.title %}
+                                <li class="b-property__item">
                                     <span class="b-property__key">{{ property.property.title }}
                                         {% if property.property.units %}
                                             , {{ property.property.units }}
                                         {% endif %}</span>
-                                        <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
+                                    <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {#                        {% for property in product.string_properties %}#}
+                        {#                            <li class="b-property__item">{{ property }}</li>#}
+                        {#                        {% endfor %}#}
+                    </ul>
+
+                    <div class="b-box b-box-grey b-box_nohover">
+                        <div class="b-box__wrapper">
+                            <a class="b-btn b-btn__fullwidth" data-toggle="modal" data-target="#order" href="#">
+                                <span class="b-btn__text">Заказать</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="b-inner b-inner_simple">
+                        <div class="b-slider js-slider">
+                            <ul class="b-slider">
+                                {% for image in product.images.all %}
+                                    <li class="b-slider__item">
+                                        <img src="{{ image.image.url }}" alt="{{ image.image.title }}">
                                     </li>
-                                {% endif %}
-                            {% endfor %}
-
-                            {#                        {% for property in product.string_properties %}#}
-                            {#                            <li class="b-property__item">{{ property }}</li>#}
-                            {#                        {% endfor %}#}
-                        </ul>
-
-                        <div class="b-box b-box-grey b-box_nohover">
-                            <div class="b-box__wrapper">
-                                <a class="b-btn b-btn__fullwidth" data-toggle="modal" data-target="#order" href="#">
-                                    <span class="b-btn__text">Заказать</span>
-                                </a>
-                            </div>
+                                {% endfor %}
+                            </ul>
                         </div>
-                        <div class="b-inner b-inner_simple">
-                            <div class="b-slider js-slider">
-                                <ul class="b-slider">
-                                    {% for image in product.images.all %}
-                                        <li class="b-slider__item">
-                                            <img src="{{ image.image.url }}" alt="{{ image.image.title }}">
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
+                    </div>
 
-                        <ul class="b-property">
-                            {% for property in product.properties.all %}
-                                {% if "Цена" not in property.property.title %}
-                                    <li class="b-property__item">
+                    <ul class="b-property">
+                        {% for property in product.properties.all %}
+                            {% if "Цена" not in property.property.title %}
+                                <li class="b-property__item">
                                     <span class="b-property__key">{{ property.property.title }}
                                         {% if property.property.units %}
                                             , {{ property.property.units }}
                                         {% endif %}</span>
-                                        <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
+                                    <span class="b-property__value b-property__value_extra">{{ property.value }}</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -154,6 +157,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <a href="#" class="modal__close close" data-dismiss="modal" aria-label="Close"></a>
+
                 <div class="modal-body">
                     <div class="b-block__item__wrapper">
                         <div class="b-block__item__title b-block__item__title_small b-block__item__title_left">
@@ -183,7 +187,8 @@
                                 <textarea id="id_comment" maxlength="500" name="comment" required=""
                                           class="b-form-control" rows="4" placeholder="Комментарий"></textarea>
                             </div>
-                            <input id="id_product" maxlength="500" name="product" type="hidden" value="{{ product.name }}">
+                            <input id="id_product" maxlength="500" name="product" type="hidden"
+                                   value="{{ product.name }}">
                             <button type="submit" class="b-btn b-btn__fullwidth">
                                 <span class="b-btn__text">Отправить</span>
                             </button>

@@ -1,3 +1,4 @@
+from zavod.forms import CallMeForm
 from zavod.models import News
 from zavod.models import Gallery
 from zavod.models import Product
@@ -24,3 +25,11 @@ def black_friday_product(request):
         exclude(category=None).\
         order_by('?').first()
     return {'black_friday_product': black_friday_product}
+
+
+def callme_form(request):
+    callme_form = CallMeForm()
+    return {
+        'callme_form': callme_form,
+        'callme_form_url': str(request.path)
+    }

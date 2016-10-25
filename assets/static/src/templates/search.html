@@ -1,0 +1,95 @@
+{% extends "blocks/base.html" %}
+
+{# TODO: remove that loading #}
+{% load static from staticfiles %}
+{% load extras %}
+
+{% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs">
+                <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
+                <a class="b-breadcrumbs__link" href="{% url "dokumentatsija" %}">Поиск</a>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-7">
+                    <h3 class="b-section-title">Результаты поиска</h3>
+                    <h5 class="b-section-title">Найдено {{ search_results_count }} страниц</h5>
+                </div>
+            </div>
+            <div class="grid__row">
+                <div class="grid__column-9">
+                    {% for search_result in search_results %}
+                         <a class="b-link_pseudo" href="{{ search_result.url }}">
+                             <p class="b-section-text">{{ current_page_number|subtract:1|multiply:10|add:forloop.counter }}. {{ search_result }}</p>
+                         </a>
+                    {% endfor %}
+                </div>
+                <div class="grid__column-4 grid__offset">
+
+                </div>
+            </div>
+        </div>
+        <div class="b-layout">
+            <div class="b-paginator">
+                {% if all_page_number|length <= 8 %}
+                    {% for page_number in all_page_number %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{{ request.path }}?search={{ search_text }}&page={{ page_number }}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                {% elif current_page_number <= 5 %}
+                    {% for page_number in all_page_number|slice:":6" %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{{ request.path }}?search={{ search_text }}&page={{ page_number }}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                    <div class="b-paginator__item">...</div>
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{{ request.path }}?search={{ search_text }}&page={{ all_page_number|length }}">{{ all_page_number|length }}</a>
+                    </div>
+                {% else %}
+                    {% for page_number in all_page_number|slice:":2" %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{{ request.path }}?search={{ search_text }}&page={{ page_number }}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                    <div class="b-paginator__item">...</div>
+                    {% if current_page_number != all_page_number|length and current_page_number|add:1 != all_page_number|length %}
+                        {% for page_number in all_page_number|pages_set:current_page_number %}
+                            <div class="b-paginator__item">
+                                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                                   href="{{ request.path }}?search={{ search_text }}&page={{ page_number }}">{{ page_number }}</a>
+                            </div>
+                        {% endfor %}
+                        <div class="b-paginator__item">...</div>
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{{ request.path }}?search={{ search_text }}&page={{ all_page_number|length }}">{{ all_page_number|length }}</a>
+                        </div>
+                    {% elif current_page_number|add:1 != all_page_number|length %}
+                        {% for page_number in all_page_number|slice:"-5:" %}
+                            <div class="b-paginator__item">
+                                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                                   href="{{ request.path }}?search={{ search_text }}&page={{ page_number }}">{{ page_number }}</a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for page_number in all_page_number|slice:"-5:" %}
+                            <div class="b-paginator__item">
+                                <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                                   href="{{ request.path }}?search={{ search_text }}&page={{ page_number }}">{{ page_number }}</a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'blocks/bottom.html' %}
+{% endblock %}

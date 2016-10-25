@@ -44,8 +44,8 @@
             </div>
             {% if products %}
                 <div class="b-section b-section_short b-section_borderless">
-                {% for ind, product in ind_products %}
-                    {% if ind|mod:3 == 0 %}
+                {% for product in products %}
+                    {% if forloop.counter|mod:3 == 1 %}
                         <div class="grid__row grid__row-btm">
                         <div class="grid__column-4">
                     {% else %}
@@ -68,7 +68,7 @@
                     </div>
                 </a>
                 </div>
-                {% if ind|add:1|mod:3 == 0 %}
+                {% if forloop.counter|mod:3 == 0 %}
                     </div>
                 {% endif %}
                 {% endfor %}

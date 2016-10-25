@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     # 'fluent_contents.plugins.text',
     'django_wysiwyg',
+    'ckeditor',
     'zavod',
 ]
 
@@ -77,7 +78,10 @@ TEMPLATES = [
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
                 'zavod.context_processors.news_for_bottom',
-                'zavod.context_processors.product_for_bottom'
+                'zavod.context_processors.product_for_bottom',
+                'zavod.context_processors.media_for_bottom',
+                'zavod.context_processors.black_friday_product',
+                'zavod.context_processors.callme_form',
             ],
         },
     },

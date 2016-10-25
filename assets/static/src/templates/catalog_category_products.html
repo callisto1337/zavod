@@ -58,7 +58,6 @@
                                     <td>
                                         <a href="{% url "catalog_category_inside" product.category.slug product.slug %}">
                                             {{ product.name }}
-                                            {{ product.properties_dict.0.value }}
                                         </a>
                                     </td>
                                     {% for key, value in product.properties_dict.items %}

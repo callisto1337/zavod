@@ -54,7 +54,7 @@
                                 {% endif %}
                             </div>
                             <h4 class="b-box__header">{{ category_product.name }}</h4>
-                            <p class="b-box__text">{{ category_product.text | striptags | truncatewords:20 | safe }}</p>
+                            <p class="b-box__text">{{ category_product.text | striptags | truncatewords:20 }}</p>
                         </div>
 
                         {% if category_product.number > 0 or category_product.number != 0 and category_product.price_list %}

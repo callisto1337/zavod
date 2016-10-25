@@ -10,7 +10,7 @@ from watson import search as watson
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import logout as auth_logout, authenticate, login
-from zavod.forms import QuestionForm, CustomUserCreationForm, CallbackForm, SubscriptionForm
+from zavod.forms import QuestionForm, CustomUserCreationForm, CallbackForm, SubscriptionForm, CallMeForm
 from zavod.constants import SPECIAL_FILTER_PARAMS, SUBSCRIPTION_TYPE
 from zavod.models import Article, CategoryProduct, Product, News, Gallery, GalleryImage, Question, Employee, Tag, \
     ProductProperty, Property, Department, Subscription
@@ -74,9 +74,20 @@ def search(request):
     out = {}
     search_text = request.GET.get('search', '')
     search_results = watson.search(search_text)
-    out.update({'menu_active_item': 'about'})
+    search_results_count = search_results.count()
+    page_number = request.GET.get('page', 1)
+    start = (int(page_number) - 1) * 10
+    out.update({'current_page_number': int(page_number)})
+    all_page_count = search_results.count() / 10 + 1
+    if search_results.count() % 10:
+        all_page_count += 1
+    search_results = search_results[start:start+10]
+    out.update({'all_page_number': range(1, all_page_count)})
+    out.update({'menu_active_item': 'search'})
     out.update({'search_results': search_results})
-    return render(request, 'zavod/search.html', out)
+    out.update({'search_results_count': search_results_count})
+    out.update({'search_text': search_text})
+    return render(request, 'search.html', out)
 
 
 def contacts(request):
@@ -583,24 +594,48 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             return render(request, template_name, out)
         else:
             title = 'Список продуктов'
-            products = Product.objects.all().filter(category=category, published=True)
-            for product in products:
+            products = Product.objects.filter(category=category, published=True)
+            for product in products.all():
                 product.properties_dict = product.properties.values('property__title', 'value')
             template_name = 'catalog_category_products.html'
-            ind_products = enumerate(products)
+            ind_products = enumerate(products.all())
             properties = []
             properties_ids = ProductProperty.objects.filter(product__in=products).values_list('property', flat=True).distinct().all()
             for property_id in properties_ids:
                 properties.append(Property.objects.get(pk=property_id))
             properties.sort()
+            # фильтрация по гет-параметрам
+            for property in properties:
+                property_get_param_from = property.slug + '_from'
+                property_value_from = request.GET.get(property_get_param_from, None)
+                if property_value_from:
+                    for product in products:
+                        if not float(product.properties.filter(property=property).first().value.replace(',', '.')) >= float(property_value_from):
+                            products = products.exclude(pk=product.pk)
+                property_get_param_to = property.slug + '_to'
+                property_value_to = request.GET.get(property_get_param_to, None)
+                if property_value_to:
+                    for product in products:
+                        if not float(product.properties.filter(property=property).first().value.replace(',', '.')) <= float(property_value_to):
+                            products = products.exclude(pk=product.pk)
+            # отфильтровали
+            products = products.all()
             for product in products:
                 product.properties_dict = {}
                 for property in properties:
-                    product.properties_dict.update(
-                        {
-                            property.title: ProductProperty.objects.filter(product=product, property=property).first().value
-                        }
-                    )
+                    prop = ProductProperty.objects.filter(product=product, property=property).first()
+                    if prop:
+                        product.properties_dict.update(
+                            {
+                                property.title: prop.value
+                            }
+                        )
+                    else:
+                        product.properties_dict.update(
+                            {
+                                property.title: ' - '
+                            }
+                        )
                 product.properties_dict = collections.OrderedDict(sorted(product.properties_dict.items()))
             new_properties = []
             for property in properties:
@@ -672,6 +707,27 @@ def products_search(request):
             result = result.filter(**search_param)
     out.update({'search_results': result})
     return render(request, 'zavod/search.html', out)
+
+
+def callme_form_process(request, next_url='main'):
+    if request.method == 'POST':
+        callme_form = CallMeForm(request.POST)
+        if callme_form.is_valid():
+            kwargs = dict(
+                to=EMAILS_FOR_CALLBACK,
+                from_email='from@example.com',
+                subject=u'Просьба перезвонить',
+                body=u'Поступил просьба перезвонить: {}, телефон для связи - {}, с {} до {}.'.format(
+                    callme_form.cleaned_data['name'],
+                    callme_form.cleaned_data['phone'],
+                    callme_form.cleaned_data['time_from'],
+                    callme_form.cleaned_data['time_to'],
+                ),
+            )
+            message = EmailMessage(**kwargs)
+            message.send()
+            logger.info(u'Send callme with text: {}'.format(kwargs['body']))
+    return redirect(next_url)
 
 
 # def email_question(request):
