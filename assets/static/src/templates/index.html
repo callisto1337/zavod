@@ -261,7 +261,7 @@
                 {% else %}
                     <div class="grid__column-custom-612 grid__offset-small">
                 {% endif %}
-            <a class="b-link_pseudo" href="{% url "news_detail" news.slug %}">
+            <a class="b-link_pseudo" href="{% url "news_detail" news.slug %}" title="{{ news.title }}">
                 <div class="b-box b-box_468">
 
                     <div class="b-box__image-fullsize">
@@ -269,9 +269,9 @@
                     </div>
                     <div class="b-box__body">
                         <div class="b-box__wrapper">
-                            <h4 class="b-box__header b-box__header-big">{{ news.title }}</h4>
+                            <h4 class="b-box__header b-box__header-big">{{ news.title|truncatechars:60 }}</h4>
                             <p class="b-box__text">
-                                {{ news.text | striptags | truncatewords:20 }}
+                                {{ news.text | striptags | truncatechars:170 }}
                             </p>
                         </div>
                     </div>
@@ -301,7 +301,7 @@
                     {% else %}
                         <div class="grid__column-4 grid__offset">
                     {% endif %}
-                <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}">
+                <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}" title="{{ article.title }}">
                     <div class="b-box b-box_342 {% cycle 'b-box-red' 'b-box-green' 'b-box-black' %}">
                         <div class="b-box__image-fullsize">
                             {% if article.images.first %}
@@ -312,9 +312,9 @@
                         </div>
                         <div class="b-box__body">
                             <div class="b-box__wrapper">
-                                <h4 class="b-box__header">{{ article.title }}</h4>
+                                <h4 class="b-box__header">{{ article.title|truncatechars:60 }}</h4>
                                 <p class="b-box__text">
-                                    {{ article.text|striptags|truncatewords:10 }}
+                                    {{ article.text|striptags|truncatechars:150 }}
                                 </p>
                             </div>
                         </div>

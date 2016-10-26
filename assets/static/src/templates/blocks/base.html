@@ -30,8 +30,9 @@
 <script type="text/javascript" src="{% static 'js/vendor/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/vendor/modal.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/vendor/underscore.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/vendor/feather.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/vendor/feather.gallery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/vendor/slick.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/forms/Forms.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/stickymenu/StickyMenu.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/slider/Slider.js' %}"></script>
 
@@ -53,11 +54,14 @@
             topSpacing: 0,
             zIndex: 1040
         });
+
         $('#js-search').on('click', function (e) {
             e.preventDefault();
 
             $menu.toggleClass('search-toggle');
         });
+
+        $.featherlight.defaults['loading'] = "<img src='{% static '/img/ajax-loader.gif' %}' />";
     });
 </script>
 {% block extra-js %}{% endblock %}

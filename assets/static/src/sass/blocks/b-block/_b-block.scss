@@ -53,6 +53,97 @@
 				text-align: left;
 			}
 		}
+
+		// когда картинка фулл размер занимает
+		&_imaged, &_video {
+			position: relative;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+
+			&:after {
+				content: '\A';
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background: rgba(0, 149, 95, 0.6);
+				opacity: 0;
+				transition: all 0.5s;
+				box-shadow: inset 9px 16px 36px rgba(0, 0, 0, .3);
+			}
+
+			&:hover:after {
+				opacity: 1;
+			}
+			.b-block__bottom {
+				position: absolute;
+				bottom: 55px;
+				left: 90px;
+				z-index: 10;
+			}
+
+			.b-block__title {
+				font-size: 36px;
+				font-weight: 700;
+				color: #fff;
+				margin: 0 0 24px 0;
+				padding: 0;
+			}
+
+			.b-block__desc {
+				color: #fff;
+				font-size: 18px;
+				font-weight: 700;
+
+				span {
+					margin-left: 8px;
+					font-size: 14px;
+					font-weight: 300;
+				}
+			}
+		}
+		&_video {
+
+			.b-block__title {
+				position: absolute;
+				top: 55px;
+				left: 90px;
+				font-size: 36px;
+				font-weight: 700;
+				color: #fff;
+				margin: 0;
+				padding: 0;
+				z-index: 10;
+			}
+
+			.b-block__desc {
+				font-size: 14.4px;
+				line-height: 19.8px;
+				position: absolute;
+				left: 90px;
+				right: 90px;
+				bottom: 55px;
+				font-weight: 300;
+				z-index: 10;
+			}
+
+			.b-block__play {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 92px;
+				height:65px;
+				margin: auto;
+				z-index: 10;
+				background: url('../img/play.png') center center no-repeat;
+			}
+		}
 	}
 
 	&:after {

@@ -7,44 +7,57 @@
 {% block content %}
     <div class="b-section b-section_short">
         <div class="b-layout">
-            <div class="b-breadcrumbs">
+            <div class="b-breadcrumbs b-breadcrumbs_white">
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "photogallery" %}>">Фотогалерея</a>
             </div>
-{#            <div class="grid__row">#}
-{#                <div class="grid__column-3">#}
-{#                    {% for item in gallery %}#}
-{#                        <li>{{ item.title }}</li>#}
-{#                        <li>{{ item.galleryimage.all | length }}</li>#}
-{#                        <li>{{ item.date_created }}</li>#}
-{#                    {% endfor %}#}
-{#                </div>#}
-{#            </div>#}
         </div>
-        <div class="grid__row">
-            {% for item in gallery %}
-                {% if forloop|mod:2 == 0 %}
-                    <div class="grid__row grid__row-btm">
-                    <div class="grid__column-custom-612">
-                {% else %}
-                    <div class="grid__column-custom-612">
-                {% endif %}
-            <a class="b-image" href="{% url "photogallery_detail" item.slug %}">
-                <div class="b-box">
-                    <div class="b-box__image-fullsize">
-                        {% if item.cover_image %}
-                            <img src="{{ item.cover_image.url }}" alt="Пример баннера">
-                        {% else %}
-                            <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
-                        {% endif %}
-                    </div>
+        {#            <div class="grid__row">#}
+        {#                <div class="grid__column-3">#}
+        {#                    {% for item in gallery %}#}
+        {#                        <li>{{ item.title }}</li>#}
+        {#                        <li>{{ item.galleryimage.all | length }}</li>#}
+        {#                        <li>{{ item.date_created }}</li>#}
+        {#                    {% endfor %}#}
+        {#                </div>#}
+        {#            </div>#}
+    </div>
+    <div class="b-block">
+        <a class="b-link_pseudo" href="#">
+            <div class="b-block__item b-block__item_imaged">
+                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
+                <div class="b-block__bottom">
+                    <h2 class="b-block__title">Как закалялась сталь</h2>
+                    <div class="b-block__desc">44 фотографии <span>Обновлено 24 января 2016 г.</span></div>
                 </div>
-            </a>
             </div>
-            {% if forloop|mod:2 == 1 %}
+        </a>
+        <a class="b-link_pseudo" href="#">
+            <div class="b-block__item b-block__item_imaged">
+                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
+                <div class="b-block__bottom">
+                    <h2 class="b-block__title">Как закалялась сталь</h2>
+                    <div class="b-block__desc">44 фотографии <span>Обновлено 24 января 2016 г.</span></div>
                 </div>
-            {% endif %}
-            {% endfor %}
-        </div>
+            </div>
+        </a>
+        <a class="b-link_pseudo" href="#">
+            <div class="b-block__item b-block__item_imaged">
+                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
+                <div class="b-block__bottom">
+                    <h2 class="b-block__title">Как закалялась сталь</h2>
+                    <div class="b-block__desc">44 фотографии <span>Обновлено 24 января 2016 г.</span></div>
+                </div>
+            </div>
+        </a>
+        <a class="b-link_pseudo" href="#">
+            <div class="b-block__item b-block__item_imaged">
+                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
+                <div class="b-block__bottom">
+                    <h2 class="b-block__title">Как закалялась сталь</h2>
+                    <div class="b-block__desc">44 фотографии <span>Обновлено 24 января 2016 г.</span></div>
+                </div>
+            </div>
+        </a>
     </div>
 {% endblock %}

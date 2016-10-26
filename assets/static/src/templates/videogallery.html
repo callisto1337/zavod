@@ -7,36 +7,26 @@
 {% block content %}
     <div class="b-section b-section_short">
         <div class="b-layout">
-            <div class="b-breadcrumbs">
+            <div class="b-breadcrumbs b-breadcrumbs_white">
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "videogallery" %}>">Видеогалерея</a>
             </div>
         </div>
-        <div class="grid__row">
-            {% for item in gallery %}
-                {% if forloop|mod:2 == 0 %}
-                    <div class="grid__row grid__row-btm">
-                    <div class="grid__column-custom-612">
-                {% else %}
-                    <div class="grid__column-custom-612">
-                {% endif %}
-{#            <a class="b-image" href="{% url "photogallery_detail" item.slug %}">#}
-                <div class="b-box">
-                    <div class="b-box__image-fullsize">
-                        {% if item.cover_image %}
-                            <img src="{{ item.galleryvideo.cover_image.url }}" alt="Пример баннера">
-                        {% else %}
-                            <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
-                        {% endif %}
-                    </div>
-                {{ item.galleryvideo.video_url }}
+    </div>
+    <div class="b-block">
+        <a class="b-link_pseudo js-light" href="https://www.youtube.com/embed/CACFIGzRiGM" data-featherlight="iframe"
+           data-featherlight-iframe-width="960" data-featherlight-iframe-height="540">
+            <div class="b-block__item b-block__item_video">
+                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
+                <h2 class="b-block__title">Как закалялась сталь</h2>
+                <div class="b-block__desc">
+                    Видео обзор с всероссийского форума «ЖКХ – новое качество», прошедшего в июне в Челябинске.
+                    Конференция под руководством Дмитрия Медведева собрала работников коммунальной сферы из многих
+                    регионов для обсуждения актуальных вопросов отрасли.
+                    «Завод Триумф» стал участником крупной выставки, посвященной форуму.
                 </div>
-{#            </a>#}
+                <div class="b-block__play"></div>
             </div>
-            {% if forloop|mod:2 == 1 %}
-                </div>
-            {% endif %}
-            {% endfor %}
-        </div>
+        </a>
     </div>
 {% endblock %}
