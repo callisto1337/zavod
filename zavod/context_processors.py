@@ -31,5 +31,5 @@ def callme_form(request):
     callme_form = CallMeForm()
     return {
         'callme_form': callme_form,
-        'callme_form_url': str(request.path)
+        'callme_form_url': unicode(request.path)
     }
