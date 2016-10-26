@@ -38,7 +38,7 @@
 
 {# TODO создать главный файл инициализации #}
 <script type="text/javascript">
-    jQuery(document).ready(function ($) {
+    $(document).ready(function () {
         // слайдер на главной
         $('.js-slider').unslider({
             infinite: true,
@@ -50,10 +50,12 @@
         });
 
         var $menu = $('#b-menu');
-        $menu.sticky({
-            topSpacing: 0,
-            zIndex: 1040
-        });
+        if ($menu) {
+            $menu.sticky({
+                topSpacing: 0,
+                zIndex: 1040
+            });
+        }
 
         $('#js-search').on('click', function (e) {
             e.preventDefault();
