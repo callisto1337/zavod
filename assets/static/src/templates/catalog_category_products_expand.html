@@ -44,35 +44,99 @@
             </div>
             {% if products %}
                 <div class="b-section b-section_short b-section_borderless">
-                {% for product in products %}
-                    {% if forloop.counter|mod:3 == 1 %}
+                    {% for product in products %}
                         <div class="grid__row grid__row-btm">
-                        <div class="grid__column-4">
-                    {% else %}
-                        <div class="grid__column-4 grid__offset">
-                    {% endif %}
-                <a class="b-link b-link_pseudo"
-                   href="{% url "catalog_category_inside" product.category.slug product.slug %}">
-                    <div class="b-box">
-                        <div class="b-box__wrapper">
-                            <div class="b-box__image">
-                                {% if product.images.first %}
-                                    <img src="{{ product.images.first.image.url }}" alt="Пример Продукта">
-                                {% else %}
-                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                {% endif %}
+                            <div class="grid__column-9">
+                                <div class="b-box b-box_258">
+                                    <a class="b-link_pseudo"
+                                       href="{% url "catalog_category_inside" product.category.slug product.slug %}">
+                                        <div class="b-box__body">
+                                            <div class="b-box__wrapper">
+                                                <h2 class="b-box__header">{{ product.name }}</h2>
+                                                <div class="b-box__image-fullsize">
+                                                    {% if product.images.first %}
+                                                        <img src="{{ product.images.first.image.url }}" alt="">
+                                                    {% else %}
+                                                        <img src="{% static 'img/products/product_sale.png' %}"
+                                                             alt="Пример Продукта">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="b-box__property">
+                                                    <ul class="b-property b-property_noborder">
+                                                        <li class="b-property__item">
+                                                            <span class="b-property__key">Масса, кг</span>
+                                                            <span class="b-property__value b-property__value_darker">473</span>
+                                                        </li>
+                                                        <li class="b-property__item">
+                                                            <span class="b-property__key">Условный проход, мм, Ду</span>
+                                                            <span class="b-property__value b-property__value_darker">300</span>
+                                                        </li>
+                                                        <li class="b-property__item">
+                                                            <span class="b-property__key">Условное давление, Мпа, Ру</span>
+                                                            <span class="b-property__value b-property__value_darker">2,5</span>
+                                                        </li>
+                                                        <li class="b-property__item">
+                                                            <span class="b-property__key">Производительность, т/ч</span>
+                                                            <span class="b-property__value b-property__value_darker">356</span>
+                                                        </li>
+                                                        <li class="b-property__item">
+                                                            <span class="b-property__key">Диаметр корпуса, мм, Дн</span>
+                                                            <span class="b-property__value b-property__value_darker">530</span>
+                                                        </li>
+                                                        <li class="b-property__item">
+                                                            <span class="b-property__key">Длина L, мм</span>
+                                                            <span class="b-property__value b-property__value_darker">1535</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="b-box__footer">
+                                        <div class="b-box__wrapper">
+                                            <h3 class="b-box__header">Цена с НДС:</h3>
+                                            <div class="b-box__property">
+                                                <ul class="b-property b-property_noborder">
+                                                    <li class="b-property__item">
+                                                        <span class="b-property__key">нержав.</span>
+                                                        <span class="b-property__value b-property__value_extra">557 700 руб.</span>
+                                                    </li>
+                                                    <li class="b-property__item">
+                                                        <span class="b-property__key">латунь</span>
+                                                        <span class="b-property__value b-property__value_extra">557 700 руб.</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <form>
+                                                {% csrf_token %}
+                                                <div class="b-form-group">
+                                                    <input type="number" class="b-form-control" placeholder="1 шт."
+                                                           id="id_name" maxlength="200" name="name" required="">
+                                                </div>
+                                                <button type="submit" class="b-btn b-btn__fullwidth">
+                                                    <span class="b-btn__text">Заказать</span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    {#                                        <div class="b-box__wrapper">#}
+                                    {#                                            <div class="b-box__image">#}
+                                    {#                                                {% if product.images.first %}#}
+                                    {#                                                    <img src="{{ product.images.first.image.url }}"#}
+                                    {#                                                         alt="Пример Продукта">#}
+                                    {#                                                {% else %}#}
+                                    {#                                                    <img src="{% static 'img/products/product_sale.png' %}"#}
+                                    {#                                                         alt="Пример Продукта">#}
+                                    {#                                                {% endif %}#}
+                                    {#                                            </div>#}
+                                    {#                                            <h4 class="b-box__header">{{ product.name }}</h4>#}
+                                    {#                                            <p class="b-box__text">{{ product.product_text|truncatewords:20 }}</p>#}
+                                    {#                                        </div>#}
+                                </div>
                             </div>
-                            <h4 class="b-box__header">{{ product.name }}</h4>
-                            <p class="b-box__text">{{ product.product_text|truncatewords:20 }}</p>
                         </div>
-                    </div>
-                </a>
+                    {% endfor %}
                 </div>
-                {% if forloop.counter|mod:3 == 0 %}
-                    </div>
-                {% endif %}
-                {% endfor %}
-            </div>
             {% endif %}
             <div class="grid__row">
                 <div class="grid__column-9">
@@ -99,63 +163,54 @@
                     </ul>
                 </div>
             </div>
-            <div class="grid__row">
-                <div class="grid__column-12">
-                    {% for category_image in category.images.all %}
-                        <div class="b-box__image-fullsize">
-                            <img src="{{ category_image.image.url }}" alt="Пример Продукта">
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-            </div>
         </div>
+    </div>
 
-        {% if category.popularproduct.all %}
-            <div class="b-section">
-            <div class="b-layout">
-                <div class="grid__row">
-                    <h3 class="subheading">Популярные товары</h3>
-                    {% for popularproduct in category.popularproduct.all %}
-                        {% if forloop.counter > 1 %}
-                            <div class="grid__column-4 grid__offset">
-                        {% else %}
-                            <div class="grid__column-4">
-                        {% endif %}
-                    <a class="b-image"
-                       href="{% url 'catalog_category_inside' popularproduct.product.category.slug popularproduct.product.slug %}">
-                        <div class="b-box">
-                            <div class="b-box__wrapper">
-                                <div class="b-box__image-left">
-                                    {% if popularproduct.product.images.first %}
-                                        <img src="{{ popularproduct.product.images.first.image.url }}"
-                                             alt="Пример Продукта">
-                                    {% else %}
-                                        <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
-                                    {% endif %}
-                                </div>
-                                <p class="b-box__author">
-                                    {{ popularproduct.product.category.name }}
-                                </p>
-                                <p class="b-box__text">
-                                    {{ popularproduct.product.name }}
-                                </p>
-                                {% if popularproduct.type == 0 %}
-                                    <div class="b-box__sale">Хит</div>
-                                {% elif popularproduct.type == 1 %}
-                                    <div class="b-box__sale">Скидка!</div>
-                                {% elif popularproduct.type == 2 %}
-                                    <div class="b-box__sale">Новинка</div>
+    {% if category.popularproduct.all %}
+        <div class="b-section">
+        <div class="b-layout">
+            <div class="grid__row">
+                <h3 class="subheading">Популярные товары</h3>
+                {% for popularproduct in category.popularproduct.all %}
+                    {% if forloop.counter > 1 %}
+                        <div class="grid__column-4 grid__offset">
+                    {% else %}
+                        <div class="grid__column-4">
+                    {% endif %}
+                <a class="b-link_pseudo"
+                   href="{% url 'catalog_category_inside' popularproduct.product.category.slug popularproduct.product.slug %}">
+                    <div class="b-box">
+                        <div class="b-box__wrapper">
+                            <div class="b-box__image-left">
+                                {% if popularproduct.product.images.first %}
+                                    <img src="{{ popularproduct.product.images.first.image.url }}"
+                                         alt="Пример Продукта">
+                                {% else %}
+                                    <img src="{% static 'img/products/product_sale.png' %}" alt="Пример Продукта">
                                 {% endif %}
                             </div>
+                            <p class="b-box__author">
+                                {{ popularproduct.product.category.name }}
+                            </p>
+                            <p class="b-box__text">
+                                {{ popularproduct.product.name }}
+                            </p>
+                            {% if popularproduct.type == 0 %}
+                                <div class="b-box__sale">Хит</div>
+                            {% elif popularproduct.type == 1 %}
+                                <div class="b-box__sale">Скидка!</div>
+                            {% elif popularproduct.type == 2 %}
+                                <div class="b-box__sale">Новинка</div>
+                            {% endif %}
                         </div>
-                    </a>
                     </div>
-                    {% endfor %}
-                    </div>
+                </a>
+                </div>
+                {% endfor %}
                 </div>
             </div>
-        {% endif %}
+        </div>
+    {% endif %}
 
-        {% include 'blocks/bottom.html' %}
+{% include 'blocks/bottom.html' %}
 {% endblock %}

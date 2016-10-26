@@ -51,7 +51,9 @@
                 <div class="grid__column-2">
                     <div class="b-image">
                         <div class="b-image__container">
-                            <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            <a class="js-gallery" href="{% static 'img/awards/example.png' %}">
+                                <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            </a>
                         </div>
                         <div class="b-image__caption">Диплом за лучшую продукцию на всем белом свете</div>
                     </div>
@@ -59,7 +61,9 @@
                 <div class="grid__column-2 grid__offset">
                     <div class="b-image">
                         <div class="b-image__container">
-                            <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            <a class="js-gallery" href="{% static 'img/awards/example.png' %}">
+                                <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            </a>
                         </div>
                         <div class="b-image__caption">Диплом за лучшую продукцию на всем белом свете</div>
                     </div>
@@ -67,7 +71,9 @@
                 <div class="grid__column-2 grid__offset ">
                     <div class="b-image">
                         <div class="b-image__container">
-                            <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            <a class="js-gallery" href="{% static 'img/awards/example.png' %}">
+                                <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            </a>
                         </div>
                         <div class="b-image__caption">Диплом за лучшую продукцию на всем белом свете</div>
                     </div>
@@ -75,7 +81,9 @@
                 <div class="grid__column-2 grid__offset">
                     <div class="b-image">
                         <div class="b-image__container">
-                            <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            <a class="js-gallery" href="{% static 'img/awards/example.png' %}">
+                                <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            </a>
                         </div>
                         <div class="b-image__caption">Диплом за лучшую продукцию на всем белом свете</div>
                     </div>
@@ -83,7 +91,9 @@
                 <div class="grid__column-2 grid__offset">
                     <div class="b-image">
                         <div class="b-image__container">
-                            <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            <a class="js-gallery" href="{% static 'img/awards/example.png' %}">
+                                <img src="{% static 'img/awards/example.png' %}" alt="Пример награды">
+                            </a>
                         </div>
                         <div class="b-image__caption">Диплом за лучшую продукцию на всем белом свете</div>
                     </div>
@@ -93,4 +103,15 @@
     </div>
 
     {% include 'blocks/bottom.html' %}
+{% endblock %}
+
+{% block extra-js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-gallery').featherlightGallery({
+                previousIcon: '«',
+                nextIcon: '»'
+            });
+        });
+    </script>
 {% endblock %}

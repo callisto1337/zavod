@@ -16,6 +16,20 @@
 		}
 	}
 
+	// для расширенного товара
+	&_noborder {
+		margin-bottom: 16px;
+
+		.b-property__item {
+			border-bottom: none;
+			margin-bottom: 12px;
+
+			.b-property__key, .b-property__value {
+				border-color: transparent;
+			}
+		}
+	}
+
 	&__key, &__value {
 		font-size: 12.6px;
 		color: #777777;
@@ -38,6 +52,10 @@
 		&_extra {
 			font-size: 16.2px;
 			font-weight: 700;
+			color: #292929;
+		}
+
+		&_darker {
 			color: #292929;
 		}
 	}

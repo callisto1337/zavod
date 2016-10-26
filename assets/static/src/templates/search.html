@@ -18,15 +18,16 @@
                 </div>
             </div>
             <div class="grid__row">
-                <div class="grid__column-9">
-                    {% for search_result in search_results %}
-                         <a class="b-link_pseudo" href="{{ search_result.url }}">
-                             <p class="b-section-text">{{ current_page_number|subtract:1|multiply:10|add:forloop.counter }}. {{ search_result }}</p>
-                         </a>
-                    {% endfor %}
-                </div>
-                <div class="grid__column-4 grid__offset">
-
+                <div class="grid__column-14">
+                    <ul class="b-category-list-group__list">
+                        {% for search_result in search_results %}
+                            <li class="b-category-list-group__list__item">
+                                <a class="b-category-list-group__list__item-link" href="{{ search_result.url }}">
+                                    {{ current_page_number|subtract:1|multiply:10|add:forloop.counter }}. {{ search_result }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
