@@ -1,3 +1,37 @@
+
+{#    <div class="b-section b-section_short">#}
+{#        <div class="b-layout">#}
+{#            <div class="b-breadcrumbs">#}
+{#                <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /#}
+{#                <a class="b-breadcrumbs__link" href="{% url "photogallery" %}">Фотогалерея</a>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="grid__row">#}
+{#            {% for item in gallery.gallery_images %}#}
+{#                {% if forloop|mod:2 == 0 %}#}
+{#                    <div class="grid__row grid__row-btm">#}
+{#                    <div class="grid__column-custom-612">#}
+{#                {% else %}#}
+{#                    <div class="grid__column-custom-612">#}
+{#                {% endif %}#}
+{#                <div class="b-box">#}
+{#                    <div class="b-box__image-fullsize">#}
+{#                        {% if item.gallery_image %}#}
+{#                            <img src="{{ item.gallery_image.url }}" alt="Пример баннера">#}
+{#                        {% else %}#}
+{#                            <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            {% if forloop|mod:2 == 1 %}#}
+{#                </div>#}
+{#            {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+
+
 {% extends "blocks/base.html" %}
 
 {# TODO: remove that loading #}
@@ -7,33 +41,29 @@
 {% block content %}
     <div class="b-section b-section_short">
         <div class="b-layout">
-            <div class="b-breadcrumbs">
+            <div class="b-breadcrumbs b-breadcrumbs_white">
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
-                <a class="b-breadcrumbs__link" href="{% url "photogallery" %}>">Фотогалерея</a>
+                <a class="b-breadcrumbs__link" href="{% url "photogallery" %}">Фотогалерея</a>
             </div>
         </div>
-        <div class="grid__row">
-            {% for item in gallery.gallery_images %}
-                {% if forloop|mod:2 == 0 %}
-                    <div class="grid__row grid__row-btm">
-                    <div class="grid__column-custom-612">
+    </div>
+    <div class="b-block">
+        {% for item in gallery.gallery_images %}
+            <div class="b-block__item b-block__item_imaged">
+                {% if item.gallery_image %}
+                    <img src="{{ item.gallery_image.url }}" alt="Тайтл картинки">
                 {% else %}
-                    <div class="grid__column-custom-612">
+                    <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
                 {% endif %}
-                <div class="b-box">
-                    <div class="b-box__image-fullsize">
-                        {% if item.gallery_image %}
-                            <img src="{{ item.gallery_image.url }}" alt="Пример баннера">
-                        {% else %}
-                            <img src="{% static 'img/life/banner_1.png' %}" alt="Пример баннера">
-                        {% endif %}
+                {% if forloop.counter == 1 %}
+                    <div class="b-block__bottom">
+                        <h2 class="b-block__title">{{ gallery.name }} {{ gallery.gallery_images | length }} фото</h2>
+                        <div class="b-block__desc">
+                            <a href="../" class="b-section-back">Назад в фотоальбомы</a>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
-            {% if forloop|mod:2 == 1 %}
-                </div>
-            {% endif %}
-            {% endfor %}
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}

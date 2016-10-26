@@ -9,55 +9,84 @@
         <div class="b-layout">
             <div class="b-breadcrumbs b-breadcrumbs_white">
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
-                <a class="b-breadcrumbs__link" href="{% url "photogallery" %}>">Фотогалерея</a>
+                <a class="b-breadcrumbs__link" href="{% url "photogallery" %}">Фотогалерея</a>
             </div>
         </div>
-        {#            <div class="grid__row">#}
-        {#                <div class="grid__column-3">#}
-        {#                    {% for item in gallery %}#}
-        {#                        <li>{{ item.title }}</li>#}
-        {#                        <li>{{ item.galleryimage.all | length }}</li>#}
-        {#                        <li>{{ item.date_created }}</li>#}
-        {#                    {% endfor %}#}
-        {#                </div>#}
-        {#            </div>#}
     </div>
     <div class="b-block">
-        <a class="b-link_pseudo" href="#">
-            <div class="b-block__item b-block__item_imaged">
-                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
-                <div class="b-block__bottom">
-                    <h2 class="b-block__title">Как закалялась сталь</h2>
-                    <div class="b-block__desc">44 фотографии <span>Обновлено 24 января 2016 г.</span></div>
+        {% for item in gallery %}
+            <a class="b-link_pseudo" href="{% url "photogallery_detail" item.slug %}">
+                <div class="b-block__item b-block__item_imaged">
+                    {% if item.cover_image %}
+                        <img src="{{ item.cover_image.url }}" alt="Тайтл картинки">
+                    {% else %}
+                        <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
+                    {% endif %}
+                    <div class="b-block__bottom">
+                        <h2 class="b-block__title">{{ item.name }}</h2>
+                        <div class="b-block__desc">{{ item.galleryimage.all | length }} фотографии <span>Обновлено {{ item.date_created | date:"d F Y г."|lower }} </span></div>
+                    </div>
                 </div>
-            </div>
-        </a>
-        <a class="b-link_pseudo" href="#">
-            <div class="b-block__item b-block__item_imaged">
-                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
-                <div class="b-block__bottom">
-                    <h2 class="b-block__title">Как закалялась сталь</h2>
-                    <div class="b-block__desc">44 фотографии <span>Обновлено 24 января 2016 г.</span></div>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="b-layout">
+        <div class="b-paginator">
+            {% if all_page_number|length <= 8 %}
+                {% for page_number in all_page_number %}
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{% url "photogallery" page_number %}">{{ page_number }}</a>
+                    </div>
+                {% endfor %}
+            {% elif current_page_number <= 5 %}
+                {% for page_number in all_page_number|slice:":6" %}
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{% url "photogallery" page_number %}">{{ page_number }}</a>
+                    </div>
+                {% endfor %}
+                <div class="b-paginator__item">...</div>
+                <div class="b-paginator__item">
+                    <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}"
+                       href="{% url "photogallery" all_page_number|length %}">{{ all_page_number|length }}</a>
                 </div>
-            </div>
-        </a>
-        <a class="b-link_pseudo" href="#">
-            <div class="b-block__item b-block__item_imaged">
-                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
-                <div class="b-block__bottom">
-                    <h2 class="b-block__title">Как закалялась сталь</h2>
-                    <div class="b-block__desc">44 фотографии <span>Обновлено 24 января 2016 г.</span></div>
-                </div>
-            </div>
-        </a>
-        <a class="b-link_pseudo" href="#">
-            <div class="b-block__item b-block__item_imaged">
-                <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
-                <div class="b-block__bottom">
-                    <h2 class="b-block__title">Как закалялась сталь</h2>
-                    <div class="b-block__desc">44 фотографии <span>Обновлено 24 января 2016 г.</span></div>
-                </div>
-            </div>
-        </a>
+            {% else %}
+                {% for page_number in all_page_number|slice:":2" %}
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{% url "photogallery" page_number %}">{{ page_number }}</a>
+                    </div>
+                {% endfor %}
+                <div class="b-paginator__item">...</div>
+                {% if current_page_number != all_page_number|length and current_page_number|add:1 != all_page_number|length %}
+                    {% for page_number in all_page_number|pages_set:current_page_number %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{% url "photogallery" page_number %}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                    <div class="b-paginator__item">...</div>
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{% url "photogallery" all_page_number|length %}">{{ all_page_number|length }}</a>
+                    </div>
+                {% elif current_page_number|add:1 != all_page_number|length %}
+                    {% for page_number in all_page_number|slice:"-5:" %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{% url "photogallery" page_number %}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for page_number in all_page_number|slice:"-5:" %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{% url "photogallery" page_number %}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

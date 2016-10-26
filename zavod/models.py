@@ -250,7 +250,7 @@ class Gallery(models.Model):
 
 
 class GalleryImage(models.Model):
-    gallery = models.ForeignKey(Gallery)
+    gallery = models.ForeignKey(Gallery, related_name='galleryimage')
     gallery_image = models.ImageField(upload_to='media/gallery/', blank=True, null=True)
 
     def __unicode__(self):
