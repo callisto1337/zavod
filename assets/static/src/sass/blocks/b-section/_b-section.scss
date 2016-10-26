@@ -181,6 +181,10 @@
 			.b-section-social-list__item {
 				float: none;
 				display: inline-block;
+
+				a:hover{
+					color: #ffffff;
+				}
 			}
 		}
 	}

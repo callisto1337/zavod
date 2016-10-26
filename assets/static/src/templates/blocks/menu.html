@@ -167,8 +167,24 @@
                            class="b-menu__item-link {% if menu_active_item == 'articles' %}b-menu__item-link-active {% endif %}">Статьи</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "photogallery" %}"
-                           class="b-menu__item-link {% if menu_active_item == 'gallery' %}b-menu__item-link-active {% endif %}">Фотогалерея</a>
+                        <span href="{% url "photogallery" %}"
+                           class="b-menu__item-link {% if menu_active_item == 'gallery' %}b-menu__item-link-active {% endif %}">Медиа</span>
+                        <div class="b-menu__submenu b-menu__submenu_small">
+                            <div class="submenu__content">
+                                <div class="submenu__column">
+                                    <ul class="submenu__group__list">
+                                        <li class="submenu__group__list__item">
+                                            <a href="{% url "photogallery" %}"
+                                               class="submenu__group__list__item-link">Фотогалерея</a>
+                                        </li>
+                                        <li class="submenu__group__list__item">
+                                            <a href="{% url "videogallery" %}"
+                                               class="submenu__group__list__item-link">Видеогалерея</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                     <td class="b-menu__item">
                         <a href="{% url "faq" %}"

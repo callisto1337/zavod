@@ -15,11 +15,11 @@
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if product.category.parent_id %}
-                    /<a class="b-breadcrumbs__link"
+                    / <a class="b-breadcrumbs__link"
                         href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
                 {% endif %}
                 {% if product.category %}
-                    /<a class="b-breadcrumbs__link"
+                    / <a class="b-breadcrumbs__link"
                         href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
                 {% endif %}
             </div>

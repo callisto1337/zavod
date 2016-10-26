@@ -67,6 +67,11 @@
 				}
 			}
 		}
+
+		&_small {
+			padding: 40px;
+			margin-left: -62px;
+		}
 	}
 
 	&__item {
@@ -90,6 +95,7 @@
 
 			&:hover {
 				color: #000;
+				cursor: pointer;
 			}
 
 			&-active {

@@ -27,8 +27,8 @@
                 {% else %}
                     <div class="grid__column-custom-612 grid__offset-small">
                 {% endif %}
-            <a class="b-image b-image-round" href="{% url "news_detail" one_news.slug %}">
-                <div class="b-box">
+            <a class="b-link_pseudo" href="{% url "news_detail" one_news.slug %}">
+                <div class="b-box b-box b-box_468">
                     <div class="b-box__image-fullsize">
                         {% if one_news.images.first %}
                             <img src="{{ one_news.images.first.image.url }}" alt="Пример баннера">

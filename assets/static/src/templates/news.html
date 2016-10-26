@@ -30,7 +30,7 @@
                                         <div class="b-box__wrapper">
                                             <h1 class="b-box__header b-box__header-big">{{ news.title }}</h1>
                                             <div class="b-box__text">
-                                                {{ news.text | truncatechars_html:300 | striptags }}
+                                                {{ news.text | striptags | truncatechars_html:200 }}
                                             </div>
                                         </div>
                                         <div class="b-box__footer">
@@ -64,7 +64,7 @@
                                                 {% endif %}
                                             </div>
                                             <div class="b-box__wrapper">
-                                                <h1 class="b-box__header">{{ news.title }}</h1>
+                                                <h1 class="b-box__header">{{ news.title | truncatechars:80}}</h1>
                                                 <div class="b-box__text">
                                                     {{ news.text | truncatechars_html:120 | striptags }}
                                                 </div>

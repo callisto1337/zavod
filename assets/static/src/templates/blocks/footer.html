@@ -1,55 +1,61 @@
 {% block footer %}
     {% if menu_active_item != 'contacts' %}
-    <div class="b-section">
-        <div class="b-layout">
-            <div class="grid__row">
-                <div class="grid__column-4">
-                    <h4 class="b-section-subtitle">Офис</h4>
-                    <span class="b-section-text">
+        <div class="b-section">
+            <div class="b-layout">
+                <div class="grid__row">
+                    <div class="grid__column-4">
+                        <h4 class="b-section-subtitle">Офис</h4>
+                        <span class="b-section-text">
                         107014, г. Москва, ул. Стромынка, д. 13а
                         Телефон: +7 (495) 545-36-90
                     </span>
-                </div>
-                <div class="grid__column-4 grid__offset">
-                    <h4 class="b-section-subtitle">Производство</h4>
-                    <span class="b-section-text">
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <h4 class="b-section-subtitle">Производство</h4>
+                        <span class="b-section-text">
                         454008, г. Челябинск, ул. Автодорожная, д.3
                         Телефон: +7 (351) 729-99-47
                     </span>
-                </div>
-                <div class="grid__column-4 grid__offset">
-                    <h4 class="b-section-subtitle">Социальные сети</h4>
-                    <div class="b-section-social">
-                        <ul class="b-section-social-list">
-                            <li class="b-section-social-list__item">
-                                <a href="http://www.facebook.com/zavodtriumph.ru"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="b-section-social-list__item">
-                                <a href="http://vk.com/planttriumph"><i class="fa fa-vk" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="b-section-social-list__item">
-                                <a href="http://twitter.com/zavodtriumph"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="b-section-social-list__item">
-                                <a href="https://plus.google.com/+ZavodtriumphRu"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="b-section-social-list__item">
-                                <a href="http://www.youtube.com/user/zavodtriumph"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="b-section-social-list__item">
-                                <a href="http://instagram.com/zavodtriumph"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            </li>
-                        </ul>
+                    </div>
+                    <div class="grid__column-4 grid__offset">
+                        <h4 class="b-section-subtitle">Социальные сети</h4>
+                        <div class="b-section-social">
+                            <ul class="b-section-social-list">
+                                <li class="b-section-social-list__item">
+                                    <a href="http://www.facebook.com/zavodtriumph.ru"><i class="fa fa-facebook"
+                                                                                         aria-hidden="true"></i></a>
+                                </li>
+                                <li class="b-section-social-list__item">
+                                    <a href="http://vk.com/planttriumph"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                                </li>
+                                <li class="b-section-social-list__item">
+                                    <a href="http://twitter.com/zavodtriumph"><i class="fa fa-twitter"
+                                                                                 aria-hidden="true"></i></a>
+                                </li>
+                                <li class="b-section-social-list__item">
+                                    <a href="https://plus.google.com/+ZavodtriumphRu"><i class="fa fa-google-plus"
+                                                                                         aria-hidden="true"></i></a>
+                                </li>
+                                <li class="b-section-social-list__item">
+                                    <a href="http://www.youtube.com/user/zavodtriumph"><i class="fa fa-youtube"
+                                                                                          aria-hidden="true"></i></a>
+                                </li>
+                                <li class="b-section-social-list__item">
+                                    <a href="http://instagram.com/zavodtriumph"><i class="fa fa-instagram"
+                                                                                   aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endif %}
     <div class="b-footer">
         <div class="b-layout">
             <div class="grid__row">
-                <span class="b-footer-text pull-left">© 1995 — {% now "Y" %} ООО «Завод Триумф»</span><span class="b-footer-text pull-right">Свидетельство и лицензии Завода</span>
+                <span class="b-footer-text pull-left">© 1995 — {% now "Y" %} ООО «Завод Триумф»</span><span
+                    class="b-footer-text pull-right">Свидетельство и лицензии Завода</span>
             </div>
         </div>
     </div>
@@ -66,7 +72,6 @@
                             </div>
                             <div class="b-section__space"></div>
                             <form class="b-form" method="post" action="{% url "callme_form_process" callme_form_url %}">
-{#                            <form class="b-form" method="post" action="{% url "callme_form_process" request.path %}">#}
                                 {% csrf_token %}
                                 <div class="b-form-group">
                                     <input type="text" class="b-form-control" placeholder="Ваше имя"
@@ -76,14 +81,25 @@
                                     <input class="b-form-control" placeholder="Контактный телефон" required=""
                                            id="id_phone" maxlength="50" name="phone">
                                 </div>
+
                                 Удобное время для звонка
-                                <div class="b-form-group">
-                                    <input class="b-form-control" placeholder="От" type="text" required=""
-                                           id="id_time_from" maxlength="50" name="time_from">
-                                </div>
-                                <div class="b-form-group">
-                                    <input class="b-form-control" placeholder="До" type="text" required=""
-                                           id="id_time_to" maxlength="50" name="time_to">
+                                <div class="b-section__space"></div>
+                                <div class="grid-fluid">
+                                    <div class="grid__row">
+                                        <div class="grid__column-7">
+
+                                            <div class="b-form-group">
+                                                <input class="b-form-control" placeholder="От 00:01" type="text" required=""
+                                                       id="id_time_from" maxlength="50" name="time_from">
+                                            </div>
+                                        </div>
+                                        <div class="grid__column-7">
+                                            <div class="b-form-group">
+                                                <input class="b-form-control" placeholder="До 23:59" type="text" required=""
+                                                       id="id_time_to" maxlength="50" name="time_to">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button type="submit" class="b-btn b-btn__fullwidth">
                                     <span class="b-btn__text">Отправить</span>
