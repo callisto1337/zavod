@@ -66,6 +66,33 @@
 		}
 	}
 
+	// например, поиск в меню
+	&-input-group {
+		position: relative;
+		width: 100%;
+		display: table;
+		border-collapse: separate;
+
+		.b-form-control {
+			position: relative;
+			z-index: 2;
+			float: left;
+			width: 100%;
+			margin-bottom: 0;
+			display: table-cell;
+		}
+
+		&-btn {
+			position: relative;
+			font-size: 0;
+			white-space: nowrap;
+			width: 1%;
+			vertical-align: middle;
+			display: table-cell;
+		}
+
+	}
+
 	//input[type="file"].b-form-control {
 	//	width: 0.1px;
 	//	height: 0.1px;

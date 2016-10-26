@@ -168,7 +168,7 @@
                     </td>
                     <td class="b-menu__item">
                         <span href="{% url "photogallery" %}"
-                           class="b-menu__item-link {% if menu_active_item == 'gallery' %}b-menu__item-link-active {% endif %}">Медиа</span>
+                              class="b-menu__item-link {% if menu_active_item == 'gallery' %}b-menu__item-link-active {% endif %}">Медиа</span>
                         <div class="b-menu__submenu b-menu__submenu_small">
                             <div class="submenu__content">
                                 <div class="submenu__column">
@@ -196,12 +196,31 @@
                            class="b-menu__item-link {% if menu_active_item == 'contacts' %}b-menu__item-link-active {% endif %}">Контакты</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "search" %}"
+                        <a id="js-search" href="#"
                            class="b-menu__item-link {% if menu_active_item == 'search' %}b-menu__item-link-active {% endif %}"><i
                                 class="fa fa-search" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             </table>
+            <div class="b-menu__search">
+                <div class="b-menu__search__wrapper">
+                    <form class="b-form" method="get" action="{% url "search" %}">
+                        {% csrf_token %}
+
+                        <div class="b-form-group">
+                            <div class="b-form-input-group">
+                                <input type="text" class="b-form-control" placeholder="Что хотите найти?" id="search"
+                                       maxlength="200" name="search">
+                                <span class="b-form-input-group-btn">
+                                    <button class="b-btn b-btn-default b-btn-search" type="submit">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
