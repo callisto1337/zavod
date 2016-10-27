@@ -41,13 +41,13 @@
                             <i class="fa fa-eye" aria-hidden="true"></i> {{ article.views }}
                         </div>
                     </div>
-                    <div class="b-section__image">
+                    {% comment %}<div class="b-section__image">
                         {% if article.images.first %}
                             <img src="{{ article.images.first.image.url }}" alt="Картинка">
                         {% else %}
                             <img src="{% static 'img/player.png' %}" alt="Картинка">
                         {% endif %}
-                    </div>
+                    </div>{% endcomment %}
                     <div class="b-section__space"></div>
                     {# Содержимое статьи #}
                     <div class="b-content">
@@ -60,6 +60,12 @@
                                 <i class="fa fa-tag" aria-hidden="true"></i>{{ tag.title }}
                             </a>
                         {% endfor %}
+                        <div class="social-likes pull-right">
+                            <div class="facebook" title="Поделиться ссылкой на Фейсбуке">Facebook</div>
+                            <div class="twitter" title="Поделиться ссылкой в Твиттере">Twitter</div>
+                            <div class="vkontakte" title="Поделиться ссылкой во Вконтакте">Вконтакте</div>
+                            <div class="plusone" title="Поделиться ссылкой в Гугл-плюсе">Google+</div>
+                        </div>
                     </div>
                     {# end article #}
                     <hr class="delimiter"/>
@@ -153,4 +159,27 @@
     </div>
 
     {% include 'blocks/bottom.html' %}
+{% endblock %}
+
+{% block extra-js %}
+    <script text="text/javascript">
+        $(document).ready(function () {
+            var $content = $('.b-content');
+            // init
+            $('.slider', $content).each(function (idx, el) {
+
+                $(el).slick({
+                    arrows: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    draggable: false,
+                    swipe: false,
+                    swipeToSlide: false,
+                    autoplay: true,
+                    dots: true,
+                    dotsClass: 'slider-dots'
+                });
+            });
+        });
+    </script>
 {% endblock %}
