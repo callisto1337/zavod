@@ -89,6 +89,63 @@
                     {#                        </ul>#}
                     {#                    </div>#}
                 </div>
+                <div class="grid__offset grid__column-4">
+                    <div class="b-box b-box-grey b-box_nohover">
+                        <div class="b-box__wrapper">
+                            <form method="get" action="./">
+
+                                {% comment %}
+                                тут начинается формирование слайдеров
+                                {% endcomment %}
+                                {% for property in properties_objs %}
+                                    {% if property.filterable %}
+                                        {{ property.title }}, {{ property.units }}
+                                        <div class="b-section__space"></div>
+                                        <div class="grid-fluid">
+                                            <div class="grid__row">
+                                                <div class="grid__column-7">
+                                                    <input type="hidden" name="expand" value="false">
+                                                    <div class="b-form-group">
+                                                        <input class="b-form-control" placeholder="От"
+                                                               type="number"
+                                                               id="id_{{ forloop.counter }}_1" maxlength="50"
+                                                               name="{{ property.slug }}_from"
+                                                               value="{{ property.get_min | stringformat:'d' }}">
+                                                        {% comment %}value=минимальное значение{% endcomment %}
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-7">
+                                                    <div class="b-form-group">
+                                                        <input class="b-form-control" placeholder="До"
+                                                               type="number"
+                                                               required="" id="id_{{ forloop.counter }}_2"
+                                                               maxlength="50"
+                                                               name="{{ property.slug }}_to"
+                                                               value="{{ property.get_max | stringformat:'d' }}">
+                                                        {% comment %}value=максимальное значение{% endcomment %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="b-form-group">
+                                            <div id="js-slider-{{ forloop.counter }}"></div>
+                                        </div>
+                                        {#                                                <div id="js-slider_1"></div>#}
+                                    {% endif %}
+                                {% endfor %}
+                                {% comment %} конец примера (но смотри в extra-js){% endcomment %}
+
+                                <div class="b-section__space"></div>
+                                <button type="submit" class="b-btn b-btn__fullwidth">
+                                    <span class="b-btn__text">Отфильтровать</span>
+                                </button>
+                                <button type="reset" class="b-btn b-btn-revert b-btn__fullwidth">
+                                    <span class="b-btn__text">Сбросить</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">
@@ -205,6 +262,37 @@
 {% endblock %}
 
 {% block extra-js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% comment %}начало автогенерируемого кода{% endcomment %}
+            {% for property in properties_objs %}
+                {% if property.filterable %}
+                    var slider{{ forloop.counter }} = document.getElementById('js-slider-{{ forloop.counter }}');
+                    noUiSlider.create(slider{{ forloop.counter }}, {
+                        start: [{{ property.get_min }}, {{ property.get_max }}],
+                        connect: true,
+                        range: {
+                            'min': Math.round({{ property.min }}), // любое минимальное значение
+                            'max': Math.round({{ property.max }})   // любое максимальное значение
+                        }
+                    });
+
+                    var min_input_{{ forloop.counter }} = document.getElementById('id_{{ forloop.counter }}_1');
+                    var max_input_{{ forloop.counter }} = document.getElementById('id_{{ forloop.counter }}_2');
+                    slider{{ forloop.counter }}.noUiSlider.on('update', function (values, handle) {
+
+                        var value = values[handle];
+
+                        if (handle) {
+                            max_input_{{ forloop.counter }}.value = Math.round(value);
+                        } else {
+                            min_input_{{ forloop.counter }}.value = Math.round(value);
+                        }
+                    });
+                {% endif %}
+            {% endfor %}
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#order').on('show.bs.modal', function (e) {

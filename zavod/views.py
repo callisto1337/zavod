@@ -608,17 +608,30 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             for property_id in properties_ids:
                 properties.append(Property.objects.get(pk=property_id))
             properties.sort()
+            # найти минимальное и максимальное значение в каждом свойстве
+            for property in properties:
+                all_value = list(ProductProperty.objects.filter(product__in=products, property=property).
+                                 values_list('value', flat=True))
+                all_value_int = []
+                for value in all_value:
+                    all_value_int.append(float(value.replace(',', '.').replace(' ', '').replace(u'\xa0', '').replace(u'\u2014', '').replace('-', '')))
+                property.min = unicode(min(all_value_int)).replace(',', '.')
+                property.max = unicode(max(all_value_int)).replace(',', '.')
+                property.get_min = property.min
+                property.get_max = property.max
             # фильтрация по гет-параметрам
             for property in properties:
                 property_get_param_from = property.slug + '_from'
                 property_value_from = request.GET.get(property_get_param_from, None)
                 if property_value_from:
+                    property.get_min = property_value_from
                     for product in products:
                         if not float(product.properties.filter(property=property).first().value.replace(',', '.')) >= float(property_value_from):
                             products = products.exclude(pk=product.pk)
                 property_get_param_to = property.slug + '_to'
                 property_value_to = request.GET.get(property_get_param_to, None)
                 if property_value_to:
+                    property.get_max = property_value_to
                     for product in products:
                         if not float(product.properties.filter(property=property).first().value.replace(',', '.')) <= float(property_value_to):
                             products = products.exclude(pk=product.pk)
@@ -648,7 +661,8 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             if request.GET.get('expand', 'true') == 'true':
                 template_name = 'catalog_category_products_expand.html'
             out.update({'products': products, 'parent': category, 'title': title, 'category': category,
-                        'request': request, 'ind_products': ind_products, 'properties': new_properties})
+                        'request': request, 'ind_products': ind_products, 'properties': new_properties,
+                        'properties_objs': properties})
             if request.method == 'POST':
                 callback_form = CallbackForm(request.POST, request.FILES)
                 if callback_form.is_valid():

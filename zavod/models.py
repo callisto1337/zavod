@@ -135,6 +135,7 @@ class Property(models.Model):
     title = models.CharField(max_length=200, default='')
     units = models.CharField(max_length=200, default='')
     slug = models.CharField(max_length=200, default='')
+    filterable = models.BooleanField(default=0)
 
     def __unicode__(self):
         return u'{}, {}'.format(self.title, self.units)
