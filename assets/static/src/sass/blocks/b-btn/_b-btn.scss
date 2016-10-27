@@ -74,6 +74,28 @@
 		}
 	}
 
+	&-revert {
+		text-shadow: none;
+		background: transparent;
+		box-shadow: none;
+		border: none;
+
+		&:hover {
+			text-shadow: none;
+			background: transparent;
+			border: 0;
+			color: #000;
+
+			.b-btn__text {
+				color: #000;
+			}
+		}
+
+		.b-btn__text {
+			color: #868686;
+		}
+	}
+
 	// для поиска
 	&-search {
 		height: 44px;

@@ -44,98 +44,148 @@
             </div>
             {% if products %}
                 <div class="b-section b-section_short b-section_borderless">
-                    {% for product in products %}
-                        <div class="grid__row grid__row-btm">
-                            <div class="grid__column-9">
-                                <div class="b-box b-box_258">
-                                    <a class="b-link_pseudo"
-                                       href="{% url "catalog_category_inside" product.category.slug product.slug %}">
-                                        <div class="b-box__body">
-                                            <div class="b-box__wrapper">
-                                                <h2 class="b-box__header">{{ product.name }}</h2>
-                                                <div class="b-box__image-fullsize">
-                                                    {% if product.images.first %}
-                                                        <img src="{{ product.images.first.image.url }}" alt="">
-                                                    {% else %}
-                                                        <img src="{% static 'img/products/product_sale.png' %}"
-                                                             alt="Пример Продукта">
-                                                    {% endif %}
+                    <div class="grid__row">
+                        <div class="grid__column-9">
+                            {% for product in products %}
+                                <div class="grid__row grid__row-btm">
+                                    <div class="grid__column-9">
+                                        <div class="b-box b-box_258">
+                                            <a class="b-link_pseudo"
+                                               href="{% url "catalog_category_inside" product.category.slug product.slug %}">
+                                                <div class="b-box__body">
+                                                    <div class="b-box__wrapper">
+                                                        <h2 class="b-box__header">{{ product.name }}</h2>
+                                                        <div class="b-box__image-fullsize">
+                                                            {% if product.images.first %}
+                                                                <img src="{{ product.images.first.image.url }}" alt="">
+                                                            {% else %}
+                                                                <img src="{% static 'img/products/product_sale.png' %}"
+                                                                     alt="Пример Продукта">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="b-box__property">
+                                                            <ul class="b-property b-property_noborder">
+                                                                <li class="b-property__item">
+                                                                    <span class="b-property__key">Масса, кг</span>
+                                                                    <span class="b-property__value b-property__value_darker">473</span>
+                                                                </li>
+                                                                <li class="b-property__item">
+                                                                    <span class="b-property__key">Условный проход, мм, Ду</span>
+                                                                    <span class="b-property__value b-property__value_darker">300</span>
+                                                                </li>
+                                                                <li class="b-property__item">
+                                                                    <span class="b-property__key">Условное давление, Мпа, Ру</span>
+                                                                    <span class="b-property__value b-property__value_darker">2,5</span>
+                                                                </li>
+                                                                <li class="b-property__item">
+                                                                    <span class="b-property__key">Производительность, т/ч</span>
+                                                                    <span class="b-property__value b-property__value_darker">356</span>
+                                                                </li>
+                                                                <li class="b-property__item">
+                                                                    <span class="b-property__key">Диаметр корпуса, мм, Дн</span>
+                                                                    <span class="b-property__value b-property__value_darker">530</span>
+                                                                </li>
+                                                                <li class="b-property__item">
+                                                                    <span class="b-property__key">Длина L, мм</span>
+                                                                    <span class="b-property__value b-property__value_darker">1535</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="b-box__property">
-                                                    <ul class="b-property b-property_noborder">
-                                                        <li class="b-property__item">
-                                                            <span class="b-property__key">Масса, кг</span>
-                                                            <span class="b-property__value b-property__value_darker">473</span>
-                                                        </li>
-                                                        <li class="b-property__item">
-                                                            <span class="b-property__key">Условный проход, мм, Ду</span>
-                                                            <span class="b-property__value b-property__value_darker">300</span>
-                                                        </li>
-                                                        <li class="b-property__item">
-                                                            <span class="b-property__key">Условное давление, Мпа, Ру</span>
-                                                            <span class="b-property__value b-property__value_darker">2,5</span>
-                                                        </li>
-                                                        <li class="b-property__item">
-                                                            <span class="b-property__key">Производительность, т/ч</span>
-                                                            <span class="b-property__value b-property__value_darker">356</span>
-                                                        </li>
-                                                        <li class="b-property__item">
-                                                            <span class="b-property__key">Диаметр корпуса, мм, Дн</span>
-                                                            <span class="b-property__value b-property__value_darker">530</span>
-                                                        </li>
-                                                        <li class="b-property__item">
-                                                            <span class="b-property__key">Длина L, мм</span>
-                                                            <span class="b-property__value b-property__value_darker">1535</span>
-                                                        </li>
-                                                    </ul>
+                                            </a>
+                                            <div class="b-box__footer">
+                                                <div class="b-box__wrapper">
+                                                    <h3 class="b-box__header">Цена с НДС:</h3>
+                                                    <div class="b-box__property">
+                                                        <ul class="b-property b-property_noborder">
+                                                            <li class="b-property__item">
+                                                                <span class="b-property__key">нержав.</span>
+                                                                <span class="b-property__value b-property__value_extra">557 700 руб.</span>
+                                                            </li>
+                                                            <li class="b-property__item">
+                                                                <span class="b-property__key">латунь</span>
+                                                                <span class="b-property__value b-property__value_extra">557 700 руб.</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <form>
+                                                        {% csrf_token %}
+                                                        <div class="b-form-group">
+                                                            <input type="number" class="b-form-control"
+                                                                   placeholder="1 шт."
+                                                                   id="id_name" maxlength="200" name="name" required="">
+                                                        </div>
+                                                        <button type="submit" class="b-btn b-btn__fullwidth">
+                                                            <span class="b-btn__text">Заказать</span>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                    <div class="b-box__footer">
-                                        <div class="b-box__wrapper">
-                                            <h3 class="b-box__header">Цена с НДС:</h3>
-                                            <div class="b-box__property">
-                                                <ul class="b-property b-property_noborder">
-                                                    <li class="b-property__item">
-                                                        <span class="b-property__key">нержав.</span>
-                                                        <span class="b-property__value b-property__value_extra">557 700 руб.</span>
-                                                    </li>
-                                                    <li class="b-property__item">
-                                                        <span class="b-property__key">латунь</span>
-                                                        <span class="b-property__value b-property__value_extra">557 700 руб.</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <form>
-                                                {% csrf_token %}
-                                                <div class="b-form-group">
-                                                    <input type="number" class="b-form-control" placeholder="1 шт."
-                                                           id="id_name" maxlength="200" name="name" required="">
-                                                </div>
-                                                <button type="submit" class="b-btn b-btn__fullwidth">
-                                                    <span class="b-btn__text">Заказать</span>
-                                                </button>
-                                            </form>
+                                            {#                                        <div class="b-box__wrapper">#}
+                                            {#                                            <div class="b-box__image">#}
+                                            {#                                                {% if product.images.first %}#}
+                                            {#                                                    <img src="{{ product.images.first.image.url }}"#}
+                                            {#                                                         alt="Пример Продукта">#}
+                                            {#                                                {% else %}#}
+                                            {#                                                    <img src="{% static 'img/products/product_sale.png' %}"#}
+                                            {#                                                         alt="Пример Продукта">#}
+                                            {#                                                {% endif %}#}
+                                            {#                                            </div>#}
+                                            {#                                            <h4 class="b-box__header">{{ product.name }}</h4>#}
+                                            {#                                            <p class="b-box__text">{{ product.product_text|truncatewords:20 }}</p>#}
+                                            {#                                        </div>#}
                                         </div>
                                     </div>
-                                    {#                                        <div class="b-box__wrapper">#}
-                                    {#                                            <div class="b-box__image">#}
-                                    {#                                                {% if product.images.first %}#}
-                                    {#                                                    <img src="{{ product.images.first.image.url }}"#}
-                                    {#                                                         alt="Пример Продукта">#}
-                                    {#                                                {% else %}#}
-                                    {#                                                    <img src="{% static 'img/products/product_sale.png' %}"#}
-                                    {#                                                         alt="Пример Продукта">#}
-                                    {#                                                {% endif %}#}
-                                    {#                                            </div>#}
-                                    {#                                            <h4 class="b-box__header">{{ product.name }}</h4>#}
-                                    {#                                            <p class="b-box__text">{{ product.product_text|truncatewords:20 }}</p>#}
-                                    {#                                        </div>#}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="grid__offset grid__column-4">
+                            <div class="b-box b-box-grey b-box_nohover">
+                                <div class="b-box__wrapper">
+                                    <form method="get" action="">
+
+                                        {% comment %}
+                                        тут начинается формирование слайдеров
+                                        {% endcomment %}
+                                        Тепловой поток, кВт/ч
+                                        <div class="b-section__space"></div>
+                                        <div class="grid-fluid">
+                                            <div class="grid__row">
+                                                <div class="grid__column-7">
+
+                                                    <div class="b-form-group">
+                                                        <input class="b-form-control" placeholder="От" type="number"
+                                                               id="id_1_1" maxlength="50"
+                                                               name="" value="0">
+                                                        {% comment %}value=минимальное значение{% endcomment %}
+                                                    </div>
+                                                </div>
+                                                <div class="grid__column-7">
+                                                    <div class="b-form-group">
+                                                        <input class="b-form-control" placeholder="До" type="number"
+                                                               required="" id="id_1_2" maxlength="50"
+                                                               name="" value="100">
+                                                        {% comment %}value=максимальное значение{% endcomment %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="js-slider_1"></div>
+                                        {% comment %} конец примера (но смотри в extra-js){% endcomment %}
+
+                                        <div class="b-section__space"></div>
+                                        <button type="submit" class="b-btn b-btn__fullwidth">
+                                            <span class="b-btn__text">Отфильтровать</span>
+                                        </button>
+                                        <button type="reset" class="b-btn b-btn-revert b-btn__fullwidth">
+                                            <span class="b-btn__text">Сбросить</span>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
             {% endif %}
             <div class="grid__row">
@@ -212,5 +262,35 @@
         </div>
     {% endif %}
 
-{% include 'blocks/bottom.html' %}
+    {% include 'blocks/bottom.html' %}
+{% endblock %}
+
+{% block extra-js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% comment %}начало автогенерируемого кода{% endcomment %}
+            var slider1 = document.getElementById('js-slider_1');
+            noUiSlider.create(slider1, {
+                start: [10, 30],
+                connect: true,
+                range: {
+                    'min': -20, // любое минимальное значение
+                    'max': 40   // любое максимальное значение
+                }
+            });
+
+            var min_input_1 = document.getElementById('id_1_1');
+            var max_input_1 = document.getElementById('id_1_2');
+            slider1.noUiSlider.on('update', function (values, handle) {
+
+                var value = values[handle];
+
+                if (handle) {
+                    max_input_1.value = Math.round(value);
+                } else {
+                    min_input_1.value = Math.round(value);
+                }
+            });
+        });
+    </script>
 {% endblock %}
