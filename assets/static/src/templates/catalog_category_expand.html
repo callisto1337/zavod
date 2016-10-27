@@ -59,7 +59,7 @@
                                 {% endif %}
                             </div>
                             <h4 class="b-box__header">{{ subcategory.name }}</h4>
-                            <p class="b-box__text">{{ subcategory.text|truncatewords:20 | striptags | safe }}</p>
+                            <p class="b-box__text">{{ subcategory.text| striptags | truncatechars_html:100 | safe }}</p>
                         </div>
                         <div class="b-box__footer">
                             <div class="b-box__wrapper">
