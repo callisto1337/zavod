@@ -236,6 +236,16 @@ LOGGING = {
     },
 }
 
+# ckeditor settings
+
+CKEDITOR_UPLOAD_PATH = os.path.join('media/', 'images')
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
+
 # Local settings
 
 try:

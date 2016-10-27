@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.mail import send_mail
 from django.db import models
 from django.db.models.signals import post_save
@@ -74,7 +74,7 @@ class News(models.Model):
     published = models.BooleanField(default=True)
     slug = models.SlugField(max_length=100, default='', unique=True)
     preview_post = models.TextField()
-    text = RichTextField()
+    text = RichTextUploadingField()
     date_created = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=1000)
     seo_title = models.CharField(max_length=200, default='')
@@ -114,7 +114,7 @@ class CategoryProduct(models.Model):
     slug = models.SlugField(max_length=100, default='', unique=True)
     parent_id = models.ForeignKey("CategoryProduct", default=None, null=True, blank=True)
     title = models.CharField(max_length=100, default='')
-    text = RichTextField(default='')
+    text = RichTextUploadingField(default='')
     images = models.ManyToManyField(Image, related_name='categories', default=None, null=True, blank=True)
     files = models.ManyToManyField(File, related_name='categories', default=None, null=True, blank=True)
     galleries = models.ManyToManyField('Gallery', related_name='categories', default=None, null=True, blank=True)
@@ -151,7 +151,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, default='')
     slug = models.SlugField(max_length=100, default='')
     category = models.ForeignKey(CategoryProduct, null=True)
-    product_text = RichTextField()
+    product_text = RichTextUploadingField()
     title = models.CharField(max_length=200, default='')
     seo_title = models.CharField(max_length=300, default='')
     seo_description = models.CharField(max_length=300, default='')
@@ -201,7 +201,7 @@ class Article(models.Model):
     published = models.BooleanField(default=True)
     slug = models.SlugField(max_length=100, default='', unique=True)
     preview_post = models.TextField()
-    text = RichTextField()
+    text = RichTextUploadingField()
     date_created = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=1000)
     seo_title = models.CharField(max_length=200, default='')

@@ -69,6 +69,7 @@ urlpatterns = [
     url(r'^proizvodstvo-zavoda-triumf/$', views.proizvodstvo_zavoda_triumf, name='proizvodstvo_zavoda_triumf'),
     url(r'^prajjsy/gibkaja-sistema-skidok/$', views.gibkaja_sistema_skidok, name='gibkaja_sistema_skidok'),
     url(r'^callme_form_process/(?P<next_url>.*)/$', views.callme_form_process, name='callme_form_process'),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^robots.txt$',
         lambda r: HttpResponse("User-agent: *\nDisallow: /", content_type="text/plain")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
