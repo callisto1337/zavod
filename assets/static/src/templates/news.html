@@ -88,14 +88,14 @@
                             <div class="b-list">
                                 <div class="b-list__item b-list__item_head">Одной строкой</div>
                                 {% for news in one_line_news %}
-                                    <div class="b-list__item b-list__item_height_101">
+                                    <div class="b-list__item b-list__item_height_107">
                                         <div class="b-list__item__extra">
                                             {{ news.date_created|date:"d F Y"|lower }} г.
                                         </div>
                                         {% comment %} НЕ БОЛЬШЕ ДВУХ СТРОК (используй truncatechars) {% endcomment %}
                                         <a href="{% url "news_detail" news.slug %}" class="b-list__item__link"
                                            title="{{ news.title }}">
-                                            {{ news.title | truncatechars:75 }}
+                                            {{ news.title | truncatechars:65 }}
                                         </a>
                                     </div>
                                 {% endfor %}
@@ -141,7 +141,7 @@
                                     <a class="b-link_pseudo" href="{% url "articles_detail" article.slug %}"
                                        title="{{ article.title }}">
                                         <div class="b-list__item b-list__item_nopadding">
-                                            <div class="b-box b-box_nohover {% cycle 'b-box-red' 'b-box-green' %} b-box_244">
+                                            <div class="b-box b-box_nohover {% cycle 'b-box-red' 'b-box-green' %} b-box_250">
                                                 <div class="b-box__image-fullsize">
                                                     {% if article.images.first %}
                                                         <img src="{{ article.images.first.image.url }}" alt="">

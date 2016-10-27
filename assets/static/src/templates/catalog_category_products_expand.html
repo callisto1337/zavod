@@ -71,7 +71,7 @@
                                                                             <span class="b-property__key">{{ key }}</span>
                                                                             <span class="b-property__value b-property__value_darker">{{ value }}</span>
                                                                         </li>
-                                                                    {%  endif %}
+                                                                    {% endif %}
                                                                 {% endfor %}
                                                             </ul>
                                                         </div>
@@ -87,24 +87,24 @@
                                                                 {% if "Цена" in key %}
                                                                     <li class="b-property__item">
                                                                         <span class="b-property__key">{{ key|slice:'12:-6:' }}</span>
-                                                                        <span class="b-property__value b-property__value_darker">{{ value }} руб.</span>
+                                                                        <span class="b-property__value b-property__value_extra">{{ value }} руб.</span>
                                                                     </li>
-                                                                {%  endif %}
+                                                                {% endif %}
                                                             {% endfor %}
                                                         </ul>
                                                     </div>
-{#                                                    <form>#}
-{#                                                        {% csrf_token %}#}
-                                                        <div class="b-form-group">
-                                                            <input type="number" class="b-form-control"
-                                                                   placeholder="1 шт."
-                                                                   id="id_count" maxlength="200" name="count">
-                                                        </div>
-                                                        <button type="submit" class="b-btn b-btn__fullwidth"
-                                                                data-toggle="modal" data-target="#order" href="#"
-                                                                data-product-id="{{ product.name }}">
-                                                            <span class="b-btn__text">Заказать</span>
-                                                        </button>
+                                                    {#                                                    <form>#}
+                                                    {#                                                        {% csrf_token %}#}
+                                                    <div class="b-form-group">
+                                                        <input type="number" class="b-form-control"
+                                                               placeholder="1 шт."
+                                                               id="id_count" maxlength="200" name="count">
+                                                    </div>
+                                                    <button type="submit" class="b-btn b-btn__fullwidth"
+                                                            data-toggle="modal" data-target="#order" href="#"
+                                                            data-product-id="{{ product.name }}">
+                                                        <span class="b-btn__text">Заказать</span>
+                                                    </button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -143,7 +143,8 @@
                                                         <div class="grid__column-7">
 
                                                             <div class="b-form-group">
-                                                                <input class="b-form-control" placeholder="От" type="number"
+                                                                <input class="b-form-control" placeholder="От"
+                                                                       type="number"
                                                                        id="id_1_1" maxlength="50"
                                                                        name="" value="0">
                                                                 {% comment %}value=минимальное значение{% endcomment %}
@@ -151,7 +152,8 @@
                                                         </div>
                                                         <div class="grid__column-7">
                                                             <div class="b-form-group">
-                                                                <input class="b-form-control" placeholder="До" type="number"
+                                                                <input class="b-form-control" placeholder="До"
+                                                                       type="number"
                                                                        required="" id="id_1_2" maxlength="50"
                                                                        name="" value="100">
                                                                 {% comment %}value=максимальное значение{% endcomment %}
@@ -159,8 +161,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div id="js-slider-{{ forloop.counter }}"></div>
-{#                                                <div id="js-slider_1"></div>#}
+                                                <div class="b-form-group">
+                                                    <div id="js-slider-{{ forloop.counter }}"></div>
+                                                </div>
+                                                {#                                                <div id="js-slider_1"></div>#}
                                             {% endif %}
                                         {% endfor %}
                                         {% comment %} конец примера (но смотри в extra-js){% endcomment %}
@@ -268,7 +272,8 @@
                             Заказать продукцию
                         </div>
                         <div class="b-section__space"></div>
-                        <form class="b-form" method="post" action="{{ request.path }}?expand=true" enctype="multipart/form-data">
+                        <form class="b-form" method="post" action="{{ request.path }}?expand=true"
+                              enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="b-form-group">
                                 <input type="text" class="b-form-control" placeholder="Ваше имя"
