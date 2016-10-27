@@ -153,7 +153,7 @@
                             Заказать продукцию
                         </div>
                         <div class="b-section__space"></div>
-                        <form class="b-form" method="post" action="{{ request.path }}" enctype="multipart/form-data">
+                        <form class="b-form" method="post" action="{{ request.path }}?tab=docs" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="b-form-group">
                                 <input type="text" class="b-form-control" placeholder="Ваше имя"
@@ -177,6 +177,7 @@
                                           class="b-form-control" rows="4" placeholder="Комментарий"></textarea>
                             </div>
                             <input id="id_product" maxlength="500" name="product" type="hidden" value="{{ product.name }}">
+                            <input id="id_count" maxlength="500" name="count" type="hidden" value="1">
                             <button type="submit" class="b-btn b-btn__fullwidth">
                                 <span class="b-btn__text">Отправить</span>
                             </button>

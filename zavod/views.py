@@ -539,8 +539,9 @@ def get_product(request, slug, parent_category_slug=None, out={}):
                 to=EMAILS_FOR_CALLBACK,
                 from_email='from@example.com',
                 subject=u'Заказ продукции',
-                body=u'Поступил запрос на заказ продукции {} от {} (телефон для связи - {}, email - {}) с комментарием:\n\n"{}"'.format(
+                body=u'Поступил запрос на заказ продукции {} в количестве {} штук от {} (телефон для связи - {}, email - {}) с комментарием:\n\n"{}"'.format(
                     callback_form.cleaned_data['product'],
+                    callback_form.cleaned_data['count'],
                     callback_form.cleaned_data['name'],
                     callback_form.cleaned_data['phone'],
                     callback_form.cleaned_data['email'],
@@ -630,13 +631,13 @@ def catalog_category(request, category_slug, parent_category_slug=None):
                     if prop:
                         product.properties_dict.update(
                             {
-                                property.title: prop.value
+                                property.title + ', ' + property.units: prop.value
                             }
                         )
                     else:
                         product.properties_dict.update(
                             {
-                                property.title: ' - '
+                                property.title + ', ' + property.units: ' - '
                             }
                         )
                 product.properties_dict = collections.OrderedDict(sorted(product.properties_dict.items()))
@@ -655,8 +656,9 @@ def catalog_category(request, category_slug, parent_category_slug=None):
                         to=EMAILS_FOR_CALLBACK,
                         from_email='from@example.com',
                         subject=u'Заказ продукции',
-                        body=u'Поступил запрос на заказ продукции {} от {} (телефон для связи - {}, email - {}) с комментарием:\n\n"{}"'.format(
+                        body=u'Поступил запрос на заказ продукции {} в количестве {} штук от {} (телефон для связи - {}, email - {}) с комментарием:\n\n"{}"'.format(
                             callback_form.cleaned_data['product'],
+                            callback_form.cleaned_data['count'],
                             callback_form.cleaned_data['name'],
                             callback_form.cleaned_data['phone'],
                             callback_form.cleaned_data['email'],

@@ -65,30 +65,14 @@
                                                         </div>
                                                         <div class="b-box__property">
                                                             <ul class="b-property b-property_noborder">
-                                                                <li class="b-property__item">
-                                                                    <span class="b-property__key">Масса, кг</span>
-                                                                    <span class="b-property__value b-property__value_darker">473</span>
-                                                                </li>
-                                                                <li class="b-property__item">
-                                                                    <span class="b-property__key">Условный проход, мм, Ду</span>
-                                                                    <span class="b-property__value b-property__value_darker">300</span>
-                                                                </li>
-                                                                <li class="b-property__item">
-                                                                    <span class="b-property__key">Условное давление, Мпа, Ру</span>
-                                                                    <span class="b-property__value b-property__value_darker">2,5</span>
-                                                                </li>
-                                                                <li class="b-property__item">
-                                                                    <span class="b-property__key">Производительность, т/ч</span>
-                                                                    <span class="b-property__value b-property__value_darker">356</span>
-                                                                </li>
-                                                                <li class="b-property__item">
-                                                                    <span class="b-property__key">Диаметр корпуса, мм, Дн</span>
-                                                                    <span class="b-property__value b-property__value_darker">530</span>
-                                                                </li>
-                                                                <li class="b-property__item">
-                                                                    <span class="b-property__key">Длина L, мм</span>
-                                                                    <span class="b-property__value b-property__value_darker">1535</span>
-                                                                </li>
+                                                                {% for key, value in product.properties_dict.items %}
+                                                                    {% if "Цена" not in key %}
+                                                                        <li class="b-property__item">
+                                                                            <span class="b-property__key">{{ key }}</span>
+                                                                            <span class="b-property__value b-property__value_darker">{{ value }}</span>
+                                                                        </li>
+                                                                    {%  endif %}
+                                                                {% endfor %}
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -99,24 +83,26 @@
                                                     <h3 class="b-box__header">Цена с НДС:</h3>
                                                     <div class="b-box__property">
                                                         <ul class="b-property b-property_noborder">
-                                                            <li class="b-property__item">
-                                                                <span class="b-property__key">нержав.</span>
-                                                                <span class="b-property__value b-property__value_extra">557 700 руб.</span>
-                                                            </li>
-                                                            <li class="b-property__item">
-                                                                <span class="b-property__key">латунь</span>
-                                                                <span class="b-property__value b-property__value_extra">557 700 руб.</span>
-                                                            </li>
+                                                            {% for key, value in product.properties_dict.items %}
+                                                                {% if "Цена" in key %}
+                                                                    <li class="b-property__item">
+                                                                        <span class="b-property__key">{{ key|slice:'12:-6:' }}</span>
+                                                                        <span class="b-property__value b-property__value_darker">{{ value }} руб.</span>
+                                                                    </li>
+                                                                {%  endif %}
+                                                            {% endfor %}
                                                         </ul>
                                                     </div>
-                                                    <form>
-                                                        {% csrf_token %}
+{#                                                    <form>#}
+{#                                                        {% csrf_token %}#}
                                                         <div class="b-form-group">
                                                             <input type="number" class="b-form-control"
                                                                    placeholder="1 шт."
-                                                                   id="id_name" maxlength="200" name="name" required="">
+                                                                   id="id_count" maxlength="200" name="count">
                                                         </div>
-                                                        <button type="submit" class="b-btn b-btn__fullwidth">
+                                                        <button type="submit" class="b-btn b-btn__fullwidth"
+                                                                data-toggle="modal" data-target="#order" href="#"
+                                                                data-product-id="{{ product.name }}">
                                                             <span class="b-btn__text">Заказать</span>
                                                         </button>
                                                     </form>
@@ -148,30 +134,35 @@
                                         {% comment %}
                                         тут начинается формирование слайдеров
                                         {% endcomment %}
-                                        Тепловой поток, кВт/ч
-                                        <div class="b-section__space"></div>
-                                        <div class="grid-fluid">
-                                            <div class="grid__row">
-                                                <div class="grid__column-7">
+                                        {% for property in properties %}
+                                            {% if "Цена" not in property.title %}
+                                                {{ property }}
+                                                <div class="b-section__space"></div>
+                                                <div class="grid-fluid">
+                                                    <div class="grid__row">
+                                                        <div class="grid__column-7">
 
-                                                    <div class="b-form-group">
-                                                        <input class="b-form-control" placeholder="От" type="number"
-                                                               id="id_1_1" maxlength="50"
-                                                               name="" value="0">
-                                                        {% comment %}value=минимальное значение{% endcomment %}
+                                                            <div class="b-form-group">
+                                                                <input class="b-form-control" placeholder="От" type="number"
+                                                                       id="id_1_1" maxlength="50"
+                                                                       name="" value="0">
+                                                                {% comment %}value=минимальное значение{% endcomment %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="grid__column-7">
+                                                            <div class="b-form-group">
+                                                                <input class="b-form-control" placeholder="До" type="number"
+                                                                       required="" id="id_1_2" maxlength="50"
+                                                                       name="" value="100">
+                                                                {% comment %}value=максимальное значение{% endcomment %}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="grid__column-7">
-                                                    <div class="b-form-group">
-                                                        <input class="b-form-control" placeholder="До" type="number"
-                                                               required="" id="id_1_2" maxlength="50"
-                                                               name="" value="100">
-                                                        {% comment %}value=максимальное значение{% endcomment %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="js-slider_1"></div>
+                                                <div id="js-slider-{{ forloop.counter }}"></div>
+{#                                                <div id="js-slider_1"></div>#}
+                                            {% endif %}
+                                        {% endfor %}
                                         {% comment %} конец примера (но смотри в extra-js){% endcomment %}
 
                                         <div class="b-section__space"></div>
@@ -265,31 +256,95 @@
     {% include 'blocks/bottom.html' %}
 {% endblock %}
 
+{% block extra-html %}
+    <div class="modal fade" id="order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="modal__close close" data-dismiss="modal" aria-label="Close"></a>
+
+                <div class="modal-body">
+                    <div class="b-block__item__wrapper">
+                        <div class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                            Заказать продукцию
+                        </div>
+                        <div class="b-section__space"></div>
+                        <form class="b-form" method="post" action="{{ request.path }}?expand=true" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="b-form-group">
+                                <input type="text" class="b-form-control" placeholder="Ваше имя"
+                                       id="id_name" maxlength="200" name="name" required="">
+                            </div>
+
+                            <div class="b-form-group">
+                                <input class="b-form-control" placeholder="Контактный телефон"
+                                       id="id_phone" maxlength="50" name="phone">
+                            </div>
+                            <div class="b-form-group">
+                                <input class="b-form-control" placeholder="Email"
+                                       id="id_email" name="email" type="email" required="">
+                            </div>
+                            <div class="b-form-group">
+                                <input type="file" id="id_file_field" name="file_field" multiple="">
+                                {% comment %}<i class="fa fa-paperclip pull-right" aria-hidden="true"></i>{% endcomment %}
+                            </div>
+                            <div class="b-form-group">
+                                <textarea id="id_comment" maxlength="500" name="comment" required=""
+                                          class="b-form-control" rows="4" placeholder="Комментарий"></textarea>
+                            </div>
+                            <input id="id_product" maxlength="500" name="product" type="hidden" value="">
+                            <input id="id_count" maxlength="500" name="count" type="hidden" value="1">
+                            <button type="submit" class="b-btn b-btn__fullwidth">
+                                <span class="b-btn__text">Отправить</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block extra-js %}
     <script type="text/javascript">
         $(document).ready(function () {
             {% comment %}начало автогенерируемого кода{% endcomment %}
-            var slider1 = document.getElementById('js-slider_1');
-            noUiSlider.create(slider1, {
-                start: [10, 30],
-                connect: true,
-                range: {
-                    'min': -20, // любое минимальное значение
-                    'max': 40   // любое максимальное значение
-                }
-            });
+            {% for property in properties %}
+                {% if "Цена" not in property.title %}
+                    var slider1 = document.getElementById('js-slider-{{ forloop.counter }}');
+                    noUiSlider.create(slider1, {
+                        start: [10, 30],
+                        connect: true,
+                        range: {
+                            'min': -20, // любое минимальное значение
+                            'max': 40   // любое максимальное значение
+                        }
+                    });
 
-            var min_input_1 = document.getElementById('id_1_1');
-            var max_input_1 = document.getElementById('id_1_2');
-            slider1.noUiSlider.on('update', function (values, handle) {
+                    var min_input_1 = document.getElementById('id_1_1');
+                    var max_input_1 = document.getElementById('id_1_2');
+                    slider1.noUiSlider.on('update', function (values, handle) {
 
-                var value = values[handle];
+                        var value = values[handle];
 
-                if (handle) {
-                    max_input_1.value = Math.round(value);
-                } else {
-                    min_input_1.value = Math.round(value);
-                }
+                        if (handle) {
+                            max_input_1.value = Math.round(value);
+                        } else {
+                            min_input_1.value = Math.round(value);
+                        }
+                    });
+                {% endif %}
+            {% endfor %}
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#order').on('show.bs.modal', function (e) {
+
+                //get data-id attribute of the clicked element
+                var productId = $(e.relatedTarget).data('product-id');
+
+                //populate the textbox
+                $(e.currentTarget).find('input[name="product"]').val(productId);
             });
         });
     </script>

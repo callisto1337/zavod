@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from django.forms import ModelForm, TextInput, EmailField, Form, FileField, ClearableFileInput, CharField, Textarea, \
-    NumberInput
+    NumberInput, IntegerField
 from django.contrib.auth.forms import UserCreationForm
 from zavod.models import Question, Subscription
 from zavod.models import CustomUser
@@ -48,6 +48,7 @@ class CallbackForm(Form):
     phone = CharField(max_length=50, required=True)
     comment = CharField(max_length=500, required=True)
     product = CharField(max_length=500, required=False)
+    count = IntegerField(required=False)
     file_field = FileField(widget=ClearableFileInput(attrs={'multiple': True}), required=False)
 
 
