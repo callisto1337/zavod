@@ -614,9 +614,9 @@ def catalog_category(request, category_slug, parent_category_slug=None):
                                  values_list('value', flat=True))
                 all_value_int = []
                 for value in all_value:
-                    if re.search(r'\d+', value):
+                    try:
                         all_value_int.append(float(value.replace(',', '.').replace(' ', '').replace(u'\xa0', '').replace(u'\u2014', '').replace('-', '')))
-                    else:
+                    except Exception:
                         all_value_int = [0]
                 property.min = unicode(min(all_value_int)).replace(',', '.')
                 property.max = unicode(max(all_value_int)).replace(',', '.')
