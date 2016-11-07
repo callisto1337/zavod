@@ -62,7 +62,8 @@
                                        class="b-category-list-group__list__item-link">Вертикальные: ТС-567, ТС-568</a>
                                 </li>
                                 <li class="b-category-list-group__list__item">
-                                    <a href="#" class="b-category-list-group__list__item-link">Грезевики для тепловых
+                                    <a href="{% url "catalog_category_inside" parent_category_slug='grjazevik' category_slug='grjazeviki-vertikalnye-gv-serija-ts-567-ts-568' %}"
+                                       class="b-category-list-group__list__item-link">Грезевики для тепловых
                                         пунктов (ГТП) ТС-569</a>
                                 </li>
                             </ul>
@@ -120,7 +121,8 @@
                                        class="b-category-list-group__list__item-link">Днища эллиптические</a>
                                 </li>
                                 <li class="b-category-list-group__list__item">
-                                    <a href="#" class="b-category-list-group__list__item-link">Элеваторы</a>
+                                    <a href="{% url "catalog_category" category_slug='elevatory' %}"
+                                       class="b-category-list-group__list__item-link">Элеваторы</a>
                                 </li>
                                 <li class="b-category-list-group__list__item">
                                     <a href="{% url "catalog_category" category_slug='truboprovodnaja-armatura' %}"
@@ -131,11 +133,13 @@
                                        class="b-category-list-group__list__item-link">Контейнеры для мусора</a>
                                 </li>
                                 <li class="b-category-list-group__list__item">
-                                    <a href="#" class="b-category-list-group__list__item-link">Нестандартизированное
+                                    <a href="{% url "catalog_category" category_slug='nestandartizirovannoe-oborudovanie' %}"
+                                       class="b-category-list-group__list__item-link">Нестандартизированное
                                         оборудование</a>
                                 </li>
                                 <li class="b-category-list-group__list__item">
-                                    <a href="#" class="b-category-list-group__list__item-link">Монтаж оборудования</a>
+                                    <a href="{% url "catalog_category" category_slug='montazh-oborudovanija' %}"
+                                       class="b-category-list-group__list__item-link">Монтаж оборудования</a>
                                 </li>
                             </ul>
                         </div>

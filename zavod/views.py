@@ -9,6 +9,7 @@ from django.core.mail import EmailMessage
 from watson import search as watson
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.contrib.auth import logout as auth_logout, authenticate, login
 from zavod.forms import QuestionForm, CustomUserCreationForm, CallbackForm, SubscriptionForm, CallMeForm
 from zavod.constants import SPECIAL_FILTER_PARAMS, SUBSCRIPTION_TYPE
@@ -20,22 +21,23 @@ from zt.settings import EMAILS_FOR_CALLBACK
 logger = logging.getLogger(__name__)
 
 
-def registration(request):
-    out = {}
+def registration(request, next_url='main'):
     if request.method == 'POST':
         form_reg = CustomUserCreationForm(request.POST)
         if form_reg.is_valid():
             form_reg.save()
-            return redirect('/')
-    else:
-        form_reg = CustomUserCreationForm()
-    out.update({'form_reg': form_reg})
-    return render(request, 'zavod/login.html', out)
+            user = authenticate(
+                username=form_reg.cleaned_data['email'],
+                password=form_reg.cleaned_data['password1']
+            )
+            if user is not None:
+                login(request, user)
+        messages.add_message(request, messages.INFO, form_reg.errors)
+    return redirect(next_url)
 
 
-def log_in(request):
+def log_in(request, next_url='main'):
     if not request.user.is_authenticated:
-        out = {}
         if request.method == 'POST':
             form = AuthenticationForm(request.POST)
             username = request.POST["username"]
@@ -43,15 +45,8 @@ def log_in(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/')
-            else:
-                out.update({"error": 1})
-        else:
-            form = AuthenticationForm()
-        out.update({'form_auth': form})
-        return render(request, 'zavod/login.html', out)
-    else:
-        return redirect('/')
+            messages.add_message(request, messages.INFO, u'Неправильная пара email-пароль')
+    return redirect(next_url)
 
 
 def logout(request):
@@ -378,13 +373,16 @@ def articles(request, page_number=1, tag_in_url=None):
         )
     elif sort_type == 'view':
         article_objects = article_objects.order_by('-views')
-    start = (int(page_number) - 1) * 8
-    ind_articles = enumerate(article_objects.all()[start:start+8])
+    start = (int(page_number) - 1) * 9
+    if start == 0:
+        ind_articles = enumerate(article_objects.all()[start:start+8])
+    else:
+        ind_articles = enumerate(article_objects.all()[start-1:start+8])
     out.update({'ind_articles': ind_articles})
     out.update({'menu_active_item': 'articles'})
     out.update({'current_page_number': int(page_number)})
-    all_page_count = article_objects.count() / 8 + 1
-    if article_objects.count() % 8:
+    all_page_count = (article_objects.count() + 1) / 9 + 1
+    if (article_objects.count() + 1) % 9:
         all_page_count += 1
     out.update({'all_page_number': range(1, all_page_count)})
     if request.method == 'POST':

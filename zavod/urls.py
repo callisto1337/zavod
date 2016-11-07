@@ -7,8 +7,10 @@ from zt import settings
 urlpatterns = [
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^$', views.main, name='main'),
-    url(r'^login/$', views.log_in, name='login'),
-    url(r'^registration/$', views.registration, name='registration'),
+    # url(r'^login/$', views.log_in, name='login'),
+    url(r'^login/(?P<next_url>.*)/$', views.log_in, name='login'),
+    # url(r'^registration/$', views.registration, name='registration'),
+    url(r'^registration/(?P<next_url>.*)/$', views.registration, name='registration'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^search/$', views.search, name='search'),
     url(r'^catalog/$', views.catalog, name='catalog'),

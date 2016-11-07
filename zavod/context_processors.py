@@ -1,4 +1,5 @@
-from zavod.forms import CallMeForm
+from django.contrib.auth.forms import AuthenticationForm
+from zavod.forms import CallMeForm, CustomUserCreationForm
 from zavod.models import News
 from zavod.models import Gallery
 from zavod.models import Product
@@ -32,4 +33,20 @@ def callme_form(request):
     return {
         'callme_form': callme_form,
         'callme_form_url': unicode(request.path)
+    }
+
+
+def log_in_form(request):
+    log_in_form = AuthenticationForm()
+    return {
+        'log_in_form': log_in_form,
+        'log_in_form_url': unicode(request.path)
+    }
+
+
+def registration_form(request):
+    registration_form = CustomUserCreationForm()
+    return {
+        'registration_form': registration_form,
+        'registration_form_url': unicode(request.path)
     }

@@ -82,6 +82,8 @@ TEMPLATES = [
                 'zavod.context_processors.media_for_bottom',
                 'zavod.context_processors.black_friday_product',
                 'zavod.context_processors.callme_form',
+                'zavod.context_processors.log_in_form',
+                'zavod.context_processors.registration_form',
             ],
         },
     },

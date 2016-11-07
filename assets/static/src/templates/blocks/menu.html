@@ -63,7 +63,8 @@
                                                     ТС-568</a>
                                             </li>
                                             <li class="submenu__group__list__item">
-                                                <a href="#" class="submenu__group__list__item-link">Грезевики для
+                                                <a href="{% url "catalog_category_inside" parent_category_slug='grjazevik' category_slug='grjazeviki-vertikalnye-gv-serija-ts-567-ts-568' %}"
+                                                   class="submenu__group__list__item-link">Грезевики для
                                                     тепловых пунктов (ГТП) ТС-569</a>
                                             </li>
                                         </ul>
@@ -122,7 +123,8 @@
                                                    class="submenu__group__list__item-link">Днища эллиптические</a>
                                             </li>
                                             <li class="submenu__group__list__item">
-                                                <a href="#" class="submenu__group__list__item-link">Элеваторы</a>
+                                                <a href="{% url "catalog_category" category_slug='elevatory' %}"
+                                                   class="submenu__group__list__item-link">Элеваторы</a>
                                             </li>
                                             <li class="submenu__group__list__item">
                                                 <a href="{% url "catalog_category" category_slug='truboprovodnaja-armatura' %}"
@@ -133,11 +135,13 @@
                                                    class="submenu__group__list__item-link">Контейнеры для мусора</a>
                                             </li>
                                             <li class="submenu__group__list__item">
-                                                <a href="#" class="submenu__group__list__item-link">Нестандартизированное
+                                                <a href="{% url "catalog_category" category_slug='nestandartizirovannoe-oborudovanie' %}"
+                                                   class="submenu__group__list__item-link">Нестандартизированное
                                                     оборудование</a>
                                             </li>
                                             <li class="submenu__group__list__item">
-                                                <a href="#" class="submenu__group__list__item-link">Монтаж
+                                                <a href="{% url "catalog_category" category_slug='montazh-oborudovanija' %}"
+                                                   class="submenu__group__list__item-link">Монтаж
                                                     оборудования</a>
                                             </li>
                                         </ul>
@@ -205,8 +209,6 @@
             <div class="b-menu__search">
                 <div class="b-menu__search__wrapper">
                     <form class="b-form" method="get" action="{% url "search" %}">
-                        {% csrf_token %}
-
                         <div class="b-form-group">
                             <div class="b-form-input-group">
                                 <input type="text" class="b-form-control" placeholder="Что хотите найти?" id="search"
