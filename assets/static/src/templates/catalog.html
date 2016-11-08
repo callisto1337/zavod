@@ -8,6 +8,7 @@
         <div class="b-layout">
             <div class="b-breadcrumbs">
                 <a class="b-breadcrumbs__link" href="/">Главная</a> /
+                {{ title }}
             </div>
 
             <div class="grid__row">
@@ -17,7 +18,7 @@
                 <div class="grid__column-7">
                     <ul class="b-tab">
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{% url "catalog" %}?expand=true">Расширено</a>
+                            <a class="b-tab__item__link" href="{% url "catalog" %}">Расширено</a>
                         </li>
                         <li class="b-tab__item b-tab__item_active">
                             <a class="b-tab__item__link" href="{% url "catalog" %}?expand=false">Списком</a>

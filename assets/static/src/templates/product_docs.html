@@ -21,6 +21,7 @@
                     / <a class="b-breadcrumbs__link"
                          href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
                 {% endif %}
+            / {{ title }}
             </div>
             <div class="grid__row">
                 <div class="grid__column-9">
@@ -39,7 +40,7 @@
                 <div class="grid__column-7">
                     <ul class="b-tab b-tab-left">
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{{ request.path }}?tab=description">Описание</a>
+                            <a class="b-tab__item__link" href="{{ request.path }}">Описание</a>
                         </li>
                         <li class="b-tab__item b-tab__item_active">
                             <a class="b-tab__item__link" href="{{ request.path }}?tab=docs">Документация</a>

@@ -8,6 +8,7 @@
         <div class="b-layout">
             <div class="b-breadcrumbs b-breadcrumbs_white">
                 <a class="b-breadcrumbs__link b-breadcrumbs_white" href="/">Главная</a> /
+                {{ title }}
             </div>
         </div>
     </div>
@@ -17,7 +18,7 @@
                 <ul class="b-tab b-tab-nofloat">
                     <li class="b-tab__item b-tab__item_active">
                         <a class="b-tab__item__link b-tab__item__link_white"
-                           href="{% url "contacts" %}?location=office">Офис</a>
+                           href="{% url "contacts" %}">Офис</a>
                     </li>
                     <li class="b-tab__item">
                         <a class="b-tab__item__link b-tab__item__link_white"

@@ -11,6 +11,9 @@
             <div class="b-breadcrumbs">
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "news" %}">Новости</a>
+                {% if current_page_number > 1 %}
+                     / {{ current_page_number }} страница
+                {% endif %}
             </div>
             <div class="grid__row">
                 <div class="grid__column-3">

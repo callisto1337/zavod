@@ -10,6 +10,9 @@
             <div class="b-breadcrumbs">
                 <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
                 <a class="b-breadcrumbs__link" href="{% url "articles" %}">Статьи</a>
+                {% if current_page_number > 1 %}
+                     / {{ current_page_number }} страница
+                {% endif %}
             </div>
         {% if not current_page_number or current_page_number == 1%}
             {% for ind, article in ind_articles %}

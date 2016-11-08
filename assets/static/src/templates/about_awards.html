@@ -8,8 +8,9 @@
         <div class="b-layout">
 
             <div class="b-breadcrumbs">
-                <a class="b-breadcrumbs__link" href="/">Главная</a> / <a class="b-breadcrumbs__link"
-                                                                         href="{% url "about" %}">О компании</a>
+                <a class="b-breadcrumbs__link" href="/">Главная</a> /
+                <a class="b-breadcrumbs__link" href="{% url "about" %}">О компании</a> /
+                {{ title }}
             </div>
 
             <div class="grid__row">
@@ -19,7 +20,7 @@
                 <div class="grid__column-7">
                     <ul class="b-tab">
                         <li class="b-tab__item">
-                            <a class="b-tab__item__link" href="{% url "about" %}">Триумф</a>
+                            <a class="b-tab__item__link" href="{% url "about" %}">О заводе</a>
                         </li>
                         <li class="b-tab__item b-tab__item_active">
                             <a class="b-tab__item__link" href="#">Награды</a>

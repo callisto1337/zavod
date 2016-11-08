@@ -6,6 +6,7 @@ import collections
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.contenttypes.models import ContentType
 from django.core.mail import EmailMessage
+from django.db.models import Q
 from watson import search as watson
 
 from django.shortcuts import render, get_object_or_404, redirect
@@ -114,6 +115,7 @@ def contacts(request):
     callback_form = CallbackForm()
     out.update({'callback_form': callback_form})
     location = request.GET.get('location', 'office')
+    out.update({'title': u'Контакты'})
     if location == 'manufacture':
         return render(request, 'contacts_manufacture.html', out)
     else:
@@ -134,72 +136,84 @@ def prajjsy(request):
     out.update({'vozdukhosborniki_a1i': CategoryProduct.objects.filter(slug='vozdukhosborniki-a1i').first()})
     out.update({'elevatory': CategoryProduct.objects.filter(slug='elevatory').first()})
     out.update({'menu_active_item': 'prajjsy'})
+    out.update({'title': u'Прайс-листы'})
     return render(request, 'prajjsy.html', out)
 
 
 def dostavka(request):
     out = {}
     out.update({'menu_active_item': 'dostavka'})
+    out.update({'title': u'Доставка'})
     return render(request, 'dostavka.html', out)
 
 
 def mezhdunarodnaja_dostavka(request):
     out = {}
     out.update({'menu_active_item': 'dostavka'})
+    out.update({'title': u'Международная доставка'})
     return render(request, 'mezhdunarodnaja_dostavka.html', out)
 
 
 def geografija_prodazh(request):
     out = {}
     out.update({'menu_active_item': 'dostavka'})
+    out.update({'title': u'География продаж'})
     return render(request, 'geografija_prodazh.html', out)
 
 
 def dokumentatsija(request):
     out = {}
     out.update({'menu_active_item': 'dokumentatsija'})
+    out.update({'title': u'Документация'})
     return render(request, 'dokumentatsija.html', out)
 
 
 def razreshenie_na_primenenie(request):
     out = {}
     out.update({'menu_active_item': 'dokumentatsija'})
+    out.update({'title': u'Разрешение на применение'})
     return render(request, 'razreshenie_na_primenenie.html', out)
 
 
 def sertifikaty(request):
     out = {}
     out.update({'menu_active_item': 'dokumentatsija'})
+    out.update({'title': u'Сертификаты'})
     return render(request, 'sertifikaty.html', out)
 
 
 def tovarnye_znaki(request):
     out = {}
     out.update({'menu_active_item': 'dokumentatsija'})
+    out.update({'title': u'Товарные знаки'})
     return render(request, 'tovarnye_znaki.html', out)
 
 
 def mezhdunarodnye_tovarnye_znaki(request):
     out = {}
     out.update({'menu_active_item': 'dokumentatsija'})
+    out.update({'title': u'Международные товарные знаки'})
     return render(request, 'mezhdunarodnye_tovarnye_znaki.html', out)
 
 
 def tovarnyjj_znak_zachem_on(request):
     out = {}
     out.update({'menu_active_item': 'dokumentatsija'})
+    out.update({'title': u'Контакты'})
     return render(request, 'tovarnyjj_znak_zachem_on.html', out)
 
 
 def tekhnicheskaja_dokumentatsija(request):
     out = {}
     out.update({'menu_active_item': 'dokumentatsija'})
+    out.update({'title': u'Техническая документация'})
     return render(request, 'tekhnicheskaja_dokumentatsija.html', out)
 
 
 def zachem_nuzhna_dokumentatsija(request):
     out = {}
     out.update({'menu_active_item': 'dokumentatsija'})
+    out.update({'title': u'Контакты'})
     return render(request, 'zachem_nuzhna_dokumentatsija.html', out)
 
 
@@ -215,6 +229,7 @@ def photogallery(request, page_number=1):
     out.update({'all_page_number': range(1, all_page_count)})
     out.update({'gallery': gallery})
     out.update({'menu_active_item': 'gallery'})
+    out.update({'title': u'Фотогалерея'})
     return render(request, 'photogallery.html', out)
 
 
@@ -224,6 +239,7 @@ def photogallery_detail_page(request, photogallery_slug, page_number=1):
     gallery.gallery_images = GalleryImage.objects.filter(gallery=gallery).all()
     out.update({'menu_active_item': 'gallery'})
     out.update({'gallery': gallery})
+    out.update({'title': gallery.title})
     return render(request, 'photogallery_detail.html', out)
 
 
@@ -239,6 +255,7 @@ def videogallery(request, page_number=1):
     out.update({'all_page_number': range(1, all_page_count)})
     out.update({'gallery': gallery})
     out.update({'menu_active_item': 'gallery'})
+    out.update({'title': u'Видеогалерея'})
     return render(request, 'videogallery.html', out)
 
 
@@ -253,24 +270,28 @@ def about(request):
         return render(request, 'about_employee.html', out)
     elif 'review' in request.GET:
         return render(request, 'about_review.html', out)
+    out.update({'title': u'О компании'})
     return render(request, 'about.html', out)
 
 
 def nagrady(request):
     out = {}
     out.update({'menu_active_item': 'about'})
+    out.update({'title': u'Награды компании'})
     return render(request, 'about_awards.html', out)
 
 
 def partnery(request):
     out = {}
     out.update({'menu_active_item': 'about'})
+    out.update({'title': u'Партнеры компании'})
     return render(request, 'about_partners.html', out)
 
 
 def otzyvy(request):
     out = {}
     out.update({'menu_active_item': 'about'})
+    out.update({'title': u'Отзывы о компании'})
     return render(request, 'about_review.html', out)
 
 
@@ -293,6 +314,7 @@ def employee(request):
         all_employees.append(set_by_five_employees)
     out.update({'employees': all_employees})
     out.update({'menu_active_item': 'about'})
+    out.update({'title': u'Сотрудники компании'})
     return render(request, 'about_employee.html', out)
 
 
@@ -301,12 +323,14 @@ def employee_info(request, employee_name):
     employee = Employee.objects.filter(published=True, name=employee_name).first()
     out.update({'employee': employee})
     out.update({'menu_active_item': 'about'})
+    out.update({'title': employee.first_name + ' ' + employee.last_name})
     return render(request, 'about_employee_info.html', out)
 
 
 def vacancy(request):
     out = {}
     out.update({'menu_active_item': 'about'})
+    out.update({'title': u'Вакансии'})
     return render(request, 'about_vacancy.html', out)
 
 
@@ -324,18 +348,21 @@ def faq(request):
     questions = Question.objects.filter(published=True).all()
     out.update({'questions': questions})
     out.update({'menu_active_item': 'faq'})
+    out.update({'title': u'Часто задаваемые вопросы'})
     return render(request, 'about_faq.html', out)
 
 
 def proizvodstvo_zavoda_triumf(request):
     out = {}
     out.update({'menu_active_item': 'about'})
+    out.update({'title': u'Контакты'})
     return render(request, 'zavod/proizvodstvo_zavoda_triumf.html', out)
 
 
 def gibkaja_sistema_skidok(request):
     out = {}
     out.update({'menu_active_item': 'prajjsy'})
+    out.update({'title': u'Гибкая система скидок'})
     return render(request, 'gibkaja_sistema_skidok.html', out)
 
 
@@ -394,6 +421,7 @@ def articles(request, page_number=1, tag_in_url=None):
             )
     subscription_form = SubscriptionForm()
     out.update({'subscription_form': subscription_form})
+    out.update({'title': u'Статьи'})
     return render(request, 'articles.html', out)
 
 
@@ -415,6 +443,7 @@ def articles_detail(request, article_slug):
             )
     subscription_form = SubscriptionForm()
     out.update({'subscription_form': subscription_form})
+    out.update({'title': article.title})
     return render(request, 'articles_detail.html', out)
 
 
@@ -461,6 +490,7 @@ def news_archive(request, page_number=1, tag_in_url=None):
     if news_objects.count() % 6:
         all_page_count += 1
     out.update({'all_page_number': range(1, all_page_count)})
+    out.update({'title': u'Архив новостей'})
     return render(request, 'news_archive.html', out)
 
 
@@ -483,6 +513,7 @@ def news(request):
             )
     subscription_form = SubscriptionForm()
     out.update({'subscription_form': subscription_form})
+    out.update({'title': u'Новости'})
     return render(request, 'news.html', out)
 
 
@@ -504,6 +535,7 @@ def news_detail(request, news_slug):
             )
     subscription_form = SubscriptionForm()
     out.update({'subscription_form': subscription_form})
+    out.update({'title': news.title})
     return render(request, 'news_detail.html', out)
 
 
@@ -553,6 +585,7 @@ def get_product(request, slug, parent_category_slug=None, out={}):
             logger.info(u'Send callback with text: {}'.format(kwargs['body']))
     callback_form = CallbackForm()
     out.update({'callback_form': callback_form})
+    out.update({'title': product.name})
     return render(request, template_name, out)
 
 
@@ -560,13 +593,15 @@ def catalog(request):
     out = {}
     category_products = CategoryProduct.objects.filter(published=True, parent_id=None).all()
     for category_product in category_products:
-        category_product.number = Product.objects.filter(published=True, category=category_product).count()
+        category_products_all = Product.objects.filter(published=True, category=category_product)
+        category_product.number = category_products_all.count()
         for child_category in CategoryProduct.objects.filter(published=True, parent_id=category_product.id).all():
             category_product.number += Product.objects.filter(published=True, category=child_category).count()
     ind_category_products = enumerate(category_products)
     out.update({'ind_category_products': ind_category_products})
     out.update({'menu_active_item': 'catalog'})
     out.update({'category_products': category_products})
+    out.update({'title': u'Каталог'})
     if request.GET.get('expand', 'true') == 'true':
         return render(request, 'catalog_expand.html', out)
     return render(request, 'catalog.html', out)
@@ -584,15 +619,28 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             title = 'Вложенные категории'
             subcategories = CategoryProduct.objects.filter(parent_id=category.id, published=True).all()
             for subcategory in subcategories:
-                subcategory.number = Product.objects.filter(published=True, category=subcategory).count()
+                subcategory_products_all = Product.objects.filter(published=True, category=subcategory)
+                subcategory.number = subcategory_products_all.count()
                 for child_category in CategoryProduct.objects.filter(published=True, parent_id=subcategory.id).all():
+                    subcategory_products_all = subcategory_products_all | Product.objects.filter(published=True, category=child_category)
                     subcategory.number += Product.objects.filter(published=True, category=child_category).count()
+                subcategory.min_price = None
+                for product in subcategory_products_all:
+                    current = product.properties.filter(Q(property__title__contains='Цена')).first()
+                    try:
+                        if current and not subcategory.min_price:
+                            subcategory.min_price = float(unicode(current.value).replace(u' ', u'').replace(u'\xa0', u''))
+                        if current and float(current.value.replace(' ', '').replace(u'\xa0', '')) < subcategory.min_price:
+                            subcategory.min_price = float(current.value.replace(' ', '').replace(u'\xa0', ''))
+                    except Exception:
+                        pass
             template_name = 'catalog_category.html'
             ind_subcategory = enumerate(subcategories)
             if request.GET.get('expand', 'true') == 'true':
                 template_name = 'catalog_category_expand.html'
             out.update({'subcategories': subcategories, 'title': title, 'category': category, 'request': request,
                         'ind_subcategory': ind_subcategory})
+            out.update({'title': category.name})
             return render(request, template_name, out)
         else:
             title = 'Список продуктов'
@@ -687,6 +735,7 @@ def catalog_category(request, category_slug, parent_category_slug=None):
                     logger.info(u'Send callback with text: {}'.format(kwargs['body']))
             callback_form = CallbackForm()
             out.update({'callback_form': callback_form})
+            out.update({'title': category.name})
             return render(request, template_name, out)
     else:
         return get_product(request, category_slug, parent_category_slug, out)
@@ -702,6 +751,7 @@ def product_or_products(request, slug, parent_category_slug=None, category_slug=
     category = get_object_or_404(CategoryProduct, slug=slug)
     products = Product.objects.filter(category=category, published=True).all()
     out.update({'products': products, 'title': title, 'category': category})
+    out.update({'title': category.name})
     return render(request, 'catalog_category.html', out)
 
 
@@ -726,6 +776,7 @@ def products_search(request):
             })
             result = result.filter(**search_param)
     out.update({'search_results': result})
+    out.update({'title': u'Поиск'})
     return render(request, 'zavod/search.html', out)
 
 

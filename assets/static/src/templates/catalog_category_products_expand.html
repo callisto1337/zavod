@@ -15,6 +15,7 @@
                     / <a class="b-breadcrumbs__link"
                          href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
                 {% endif %}
+            / {{ title }}
             </div>
 
             <div class="grid__row">
@@ -25,7 +26,7 @@
                     <div class="grid__column-7">
                         <ul class="b-tab">
                             <li class="b-tab__item b-tab__item_active">
-                                <a class="b-tab__item__link" href="{{ request.path }}?expand=true">Расширено</a>
+                                <a class="b-tab__item__link" href="{{ request.path }}">Расширено</a>
                             </li>
                             <li class="b-tab__item">
                                 <a class="b-tab__item__link" href="{{ request.path }}?expand=false">Списком</a>
@@ -272,7 +273,7 @@
                             Заказать продукцию
                         </div>
                         <div class="b-section__space"></div>
-                        <form class="b-form" method="post" action="{{ request.path }}?expand=true"
+                        <form class="b-form" method="post" action="{{ request.path }}"
                               enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="b-form-group">
