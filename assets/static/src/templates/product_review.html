@@ -3,6 +3,7 @@
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
 {% load threadedcomments_tags %}
+{% load extras %}
 
 {% block content %}
     {#  get all comments count  #}
@@ -15,11 +16,11 @@
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if product.category.parent_id %}
                     / <a class="b-breadcrumbs__link"
-                         href="{% url "catalog_category" product.category.parent_id.slug %}">{{ product.category.parent_id.name }}</a>
+                         href="{% url "catalog_category" product.category.parent_id|get_full_category_path %}">{{ product.category.parent_id.name }}</a>
                 {% endif %}
                 {% if product.category %}
                     / <a class="b-breadcrumbs__link"
-                         href="{% url "catalog_category" product.category.slug %}">{{ product.category.name }}</a>
+                         href="{% url "catalog_category" product.category|get_full_category_path %}">{{ product.category.name }}</a>
                 {% endif %}
             / {{ title }}
             </div>
@@ -30,7 +31,7 @@
             </div>
             <div class="grid__row">
                 {% if product.category %}
-                    <a href="{% url "catalog_category" product.category.slug %}" class="b-section-back">Назад к
+                    <a href="{% url "catalog_category" product.category|get_full_category_path %}" class="b-section-back">Назад к
                         каталогу</a>
                 {% else %}
                     <a href="../" class="b-section-back">Назад к каталогу</a>

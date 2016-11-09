@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.urls import reverse
 from django.contrib.auth.models import User, UserManager, AbstractBaseUser
 from zavod.constants import POPULAR_TYPE_CHOICES, HIT, SUBSCRIPTION_TYPE, SUBSCRIPTION_TYPE_CHOICES
+from zavod.templatetags.extras import get_full_product_path
 from zt.settings import EMAILS_FOR_FAQ
 
 
@@ -165,7 +166,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "{}?tab=review".format(reverse('catalog_category_inside', args=[self.category.slug, self.slug]))
+        return "{}?tab=review".format(reverse('catalog_category', args=[get_full_product_path(self)]))
 
     class Meta:
         verbose_name = 'Продукт'

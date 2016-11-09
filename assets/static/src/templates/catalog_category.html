@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load extras %}
 
 {% block content %}
     <div class="b-section b-section_short">
@@ -11,7 +12,7 @@
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if category.parent_id %}
                     / <a class="b-breadcrumbs__link"
-                        href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
+                        href="{% url "catalog_category" category.parent_id|get_full_category_path %}">{{ category.parent_id.name }}</a>
                 {% endif %}
             / {{ title }}
             </div>
@@ -34,7 +35,7 @@
             </div>
             <div class="grid__row">
                 {% if category.parent_id %}
-                    <a href="{% url "catalog_category" category.parent_id.slug %}" class="b-section-back">Назад к
+                    <a href="{% url "catalog_category" category.parent_id|get_full_category_path %}" class="b-section-back">Назад к
                         каталогу</a>
                 {% else %}
                     <a href="../" class="b-section-back">Назад к каталогу</a>
@@ -46,7 +47,7 @@
                         <ul class="b-category-list-group__list b-category-list-group__list_bold">
                             {% for subcategory in subcategories %}
                                 <li class="b-category-list-group__list__item">
-                                    <a href="{% url "catalog_category" subcategory.slug %}"
+                                    <a href="{% url "catalog_category" subcategory|get_full_category_path %}"
                                        class="b-category-list-group__list__item-link">{{ subcategory.name }}
                                         {% if subcategory.number > 0 %}
                                             <span class="b-category-list-group__list__item-info">{{ subcategory.number }} позиции</span>
@@ -102,7 +103,7 @@
                             <div class="grid__column-4">
                         {% endif %}
                             <a class="b-image"
-                               href="{% url 'catalog_category_inside' popularproduct.product.category.slug popularproduct.product.slug %}">
+                               href="{% url 'catalog_category' popularproduct.product|get_full_product_path %}">
                                 <div class="b-box">
                                     <div class="b-box__wrapper">
                                         <div class="b-box__image-left">

@@ -2,6 +2,7 @@
 
 {# TODO: remove that loading #}
 {% load static from staticfiles %}
+{% load extras %}
 
 {% block content %}
 
@@ -12,7 +13,7 @@
                 <a class="b-breadcrumbs__link" href="{% url "catalog" %}">Каталог</a>
                 {% if category.parent_id %}
                     / <a class="b-breadcrumbs__link"
-                         href="{% url "catalog_category" category.parent_id.slug %}">{{ category.parent_id.name }}</a>
+                         href="{% url "catalog_category" category.parent_id|get_full_category_path %}">{{ category.parent_id.name }}</a>
                 {% endif %}
             / {{ title }}
             </div>
@@ -33,7 +34,7 @@
             </div>
             <div class="grid__row">
                 {% if category.parent_id %}
-                    <a href="{% url "catalog_category" category.parent_id.slug %}" class="b-section-back">Назад к
+                    <a href="{% url "catalog_category" category.parent_id|get_full_category_path %}" class="b-section-back">Назад к
                         каталогу</a>
                 {% else %}
                     <a href="../" class="b-section-back">Назад к каталогу</a>
@@ -57,7 +58,7 @@
                             {% for product in products %}
                                 <tr>
                                     <td>
-                                        <a href="{% url "catalog_category_inside" product.category.slug product.slug %}">
+                                        <a href="{% url "catalog_category" product|get_full_product_path %}">
                                             {{ product.name }}
                                         </a>
                                     </td>
@@ -177,7 +178,7 @@
                         <div class="grid__column-4">
                     {% endif %}
                 <a class="b-link_pseudo"
-                   href="{% url 'catalog_category_inside' popularproduct.product.category.slug popularproduct.product.slug %}">
+                   href="{% url 'catalog_category' popularproduct.product|get_full_product_path %}">
                     <div class="b-box">
                         <div class="b-box__wrapper">
                             <div class="b-box__image-left">

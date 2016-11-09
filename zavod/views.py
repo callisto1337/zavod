@@ -539,8 +539,14 @@ def news_detail(request, news_slug):
     return render(request, 'news_detail.html', out)
 
 
-def get_product(request, slug, parent_category_slug=None, out={}):
-    product = get_object_or_404(Product, slug=slug, category__slug=parent_category_slug)
+def get_product(request, path, out={}):
+    slug = path.split('/')[-2]
+    if len(path.split('/')) > 2:
+        category_slug = path.split('/')[-3]
+    if category_slug:
+        product = get_object_or_404(Product, slug=slug, category__slug=category_slug)
+    else:
+        product = get_object_or_404(Product, slug=slug)
     tab = request.GET.get('tab', 'description')
     template_name = 'product.html'
     if tab == 'description':
@@ -607,10 +613,14 @@ def catalog(request):
     return render(request, 'catalog.html', out)
 
 
-def catalog_category(request, category_slug, parent_category_slug=None):
+def catalog_category(request, category_path):
     out = {}
+    category_slug = category_path.split('/')[-2]
+    if len(category_path.split('/')) > 2:
+        parent_category_slug = category_path.split('/')[-3]
     category = CategoryProduct.objects.filter(slug=category_slug).first()
     out.update({'menu_active_item': 'catalog'})
+    out.update({'category_path': category_path})
     if category:
         category.number = Product.objects.filter(published=True, category=category).count()
         for child_category in CategoryProduct.objects.filter(published=True, parent_id=category.id).all():
@@ -738,15 +748,18 @@ def catalog_category(request, category_slug, parent_category_slug=None):
             out.update({'title': category.name})
             return render(request, template_name, out)
     else:
-        return get_product(request, category_slug, parent_category_slug, out)
+        return get_product(request, category_path, out)
 
 
-def product_or_products(request, slug, parent_category_slug=None, category_slug=None):
+def product_or_products(request, path):
     out = {}
+    slug = path.split('/')[-2]
+    if len(path.split('/')) > 2:
+        category_slug = path.split('/')[-3]
     out.update({'menu_active_item': 'catalog'})
     product = Product.objects.filter(slug=slug).first()
     if product:
-        return get_product(request, slug, category_slug, out)
+        return get_product(request, path, out)
     title = 'Список продуктов во вложенной категории'
     category = get_object_or_404(CategoryProduct, slug=slug)
     products = Product.objects.filter(category=category, published=True).all()

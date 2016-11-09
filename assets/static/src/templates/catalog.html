@@ -43,7 +43,7 @@
                                 <ul class="b-category-list-group__list b-category-list-group__list_bold">
                                     {% for category_product in category_products %}
                                         <li class="b-category-list-group__list__item">
-                                            <a href="{% url "catalog_category" category_product.slug %}"
+                                            <a href="{% url "catalog_category" category_product.slug|add:'/' %}"
                                                class="b-category-list-group__list__item-link">{{ category_product.name }}</a>
                                             {% if category_product.number > 0 %}
                                                 <span class="b-category-list-group__list__item-info">{{ category_product.number }} позиции</span>
