@@ -61,3 +61,5 @@ gulp.task('default', ['build-html', 'build-css', 'build-font', 'build-img', 'bui
 	gulp.watch(['src/img/**/*.+(jpg|png|gif)'], ['build-img']);
 	gulp.watch(['src/js/**/*.js'], ['build-js']);
 });
+
+gulp.task('build', ['build-html', 'build-css', 'build-font', 'build-img', 'build-js']);
