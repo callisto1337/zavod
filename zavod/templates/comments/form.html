@@ -8,6 +8,7 @@
             <div>{{ field }}</div>
         {% else %}
             {% if field.errors %}{{ field.errors }}{% endif %}
+            <div class="b-form-group">
             <p
                     {% if field.errors %} class="error"{% endif %}
                     {% ifequal field.name "honeypot" %} style="display:none;">
@@ -20,13 +21,18 @@
             {% endifequal %}
             {% ifequal field.name "url" %} style="display:none;">{% endifequal %}
             {% ifequal field.name "title" %} style="display:none;">{% endifequal %}
-            {% ifequal field.name "comment" %}
-                {{ field.label_tag }} {{ field }}
-            {% endifequal %}
+                {% ifequal field.name "comment" %}
+                    <div class="b-form-group">
+                    <textarea id="id_comment" maxlength="500" name="comment" required=""
+                      class="b-form-control" rows="4" placeholder="Комментарий"></textarea>
+{#                    {{ field.label_tag }} {{ field }}#}
+                    </div>
+                {% endifequal %}
             </p>
+            </div>
         {% endif %}
     {% endfor %}
-    <p class="submit">
-        <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}"/>
-    </p>
+    <button type="submit" class="b-btn b-btn__fullwidth" name="post">
+        <span class="b-btn__text">Отправить</span>
+    </button>
 </form>

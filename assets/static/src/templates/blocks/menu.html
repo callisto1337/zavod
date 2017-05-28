@@ -169,7 +169,7 @@
                            class="b-menu__item-link {% if menu_active_item == 'dostavka' %}b-menu__item-link-active {% endif %}">Доставка</a>
                     </td>
                     <td class="b-menu__item">
-                        <a href="{% url "dokumentatsija" %}"
+                        <a href="{% url "razreshenie_na_primenenie" %}"
                            class="b-menu__item-link {% if menu_active_item == 'dokumentatsija' %}b-menu__item-link-active {% endif %}">Документация</a>
                     </td>
                     <td class="b-menu__item">
@@ -194,6 +194,10 @@
                                         <li class="submenu__group__list__item">
                                             <a href="{% url "videogallery" %}"
                                                class="submenu__group__list__item-link">Видеогалерея</a>
+                                        </li>
+                                        <li class="submenu__group__list__item">
+                                            <a href="{% url "videootzyvy" %}"
+                                               class="submenu__group__list__item-link">Видеоотзывы</a>
                                         </li>
                                     </ul>
                                 </div>

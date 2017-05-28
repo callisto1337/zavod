@@ -60,9 +60,14 @@ def main(request):
     ind_articles = enumerate(Article.objects.filter(published=True).order_by('-date_created').all()[0:3])
     ind_news = enumerate(News.objects.filter(published=True).order_by('-date_created').all()[0:2])
     black_friday_product = Product.objects.filter(is_black_friday=True).first()
+    gallery = black_friday_product.category.galleries.filter(published=True).first()
+    if not gallery and black_friday_product.category.parent_id:
+        gallery = black_friday_product.category.parent_id.galleries.filter(published=True).first()
+    out.update({'gallery': gallery})
     out.update({'ind_articles': ind_articles})
     out.update({'ind_news': ind_news})
     out.update({'black_friday_product': black_friday_product})
+    out.update({'title': u'Завод Триумф'})
     return render(request, 'index.html', out)
 
 
@@ -83,6 +88,7 @@ def search(request):
     out.update({'search_results': search_results})
     out.update({'search_results_count': search_results_count})
     out.update({'search_text': search_text})
+    out.update({'title': u'Поиск'})
     return render(request, 'search.html', out)
 
 
@@ -246,7 +252,7 @@ def photogallery_detail_page(request, photogallery_slug, page_number=1):
 def videogallery(request, page_number=1):
     out = {}
     start = (int(page_number) - 1) * 5
-    gallery = Gallery.objects.filter(published=True).exclude(galleryvideo=None).order_by('-date_created').all()
+    gallery = Gallery.objects.filter(published=True, is_otzyv=False).exclude(galleryvideo=None).order_by('-date_created').all()
     out.update({'current_page_number': int(page_number)})
     all_page_count = gallery.count() / 6 + 1
     if gallery.count() % 6:
@@ -257,6 +263,22 @@ def videogallery(request, page_number=1):
     out.update({'menu_active_item': 'gallery'})
     out.update({'title': u'Видеогалерея'})
     return render(request, 'videogallery.html', out)
+
+
+def videootzyvy(request, page_number=1):
+    out = {}
+    start = (int(page_number) - 1) * 5
+    gallery = Gallery.objects.filter(published=True, is_otzyv=True).exclude(galleryvideo=None).order_by('-date_created').all()
+    out.update({'current_page_number': int(page_number)})
+    all_page_count = gallery.count() / 6 + 1
+    if gallery.count() % 6:
+        all_page_count += 1
+    gallery = gallery[start:start+5]
+    out.update({'all_page_number': range(1, all_page_count)})
+    out.update({'gallery': gallery})
+    out.update({'menu_active_item': 'gallery'})
+    out.update({'title': u'Видеоотзывы'})
+    return render(request, 'videootzyvy.html', out)
 
 
 def about(request):

@@ -1,0 +1,95 @@
+{% extends "blocks/base.html" %}
+
+{# TODO: remove that loading #}
+{% load static from staticfiles %}
+{% load extras %}
+
+{% block content %}
+    <div class="b-section b-section_short">
+        <div class="b-layout">
+            <div class="b-breadcrumbs b-breadcrumbs_white">
+                <a class="b-breadcrumbs__link" href="{% url "main" %}">Главная</a> /
+                Видеогалерея
+            </div>
+        </div>
+    </div>
+    <div class="b-block">
+        {% for item in gallery %}
+            <a class="b-link_pseudo js-light" href="{{ item.galleryvideo.first.video_url }}" data-featherlight="iframe"
+               data-featherlight-iframe-width="960" data-featherlight-iframe-height="540">
+                <div class="b-block__item b-block__item_video">
+                    {% if item.galleryvideo.first.cover_image %}
+                        <img src="{{ item.galleryvideo.first.cover_image.url }}" alt="Тайтл картинки">
+                    {% else %}
+                        <img src="{% static 'img/news/example.png' %}" alt="Тайтл картинки">
+                    {% endif %}
+                    <h2 class="b-block__title">{{ item.name }}</h2>
+                    <div class="b-block__desc">
+                        {{ item.text }}
+                    </div>
+                    <div class="b-block__play"></div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="b-section__space"></div>
+    <div class="b-layout">
+        <div class="b-paginator">
+            {% if all_page_number|length <= 8 %}
+                {% for page_number in all_page_number %}
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{% url "videogallery" page_number %}">{{ page_number }}</a>
+                    </div>
+                {% endfor %}
+            {% elif current_page_number <= 5 %}
+                {% for page_number in all_page_number|slice:":6" %}
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{% url "videogallery" page_number %}">{{ page_number }}</a>
+                    </div>
+                {% endfor %}
+                <div class="b-paginator__item">...</div>
+                <div class="b-paginator__item">
+                    <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}"
+                       href="{% url "videogallery" all_page_number|length %}">{{ all_page_number|length }}</a>
+                </div>
+            {% else %}
+                {% for page_number in all_page_number|slice:":2" %}
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{% url "videogallery" page_number %}">{{ page_number }}</a>
+                    </div>
+                {% endfor %}
+                <div class="b-paginator__item">...</div>
+                {% if current_page_number != all_page_number|length and current_page_number|add:1 != all_page_number|length %}
+                    {% for page_number in all_page_number|pages_set:current_page_number %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{% url "videogallery" page_number %}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                    <div class="b-paginator__item">...</div>
+                    <div class="b-paginator__item">
+                        <a class="b-paginator__item__link {% if all_page_number|length == current_page_number %}b-paginator__item__link_current{% endif %}"
+                           href="{% url "videogallery" all_page_number|length %}">{{ all_page_number|length }}</a>
+                    </div>
+                {% elif current_page_number|add:1 != all_page_number|length %}
+                    {% for page_number in all_page_number|slice:"-5:" %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{% url "videogallery" page_number %}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for page_number in all_page_number|slice:"-5:" %}
+                        <div class="b-paginator__item">
+                            <a class="b-paginator__item__link {% if page_number == current_page_number %}b-paginator__item__link_current{% endif %}"
+                               href="{% url "videogallery" page_number %}">{{ page_number }}</a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

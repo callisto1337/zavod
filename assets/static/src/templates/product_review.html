@@ -70,9 +70,6 @@
                                 <div class="b-comment__content__text">
                                     {{ comment.comment }}
                                 </div>
-                                {% if user.is_staff %}
-                                    {#                                        {% render_comment_form for news with comment.id %}#}
-                                {% endif %}
                             </div>
                             <div class="b-comment__info">
                                 <div class="b-comment__avatar">
@@ -84,14 +81,19 @@
                                     </div>
                                     <div class="b-comment__extra-date">
                                         {{ comment.submit_date | date }}
-                                        <a href="#" class="b-comment-send">ответить</a>
+                                        {% if user.is_staff %}
+                                            <a class="b-comment-send" id="btn-login" href="#" data-target="#answer" data-toggle="modal" >
+                                                ответить
+                                            </a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     {% endfor %}
-                    {% render_comment_form for product %}
+                    {% if user.is_authenticated %}
+                        {% render_comment_form for product %}
+                    {% endif %}
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <ul class="b-property">
@@ -207,6 +209,24 @@
                                 <span class="b-btn__text">Отправить</span>
                             </button>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="answer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="modal__close close" data-dismiss="modal" aria-label="Close"></a>
+                <div class="modal-body">
+                    <div class="b-block__item__wrapper">
+                        <div class="b-block__item__title b-block__item__title_small b-block__item__title_left">
+                            Заказать продукцию
+                        </div>
+                        <div class="b-section__space">
+                            {% render_comment_form for product with comment.id %}
+                        </div>
                     </div>
                 </div>
             </div>

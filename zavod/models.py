@@ -267,6 +267,7 @@ class GalleryVideo(models.Model):
     gallery = models.ForeignKey(Gallery, related_name='galleryvideo')
     video_url = models.CharField(max_length=500, default='', blank=True, null=True)
     cover_image = models.ImageField(upload_to='media/gallery/', blank=True, null=True)
+    is_otzyv = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.video_url

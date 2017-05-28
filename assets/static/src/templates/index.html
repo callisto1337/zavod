@@ -146,7 +146,7 @@
                     </div>
                     {% if black_friday_product %}
                         <div class="grid__column-4 grid__offset">
-                            <h3 class="subheading">Черная пятница!</h3>
+                            <h3 class="subheading">Лучшая цена</h3>
                             <a class="b-link_pseudo"
                                href="{% url 'catalog_category' black_friday_product|get_full_product_path %}"
                                title="{{ black_friday_product.name }}">
@@ -165,9 +165,15 @@
                                     </div>
                                     <div class="b-box__footer">
                                         <div class="b-box__wrapper">
+                                            {% if black_friday_product.images %}
                                             {#                                        <span class="b-box__footer-left">44 позиции</span>#}
-                                            <span class="b-box__footer-right"><i class="fa fa-picture-o"
-                                                                                 aria-hidden="true"></i> {{ black_friday_product.images.all | length }} фото</span>
+                                            <a class="b-link_pseudo"
+                                               href="{% url 'catalog_category' black_friday_product|get_full_product_path %}?tab=photo"
+                                               title="{{ black_friday_product.name }}">
+                                                <span class="b-box__footer-right"><i class="fa fa-picture-o"
+                                                                                     aria-hidden="true"></i> {{ black_friday_product.images.all | length }} фото</span>
+                                            </a>
+                                                {% endif %}
                                         </div>
                                     </div>
                                 </div>

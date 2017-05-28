@@ -101,7 +101,9 @@
 
                         </div>
                     {% endfor %}
-                    {#                            {% render_comment_form for news %}#}
+                {% if user.is_authenticated %}
+                    {% render_comment_form for news %}
+                {% endif %}
                 </div>
                 <div class="grid__column-4 grid__offset">
                     <div class="b-box b-box_nohover">
