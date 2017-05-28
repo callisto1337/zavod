@@ -9,7 +9,7 @@ var reload = browserSync.reload;
  * Подготовка HTML-файлов к продакшену
  */
 gulp.task('build-html', function () {
-	return gulp.src('src/templates/**/*.html')
+	return gulp.src('./src/templates/**/*.html')
 		.pipe(gulp.dest('build'))
 		.pipe(reload({ stream:true }));
 });
@@ -18,9 +18,9 @@ gulp.task('build-html', function () {
  * Подготовка CSS-файлов
  */
 gulp.task('build-css', function () {
-	return gulp.src('src/sass/main.scss')
+	return gulp.src('./src/sass/main.scss')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(gulp.dest('build/css'))
+		.pipe(gulp.dest('./build/css'))
 		.pipe(autoprefixer({
 			browsers: ['> 1%', 'IE 7']
 		}))
@@ -31,8 +31,8 @@ gulp.task('build-css', function () {
  * Подготовка Картинок
  */
 gulp.task('build-img', function () {
-	return gulp.src('src/img/**/**/*.+(jpg|png|gif|ico)')
-		.pipe(gulp.dest('build/img'))
+	return gulp.src('./src/img/**/**/*.+(jpg|png|gif|ico)')
+		.pipe(gulp.dest('./build/img'))
 		.pipe(reload({ stream:true }));
 });
 
@@ -40,8 +40,8 @@ gulp.task('build-img', function () {
  * Подготовка JS-файлов
  */
 gulp.task('build-js', function () {
-	return gulp.src('src/js/**/*.js')
-		.pipe(gulp.dest('build/js'))
+	return gulp.src('./src/js/**/*.js')
+		.pipe(gulp.dest('./build/js'))
 		.pipe(reload({ stream:true }));
 });
 
@@ -49,8 +49,8 @@ gulp.task('build-js', function () {
  * Подготовка шрифтов
  */
 gulp.task('build-font', function () {
-	return gulp.src('src/fonts/**/*')
-		.pipe(gulp.dest('build/fonts'))
+	return gulp.src('./src/fonts/**/*')
+		.pipe(gulp.dest('./build/fonts'))
 		.pipe(reload({ stream:true }));
 });
 
@@ -61,3 +61,5 @@ gulp.task('default', ['build-html', 'build-css', 'build-font', 'build-img', 'bui
 	gulp.watch(['src/img/**/*.+(jpg|png|gif)'], ['build-img']);
 	gulp.watch(['src/js/**/*.js'], ['build-js']);
 });
+
+gulp.task('build', ['build-html', 'build-css', 'build-font', 'build-img', 'build-js']);
